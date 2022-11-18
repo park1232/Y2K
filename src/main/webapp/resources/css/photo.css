@@ -1,0 +1,84 @@
+body{font-family: 'Gowun Dodum', sans-serif;cursor: url(cursor.cur), auto}
+.main_content{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 100%;
+    overflow: auto;
+}
+
+.photo_card{
+    width: 100%;
+    margin-bottom: 30px;
+}
+#photo_upload{
+	cursor: pointer;
+	
+}
+
+.photo_title{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 10px;
+    font-size: 13px;
+    font-weight: bold;
+    background-color: #d6d6d6;
+}
+
+.photo_date{
+    font-size: 11px;
+}
+
+.photo_1 img{
+  width: 30%;
+  height: 30%;
+}
+
+.photo_content .description{
+    padding: 5px 5px;
+    font-size: 13px;
+}
+
+.side1 { top: 200px; left: 400px; }
+.side2 { top: 240px; left: 400px; }
+.side3 { top: 500px; left: 400px; }
+.side4 { top: 540px; left: 400px; }
+
+/* Tab-content 1*/
+#tab-content #tab-1-content {
+  width: 100%;
+  margin-bottom: 30px;
+  
+}
+#tab-content #tab-1-content .tab-1-content-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 15px;
+  
+}
+#tab-content #tab-1-content .tab-1-content-inner .img-box {
+  position: relative;
+  height: 293px;
+  cursor: pointer;
+}
+#tab-content #tab-1-content .tab-1-content-inner .img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+#tab-content #tab-1-content .tab-1-content-inner .img-box .comment {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 50%;
+  height: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0;
+}
+

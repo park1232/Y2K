@@ -1,0 +1,24 @@
+	@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+   .main{
+   		font-family: 'Gowun Dodum'		
+   }
+   a {
+        text-decoration-line: none;
+   }
+   .buttonGroup{
+        text-align: center;
+   }
+   .button{
+      display: inline-block;
+   }
+
+   body {
+  	 background-color: #FDCC07;
+	}
+   hr {
+    border: none;
+    border-top: 1px dotted;
+	}
+   #area{
+     background-color: white;
+   }

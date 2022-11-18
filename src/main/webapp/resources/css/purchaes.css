@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+    .main{
+   		font-family: 'Gowun Dodum';	
+   		background-color: #FDCC07;
+     }
+    .album py-5 bg-light{
+    	background-color: #FDCC07;
+    }
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      a {
+ 		 text-decoration-line: none;
+		}
+	  .btn btn-warning{
+	     margin:0 auto;
+	     width: 200px;
+	  }
+	  .search{
+		text-align: center;
+	  }
+	  #searchButton{
+		display: inline-block;
+	  }
+	  .card-body{
+		text-align: center;
+	  }
+	  .btn-group{
+	  	text-align: center;
+	  }
+	  .btn btn-warning{
+		display: inline-block;
+	  }
+	  .btn btn-outline-secondary{
+	  	padding: 50px 50px
+	  }
+	  hr {
+	    border: none;
+	    border-top: 1px blue dotted;
+	  }

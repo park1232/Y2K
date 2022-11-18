@@ -1,0 +1,287 @@
+    @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+                .main {
+  margin: 0 5px;
+  border: 2px solid #bfbfc8;
+  border-radius: 15px;
+  width: 645px;
+  height: 480px;
+  padding: 10px 30px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+
+  position: relative;
+  background-color: #fff;
+  z-index: 2;
+}
+body{font-family: 'Gowun Dodum', sans-serif;cursor: url(), auto}
+#board{text-align: center; font-size: 30px;}
+.fa-edit{font-size: 40px; text-align: right; color: rgb(255, 206, 131); cursor: pointer; margin-top: -40px;}
+.fa-edit:hover{color: rgb(28, 118, 54);}
+.pagination a {color: rgb(255, 197, 71);padding: 8px 16px;text-decoration: none;border-radius:50%; font-size: 18px;}
+ul{ justify-content: center;}
+.search-box{text-align: center;}
+
+        body {
+  padding:1.5em;
+  background: #f5f5f5
+}
+
+table {
+  border: 1px #a39485 solid;
+  font-size: .9em;
+  box-shadow: 0 2px 5px rgba(0,0,0,.25);
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: -5px;
+}
+
+th {
+  text-align: left;
+}
+  
+thead {
+  font-weight: bold;
+  color: #fff;
+  background: #ff8000;
+}
+  
+ td, th {
+  padding: 1em .5em;
+  vertical-align: middle;
+}
+  
+ td {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  background: #fff;
+}
+
+a {
+  color: #73685d;
+}
+  
+ @media all and (max-width: 768px) {
+    
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  
+  th {
+  text-align: right;
+  }
+  
+  table {
+    position: relative; 
+    padding-bottom: 0;
+    border: none;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+  }
+  
+  thead {
+    float: left;
+    white-space: nowrap;
+  }
+  
+  tbody {
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+    white-space: nowrap;
+  }
+  
+  tr {
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  th {
+    border-bottom: 1px solid #a39485;
+  }
+  
+  td {
+    border-bottom: 1px solid #e5e5e5;
+  }
+  
+  
+  }
+  td:first-child {
+  border-left: 1px solid #c6c9cc;
+}
+tr:nth-child(even) td {
+  background: #eaeaed;
+}
+tr:last-child td:first-child {
+  border-bottom-left-radius: 6px;
+}
+tr:last-child td:last-child {
+  border-bottom-right-radius: 6px;
+}
+
+p{text-align: center; margin:5px;}
+#cyimg{width: 65px; height: 65px; margin:2px;}
+#cyLink{color:orange;}
+
+hr.hrB {
+        border: 0;
+        border-bottom: 3px solid rgb(255, 184, 149);
+        background: rgb(255, 185, 21);
+        padding-top: -15px;
+        margin: 5px;
+        }
+        body{font-family: 'Gowun Dodum', sans-serif; cursor: url(cursor.cur), auto}
+        .fa-hand-holding-heart{font-size: 60px; color: rgb(255, 207, 162); text-align: center;}
+        .fa-hand-holding-heart:hover{font-size: 70px; color: rgb(255, 91, 21);}
+        #good{text-align: center;}
+        .btnOrange.btnBorder {
+          box-shadow: 0px 0px 0px 0px #f59619;
+          width: 100px;
+          height: 40px;
+          border-radius: 20px;
+          }
+          .btnOrange {
+          background: #FFAA40;
+          }
+          .btnOrange.btnBorder:hover {
+          box-shadow: 0px 0px 0px 5px #A66615;
+          }
+          #writeButton{display: block; margin: auto;text-align: center;} 
+
+	#submitReply{border:1px solid black; width:60px; border-radius:15px; background:white; height:50px;}
+	#submitReply:hover{background:black; color:white; cursor:pointer;}
+	ul {
+	text-align:center;
+}
+ul li {
+	display:inline;
+	vertical-align:middle;
+}
+ul li a {
+	display:-moz-inline-stack;	/*FF2*/
+	display:inline-block;
+	vertical-align:top;
+	padding:4px;
+	margin-right:3px;
+	width:25px;
+	color:#000;
+	font:bold 12px tahoma;
+	border:1px solid #eee;
+	text-align:center;
+	text-decoration:none;
+	width /**/:26px;	/*IE 5.5*/
+
+}
+ul li a.now {
+	color:#fff;
+	background-color:#f40;
+	border:1px solid #f40;
+}
+ul li a:hover, ul li a:focus {
+	color:#fff;
+	border:1px solid #f40;
+	background-color:#f40;
+}
+ul li .way{background-color: #f40; width: 40px;}
+
+
+body{cursor: url(resources/img/cursor.cur), auto}
+ul {
+text-align:center;
+}
+ul li {
+display:inline;
+vertical-align:middle;
+}
+
+
+.fa-hand-holding-heart{font-size: 60px; color: rgb(255, 207, 162); text-align: center;}
+.fa-hand-holding-heart:hover{font-size: 70px; color: rgb(255, 91, 21);}
+#good{text-align: center;}
+.link-icon { position: relative; display: inline-block; width: auto;    font-size: 14px; font-weight: 500; color: #333; margin-right: 3px; padding-top: 50px; }
+.link-icon.twitter { background-image: url(resources/img/icon-twitter.png); background-repeat: no-repeat; text-decoration: none; }
+.link-icon.facebook { background-image: url(resources/img/icon-facebook.png); background-repeat: no-repeat; text-decoration: none;} 
+.link-icon.kakao { background-image: url(resources/img/icon-kakao.png); background-repeat: no-repeat; text-decoration: none;}
+.link-icon.line { background-image: url(resources/img/icon-line.png); background-repeat: no-repeat; text-decoration: none;}
+.fa-share-alt-square{font-size:35px; color:lightgray;}
+body{cursor: url(resources/img/cursor.cur), auto}
+.container {
+padding-top: 1em;
+margin-top: 1em;
+border-top: 
+solid
+1px
+#CCC;
+}
+
+a.button {
+display: block;
+position: relative;
+float: left;
+width: 120px;
+padding: 0;
+margin: 10px 20px 10px 0;
+font-weight: 600;
+text-align: center;
+line-height: 50px;
+color: #FFF;
+border-radius: 5px;
+transition: all 0.2s ;
+}
+.fa-circle-up{font-size:25px; color:#FFAA40; }
+.fa-circle-down{font-size:25px; color:#FFAA40; }
+.scrollbar{text-align:right;}
+.fa-comment-dots{font-size:25px; color:#FFAA40; }
+
+/** 게시글 쓰기 */
+
+#text {width: 580px; height: 700px;}
+#text:hover{border-color: rgb(255, 183, 0);}
+
+/** 버튼 반짝이*/
+.side1 { top: 200px; left: 423px; }
+.side2 { top: 240px; left: 423px; }
+.side3 { top: 500px; left: 423px; }
+.side4 { top: 540px; left: 423px; }
+
+.menu a {
+  color: rgba(255, 255, 255, 0.8);
+  /* font-family: tahoma; */
+  /* font-size: 17pt;
+  font-weight: 400; */
+  /* padding: 15px 25px; */
+  /**/
+  /* position: relative; */
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+
+.SMN_effect-68 a:hover{
+  animation: blur-a 3s ease-out infinite;
+  text-shadow: 0px 0px 5px #fff, 0px 0px 7px #fff;
+}
+@keyframes blur-a {
+  from {
+    text-shadow:0px 0px 10px #fff,
+      0px 0px 10px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 50px #fff,
+      0px 0px 50px #fff,
+      0px 0px 50px #7B96B8,
+      0px 0px 150px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px -10px 100px #7B96B8,
+      0px -10px 100px #7B96B8;
+  }
+}
+

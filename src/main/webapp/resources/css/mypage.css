@@ -1,0 +1,141 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700);
+html {
+  height: 100%
+}
+
+body {
+  font-family:'Roboto Slab', "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+  background-color: #f5eeb4;
+  color: #838689;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Based on http://www.456bereastreet.com/archive/201105/styling_ordered_list_numbers/ */
+div {
+  max-width: 700px;
+  margin: 0 auto;
+  display: block;
+}
+/* #1- Larger numbers */
+ol.large-numbers {
+  counter-reset:li; /* Initiate a counter */
+  margin-left:0; /* Remove the default left margin */
+  padding-left:0; /* Remove the default left padding */
+  line-height: 1.25;
+}
+ol.large-numbers > li {
+  position:relative; /* Create a positioning context */
+  list-style:none; /* Disable the normal item numbering */
+  margin: 1rem 0 1rem 2rem;
+  padding: 0 0 0 1rem;
+}
+ol.large-numbers > li:before {
+  content:counter(li); /* Use the counter as content */
+  counter-increment:li; /* Increment the counter by 1 */
+  /* Position and style the number */
+  position:absolute;
+  top: -0.3em; /* move numbers up or down as needed */
+  left:-0.9em;
+  width: 1em;
+  text-align:center;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box;
+  font-size: 2em;
+  font-weight: bold;
+  font-weight: 700;
+  color: #262726;
+  text-shadow:
+       3px 3px 0 #838689,
+     -1px -1px 0 #838689,  
+      1px -1px 0 #838689,
+      -1px 1px 0 #838689,
+       1px 1px 0 #838689;
+}
+ol.large-numbers li:hover:before {
+  color: #EBE3AA;
+}
+
+#title_inputbox{
+    height: 30px;
+    border-radius: 10px;
+    border:1px solid wheat;
+}
+
+#title_submit{
+    height:40px;
+    border-radius: 10px;
+    border:1px solid wheat;
+    background-color: #EBE3AA;
+}
+
+#background-select{
+    height:40px;
+    width: 100px;
+    border: 1px solid wheat;
+    border-radius: 10px;
+}
+
+#update_inputbox{
+    height: 30px;
+    border-radius: 10px;
+    border:1px solid wheat;
+}
+
+#update_submit{
+    height:40px;
+    border-radius: 10px;
+    border:1px solid wheat;
+}
+
+#title-rayout{
+    display: none;
+    transition: 2s;
+}
+#profile-rayout{
+    display: none;
+    /* opacity: 0; */
+    /* transform: scaleY(10); */
+    /* transform-origin: 0px 0px; */
+    /* transition: width 1s ease 0.5s, margin-top 1s ease-out 0.5s; */
+}
+#background-rayout{
+    display: none;
+}
+#update-rayout{
+    display: none;
+}
+/* 
+@keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+  
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  .appear {
+    animation: fade-in 1s;
+    animation-fill-mode: forwards;
+    display: flex;
+  }
+  
+  .disappear {
+    animation: fade-out 1s;
+    animation-fill-mode: forwards;
+  } */

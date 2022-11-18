@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+.visitor_title{
+    display: flex;
+    padding: 10px 10px;
+    font-size: 13px;
+    background-color: #ffd77b;
+}
+
+.photo{
+    width: 100px;
+    height: 100px;
+}
+
+.visitor_content{ margin: 10px;}
+td{border-color: white; padding: 1px;}
+
+.minimi-border{border: 1px solid rgb(187, 187, 187); width: 100px;}
+
+
+hr {
+  background-color: #fff;
+  padding: 0;
+  margin: 40px;
+}
+
+
+hr.hr-2 {
+  border: 0;
+  border-bottom: 2px dashed #eee;
+  background: rgb(255, 198, 165);
+}
+#writeboard {width: 350px; height: 150px;}
+#submitReply{
+	color:orange;
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(255, 240, 154, 0.237);
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.25s;
+    width: 70px;}
+#submitReply:active {
+    transform: scale(1.5);
+}
+#submitReply:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.main {
+  margin: 0 5px;
+  border: 2px solid #bfbfc8;
+  border-radius: 15px;
+  width: 645px;
+  height: 480px;
+  padding: 10px 30px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+
+  position: relative;
+  background-color: #fff;
+  z-index: 2;
+}
+
+.fa-heart{color: rgb(248, 59, 90); height: 15px; width: 15px;}
+
+
+textarea{border:2px solid rgb(255, 221, 184); border-radius: 10px; resize: none;}
+textarea:hover{border:3px solid green; border-radius: 10px; resize: none;}
+
+.writeCard {
+    width: 400px; height: 150px;
+    border: 1px dashed rgb(127, 103, 81); border-radius: 10px;
+    
+}
+#homepage{color:rgb(255, 86, 24)}

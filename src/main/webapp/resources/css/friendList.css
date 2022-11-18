@@ -1,0 +1,19 @@
+	@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+   .main{
+   		font-family: 'Gowun Dodum'		
+   }
+   a {
+       text-decoration-line: none;
+   }
+   .search{
+      text-align: center;
+   }
+   #searchButton{
+      display: inline-block;
+   }
+   .friendOption{
+      text-align: center;
+   }
+   .btn btn-primary{
+      display: inline-block;
+   }

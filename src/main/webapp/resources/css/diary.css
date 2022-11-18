@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+/*달력*/
+.main {overflow: inherit;}
+.c{
+	position: absolute;
+	left: 20px;
+	right: 330px;
+	margin-top: 5px;
+}
+.c h2, .m h2{color: orange; border-bottom: none;}
+.calendar{
+    display: flex;
+    position: absolute;
+    height: 215px;
+    top: 40px;
+    bottom: 477px;
+    left: 20px;
+    right: 330px;
+    padding-top: 5px;
+    border: 2px solid silver;
+    background-color: white;
+    border-radius: 5px;
+    z-index: 999;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+.m{
+	position: absolute;
+	left: 330px;
+	right: 20px;
+	margin-top: 5px;
+}
+.map{
+    display: flex;
+    height: 215px;
+    position: absolute;
+    top: 40px;
+    bottom: 477px;
+    left: 330px;
+    right: 20px;
+    padding-top: 5px;
+    border: 2px solid silver;
+    background-color: white;
+    border-radius: 5px;
+    z-index: 999;
+    font-family: 'Gowun Dodum', sans-serif;
+}
+.diary table{border: 2px solid silver; height: 40px; text-align: center;}
+.diary td{border : 2px solid silver;}
+.diary td:first-child{color: white; font-family: 'Sigmar One', cursive; font-size: 25px; background: #facf64;}
+.diary td:last-child{font-family: 'Gowun Dodum', sans-serif; font-size: 18px;}
+.today-date{
+    flex: 0.25;
+
+    text-align: center;
+    line-height: 22px;
+    font-size: 16px;
+    
+    color: steelblue;
+}
+.day_list{
+    flex: 1;
+
+    margin-left: 10px;
+    margin-top: 2px;
+    line-height: 20px;
+    font-size: 13px;
+
+    color: black;
+}
+.side1 { top: 200px; left: 405px; }
+.side2 { top: 240px; left: 405px; }
+.side3 { top: 500px; left: 405px; }
+.side4 { top: 540px; left: 405px; }
+/*다이어리*/
+.diary{position: absolute; top: 255px; bottom: 15px; left: 10px; right: 5px; overflow: auto;}
+.diary::-webkit-scrollbar {
+    width: 12px;
+    border-radius: 10px;
+
+  }
+.diary::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 3px solid transparent;
+   
+  }
+.diary::-webkit-scrollbar-track {
+    
+    border-radius: 10px;
+    box-shadow: inset 0px 0px10px white;
+  }
+.diary_contents{ margin: 10px; margin-top: 20px; border: 1px solid silver; border-radius: 5px;}
+.SMN_effect-68 a:hover{
+  animation: blur-a 3s ease-out infinite;
+  text-shadow: 0px 0px 5px #fff, 0px 0px 7px #fff;
+}
+@keyframes blur-a {
+  from {
+    text-shadow:0px 0px 10px #fff,
+      0px 0px 10px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 50px #fff,
+      0px 0px 50px #fff,
+      0px 0px 50px #7B96B8,
+      0px 0px 150px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px -10px 100px #7B96B8,
+      0px -10px 100px #7B96B8;
+  }
+}

@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+/*달력*/
+.main{overflow-x:hidden;}
+h1 {
+	margin-top: 10px;
+	margin-bottom: 20px;
+    height: 25px;
+  	font-size: 30px;
+  	color: orange;
+  	font-weight: 700;
+  	text-align: center;
+}
+table {
+	margin-left: auto;
+	margin-right: auto;
+    width: 65%;
+    height: 40px;
+    text-align: center;
+}
+tr, td{
+	border: none;
+	font-size: 15px;
+}
+hr{
+  border-top: 2px dotted gray;
+  width: 583px;
+}
+.hr2{
+	bottom: 80px;
+	width: 583px;
+	
+}
+/*다이어리*/
+.diary{
+	width: 103%;
+	height: 230px;
+	overflow-y: scroll;
+	text-align: center;
+	font-family: 'Gowun Dodum', sans-serif;
+	font-size: 18px;
+}
+.diary::-webkit-scrollbar {
+    width: 12px;
+    border-radius: 10px;
+
+  }
+.diary::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 3px solid transparent;
+   
+  }
+.diary::-webkit-scrollbar-track {
+    
+    border-radius: 10px;
+    box-shadow: inset 0px 0px10px white;
+  }
+.write{
+	margin-top: 10px;
+	background: #fce7ad;
+	height: 50px;
+	border-radius: 10px;
+}
+.comment textarea{
+	resize: none;
+	border: 1px solid gray;
+	outline: 1px solid gray;
+	border-radius: 5px;
+	width: 470px;
+	height: 25px;
+	margin-top: 12px;
+	margin-left: 20px;
+	font-size: 12px;
+}
+.comment button{
+	background: white;
+	border: 1px solid gray;
+	border-radius: 4px;
+	vertical-align: middle;
+	margin-bottom: 17px;
+	font-size: 12px;
+	cursor: pointer;
+}
+.comm{
+/* 	overflow-y: scroll; */
+	height: 70px;
+	-ms-overflow-style: none;
+}
+.comm::-webkit-scrollbar{
+  display:none;
+}
+.comm table{
+	margin-top: 10px;
+	text-align: left;
+	width: 100%;
+	border-bottom: 1px solid lightgray;
+}
+.comm tr:nth-child(2n){
+	border-bottom: 1px solid lightgray;
+	padding: 10px;
+}
+.nickname td{
+	font-size: 11px;
+}
+.side1 { top: 200px; left: 405px; }
+.side2 { top: 240px; left: 405px; }
+.side3 { top: 500px; left: 405px; }
+.side4 { top: 540px; left: 405px; }
