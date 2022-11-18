@@ -22,6 +22,7 @@ public class HomeController {
 		System.out.println("helloWorld");
 		System.out.println("성공하자");
 		System.out.println("제발...plz");
+		System.out.println("ggggg");
 		return "/login/loginPage";
 	}
 	
