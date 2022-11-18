@@ -20,9 +20,10 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		System.out.println("helloWorld");
-		System.out.println("¼º°øÇÏÀÚ");
-		System.out.println("Á¦¹ß...plz");
-		System.out.println("ggggg");
+		System.out.println("í™”ì´íŒ… ì´ë²ˆì—” ê¼­");
+		System.out.println("í—¬ë¡œ..");
+		System.out.println("ì„±ê³µ");
+		System.out.println("ì „ì•„ë‹™ë‹ˆë‹¤.....");
 		return "/login/loginPage";
 	}
 	
