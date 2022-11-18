@@ -20,11 +20,12 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		System.out.println("helloWorld");
-		System.out.println("�솕�씠�똿 �씠踰덉뿏 瑗�");
-		System.out.println("�뿬濡�..");
-		System.out.println("�꽦怨�");
-		System.out.println("�쟾�븘�떃�땲�떎.....");
-		System.out.println("세상에...");
+		System.out.println("占쎌넅占쎌뵠占쎈샒 占쎌뵠甕곕뜆肉� �몭占�");
+		System.out.println("占쎈연嚥∽옙..");
+		System.out.println("占쎄쉐�⑨옙");
+		System.out.println("占쎌읈占쎈툡占쎈뻸占쎈빍占쎈뼄.....");
+		System.out.println("�꽭�긽�뿉...");
+		System.out.println("한바퀴 다돌앗다.");
 		return "/login/loginPage";
 	}
 	
