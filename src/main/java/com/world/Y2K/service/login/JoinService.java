@@ -1,8 +1,8 @@
-package com.world.Y2K.model.service.login;
+package com.world.Y2K.service.login;
 
 import com.world.Y2K.model.vo.Member;
 
-public interface RegisterService {
+public interface JoinService {
 
 	String joinMember(Member member);
 

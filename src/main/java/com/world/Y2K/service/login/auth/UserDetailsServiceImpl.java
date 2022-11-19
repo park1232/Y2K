@@ -1,4 +1,4 @@
-package com.world.Y2K.model.service.login.auth;
+package com.world.Y2K.service.login.auth;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
