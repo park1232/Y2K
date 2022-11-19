@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="photoMapper">
+  
+   <resultMap type="Photo" id="photoResultSet">
+      <id column="PHOTONO" property="photoNo"/>
+      <result column="PHOTONAME" property="photoName"/>
+      <result column="RENAMENAME" property="renameName"/>
+      <result column="PHOTOPATH" property="photoPath"/>
+      <result column="PHOTOSTATUS" property="photoStatus"/>
+      <result column="PHOTOCOMENT" property="photoComent"/>
+   </resultMap>
+
+   <insert id="insertPhoto">
+		INSERT INTO photo
+		VALUES(seq_rid.nextval, #{photoName}, #{renameName}, #{photoPath}, default, #{photoComent})
+		</insert>
+   
+   
+   
+</mapper>

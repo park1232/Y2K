@@ -7,12 +7,10 @@
 	
 	<bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-		<property name="username" value="SPRING"/>
-		<property name="password" value="SPRING"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
+		<property name="username" value="Y2K"/>
+		<property name="password" value="Y2K"/>
 	</bean>	
-		
-		
 		
 		
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -28,7 +26,19 @@
 	</bean>
 	
 	 <bean id="bcryptPasswordEncoder"
-   class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-
-
-</beans>
+ 		  class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+	<!-- 파일 업로드 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="100000000"/>
+		<property name="maxInMemorySize" value="100000000"/>
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	</beans>

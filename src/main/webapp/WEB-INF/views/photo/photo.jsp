@@ -125,10 +125,11 @@
 					</div>
 					<a href="${contextPath}/photo.ph"
 						class="menu-item mi-2 menu-checked">사진첩</a>
-					<div class="menu align-center expanded text-center SMN_effect-68"></div>
+					<div class="menu align-center expanded text-center SMN_effect-68">
 					<a href="${contextPath}/diary.di" class="menu-item mi-3">다이어리</a>
-					<a href="${contextPath}/visitBoard.vi"
-						class="menu-item mi-4">방명록</a> <a href="#" class="menu-item mi-5">마케팅</a>
+					<a href="${contextPath}/visitBoard.vi" class="menu-item mi-4">방명록</a> 
+					<a href="#" class="menu-item mi-5">마케팅</a>
+					</div>
 				</div>
 			</div>
 		</section>
