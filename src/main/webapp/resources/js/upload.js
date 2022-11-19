@@ -8,8 +8,18 @@ function imageChoose(obj) {
 	}
 
 	let reader = new FileReader();
+	console.log(reader);
+	const preview = document.getElementById("imageUploadPreview");
+	
 	reader.onload = (e) => {
-		$("#imageUploadPreview").attr("src", e.target.result);
+		preview.src = e.target.result
 	}
 	reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
+}
+
+// (2) 업로드 버튼 누를 시 화면 닫히기
+
+function windowClose() {
+	$(".cta blue").css("display", "none");
+	location.reload();
 }
