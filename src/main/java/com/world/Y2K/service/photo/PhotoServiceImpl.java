@@ -13,6 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.world.Y2K.dao.photo.PhotoDAO;
 import com.world.Y2K.model.vo.Photo;
 
+
+
+
+
 @Service("pService")
 public class PhotoServiceImpl implements PhotoService {
 	
@@ -23,11 +27,13 @@ public class PhotoServiceImpl implements PhotoService {
 	private PhotoDAO pDAO;
 
 	@Override
-	public void insertImage(Photo p, MultipartFile files, HttpServletRequest request) {
+	public void insertImage(Photo p, MultipartFile file, HttpServletRequest request) {
 		
-		String root = request.getSession().getServletContext().getRealPath("resources");
+//		String root = request.getSession().getServletContext().getRealPath("resources");
+//		
+//		String savePath = root+ "\\uploadFiles";
 		
-		String savePath = root+ "\\uploadFiles";
+		String savePath = "C:/Users/82107/Desktop/upload";
 		
 		File folder = new File(savePath);
 		
@@ -37,14 +43,14 @@ public class PhotoServiceImpl implements PhotoService {
 		
 		UUID uuid = UUID.randomUUID();
 		
-		String originFileName = files.getOriginalFilename();
+		String originFileName = file.getOriginalFilename();
 
 		String renameFileName = uuid+"_"+originFileName;
 		
-		String renamePath = folder + "||" + renameFileName;
+		String renamePath = folder + "/" + renameFileName;
 		
 		try {
-			files.transferTo(new File(renamePath));
+			file.transferTo(new File(renamePath));
 	
 		} catch (Exception e) {
 			
@@ -62,7 +68,7 @@ public class PhotoServiceImpl implements PhotoService {
 		System.out.println(renameFileName);
 		
 		
-		 pDAO.insertImage(sqlSession,  p);
+		 pDAO.insertImage(sqlSession, p);
 	
 }
 	

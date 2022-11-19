@@ -8,5 +8,7 @@ import com.world.Y2K.model.vo.Photo;
 
 public interface PhotoService {
 
-	void insertImage(Photo p, MultipartFile files, HttpServletRequest request);
+	void insertImage(Photo p, MultipartFile file, HttpServletRequest request);
+	
+	
 }

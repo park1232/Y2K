@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,9 +16,11 @@ import com.world.Y2K.exception.PhotoException;
 import com.world.Y2K.model.vo.Photo;
 import com.world.Y2K.service.photo.PhotoService;
 
+import lombok.AllArgsConstructor;
 
 
 
+@AllArgsConstructor
 @Controller
 public class PhotoController {
 	
@@ -44,21 +47,35 @@ public class PhotoController {
 		return "upload";
 	}
 	
-	@PostMapping("/imageUpload.ph")
+	@PostMapping("/image")
 	public String imageUpload(@ModelAttribute Photo p,
-			@RequestParam("file") MultipartFile files,
-			HttpServletRequest request,
-			Model model) {
+			@RequestParam(value="file", required=false) MultipartFile file,
+			HttpServletRequest request, Model model) {
 		
-		if(files.isEmpty()) {
+		//System.out.println(file);
+		
+		if(file.isEmpty()) {
 			throw new PhotoException("이미지가 첨부되지않았습니다.");
 		}
 		
-		pService.insertImage(p, files, request);
-		
 	
-		
+		pService.insertImage(p, file, request);
 		
 		return null;
+		
+		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

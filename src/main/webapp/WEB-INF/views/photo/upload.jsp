@@ -28,12 +28,11 @@
              </div>
              <!--사진업로드 로고 end-->
              
-             <!--사진업로드 Form-->                                                         <!-- byte랑 key=value둘다 보내고 싶을때 -->
-             <form class="upload-form"  action="/image" method="post" enctype="multipart/form-data">
-                 <input  type="file" name="file"  onchange="imageChoose(this)"/> <!-- 실제 파일은 byte화해서 날라감 -->
-                 <div class="upload-img">
-                     <img src="${contextPath}/resources/img/duck.jpg" alt="" id="imageUploadPreview" />
-                 </div>
+             <form class="upload-form" action="/image" method="post" enctype="multipart/form-data">
+                    <input  type="file" name="file"  onchange="imageChoose(this)" />
+                    <div class="upload-img">
+                        <img src="/images/person.jpeg" alt="" id="imageUploadPreview" />
+                    </div>
                  
                  <!--사진설명 + 업로드버튼-->
                  <div class="upload-form-detail">
