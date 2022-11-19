@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.world.Y2K.model.vo.Member;
+import com.world.Y2K.model.vo.User;
 import com.world.Y2K.service.login.RegisterService;
 
 @Controller
@@ -23,7 +23,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("/join.lo")
-	public String joinMember(Member member) {
+	public String joinMember(User member) {
 		return registerService.joinMember(member);
 //		return "redirect:/loginpage.lo";
 	}

@@ -2,10 +2,12 @@ package com.world.Y2K.model.vo;
 
 import java.sql.Date;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class Member {
+@Builder
+public class User {
 	
 	private Long userNo;
 	private String username;
