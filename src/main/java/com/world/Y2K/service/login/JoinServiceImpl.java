@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.world.Y2K.model.vo.User;
 
-@Service
+@Service("name")
 public class JoinServiceImpl implements JoinService{
 
 	@Override
