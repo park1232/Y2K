@@ -1,4 +1,5 @@
-// (1) 스토리 이미지 업로드를 위한 사진 선택 로직
+// 스토리 이미지 업로드를 위한 사진 선택 로직
+
 //img파일 선택 안 할 시 경고창
 function imageChoose(obj) {
 	let f = obj.files[0];
@@ -21,4 +22,6 @@ function imageChoose(obj) {
 	reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
 	
 	}
+	
+
 }

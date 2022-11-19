@@ -57,16 +57,12 @@ public class PhotoController {
 		if(file.isEmpty()) {
 			
 			throw new PhotoException("이미지가 첨부되지않았습니다.");
-			
+	
 		}
 		
-	
 		pService.insertImage(p, file, request);
 		
-
-		return null;
-		
-		
+		return "redirect:photo.ph";
 	}
 	
 	
