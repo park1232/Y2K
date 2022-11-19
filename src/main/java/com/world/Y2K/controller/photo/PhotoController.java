@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.world.Y2K.exception.PhotoException;
 import com.world.Y2K.model.vo.Photo;
 import com.world.Y2K.service.photo.PhotoService;
 
