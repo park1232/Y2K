@@ -1,4 +1,4 @@
-package com.world.Y2K.model.service.login.auth;
+package com.world.Y2K.service.login.auth;
 
 import java.util.ArrayList;
 import java.util.Collection;

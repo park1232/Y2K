@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.world.Y2K.model.service.login.RegisterService;
 import com.world.Y2K.model.vo.Member;
+import com.world.Y2K.service.login.RegisterService;
 
 @Controller
 public class LoginController {

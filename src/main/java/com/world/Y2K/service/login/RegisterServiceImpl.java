@@ -1,4 +1,4 @@
-package com.world.Y2K.model.service.login;
+package com.world.Y2K.service.login;
 
 import org.springframework.stereotype.Service;
 
