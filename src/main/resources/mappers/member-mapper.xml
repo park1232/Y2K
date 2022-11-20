@@ -21,6 +21,11 @@
 			values(MEMBER_SEQ.nextval,#{username},#{password},#{nickName},sysdate,sysdate,#{status},#{orange},#{role},#{provider},#{providerId})
 	</insert>
    
+   <select id="findUser" resultMap="memberResultSet" parameterType="string">
+   	select *
+   	from member
+   	where username = #{username} and status = 'Y'
+   </select>
    
    
 </mapper>

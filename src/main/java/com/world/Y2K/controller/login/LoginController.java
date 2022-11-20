@@ -13,14 +13,22 @@ import com.world.Y2K.service.login.RegisterService;
 @Controller
 public class LoginController {
 	
+//	@Autowired
+//	private UserDetailsServiceImpl userDetailsService;
+	
 	@Autowired
 	private RegisterService registerService;
-	
 	
 	@GetMapping("/loginpage.lo")
 	public String moveLoginView() {
 		return "loginPage";
 	}
+
+//	@PostMapping("login.lo")
+//	public UserDetails login(String username) {
+//		System.out.println("실행되나요?");
+//		return userDetailsService.loadUserByUsername(username);
+//	}
 	
 	@PostMapping("/register.lo")
 	public String joinMember(@ModelAttribute User user) throws MemberException {
@@ -29,7 +37,7 @@ public class LoginController {
 			throw new MemberException("회원가입을 실패하였습니다.");
 		}
 		
-		return "redirect:";
+		return "redirect:loginpage.lo";
 	}
 	
 }

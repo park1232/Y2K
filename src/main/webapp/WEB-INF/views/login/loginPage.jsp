@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%-- <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> --%>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" scope="application" />
 <!DOCTYPE html>
 <html lang="kor">
@@ -21,7 +21,7 @@
           <div class="col align-items-center flex-col sign-up">
             <div class="form-wrapper align-items-center">
               <div class="form sign-up">
-              <form action="/register.lo" method="POST">
+              <form action="${contextPath}/register.lo" method="POST">
                 <div class="input-group">
                
 	                  <i class='bx bxs-user'></i>
@@ -63,14 +63,14 @@
           <div class="col align-items-center flex-col sign-in" >
             <div class="form-wrapper align-items-center" id="loginForm">
               <div class="form sign-in">
-                <form action="/login" method="POST">
+                <form action="${contextPath}/login.lo" method="POST">
 	                <div class="input-group">
 	                  <i class='bx bxs-user'></i>
-	                  <input type="text" placeholder="Your Id">
+	                  <input type="text" name="username" placeholder="Your Id">
 	                </div>
 	                <div class="input-group">
 	                  <i class='bx bxs-lock-alt'></i>
-	                  <input type="password" placeholder="Your Password">
+	                  <input type="password" name="password" placeholder="Your Password">
 	                </div>
                 <button id="loginBtn" >
                   Login

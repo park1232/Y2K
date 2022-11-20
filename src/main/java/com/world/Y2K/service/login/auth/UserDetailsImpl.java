@@ -15,6 +15,10 @@ public class UserDetailsImpl implements UserDetails{
 	
 	private Member member;
 	
+	public UserDetailsImpl(Member member) {
+		this.member = member;
+	}
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> grantedAuthorityCollection = new ArrayList<GrantedAuthority>();
