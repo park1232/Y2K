@@ -5,13 +5,17 @@ import org.springframework.stereotype.Service;
 import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.User;
 
-@Service
+@Service("aservice")
 public class RegisterServiceImpl implements RegisterService{
 
 	@Override
 	public String joinMember(User user) {
 		
+
+//		Member member  = setMember(user);
+
 		//Member member  = setMember(user);
+
 		
 		return null;
 	}

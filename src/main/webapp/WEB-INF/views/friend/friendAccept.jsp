@@ -32,19 +32,19 @@
 		      <img src="${contextPath}/resources/img/profil1.jpg" style="height: 150px;">
 		   </div>
 		   <div style="width:190px; height:150px; float:left; text-align:center;">
-		      <br><br><a href="#">박규민</a>님께<br> <strong>일촌맺기</strong>를 희망합니다.
+		      <br><a href="#">박규민</a>님이 <p>오리님에게</p> <strong>일촌맺기</strong>를 희망합니다.
 		   </div>
 		   <br><br><br><br><br><br><br><hr>
 		   <div>
-		      <input type="text" Placeholder="일촌 신청 문구 입력" style="width:430px; height:100px;">
+		      <input type="text" Placeholder="일촌 신청 문구" style="width:430px; height:100px;" readonly>
 		   </div>
 		   <br>
 		   <div class="textarea" style="text-align:center;">
-		   상대방이 동의하시면 일촌이 맺어집니다.
+		   박규민님이 동의하시면 일촌이 맺어집니다.
 		   </div>
 		   <div class="buttonGroup">
 		   <br> 
-		   <button type="submit" class="button" id="submit" onclick="submit()">보내기</button>
+		   <button type="submit" class="button" id="submit" onclick="submit()">수락하기</button>
 		   <button type="submit" class="button" onClick='window.close()'>취소</button>
 		   </div>
 		</div>
@@ -53,7 +53,7 @@
    
 <script>
     function submit(){
-        alert("친구 신청이 완료되었습니다.")
+        alert("친구 요청 수락이 완료되었습니다.")
         close();
     }
 </script>
