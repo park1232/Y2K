@@ -9,13 +9,6 @@ import com.world.Y2K.model.dto.Member;
 @Repository("loginDAO")
 public class LoginDAO {
 
-	/*
-	 * private static LoginDAO loginDAO = new LoginDAO();
-	 * 
-	 * private LoginDAO() {}
-	 * 
-	 * public static LoginDAO getLoginDAO() { return loginDAO; }
-	 */
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
