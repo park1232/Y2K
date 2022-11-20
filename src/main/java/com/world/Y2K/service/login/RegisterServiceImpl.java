@@ -8,6 +8,7 @@ import com.world.Y2K.dao.login.LoginDAO;
 import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.User;
 
+<<<<<<< HEAD
 @Service
 public class RegisterServiceImpl implements RegisterService {
 
@@ -21,6 +22,25 @@ public class RegisterServiceImpl implements RegisterService {
 //	public RegisterServiceImpl() {
 //		this.loginDAO = LoginDAO.getLoginDAO();
 //		
+=======
+@Service("aservice")
+public class RegisterServiceImpl implements RegisterService{
+
+	@Override
+	public String joinMember(User user) {
+		
+
+//		Member member  = setMember(user);
+
+		//Member member  = setMember(user);
+
+		
+		return null;
+	}
+//
+//	private Member setMember(User user) {
+//
+>>>>>>> 34af81e1153239d0cc90e725123dd6f745288eec
 //	}
 	
 	

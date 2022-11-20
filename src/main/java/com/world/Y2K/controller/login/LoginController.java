@@ -21,6 +21,11 @@ public class LoginController {
 	
 	@GetMapping("/loginpage.lo")
 	public String moveLoginView() {
+<<<<<<< HEAD
+=======
+		System.out.println("�� ¥������.");
+		System.out.println(1);
+>>>>>>> 34af81e1153239d0cc90e725123dd6f745288eec
 		return "loginPage";
 	}
 

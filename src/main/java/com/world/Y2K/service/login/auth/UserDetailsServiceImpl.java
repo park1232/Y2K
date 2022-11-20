@@ -5,8 +5,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+<<<<<<< HEAD
 import com.world.Y2K.dao.login.LoginDAO;
 import com.world.Y2K.model.dto.Member;
+=======
+@Service("service")
+public class UserDetailsServiceImpl implements UserDetailsService{
+>>>>>>> 34af81e1153239d0cc90e725123dd6f745288eec
 
 
 public class UserDetailsServiceImpl  implements UserDetailsService{
@@ -33,6 +38,7 @@ public class UserDetailsServiceImpl  implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+<<<<<<< HEAD
 		System.out.println(username);
 		System.out.println(loginDAO);
 
@@ -41,6 +47,10 @@ public class UserDetailsServiceImpl  implements UserDetailsService{
 			return (UserDetails) new UsernameNotFoundException(username);
 		}
 		return new UserDetailsImpl(member);
+=======
+		System.out.println("�����");
+		return null;
+>>>>>>> 34af81e1153239d0cc90e725123dd6f745288eec
 	}
 
 }

@@ -8,10 +8,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>purchase</title>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="${contextPath}/resources/css/purchaes.css" />
 <script src="https://kit.fontawesome.com/7a738a6e1a.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <style>
     
     </style> 
@@ -27,8 +29,8 @@
         <div class="col-sm-4 offset-md-1 py-4">
           <ul class="list-unstyled">
             <li><a href="#" class="text-white">메인페이지</a></li>
-            <li><a href="payment.html" class="text-white">결제페이지</a></li>
-            <li><a href="${contextPath}/friend/friendList.html" class="text-white">친구페이지</a></li>
+            <li><a href="${contextPath}/payment.pa" class="text-white">결제페이지</a></li>
+            <li><a href="${contextPath}/friendList.fr" class="text-white">친구페이지</a></li>
           </ul>
         </div>
       </div>
@@ -60,7 +62,7 @@
               <hr>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-warning" onclick="window.open('detailPurchaes.html', 'detail', 'width=605, height=510')">상세보기</button>
+                  <button type="button" class="btn btn-warning" id="detailSelect">상세보기</button>
                 </div>
                	  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<h4>낑깡 50개</h4><img src="${contextPath}/resources/img/kumquat.jpg" style="height: 35px; width: 35px;">
               </div>
@@ -75,7 +77,7 @@
               <hr>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-warning" onclick="window.open('detailPurchaes.html', 'detail', 'width=605, height=510')">상세보기</button>
+                  <button type="button" class="btn btn-warning" onclick="window.open('detailPurchaes.jsp', 'detail', 'width=605, height=510')">상세보기</button>
                 </div>
                	  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<h4>낑깡 50개</h4><img src="${contextPath}/resources/img/kumquat.jpg" style="height: 35px; width: 35px;">
               </div>
@@ -163,39 +165,32 @@
 
 	<div>
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link"
-                   href="#">
+            <li class="page-item">
+                <a class="page-link" href="#">
                     <span>처음</span>
                 </a>
             </li>
-            <li class="page-item disabled">
-                <a class="page-link"
-                   href="#">
+            <li class="page-item">
+                <a class="page-link" href="#">
                     <span>이전</span>
                 </a>
             </li>
             <li class="page-item active">
-                <a class="page-link"
-                   href="#">1</a>
+                <a class="page-link" href="#">1</a>
             </li>
             <li class="page-item">
-                <a class="page-link"
-                   href="#">2</a>
+                <a class="page-link" href="#">2</a>
             </li>
             <li class="page-item">
-                <a class="page-link"
-                   href="#">3</a>
+                <a class="page-link" href="#">3</a>
             </li>
             <li class="page-item">
-                <a class="page-link"
-                   href="#">
+                <a class="page-link" href="#">
                     <span>다음</span>
                 </a>
             </li>
             <li class="page-item">
-                <a class="page-link"
-                   href="#">
+                <a class="page-link" href="#">
                     <span>마지막</span>
                 </a>
             </li>
@@ -208,8 +203,13 @@
               <a href="https://github.com/likelion-backendschool/DAMDA_project" rel="nofollow" target="_blank">Y2K</a>
         </footer>
 </footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script>
+	$(document).ready(function(){
+		$("#detailSelect").click(function(){
+		window.open("<%= request.getContextPath() %>/detailpurchaes.pa", "detail", "width=605, height=510, scrollbars=no, resizable=no, toolbars=no, menubar=no")
+		});
+	});
+</script>
 </body>
 </html>
     
