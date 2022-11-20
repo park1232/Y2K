@@ -21,7 +21,7 @@
           <div class="col align-items-center flex-col sign-up">
             <div class="form-wrapper align-items-center">
               <div class="form sign-up">
-              <form action="/join.lo" method="POST">
+              <form action="/register.lo" method="POST">
                 <div class="input-group">
                
 	                  <i class='bx bxs-user'></i>

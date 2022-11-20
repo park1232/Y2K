@@ -4,6 +4,6 @@ import com.world.Y2K.model.vo.User;
 
 public interface RegisterService {
 
-	String joinMember(User member);
+	int registerMember(User user);
 
 }
