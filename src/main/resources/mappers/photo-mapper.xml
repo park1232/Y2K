@@ -9,13 +9,20 @@
       <result column="PHOTOPATH" property="photoPath"/>
       <result column="PHOTOSTATUS" property="photoStatus"/>
       <result column="PHOTOCOMENT" property="photoComent"/>
+      
    </resultMap>
 
    <insert id="insertPhoto">
 		INSERT INTO photo
 		VALUES(seq_rid.nextval, #{photoName}, #{renameName}, #{photoPath}, default, #{photoComent})
-		</insert>
+	</insert>
    
+   <select id="selectPhotoList" resultMap="photoResultSet">
+   		select *
+   		from photo
+   		where photoStatus = 'Y'
+   
+   </select>
    
    
 </mapper>

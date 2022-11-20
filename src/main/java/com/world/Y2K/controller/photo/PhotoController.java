@@ -1,5 +1,7 @@
 package com.world.Y2K.controller.photo;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,11 +18,12 @@ import com.world.Y2K.exception.PhotoException;
 import com.world.Y2K.model.vo.Photo;
 import com.world.Y2K.service.photo.PhotoService;
 
-import lombok.AllArgsConstructor;
+
+import lombok.RequiredArgsConstructor;
 
 
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Controller
 public class PhotoController {
 	
@@ -28,7 +31,11 @@ public class PhotoController {
 	private PhotoService pService;
 	
 	@GetMapping("/photo.ph")
-	public String photo() {
+	public String photo(Model model) {
+		
+		List<Photo> images = pService.photoList();
+		
+		model.addAttribute("images", images);
 		
 	
 		return "photo";
@@ -55,11 +62,10 @@ public class PhotoController {
 		//System.out.println(file);
 		
 		if(file.isEmpty()) {
-			
 			throw new PhotoException("이미지가 첨부되지않았습니다.");
-	
 		}
 		
+	
 		pService.insertImage(p, file, request);
 		
 		return "redirect:photo.ph";
