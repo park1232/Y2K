@@ -6,14 +6,18 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.world.Y2K.model.vo.User;
+import com.world.Y2K.model.dto.Member;
 
 import lombok.Data;
 
 @Data
 public class UserDetailsImpl implements UserDetails{
 	
-	private User member;
+	private Member member;
+	
+	public UserDetailsImpl(Member member) {
+		this.member = member;
+	}
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
