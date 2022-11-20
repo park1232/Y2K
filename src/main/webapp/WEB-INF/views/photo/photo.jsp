@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" scope="application" />
 <!DOCTYPE html>
 <html lang="ko">
@@ -94,26 +95,20 @@
 
 										<!--아이템들-->
 
-										<div class="img-box">
+									<%-- 	<div class="img-box">
 											<img class="img" src="${contextPath}/resources/img/duck.jpg" />
-										</div>
-
-										<div class="img-box">
-											<img class="img" src="${contextPath}/resources/img/duck.jpg" />
-										</div>
-
-										<div class="img-box">
-											<img class="img" src="${contextPath}/resources/img/duck.jpg" />
-										</div>
-
-										<div class="img-box">
-											<img class="img" src="${contextPath}/resources/img/duck.jpg" />
-										</div>
-
-										<div class="img-box">
-											<img class="img" src="${contextPath}/resources/img/duck.jpg" />
-										</div>
-
+										</div> --%>
+										
+										<%-- ${images} --%>
+										
+										<c:forEach var="image" items="${images}">
+									
+											<div class="img-box">
+												<img class="img"  src="/upload/${image.renameName}"/>
+											</div>
+												
+															
+										</c:forEach>
 										<!--아이템들end-->
 									</div>
 								</div>

@@ -1,5 +1,7 @@
 package com.world.Y2K.dao.photo;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,8 +15,12 @@ public class PhotoDAO {
 
 	public void insertImage(SqlSessionTemplate sqlSession, Photo p) {
 		
-		
 		sqlSession.insert("photoMapper.insertPhoto", p);
+	}
+
+	public List<Photo> photoList(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectList("photoMapper.selectPhotoList");
 	}
 
 	

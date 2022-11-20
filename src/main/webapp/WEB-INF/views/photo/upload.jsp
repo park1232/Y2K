@@ -37,7 +37,7 @@
                  <!--사진설명 + 업로드버튼-->
                  <div class="upload-form-detail">
                        <input type="text" placeholder="사진설명" name="photoComent" >  <!-- key=value로 날라감 -->
-                     <button class="cta blue"  id="upload" disabled='disabled' onClick='window.close()'>업로드</button>
+                     <button class="cta blue"  id="upload" disabled='disabled' >업로드</button>
                  </div>
                  <!--사진설명end-->
                  
