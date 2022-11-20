@@ -11,7 +11,11 @@ public class RegisterServiceImpl implements RegisterService{
 	@Override
 	public String joinMember(User user) {
 		
+
 //		Member member  = setMember(user);
+
+		//Member member  = setMember(user);
+
 		
 		return null;
 	}

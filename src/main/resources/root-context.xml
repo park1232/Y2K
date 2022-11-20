@@ -12,6 +12,7 @@
 		<property name="password" value="Y2K"/>
 	</bean>	
 		
+		
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation" value="classpath:mybatis-config.xml"/>
 		<property name="dataSource" ref="dataSource"/>
@@ -25,7 +26,19 @@
 	</bean>
 	
 	 <bean id="bcryptPasswordEncoder"
-   class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-
-
-</beans>
+ 		  class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+	<!-- 파일 업로드 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="100000000"/>
+		<property name="maxInMemorySize" value="100000000"/>
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	</beans>
