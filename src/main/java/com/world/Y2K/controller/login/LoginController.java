@@ -1,6 +1,7 @@
 package com.world.Y2K.controller.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.world.Y2K.exception.MemberException;
 import com.world.Y2K.model.vo.User;
 import com.world.Y2K.service.login.RegisterService;
+import com.world.Y2K.service.login.auth.UserDetailsImpl;
 
 @Controller
 public class LoginController {
@@ -29,6 +31,12 @@ public class LoginController {
 		}
 		
 		return "redirect:loginpage.lo";
+	}
+	
+	@GetMapping("/info")
+	public void info(Authentication authentication) {
+		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+		System.out.println("user : " + userDetails.getMember());
 	}
 	
 }
