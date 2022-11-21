@@ -28,6 +28,15 @@
    		select *
    		from photo
    		where photoStatus = 'Y' and photoNo = #{photoNo}
+   		order by photoNo desc
    </select>
+   
+   <update id="deletePhoto">
+   		update photo
+		set photoStatus = 'N'
+		where photoNo = #{photoNo}
+
+   </update>
+   
    
 </mapper>

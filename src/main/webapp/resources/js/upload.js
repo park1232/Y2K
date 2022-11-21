@@ -2,6 +2,7 @@
 
 //img파일 선택 안 할 시 경고창
 function imageChoose(obj) {
+
 	let f = obj.files[0];
 	let up = document.getElementById('upload');
 	if (!f.type.match("image.*")) {
@@ -22,6 +23,18 @@ function imageChoose(obj) {
 	reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
 	
 	}
-	
-
 }
+
+ function popupClose(form){
+	 
+	 	form.target = opener.name;
+	 	
+	 	form.submit();
+	 	
+	 	if(opener != null){
+	 		opener.insert = null;
+	 		
+	 		self.close();
+	 		window.close();
+	 	}
+	 }

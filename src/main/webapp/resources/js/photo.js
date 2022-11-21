@@ -1,19 +1,25 @@
 
 const up = () =>{
-	window.open('upload.ph','','width=700, height=670');
+ 	
+	window.name = "photo.ph";
+	
+	window.open('upload.ph','popup','width=700, height=670');
 		
 }
 
-const image = document.getElementById("imgOne");
-$(function(){
-	$(".img-box").click(function(){
-			console.log(this);
-			
+let images = document.querySelectorAll(".imgOne");
+
+for(const img of images){
+	img.addEventListener('click',function(){
+	
+		let photoNo = img.nextElementSibling.value;
+		
+		console.log(photoNo);
+		window.open('show.ph?photoNo='+photoNo,'','width=600, height=650');
 		});
-	});
+	}
+
 
 
  //show.ph?bId='+bId+' 
 //$('.imgOne').click(function(){
-	
-	//window.open('show.ph','','width=600, height=650');

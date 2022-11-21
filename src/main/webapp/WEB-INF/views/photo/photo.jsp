@@ -21,6 +21,7 @@
 	
 	<div class="bg">
 	<main>
+		
 		<section class="pf-st">
 			<div class="pf-side">
 				<div class="pf-back">
@@ -101,7 +102,8 @@
 									
 											<div class="img-box">
 												<img id="imgOne"class="imgOne"  src="/upload/${image.renameName}"/>
-												<div class="comment"></div>
+												<input type="hidden" name="photoNo" id="photoNo" value=${image.photoNo }>
+												<!--<div class="comment"></div>-->
 											</div>
 												
 															
@@ -125,6 +127,7 @@
 				</div>
 			</div>
 		</section>
+		
 		</main>
 	</div>
 	

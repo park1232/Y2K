@@ -28,7 +28,7 @@
 
 	<beans:bean id="userService" class="com.world.Y2K.service.login.auth.UserDetailsServiceImpl"/>
 	<beans:bean id="loginDAO" class="com.world.Y2K.dao.login.LoginDAO"/>
-	<beans:bean id="loginSuceessHandler" class="com.world.Y2K.service.login.auth.LoginSuccessHandler"/>
+
 
 
 
