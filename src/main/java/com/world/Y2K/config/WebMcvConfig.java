@@ -26,6 +26,6 @@ public class WebMcvConfig implements WebMvcConfigurer{
 			.resourceChain(true)
 			.addResolver(new PathResourceResolver());
 	
-		System.out.println("나 실행됨?;;;;;;;;;");
+		
 	}
 }

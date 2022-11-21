@@ -23,6 +23,13 @@ public class PhotoDAO {
 		return sqlSession.selectList("photoMapper.selectPhotoList");
 	}
 
+	public Photo selectImg(SqlSessionTemplate sqlSession, Photo p) {
+		
+		
+		
+		return sqlSession.selectOne("photoMapper.selectPhoto", p);
+	}
+
 	
 	
 	

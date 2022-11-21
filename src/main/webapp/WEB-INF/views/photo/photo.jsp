@@ -93,18 +93,15 @@
 									<!--게시물컨 그리드배열-->
 									<div class="tab-1-content-inner">
 
-										<!--아이템들-->
-
-									<%-- 	<div class="img-box">
-											<img class="img" src="${contextPath}/resources/img/duck.jpg" />
-										</div> --%>
+										
 										
 										<%-- ${images} --%>
 										
 										<c:forEach var="image" items="${images}">
 									
 											<div class="img-box">
-												<img class="img"  src="/upload/${image.renameName}"/>
+												<img id="imgOne"class="imgOne"  src="/upload/${image.renameName}"/>
+												<div class="comment"></div>
 											</div>
 												
 															
