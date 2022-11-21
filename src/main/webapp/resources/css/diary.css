@@ -15,7 +15,7 @@
 .calendar{
     display: flex;
     position: absolute;
-    height: 215px;
+    height: 220px;
     top: 40px;
     bottom: 477px;
     left: 20px;
@@ -35,7 +35,7 @@
 }
 .map{
     display: flex;
-    height: 215px;
+    height: 220px;
     position: absolute;
     top: 40px;
     bottom: 477px;
@@ -47,6 +47,17 @@
     border-radius: 5px;
     z-index: 999;
     font-family: 'Gowun Dodum', sans-serif;
+}
+.write{
+	position: absolute;
+	top: 262px;
+	right: 20px;
+}
+#writeBtn{
+	background: white;
+	border: none;
+	cursor: pointer;
+	color: orange;
 }
 .diary table{border: 2px solid silver; height: 40px; text-align: center;}
 .diary td{border : 2px solid silver;}
@@ -76,7 +87,7 @@
 .side3 { top: 500px; left: 405px; }
 .side4 { top: 540px; left: 405px; }
 /*다이어리*/
-.diary{position: absolute; top: 255px; bottom: 15px; left: 10px; right: 5px; overflow: auto;}
+.diary{position: absolute; top: 275px; bottom: 15px; left: 10px; right: 5px; overflow: auto;}
 .diary::-webkit-scrollbar {
     width: 12px;
     border-radius: 10px;

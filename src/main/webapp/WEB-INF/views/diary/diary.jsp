@@ -89,6 +89,7 @@
                   </div>
                 </div>
                 <div class="main">
+               	 	<form method="POST" action="${ contextPath }/diary3.di" method="POST">
                   <div class="home_contents">
 			<div class="c">
 			<h2>날짜별보기</h2>
@@ -103,6 +104,9 @@
 			</div>
 			
 			<div class="map">
+			</div>
+			<div class="write">
+				<button id="writeBtn">글쓰기</button>
 			</div>
         <div class="diary">
 			<div class="diary_contents">
@@ -147,6 +151,7 @@
 			</div>
 		</div>
                 </div>
+                </form>
               </div>
               
               <div class = "menu align-center expanded text-center SMN_effect-68">
@@ -162,6 +167,7 @@
 <!--              <div class="menu-item mi-6">게시판</div>-->
 <!--              <div class="menu-item mi-7">방명록</div>-->
             </div>
+          </div>
           </div>
         </section>
       </main>
