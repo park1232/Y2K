@@ -11,7 +11,7 @@
 
 	<http auto-config='true' use-expressions="true">
 		  <csrf disabled="true"/> 
-          <form-login login-page="/loginpage.lo" login-processing-url="/login.lo"  default-target-url="/"  
+          <form-login login-page="/loginpage.lo" login-processing-url="/login.lo" 
           						 username-parameter="username" password-parameter="password"/>
           <intercept-url pattern="/resources/**" access="permitAll"/>
           <intercept-url pattern="/*.lo" access="permitAll"/>
@@ -26,8 +26,9 @@
 		</authentication-provider>
 	</authentication-manager>
 
-<beans:bean id="userService" class="com.world.Y2K.service.login.auth.UserDetailsServiceImpl"/>
-<beans:bean id="loginDAO" class="com.world.Y2K.dao.login.LoginDAO"/>
+	<beans:bean id="userService" class="com.world.Y2K.service.login.auth.UserDetailsServiceImpl"/>
+	<beans:bean id="loginDAO" class="com.world.Y2K.dao.login.LoginDAO"/>
+	<beans:bean id="loginSuceessHandler" class="com.world.Y2K.service.login.auth.LoginSuccessHandler"/>
 
 
 
