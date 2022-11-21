@@ -24,5 +24,10 @@
    
    </select>
    
+   <select id="selectPhoto" resultMap="photoResultSet">
+   		select *
+   		from photo
+   		where photoStatus = 'Y' and photoNo = #{photoNo}
+   </select>
    
 </mapper>

@@ -3,6 +3,7 @@ package com.world.Y2K.controller.photo;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,14 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.world.Y2K.exception.PhotoException;
+import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.Photo;
 import com.world.Y2K.service.photo.PhotoService;
-
 
 import lombok.RequiredArgsConstructor;
 
@@ -42,10 +43,15 @@ public class PhotoController {
 	}
 	
 	@GetMapping("/show.ph")
-	public String test3() {
+	public ModelAndView selectImg(
+			HttpSession session, ModelAndView mv,
+			//@RequestParam("username") String username
+			@ModelAttribute Photo p
+			) {
+		pService.selectImg(p);
 		
 		
-		return "show";
+		return mv;
 	}
 	
 	@GetMapping("/upload.ph")
@@ -71,8 +77,7 @@ public class PhotoController {
 		return "redirect:photo.ph";
 	}
 	
-	
-	
+
 	
 	
 	

@@ -14,6 +14,8 @@ public interface PhotoService {
 	List<Photo> photoList();
 
 	void insertImage(Photo p, MultipartFile file, HttpServletRequest request);
+
+	Photo selectImg(Photo p);
 	
 	
 }

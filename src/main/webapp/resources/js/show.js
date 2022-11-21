@@ -1,18 +1,4 @@
-// 좋아요, 안좋아요
-function toggleLike() {
-	let likeIcon = $("#storyLikeIcon-1");
-	if (likeIcon.hasClass("far")) {
-		likeIcon.addClass("fas");
-		likeIcon.addClass("active");
-		likeIcon.removeClass("far");
-	} else {
-		likeIcon.removeClass("fas");
-		likeIcon.removeClass("active");
-		likeIcon.addClass("far");
-	}
-}
-
-// (4) 댓글쓰기
+// 댓글쓰기
 // function addComment() {
 
 // 	let commentInput = document.getElementById("#storyCommentInput-1");
@@ -40,7 +26,7 @@ function toggleLike() {
 // 	commentInput.val("");
 // }
 
-// (5) 댓글 삭제
+// 댓글 삭제
 function deleteComment() {
 
 }
@@ -50,55 +36,8 @@ function modalInfo() {
 	$(".modal-info").css("display", "none");
 }
 
-// (3) 좋아요, 안좋아요
-function toggleLike(imageId) { //` ` 로 바꿔주기 뺵틱
-	let likeIcon = $(`#storyLikeIcon-${imageId}`);
-	
-	
-	
-	if (likeIcon.hasClass("far")) { //좋아요를 하겠다
-		
-		$.ajax({
-			type:"post",
-			url:`/api/image/${imageId}/likes`,
-			dataType: "json"
-		}).done(res=>{
-		
-		let likeCountStr = $(`#storyLikeCount-${imageId}`).text();
-		let likeCount = Number(likeCountStr)	+1;
-		$(`#storyLikeCount-${imageId}`).text(likeCount);
-		
-		likeIcon.addClass("fas");
-		likeIcon.addClass("active");
-		likeIcon.removeClass("far");
-		}).fail(error=>{
-			console.log("오류", error);
-		});
-		
-		
-	} else { //좋아요취소하겠다
-	
-	$.ajax({
-			type:"delete",
-			url:`/api/image/${imageId}/likes`,
-			dataType: "json"
-		}).done(res=>{
-			
-		let likeCountStr = $(`#storyLikeCount-${imageId}`).text();
-		let likeCount = Number(likeCountStr)	-1;
-		$(`#storyLikeCount-${imageId}`).text(likeCount);	
-					
-		likeIcon.removeClass("fas");
-		likeIcon.removeClass("active");
-		likeIcon.addClass("far");
-		}).fail(error=>{
-			console.log("오류", error);
-		});
 
-	}
-}
-
-// (4) 댓글쓰기
+// 댓글쓰기
 function addComment() {
 
 	let commentInput = $("#storyCommentInput-1");
@@ -130,4 +69,7 @@ function addComment() {
 function modalInfo() {
 	$(".modal-info").css("display", "none");
 }
+
+
+
 

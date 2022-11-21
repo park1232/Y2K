@@ -97,6 +97,18 @@ public class PhotoServiceImpl implements PhotoService {
 
 
 
+	@Override
+	public Photo selectImg(Photo p) {
+		
+		System.out.println(p);
+		
+		return pDAO.selectImg(sqlSession, p);
+	}
+
+
+
+
+
 
 
 }
