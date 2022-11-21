@@ -12,7 +12,6 @@
 	<http auto-config='true' use-expressions="true">
 		  <csrf disabled="true"/> 
           <form-login login-page="/loginpage.lo" login-processing-url="/login.lo" 
-          						authentication-success-handler-ref=""
           						 username-parameter="username" password-parameter="password"/>
           <intercept-url pattern="/resources/**" access="permitAll"/>
           <intercept-url pattern="/*.lo" access="permitAll"/>
