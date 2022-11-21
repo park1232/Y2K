@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="paymentMapper">
+	<select id="getPayListCount" resultType="_int">
+		select count(*)
+		from product
+		where PRODUCTSTATUS = 'Y'
+	</select>
+   
+   <select id="selectProductList" resultMap="productResultSet">
+   		select *
+   		from product
+   			join member using(USERNO)
+   		where PRODUCTSTATUS = 'Y'
+   		order by PRODUCTNO desc
+   </select>
+   
+   <select id="selectAttmList" resultMap="productPhotoResultSet">
+   		select *
+   		from productPhoto
+   			join product using(PRODUCTNO)
+   		where PRODUCTSTATUS = 'Y'
+   </select>
+   
+   <resultMap type="ProductPhoto" id="productPhotoResultSet">
+   		<id column="PRODUCTPHOTONO" property="productPhotoNo"/>
+		<result column="PRODUCTPHOTONAME" property="productPhotoName"/>
+		<result column="PRODUCTRENAMENAME" property="productReNameName"/>
+		<result column="PRODUCTPHOTOPATH" property="productPhotoPath"/>		
+		<result column="PRODUCTPHOTOSTATUS" property="productPhotoStatus"/>
+		<result column="PRODUCTNO" property="productNo"/>
+
+   </resultMap>
+   
+   <resultMap type="Product" id="productResultSet">
+		<id column="PRODUCTNO" property="productNo"/>
+		<result column="PRODUCTNAME" property="productName"/>
+		<result column="PRICE" property="price"/>
+		<result column="PRODUCTCONTENT" property="productContent"/>		
+		<result column="USERNO" property="userNo"/>
+		<result column="PRODUCTCREATEDATE" property="productCreateDate"/>
+		<result column="PRODUCTMODIFYDATE" property="productModifyDate"/>
+		<result column="PRODUCTSTATUS" property="productStatus"/>
+	</resultMap>
+	
+</mapper>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" scope="application" />
 <!doctype html>
 <html lang="en">
@@ -38,7 +39,7 @@
   </div>
   <div class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container">
-      <a href="#" class="navbar-brand d-flex align-items-center">
+      <a href="${contextPath}/purchaes.pa" class="navbar-brand d-flex align-items-center">
         
         <strong>스킨</strong>
       </a>
@@ -49,106 +50,39 @@
   </div>
 </header>
 
+${ photoList }
 <div class="main">
   <div class="album py-5">
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="${contextPath}/resources/img/mainSkin1.jpg" style="height: 300px;">
-
-            <div class="card-body">
-              <p class="card-text"><strong>별빛 스킨&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;2022-11-12</strong></p>
-              <hr>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-warning" id="detailSelect">상세보기</button>
-                </div>
-               	  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<h4>낑깡 50개</h4><img src="${contextPath}/resources/img/kumquat.jpg" style="height: 35px; width: 35px;">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="${contextPath}/resources/img/mainSkin2.jpg" style="height: 300px;">
-            <div class="card-body">
-              <p class="card-text"><strong>초록색 스킨&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;2022-11-12</strong></p>
-              <hr>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-warning" onclick="window.open('detailPurchaes.jsp', 'detail', 'width=605, height=510')">상세보기</button>
-                </div>
-               	  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<h4>낑깡 50개</h4><img src="${contextPath}/resources/img/kumquat.jpg" style="height: 35px; width: 35px;">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="${contextPath}/resources/img/mainSkin3.jpg" style="height: 300px;">
-
-            <div class="card-body">
-              <p class="card-text"><strong>빨간색 스킨&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;2022-11-12</strong></p>
-              <hr>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-warning" onclick="window.open('detailPurchaes.html', 'detail', 'width=605, height=510')">상세보기</button>
-                </div>
-               	  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<h4>낑깡 50개</h4><img src="${contextPath}/resources/img/kumquat.jpg" style="height: 35px; width: 35px;">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="${contextPath}/resources/img/mainSkin4.jpg" style="height: 300px;">
-
-            <div class="card-body">
-              <p class="card-text"><strong>파란색 스킨&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;2022-11-12</strong></p>
-              <hr>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-warning" onclick="window.open('detailPurchaes.html', 'detail', 'width=605, height=510')">상세보기</button>
-                </div>
-               	  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<h4>낑깡 50개</h4><img src="${contextPath}/resources/img/kumquat.jpg" style="height: 35px; width: 35px;">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="${contextPath}/resources/img/mainSkin5.jpg" style="height: 300px;">
-
-            <div class="card-body">
-              <p class="card-text"><strong>보라색 스킨&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;2022-11-12</strong></p>
-              <hr>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-warning" onclick="window.open('detailPurchaes.html', 'detail', 'width=605, height=510')">상세보기</button>
-                </div>
-               	  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<h4>낑깡 50개</h4><img src="${contextPath}/resources/img/kumquat.jpg" style="height: 35px; width: 35px;">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="${contextPath}/resources/img/mainSkin6.jpg" style="height: 300px;">
-
-            <div class="card-body">
-              <p class="card-text"><strong>분홍색 스킨&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;2022-11-12</strong></p>
-              <hr>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-warning" onclick="window.open('detailPurchaes.html', 'detail', 'width=605, height=510')">상세보기</button>
-                </div>
-                  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<h4>낑깡 50개</h4><img src="${contextPath}/resources/img/kumquat.jpg" style="height: 35px; width: 35px;">
-              </div>
-            </div>
-          </div>
-        </div>
+	  	<!-- 게시글 foreach문 -->
+	  	<c:forEach items="${ pList }" var="p">
+	        <div class="col">
+	          <div class="card shadow-sm">
+	          <!-- 이미지 foreach문 -->
+	          	<c:forEach items="${ photoList }" var="photo">
+	          		<c:if test="${ p.productNo eq photo.productNo }">
+		          		<c:if test="${ fn:containsIgnoreCase(photo.productReNameName, 'jpg') or fn:containsIgnoreCase(photo.productReNameName, 'png') }">
+		            		<img src="${contextPath}/resources/img/mainSkin1.jpg" style="height: 300px;">
+		            	</c:if>
+		            	<c:if test="${ !fn:containsIgnoreCase(photo.productReNameName, 'jpg') or !fn:containsIgnoreCase(photo.productReNameName, 'png') }">
+		            		<img src="${contextPath}/resources/img/mainSkin1.jpg" style="height: 300px;">
+		            	</c:if>
+		            </c:if>
+				</c:forEach>
+	            <div class="card-body">
+	              <p class="card-text"><strong>${ p.productName }&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${ p.productCreateDate }</strong></p>
+	              <hr>
+	              <div class="d-flex justify-content-between align-items-center">
+	                <div class="btn-group">
+	                  <button type="button" class="btn btn-warning" id="detailSelect">상세보기</button>
+	                </div>
+	               	  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<h4>낑깡 ${ p.price }개</h4><img src="${contextPath}/resources/img/kumquat.jpg" style="height: 35px; width: 35px;">
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+        </c:forEach>
       </div>
     </div>
   </div>
@@ -163,40 +97,88 @@
 
 	<br>
 
-	<div>
+	<div class="pagingArea">
         <ul class="pagination justify-content-center">
             <li class="page-item">
-                <a class="page-link" href="#">
-                    <span>처음</span>
-                </a>
+           		<c:url var="PListFirst" value="${ loc }"> <!--  직접적으로 주소를 가져오지않아도 select주소를 가져오는것 loc -->
+					<c:param name="page" value="1"/>
+				</c:url>
+				<c:if test="${ pi.payCurrentPage <= 1 }">
+					<a class="page-link">
+                    	<span>처음</span>
+                	</a>
+				</c:if>
+				<c:if test="${ pi.payCurrentPage > 1 }">
+	                <a class="page-link" href="${ PListFirst }">
+	                    <span>처음</span>
+	                </a>
+                </c:if>
             </li>
             <li class="page-item">
-                <a class="page-link" href="#">
-                    <span>이전</span>
-                </a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="#">1</a>
+            	<c:url var="PListBack" value="${ loc }">
+					<c:param name="page" value="${ pi.payCurrentPage -1 }"/>
+				</c:url>
+				<c:if test="${ pi.payCurrentPage <= 1 }">
+	                <a class="page-link">
+                    	<span>이전</span>
+                	</a>
+                </c:if>
+                <c:if test="${ pi.payCurrentPage > 1 }">
+					<a class="page-link" href="${ PListBack }">
+                    	<span>이전</span>
+                	</a>
+				</c:if>          
+            </li>			
+            <li class="page-item">
+            	<c:forEach begin="${ pi.payStartPage }" end="${ pi.payEndPage }" var="p">
+            		<c:if test="${ pi.payCurrentPage eq p }">
+						<a class="page-link">
+							<font color="red">${ p }</font>
+						</a>
+					</c:if>
+					<c:if test="${ pi.payCurrentPage ne p }">
+						<c:url var="PListCheck" value="${ loc }">
+							<c:param name="page" value="${ p }"/>
+						</c:url>
+						<li class="page-item"><a class="page-link" href="${ PListCheck }">${ p }</a></li>
+					</c:if>
+            	</c:forEach>
             </li>
             <li class="page-item">
-                <a class="page-link" href="#">2</a>
+            	<c:url var="PListNext" value="${ loc }"> <!--  직접적으로 주소를 가져오지않아도 select주소를 가져오는것 loc -->
+					<c:param name="page" value="${ pi.payCurrentPage + 1 }"/>
+				</c:url>
+				<c:if test="${ pi.payCurrentPage >= pi.payMaxPage }">
+					<a class="page-link">
+                    	<span>다음</span>
+                	</a>
+				</c:if>
+				<c:if test="${ pi.payCurrentPage < pi.payMaxPage }">
+					<a class="page-link" href="${ PListNext }">
+						<span>다음</span>
+					</a>
+				</c:if>
             </li>
             <li class="page-item">
-                <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">
-                    <span>다음</span>
-                </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">
-                    <span>마지막</span>
-                </a>
+            	<c:url var="PListLast" value="${ loc }"> <!--  직접적으로 주소를 가져오지않아도 select주소를 가져오는것 loc -->
+					<c:param name="page" value="${ pi.payMaxPage }"/>
+				</c:url>
+				<c:if test="${ pi.payCurrentPage >= pi.payMaxPage }">
+					<a class="page-link">
+                    	<span>마지막</span>
+                	</a>
+				</c:if>
+				<c:if test="${ pi.payCurrentPage < pi.payMaxPage }">
+					<a class="page-link" href="${ PListLast }">
+						<span>마지막</span>
+					</a>
+				</c:if>
             </li>
         </ul>
     </div>
+ 
     <br>
+    
 </div>
 <footer class="sticky-footer bg-white">
         <footer class="footer d-flex p-2 px-3 bg-white border-top">
