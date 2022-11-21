@@ -14,12 +14,17 @@ public class LoginDAO {
 	private SqlSessionTemplate sqlSession;
 	
 	public int registerMember(Member member) {
+		System.out.println(member);
 		return sqlSession.insert("memberMapper.registerMember", member);
 	}
 
 	public Member findUser(String username) {
 		return sqlSession.selectOne("memberMapper.findUser", username);
 		
+	}
+	
+	public int checkUser(String username) {
+		return sqlSession.selectOne("memberMapper.checkUser", username);
 	}
 
 }

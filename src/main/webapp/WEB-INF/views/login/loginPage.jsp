@@ -53,6 +53,7 @@
                   <b onclick="toggle()" class="pointer">
                     로그인하기
                   </b>
+               
                 </p>
               </div>
             </div>
@@ -76,6 +77,8 @@
                   Login
                 </button>
                 </form>
+                <br>
+         		<button class="Kakao" onclick="kakao();">Kakao</button>
                 <p>
                   <b>
                     <div id="forgot"><a href="#" style="text-decoration: none; color:black; font-size: 7px;">아이디 또는 비밀번호를 잊어버리셨나요?</a></div>
@@ -142,5 +145,6 @@
       </div>
 </body>
 <script src="${contextPath}/resources/js/loginPage_js.js"></script>
+
 
 </html>
