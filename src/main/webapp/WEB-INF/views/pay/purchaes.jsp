@@ -51,146 +51,150 @@
 </header>
 
 ${ photoList }
-<div class="main">
-  <div class="album py-5">
-    <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-	  	<!-- 게시글 foreach문 -->
-	  	<c:forEach items="${ pList }" var="p">
-	        <div class="col">
-	          <div class="card shadow-sm">
-	          <!-- 이미지 foreach문 -->
-	          	<c:forEach items="${ photoList }" var="photo">
-	          		<c:if test="${ p.productNo eq photo.productNo }">
-		          		<c:if test="${ fn:containsIgnoreCase(photo.productReNameName, 'jpg') or fn:containsIgnoreCase(photo.productReNameName, 'png') }">
-		            		<img src="${contextPath}/resources/img/mainSkin1.jpg" style="height: 300px;">
-		            	</c:if>
-		            	<c:if test="${ !fn:containsIgnoreCase(photo.productReNameName, 'jpg') or !fn:containsIgnoreCase(photo.productReNameName, 'png') }">
-		            		<img src="${contextPath}/resources/img/mainSkin1.jpg" style="height: 300px;">
-		            	</c:if>
-		            </c:if>
-				</c:forEach>
-	            <div class="card-body">
-	              <p class="card-text"><strong>${ p.productName }&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${ p.productCreateDate }</strong></p>
-	              <hr>
-	              <div class="d-flex justify-content-between align-items-center">
-	                <div class="btn-group">
-	                  <button type="button" class="btn btn-warning" id="detailSelect">상세보기</button>
-	                </div>
-	               	  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<h4>낑깡 ${ p.price }개</h4><img src="${contextPath}/resources/img/kumquat.jpg" style="height: 35px; width: 35px;">
-	              </div>
-	            </div>
-	          </div>
-	        </div>
-        </c:forEach>
-      </div>
-    </div>
-  </div>
- <div class="search">
-	  <select>
-     	<option>제목</option>
-        <option>설명</option>
-     </select>
-     <input type="text" placeholder="검색어 입력">
-     <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
-</div>
-
-	<br>
-
-	<div class="pagingArea">
-        <ul class="pagination justify-content-center">
-            <li class="page-item">
-           		<c:url var="PListFirst" value="${ loc }"> <!--  직접적으로 주소를 가져오지않아도 select주소를 가져오는것 loc -->
-					<c:param name="page" value="1"/>
-				</c:url>
-				<c:if test="${ pi.payCurrentPage <= 1 }">
-					<a class="page-link">
-                    	<span>처음</span>
-                	</a>
-				</c:if>
-				<c:if test="${ pi.payCurrentPage > 1 }">
-	                <a class="page-link" href="${ PListFirst }">
-	                    <span>처음</span>
-	                </a>
-                </c:if>
-            </li>
-            <li class="page-item">
-            	<c:url var="PListBack" value="${ loc }">
-					<c:param name="page" value="${ pi.payCurrentPage -1 }"/>
-				</c:url>
-				<c:if test="${ pi.payCurrentPage <= 1 }">
-	                <a class="page-link">
-                    	<span>이전</span>
-                	</a>
-                </c:if>
-                <c:if test="${ pi.payCurrentPage > 1 }">
-					<a class="page-link" href="${ PListBack }">
-                    	<span>이전</span>
-                	</a>
-				</c:if>          
-            </li>			
-            <li class="page-item">
-            	<c:forEach begin="${ pi.payStartPage }" end="${ pi.payEndPage }" var="p">
-            		<c:if test="${ pi.payCurrentPage eq p }">
+	<div class="main">
+	  <div class="album py-5">
+	    <div class="container">
+	      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+		  	<!-- 게시글 foreach문 -->
+		  	<c:forEach items="${ pList }" var="p">
+		        <div class="col">
+		          <div class="card shadow-sm">
+		          <!-- 이미지 foreach문 -->
+		          	<c:forEach items="${ photoList }" var="photo">
+		          		<c:if test="${ p.productNo eq photo.productNo }">
+			          		<c:if test="${ fn:containsIgnoreCase(photo.productReNameName, 'jpg') or fn:containsIgnoreCase(photo.productReNameName, 'png') }">
+			            		<img src="${contextPath}/resources/img/mainSkin1.jpg" style="height: 300px;">
+			            	</c:if>
+			            	<c:if test="${ !fn:containsIgnoreCase(photo.productReNameName, 'jpg') or !fn:containsIgnoreCase(photo.productReNameName, 'png') }">
+			            		<img src="${contextPath}/resources/img/mainSkin1.jpg" style="height: 300px;">
+			            	</c:if>
+			            </c:if>
+					</c:forEach>
+		            <div class="card-body">
+		              <p class="card-text"><strong>${ p.productName }&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${ p.productCreateDate }</strong></p>
+		              <hr>
+		              <div class="d-flex justify-content-between align-items-center">
+		                <div class="btn-group">
+		                  <button type="button" class="btn btn-warning" id="detailSelect">상세보기</button>
+		                </div>
+		               	  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<h4>낑깡 ${ p.price }개</h4><img src="${contextPath}/resources/img/kumquat.jpg" style="height: 35px; width: 35px;">
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+	        </c:forEach>
+	      </div>
+	    </div>
+	  </div>
+	 <div class="search">
+		  <select>
+	     	<option>제목</option>
+	        <option>설명</option>
+	     </select>
+	     <input type="text" placeholder="검색어 입력">
+	     <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
+	</div>
+	
+		<br>
+	
+		<div class="pagingArea">
+	        <ul class="pagination justify-content-center">
+	            <li class="page-item">
+	           		<c:url var="PListFirst" value="${ loc }"> <!--  직접적으로 주소를 가져오지않아도 select주소를 가져오는것 loc -->
+						<c:param name="page" value="1"/>
+					</c:url>
+					<c:if test="${ pi.payCurrentPage <= 1 }">
 						<a class="page-link">
-							<font color="red">${ p }</font>
+	                    	<span>처음</span>
+	                	</a>
+					</c:if>
+					<c:if test="${ pi.payCurrentPage > 1 }">
+		                <a class="page-link" href="${ PListFirst }">
+		                    <span>처음</span>
+		                </a>
+	                </c:if>
+	            </li>
+	            <li class="page-item">
+	            	<c:url var="PListBack" value="${ loc }">
+						<c:param name="page" value="${ pi.payCurrentPage -1 }"/>
+					</c:url>
+					<c:if test="${ pi.payCurrentPage <= 1 }">
+		                <a class="page-link">
+	                    	<span>이전</span>
+	                	</a>
+	                </c:if>
+	                <c:if test="${ pi.payCurrentPage > 1 }">
+						<a class="page-link" href="${ PListBack }">
+	                    	<span>이전</span>
+	                	</a>
+					</c:if>          
+	            </li>			
+	            <li class="page-item">
+	            	<c:forEach begin="${ pi.payStartPage }" end="${ pi.payEndPage }" var="p">
+	            		<c:if test="${ pi.payCurrentPage eq p }">
+							<a class="page-link">
+								<font color="red">${ p }</font>
+							</a>
+						</c:if>
+						<c:if test="${ pi.payCurrentPage ne p }">
+							<c:url var="PListCheck" value="${ loc }">
+								<c:param name="page" value="${ p }"/>
+							</c:url>
+							<li class="page-item"><a class="page-link" href="${ PListCheck }">${ p }</a></li>
+						</c:if>
+	            	</c:forEach>
+	            </li>
+	            <li class="page-item">
+	            	<c:url var="PListNext" value="${ loc }"> <!--  직접적으로 주소를 가져오지않아도 select주소를 가져오는것 loc -->
+						<c:param name="page" value="${ pi.payCurrentPage + 1 }"/>
+					</c:url>
+					<c:if test="${ pi.payCurrentPage >= pi.payMaxPage }">
+						<a class="page-link">
+	                    	<span>다음</span>
+	                	</a>
+					</c:if>
+					<c:if test="${ pi.payCurrentPage < pi.payMaxPage }">
+						<a class="page-link" href="${ PListNext }">
+							<span>다음</span>
 						</a>
 					</c:if>
-					<c:if test="${ pi.payCurrentPage ne p }">
-						<c:url var="PListCheck" value="${ loc }">
-							<c:param name="page" value="${ p }"/>
-						</c:url>
-						<li class="page-item"><a class="page-link" href="${ PListCheck }">${ p }</a></li>
+	            </li>
+	            <li class="page-item">
+	            	<c:url var="PListLast" value="${ loc }"> <!--  직접적으로 주소를 가져오지않아도 select주소를 가져오는것 loc -->
+						<c:param name="page" value="${ pi.payMaxPage }"/>
+					</c:url>
+					<c:if test="${ pi.payCurrentPage >= pi.payMaxPage }">
+						<a class="page-link">
+	                    	<span>마지막</span>
+	                	</a>
 					</c:if>
-            	</c:forEach>
-            </li>
-            <li class="page-item">
-            	<c:url var="PListNext" value="${ loc }"> <!--  직접적으로 주소를 가져오지않아도 select주소를 가져오는것 loc -->
-					<c:param name="page" value="${ pi.payCurrentPage + 1 }"/>
-				</c:url>
-				<c:if test="${ pi.payCurrentPage >= pi.payMaxPage }">
-					<a class="page-link">
-                    	<span>다음</span>
-                	</a>
-				</c:if>
-				<c:if test="${ pi.payCurrentPage < pi.payMaxPage }">
-					<a class="page-link" href="${ PListNext }">
-						<span>다음</span>
-					</a>
-				</c:if>
-            </li>
-            <li class="page-item">
-            	<c:url var="PListLast" value="${ loc }"> <!--  직접적으로 주소를 가져오지않아도 select주소를 가져오는것 loc -->
-					<c:param name="page" value="${ pi.payMaxPage }"/>
-				</c:url>
-				<c:if test="${ pi.payCurrentPage >= pi.payMaxPage }">
-					<a class="page-link">
-                    	<span>마지막</span>
-                	</a>
-				</c:if>
-				<c:if test="${ pi.payCurrentPage < pi.payMaxPage }">
-					<a class="page-link" href="${ PListLast }">
-						<span>마지막</span>
-					</a>
-				</c:if>
-            </li>
-        </ul>
-    </div>
- 
-    <br>
-    
-</div>
-<footer class="sticky-footer bg-white">
-        <footer class="footer d-flex p-2 px-3 bg-white border-top">
-              <a href="https://github.com/likelion-backendschool/DAMDA_project" rel="nofollow" target="_blank">Y2K</a>
-        </footer>
-</footer>
+					<c:if test="${ pi.payCurrentPage < pi.payMaxPage }">
+						<a class="page-link" href="${ PListLast }">
+							<span>마지막</span>
+						</a>
+					</c:if>
+	            </li>
+	        </ul>
+	    </div>
+	    
+
+ <!-- c:if 로 로그인 유저만 작성할 수 있게 로그인 구현되면 작성 -->
+	 		<div id="writerPurchaes">
+		    	<button type="button" class="btn btn-primary" onclick="location.href='${ contextPath }/writePurchaes.pa'">작성하기</button>
+		    </div>
+
+	 
+	    <br>
+	    
+	</div>
 <script>
 	$(document).ready(function(){
 		$("#detailSelect").click(function(){
 		window.open("<%= request.getContextPath() %>/detailpurchaes.pa", "detail", "width=605, height=510, scrollbars=no, resizable=no, toolbars=no, menubar=no")
 		});
 	});
+	
+	
 </script>
 </body>
 </html>

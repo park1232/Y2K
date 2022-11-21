@@ -13,5 +13,7 @@ public interface PaymentService {
 	ArrayList<Product> selectProductList(PayPageInfo pi);
 
 	ArrayList<ProductPhoto> selectPhotoList();
+
+	int insertBoard(Product p);
 	
 }
