@@ -1,5 +1,10 @@
 package com.world.Y2K.controller.login;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -18,13 +23,12 @@ public class LoginController {
 	@Autowired
 	private RegisterService registerService;
 	
+
+	
 	@GetMapping("/loginpage.lo")
 	public String moveLoginView() {
 		return "loginPage";
 	}
-
-
-	
 	
 	@PostMapping("/register.lo")
 	public String joinMember(@ModelAttribute User user) throws MemberException {
@@ -36,6 +40,13 @@ public class LoginController {
 		return "redirect:loginpage.lo";
 	}
 	
+	@GetMapping("/info")
+	public void info(Authentication authentication) {
+		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+		System.out.println("user : " + userDetails.getMember());
+	}
+	
+
 	
 	
 }
