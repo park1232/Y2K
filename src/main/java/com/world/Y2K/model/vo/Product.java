@@ -1,5 +1,7 @@
 package com.world.Y2K.model.vo;
 
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
@@ -10,4 +12,7 @@ public class Product {
 	private Long price;
 	private String productContent;
 	private Long userNo;
+	private Date productCreateDate;
+	private Date productModifyDate;
+	private String productStatus;
 }
