@@ -20,15 +20,12 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/datepicker.css"/>
 	<script>
 		$( function() {
-	    	$( "#datepicker" ).datepicker();
-	    	$("#datepicker").val();
-	        
+	    	$("#datepicker").datepicker();
+	    	
 	        $("#datepicker").on("change",function(){
-	            var selected = $(this).val();
-	            alert(selected);
+	    		$("#hiddenDate").val($("#datepicker").val());
 	        });
 	  	} );
-
 	</script>
   </head>
   <body>
@@ -96,10 +93,14 @@
 			</div>
 			
 			<div class="calendar">
-				<div id="datepicker"></div>
+				<div id="datepicker">
+					<input type="hidden" id="hiddenDate" name="datepicker">
+				</div>
 			</div>
 			
 			<div class="m">
+			
+			
 				<h2>지도별보기</h2>
 			</div>
 			
@@ -174,18 +175,9 @@
      
     </div>
     <script>
-    //    function openPopup(){
-    //        window.open("profil.html", "new", "toolbar=no, menubar=no, scrollbars=no, resizable=no, width=1280, height=721, left=0, top=0" );
-    //    }
-        /* $('.dropdown-btn').on('click',function(){
-            $('.dropdown-content').show();
-            }); */  
-            $(".mi-5").on('click', function(){
-
-              alert('마케팅 사이트 업데이트 진행중.');
-
-            });      
-      </script>
+    
+    
+    </script>
   </body>
 
 
