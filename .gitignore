@@ -1,6 +1,6 @@
 mybatis-config.xml
 log4j.xml
-root-context.xml
+
 lecture
 target
 pom.properties
