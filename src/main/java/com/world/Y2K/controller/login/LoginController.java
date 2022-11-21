@@ -23,6 +23,9 @@ public class LoginController {
 		return "loginPage";
 	}
 
+
+	
+	
 	@PostMapping("/register.lo")
 	public String joinMember(@ModelAttribute User user) throws MemberException {
 		
@@ -33,10 +36,6 @@ public class LoginController {
 		return "redirect:loginpage.lo";
 	}
 	
-	@GetMapping("/info")
-	public void info(Authentication authentication) {
-		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
-		System.out.println("user : " + userDetails.getMember());
-	}
+	
 	
 }

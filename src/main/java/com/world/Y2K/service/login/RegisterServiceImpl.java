@@ -9,7 +9,7 @@ import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.User;
 
 
-@Service
+@Service("registerService")
 public class RegisterServiceImpl implements RegisterService {
 
 	@Autowired
