@@ -43,4 +43,9 @@
 		<result column="PRODUCTSTATUS" property="productStatus"/>
 	</resultMap>
 	
+	<insert id="insertBoard">
+		insert into product
+		values(y2k_product_seq.nextval, #{productName}, #{price}, #{productContent}, sysdate, sysdate, default, #{userNo})
+	</insert>
+	
 </mapper>

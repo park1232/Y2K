@@ -26,5 +26,9 @@ public class PaymentDAO {
 	public ArrayList<ProductPhoto> selectPhotoList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("paymentMapper.selectAttmList");
 	}
+
+	public int insertBoard(SqlSessionTemplate sqlSession, Product p) {
+		return sqlSession.insert("paymentMapper.insertBoard", p);
+	}
 	
 }

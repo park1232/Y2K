@@ -34,4 +34,9 @@ public class PaymentImpl implements PaymentService{
 	public ArrayList<ProductPhoto> selectPhotoList() {
 		return payDAO.selectPhotoList(sqlSession);
 	}
+	
+	@Override
+	public int insertBoard(Product p) {
+		return payDAO.insertBoard(sqlSession, p);
+	}
 }
