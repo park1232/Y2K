@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" scope="application" />
 <!DOCTYPE html>
 <html lang="ko">
@@ -74,32 +75,33 @@
                   </div>
                 </div>
                 <div class="main">
-                	<h1>2022.11.05</h1>
+					<c:set var="date" value="${fn:split(datepicker, '/')}"/>
+                		<h1>${ date[2] }.${ date[0] }.${ date[1] }</h1>
                 	
                 	<table>
                 		<tr>
                 			<td>
                 				<div class="selectBox">
-								  <select name="fruits" class="select">
+								  <select name="weather" class="select">
 								    <option disabled selected>날씨⭐</option>
-								    <option value="apple">☀맑음</option>
-								    <option value="orange">☁흐림</option>
-								    <option value="grape">🌧비</option>
-								    <option value="melon">❄눈</option>
+								    <option value="sunny">☀맑음</option>
+								    <option value="cloudy">☁흐림</option>
+								    <option value="rain">🌧비</option>
+								    <option value="snow">❄눈</option>
 								  </select>
 								  <span class="icoArrow"></span>
 								</div>
                 			</td>
                 			<td>
                 				<div class="selectBox">
-								  <select name="fruits" class="select">
+								  <select name="mood" class="select">
 								    <option disabled selected>기분💕</option>
-								    <option value="apple">😄기쁨</option>
-								    <option value="orange">😭슬픔</option>
-								    <option value="orange">😡화남</option>
-								    <option value="grape">🥱피곤</option>
-								    <option value="melon">😆행복</option>
-								    <option value="melon">😵바쁨</option>
+								    <option value="joy">😄기쁨</option>
+								    <option value="sad">😭슬픔</option>
+								    <option value="mad">😡화남</option>
+								    <option value="tired">🥱피곤</option>
+								    <option value="happy">😆행복</option>
+								    <option value="bisy">😵바쁨</option>
 								  </select>
 								  <span class="icoArrow"><img src="https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png" alt=""></span>
 								</div>
@@ -112,7 +114,6 @@
 								  <select name="fruits" class="select">
 								    <option disabled selected>공개범위💌</option>
 								    <option value="apple">전체공개</option>
-								    <option value="orange">일촌공개</option>
 								    <option value="grape">비공개</option>
 								  </select>
 								  <span class="icoArrow"><img src="https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png" alt=""></span>
