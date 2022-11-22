@@ -29,24 +29,23 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 		System.out.println("½ÇÇàµÊ?");
+		
+		http.userDetailsService(userDetailsService());
+		
 		http.csrf().disable();
-//		
-//		
-//		http.authorizeRequests()
-////			.antMatchers("/*.lo").permitAll()
-//			.anyRequest().authenticated();
 		
-		
-		http.formLogin()
+		http.authorizeRequests()
+			.antMatchers("/*.lo").permitAll()
+			.anyRequest().authenticated()
+		.and()
+			.formLogin()
 			.loginPage("/loginpage.lo")
 			.loginProcessingUrl("/auth/login")
 			.defaultSuccessUrl("/login-success.lo")
 			.usernameParameter("username")
 			.passwordParameter("password");
-		
-		
-		
-//		http.headers().frameOptions().sameOrigin();
+			
+		http.headers().frameOptions().sameOrigin();
 		
 		return http.build();
 	}

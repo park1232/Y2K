@@ -28,7 +28,7 @@ public class LoginController {
 	
 	@GetMapping("/loginpage.lo")
 	public String moveLoginView() {
-		return "loginPage";
+		return "login/loginPage";
 	}
 	
 	@PostMapping("/register.lo")
