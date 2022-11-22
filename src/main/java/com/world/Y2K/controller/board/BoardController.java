@@ -39,7 +39,7 @@ public class BoardController {
 			model.addAttribute("pi", pi);
 			model.addAttribute("list", list);
 			
-			return "boardList";
+			return "board/boardList";
 		} else {
 			throw new BoardException("게시글 조회 실패");
 		}
@@ -48,7 +48,7 @@ public class BoardController {
 	
 	@RequestMapping("boardWrite.bo")
 	public String boardWrite() {
-		return "boardWrite";
+		return "/board/boardWrite";
 	}
 	
 	@RequestMapping("insertBoard.bo")
