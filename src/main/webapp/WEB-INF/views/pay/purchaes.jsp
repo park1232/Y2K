@@ -50,7 +50,6 @@
   </div>
 </header>
 
-${ photoList }
 	<div class="main">
 	  <div class="album py-5">
 	    <div class="container">
@@ -64,7 +63,6 @@ ${ photoList }
 						<c:if test="${ p.productNo eq photo.productNo }">
 			          		<c:if test="${ fn:containsIgnoreCase(photo.productReNameName, 'jpg') or fn:containsIgnoreCase(photo.productReNameName, 'png') }">
 			            		<img src="/upload/${ photo.productReNameName }" style="height: 300px;">
-			            		console.log(C:\\Users\\박유진\\Desktop\\uploadFolder/${ photo.productReNameName })
 			            	</c:if>
 						</c:if>
 					</c:forEach>
@@ -181,10 +179,14 @@ ${ photoList }
 		    	<button type="button" class="btn btn-primary" onclick="location.href='${ contextPath }/writePurchaes.pa'">작성하기</button>
 		    </div>
 
-	 
 	    <br>
-	    
+
 	</div>
+<footer class="sticky-footer bg-white" style="height: 15px;">
+        <div class="main-footer d-flex p-2 px-3 bg-white border-top">
+              <a href="https://github.com/bmm522/Y2K">Y2K</a>
+        </div>
+</footer>	
 <script>
 	$(document).ready(function(){
 		$("#detailSelect").click(function(){
