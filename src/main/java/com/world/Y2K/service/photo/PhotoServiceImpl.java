@@ -101,8 +101,18 @@ public class PhotoServiceImpl extends PhotoStore implements PhotoService {
 
 	@Override
 	public int deletetImg(Long photoNo) {
-		System.out.println("------");
+		
 		return pDAO.deleteImg(sqlSession, photoNo);
+	}
+
+
+	@Override
+	public void updateComent(Photo p) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("왜 널이지"+p);
+		
+		pDAO.updateComent(sqlSession, p);
 	}
 
 

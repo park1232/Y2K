@@ -44,13 +44,13 @@
 						
 						<div class="modal-info" onclick="modalInfo()">
 							<div class="modal"> 
-								<button type="button"  id="updateForm">수정</button>
+								<button type="button" id="updateForm">수정</button>
 								<button type="submit" id="deleteModal" >삭제</button>
 								<button type="button" onclick="closePopup('.modal-info')">닫기</button>
 							</div>
 						</div>
-						<div class="sl__item__contents__content">
-							<p>${photo.photoComent}</p>
+						<div class="sl__item__contents__content" name="photoComent">
+							<p >${photo.photoComent}</p>
 
 						</div>
 

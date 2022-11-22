@@ -9,4 +9,10 @@ import com.world.Y2K.model.vo.Photo;
 public interface PhotoImageStore {
 
 	void insertImage(Photo p, MultipartFile file, HttpServletRequest request);
+
+	void updateAll(Photo p, MultipartFile file, HttpServletRequest request);
+
+
+
+	
 }

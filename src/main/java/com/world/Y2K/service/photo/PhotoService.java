@@ -17,6 +17,8 @@ public interface PhotoService{
 	Photo selectImg(Long photoNo);
 
 	int deletetImg(Long photoNo);
+
+	void updateComent(Photo p);
 	
 	
 }

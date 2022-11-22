@@ -74,8 +74,11 @@ window.onload=()=>{
 			const form = document.getElementById('detailForm');
 			if(upd != null){
 				upd.addEventListener('click', ()=>{
-					form.action = 'upload.ph';
+					
+					form.action = 'edit.ph';
 					form.submit();
+					
+					window.close();
 				});
 			}
 			

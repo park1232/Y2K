@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -77,7 +78,7 @@ public class PhotoController {
 			throw new PhotoException("실패");
 		}
 		
-		System.out.println("controller" +p.getPhotoName());
+		
 		photoImageStore.insertImage(p, file, request);
 		
 		return "redirect:photo.ph";
@@ -96,6 +97,52 @@ public class PhotoController {
 			return "redirect:photo.ph";
 			
 		}
+	
+	
+	
+	
+	@RequestMapping("/edit.ph")
+	public void editFrom(
+			@RequestParam("photoNo") Long photoNo,
+			Model model
+			) {
+
+		Photo photo = pService.selectImg(photoNo);
+		
+		model.addAttribute("photo", photo);
+		
+		
+	}
+	
+	@RequestMapping("/update")
+	public String updateImage(@ModelAttribute Photo p,
+			@RequestParam("photoComent") String photoComent,
+			@RequestParam("file") MultipartFile file,
+			HttpServletRequest request,
+			Model model,
+			@RequestParam("renameName") String renameName,
+			@RequestParam("photoName") String photoName,
+			@RequestParam("photoNo") Long photoNo
+			
+			) {
+			
+			if(file.getOriginalFilename().equals("") && p.getRenameName()==renameName ) {
+				
+				p.setPhotoComent(photoComent);
+				p.setPhotoNo(photoNo);
+				pService.updateComent(p);
+				System.out.println("여기로가니?");
+				
+			}else {
+			
+				photoImageStore.updateAll(p, file, request);
+			
+			}
+
+		
+			return "redirect:photo.ph";
+	}
+
 	
 	}
 	

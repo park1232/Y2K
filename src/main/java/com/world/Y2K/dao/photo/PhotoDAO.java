@@ -32,6 +32,20 @@ public class PhotoDAO {
 		
 		return sqlSession.update("photoMapper.deletePhoto", photoNo);
 	}
+	
+	public void updateAll(SqlSessionTemplate sqlSession, Photo p) {
+		
+		sqlSession.update("photoMapper.updateAll", p);
+		
+	}
+
+	public void updateComent(SqlSessionTemplate sqlSession, Photo p) {
+		
+		System.out.println(p);
+		
+		sqlSession.update("photoMapper.updateComent", p);
+	}
+
 
 	
 	
