@@ -18,17 +18,17 @@ public class DiaryController {
 	
 	@GetMapping("/diary.di")
 	public String test1() {
-		return "diary";
+		return "diary/diary";
 	}
 	
 	@RequestMapping("/diary3.di")
 	public String diaryWrite(@RequestParam("datepicker") String datepicker, Model model) {
 		model.addAttribute("datepicker", datepicker);
-		return "diary3";
+		return "diary/diary3";
 	}
 	
 	@GetMapping("/diary2.di")
 	public String test2() {
-		return "diary2";
+		return "diary/diary2";
 	}
 }
