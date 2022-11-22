@@ -1,9 +1,7 @@
 package com.world.Y2K.controller.login;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -16,6 +14,7 @@ import com.world.Y2K.exception.MemberException;
 import com.world.Y2K.model.vo.User;
 import com.world.Y2K.service.login.RegisterService;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
+import com.world.Y2K.service.login.oauth.KakaoLoginService;
 
 @Controller
 public class LoginController {
@@ -23,11 +22,13 @@ public class LoginController {
 	@Autowired
 	private RegisterService registerService;
 	
+	@Autowired
+	private KakaoLoginService kakaoLoginService;
 
 	
 	@GetMapping("/loginpage.lo")
 	public String moveLoginView() {
-		return "loginPage";
+		return "login/loginPage";
 	}
 	
 	@PostMapping("/register.lo")
@@ -46,6 +47,16 @@ public class LoginController {
 		System.out.println("user : " + userDetails.getMember());
 	}
 	
+	@PostMapping("/login-success.lo")
+	public String loginSuccessHandler() {
+		return "loginSuccess";
+	}
+	
+	@GetMapping("/kakao.lo")
+	public void kakaoLogin(String code, HttpServletRequest request) {
+		kakaoLoginService.kakaoLogin(code, request);
+		
+	}
 
 	
 	
