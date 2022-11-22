@@ -104,7 +104,7 @@ body {
     padding: .6rem 0;
     border-radius: .5rem;
     border: none;
-    background-color: var(--primary-color);
+	background-color: var(--primary-color);
     color: var(--white);
     font-size: 1.2rem;
     outline: none;
@@ -275,6 +275,10 @@ body {
 .container.sign-up::before {
     transform: translate(100%, 0);
     right: 50%;
+}
+
+.Kakao{
+	background-color: yellow;
 }
 
 /* RESPONSIVE */

@@ -187,9 +187,9 @@
               <a href="photo.html" class="menu-item mi-2" >사진첩</a>
               <a href="diary.html" class="menu-item mi-3">다이어리</a>
       </div>
-              <a class="menu-item mi-5 menu-checked" onclick="location.href='${contextPath}/board.bo'">게시판</a>
+              <a class="menu-item mi-5 menu-checked" onclick="location.href='${contextPath}/boardList.bo'">게시판</a>
               <div class = "menu align-center expanded text-center SMN_effect-68">
-              <a class="menu-item mi-4" onclick="location.href='${contextPath}/visit.bo'">방명록</a>
+              <a class="menu-item mi-4" onclick="location.href='${contextPath}/visit.vi'">방명록</a>
               </div>
               <!-- <a href="#" class="menu-item mi-5">마케팅</a> -->
 <!--              <div class="menu-item mi-6">게시판</div>-->
@@ -206,12 +206,7 @@
     //    }
         /* $('.dropdown-btn').on('click',function(){
             $('.dropdown-content').show();
-            }); */  
-            $(".mi-5").on('click', function(){
-
-              alert('마케팅 사이트 업데이트 진행중.');
-
-            });    
+            }); */    
       </script>
 </body>
 </html>

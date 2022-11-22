@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="boardMapper">
+
+	<resultMap type="Board" id="boardResultSet">
+		 <id column="BOARDNO" property="boardNo"/>
+		 <result column="BOARDTITLE" property="boardTitle" />
+		 <result column="BOARDCONTENT" property="boardContent" />
+		 <result column="NICKNAME" property="nickName" />
+		 <result column="CREATEDATE" property="createDate" />
+		 <result column="MODIFYDATE" property="modifyDate" />
+		 <result column="BOARDCOUNT" property="boardCount" />
+		 <result column="BOARDSTATUS" property="boardStatus" />
+		 <result column="BOARDTYPEID" property="boardTypeId" />
+		 <result column="BOARDWRITER" property="boardWriter" />
+	 </resultMap>
+	 
+	<select id="getBoardListCount" resultType="_int">
+		select count(*) from board where boardstatus = 'Y'
+	</select>
+	
+	<select id="selectBoardList" resultMap="boardResultSet">
+		select * from board
+		join member on(boardwriter = userno)
+		where boardstatus = 'Y'
+		order by boardNo desc
+	</select>
+</mapper>
