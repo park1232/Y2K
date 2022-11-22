@@ -28,7 +28,7 @@ public class RegisterServiceImpl implements RegisterService {
 	private Member setMember(User user) {
 		return Member.builder()
 				.username(user.getUsername())
-				.password("{bcrypt}"+bCryptPasswordEncoder.encode(user.getPassword()))
+				.password(bCryptPasswordEncoder.encode(user.getPassword()))
 				.nickName(user.getNickName())
 				.status("Y")
 				.orange(0L)

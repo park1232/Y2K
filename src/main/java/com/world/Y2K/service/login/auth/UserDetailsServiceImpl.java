@@ -17,7 +17,12 @@ public class UserDetailsServiceImpl  implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		System.out.println("111111111111");
 		Member member = loginDAO.findUser(username);
+		System.out.println("loadUSerByUSername ½ÇÇà" + username);
+		System.out.println("111111111111");
+		System.out.println(member);
+		System.out.println("222222222222");
 		if(member == null) {
 			return (UserDetails) new UsernameNotFoundException(username);
 		}
