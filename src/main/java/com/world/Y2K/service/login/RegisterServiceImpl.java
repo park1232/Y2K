@@ -8,6 +8,8 @@ import com.world.Y2K.dao.login.LoginDAO;
 import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.User;
 
+import lombok.RequiredArgsConstructor;
+
 
 @Service("registerService")
 public class RegisterServiceImpl implements RegisterService {

@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.filter.CorsFilter;
 
 import com.world.Y2K.dao.login.LoginDAO;
@@ -20,7 +21,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
-	
+	@Bean
+	public BCryptPasswordEncoder bcryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 	
 	private final CorsFilter corsFilter;
 	
@@ -38,38 +42,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-//		http.addFilter(corsFilter);
 		http.formLogin().disable();
-//				.loginPage("/loginpage.lo")
-//				.loginProcessingUrl("/login")
-//				.defaultSuccessUrl("/success-login.lo");
-		
-
-       
-		
-		
 		
 		http.userDetailsService(userDetailsService());
 	
-		
-		
 		http.authorizeRequests()
 			.antMatchers("/*.lo").permitAll()
 			.anyRequest().permitAll()
 		.and()
-		.addFilter(new AuthenticationStore(authenticationManager()));
-	//	 .addFilterBefore(new OAuthLoginFilter(),SecurityContextPersistenceFilter.class);
-	
-		
+			.addFilter(new AuthenticationStore(authenticationManager()));	
 		
 	}
-	
-	
 
-	
-
-	
-	
 	
 }
 

@@ -76,10 +76,7 @@ public class RootConfig {
 //			return mysql;
 //		}
 
-	@Bean
-	public BCryptPasswordEncoder bcryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+	
 	
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {

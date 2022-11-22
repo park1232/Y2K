@@ -96,8 +96,8 @@ public class KakaoLoginService{
 		
 		String provider = "KAKAO";
 		String providerId = element.getAsJsonObject().get("id").getAsString();
-		String username = provider+providerId;
-		String password = UUID.randomUUID().toString();
+		String username = provider+"_"+providerId;
+		String password = "null";
 		
 		 
 		System.out.println("카카오로그인 실행됨");
@@ -131,76 +131,11 @@ public class KakaoLoginService{
 		mv.addObject("password", member.getPassword());
 		mv.setViewName("/login/social");
 		return mv;
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("username", username);
-//		map.put("password", password);
-		
-//		
-		
-//		URL url = null;
-//		try {
-//			url = new URL("http://localhost:8080/login");
-//		} catch (MalformedURLException e) {
-//			
-//			e.printStackTrace();
-//		}
-//		HttpURLConnection conn = null;
-//		try {
-//			conn = (HttpURLConnection)url.openConnection();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		try {
-//			conn.setRequestMethod("POST");
-//		} catch (ProtocolException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		conn.setRequestProperty("username", username);
-//		conn.setRequestProperty("password", password);
-//		conn.setDoOutput(true);
-		
-		
-		
-		
-//		HttpHeaders headerss = new HttpHeaders();
-//		headerss.add("username",username);
-//		headerss.add("password", password);
-//		
-////		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-////		params.add("username", username);
-////		params.add("password", password);
-//		
-//		RestTemplate rt = new RestTemplate();
-//		HttpEntity<MultiValueMap<String,String>> entity = new HttpEntity<>(headerss);
-//	
-//		HttpHeaders headersss = new HttpHeaders();
-//		
-//		headersss.add("username",username);
-//		headersss.add("password", password);
-//		headers.setLocation(URI.create("http://localhost:8080/login"));
-//		return new ResponseEntity<>(headersss, HttpStatus.MOVED_PERMANENTLY);
-		
-		
-//		return rt.exchange(
-//				"http://localhost:8080/login",
-//				HttpMethod.POST,
-//				entity,
-//				String.class
-//				);
+
 	}
 	
 }
-		
-		
-//		UsernamePasswordAuthenticationToken authenticationToken =
-//		new UsernamePasswordAuthenticationToken(username, password);
-//
-//Authentication authentication = authenticationManager().authenticate(authenticationToken);
-//
-//return authentication;
+
 	
 	
 

@@ -76,6 +76,7 @@
                 <button id="loginBtn" >
                   Login
                 </button>
+                <input type="hidden" name="type" vlaue="local"/>
                 </form>
                 <br>
          		<button class="Kakao" onclick="kakao();">Kakao</button>

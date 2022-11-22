@@ -15,6 +15,7 @@ String password = request.getParameter("password");
 	<form action="/login" method="POST" id="frm">
 		<input type="hidden" id="a" name="username" value="${username}"/>
 		<input type="hidden" id="b" name="password" value="${password}"/>
+		<input type="hidden" id="c" name="type" value="social"/>
 	</form>
 
 
