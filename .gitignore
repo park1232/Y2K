@@ -2,7 +2,7 @@ root-context.xml
 mybatis-config.xml
 log4j.xml
 root-context.xml
-RootConfig.java
+
 
 lecture
 target
