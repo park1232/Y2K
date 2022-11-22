@@ -61,14 +61,12 @@ ${ photoList }
 		          <div class="card shadow-sm">
 		          <!-- 이미지 foreach문 -->
 		          	<c:forEach items="${ photoList }" var="photo">
-		          		<c:if test="${ p.productNo eq photo.productNo }">
+						<c:if test="${ p.productNo eq photo.productNo }">
 			          		<c:if test="${ fn:containsIgnoreCase(photo.productReNameName, 'jpg') or fn:containsIgnoreCase(photo.productReNameName, 'png') }">
-			            		<img src="${contextPath}/resources/img/mainSkin1.jpg" style="height: 300px;">
+			            		<img src="/upload/${ photo.productReNameName }" style="height: 300px;">
+			            		console.log(C:\\Users\\박유진\\Desktop\\uploadFolder/${ photo.productReNameName })
 			            	</c:if>
-			            	<c:if test="${ !fn:containsIgnoreCase(photo.productReNameName, 'jpg') or !fn:containsIgnoreCase(photo.productReNameName, 'png') }">
-			            		<img src="${contextPath}/resources/img/mainSkin1.jpg" style="height: 300px;">
-			            	</c:if>
-			            </c:if>
+						</c:if>
 					</c:forEach>
 		            <div class="card-body">
 		              <p class="card-text"><strong>${ p.productName }&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${ p.productCreateDate }</strong></p>

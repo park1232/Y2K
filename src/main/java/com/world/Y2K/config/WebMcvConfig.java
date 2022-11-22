@@ -14,6 +14,9 @@ public class WebMcvConfig implements WebMvcConfigurer{
 	
 	private String uploadFolder ="C:/Users/82107/Desktop/upload/";
 	
+	private String uploadFolder1 ="C:\\Users\\박유진\\Desktop\\uploadFolder/";	
+	
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		
@@ -25,7 +28,15 @@ public class WebMcvConfig implements WebMvcConfigurer{
 			.setCachePeriod(60*10*6) //1시간 동안 캐싱한다
 			.resourceChain(true)
 			.addResolver(new PathResourceResolver());
-	
 		
+		registry
+		.addResourceHandler("/upload/**") //jsp페이지에서 /upload/** 이런 주소패턴이 나오면 발동 
+		.addResourceLocations("file:///"+uploadFolder1)
+		.setCachePeriod(60*10*6) //1시간 동안 캐싱한다
+		.resourceChain(true)
+		.addResolver(new PathResourceResolver());
+
 	}
+	
+	
 }

@@ -30,5 +30,9 @@ public class PaymentDAO {
 	public int insertBoard(SqlSessionTemplate sqlSession, Product p) {
 		return sqlSession.insert("paymentMapper.insertBoard", p);
 	}
+
+	public int insertPurchaes(SqlSessionTemplate sqlSession, ProductPhoto pp) {
+		return sqlSession.insert("paymentMapper.insertPurchaes", pp);
+	}
 	
 }

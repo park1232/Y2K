@@ -45,7 +45,11 @@
 	
 	<insert id="insertBoard">
 		insert into product
-		values(y2k_product_seq.nextval, #{productName}, #{price}, #{productContent}, sysdate, sysdate, default, #{userNo})
+		values(y2k_product_seq.nextval, #{productName}, #{price}, #{productContent}, sysdate, sysdate, default, 3)
 	</insert>
 	
+	<insert id="insertPurchaes">
+		insert into productPhoto
+		values(y2k_productPhoto_seq.nextval, #{productPhotoName}, #{productReNameName}, #{productPhotoPath}, default, y2k_product_seq.currval)
+	</insert>
 </mapper>
