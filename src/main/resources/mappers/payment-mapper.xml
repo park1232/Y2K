@@ -52,4 +52,22 @@
 		insert into productPhoto
 		values(y2k_productPhoto_seq.nextval, #{productPhotoName}, #{productReNameName}, #{productPhotoPath}, default, y2k_product_seq.currval)
 	</insert>
+	
+	<update id="deletePurchaes">
+		update product
+		set PRODUCTSTATUS = 'N'
+		where productNo = #{pNo}
+	</update>
+	
+	<select id="detailPurchaes" resultMap="productResultSet">
+		select count(*)
+		from product
+		where PRODUCTSTATUS = 'Y' and productNo = #{pNo}
+	</select>
+	
+	<select id="selectPhoto" resultMap="productPhotoResultSet">
+		select count(*)
+		from productPhoto
+		where PRODUCTPHOTOSTATUS = 'Y' and productNo = #{pNo}
+	</select>
 </mapper>

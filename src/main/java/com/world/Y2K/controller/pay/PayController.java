@@ -2,11 +2,11 @@ package com.world.Y2K.controller.pay;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,7 +48,7 @@ public class PayController {
 			model.addAttribute("pi", pi);
 			model.addAttribute("pList", pList);
 			model.addAttribute("photoList", photoList);
-			return "purchaes";
+			return "pay/purchaes";
 		} else {
 			throw new PaymentException("구매 게시글 조회 실패");
 		}
@@ -56,8 +56,8 @@ public class PayController {
 	}
 	
 	@GetMapping("writePurchaes.pa")
-	public String test4() {
-		return "writePurchaes";	
+	public String writer() {
+		return "pay/writePurchaes";	
 	}
 	
 	// 파일 저장소를 만드는 메소드(실제 파일이 들어갈 폴더)
@@ -113,16 +113,42 @@ public class PayController {
 		} else {
 			throw new PaymentException("구매 게시글 작성이 실패하였습니다.");
 		}
-
+	}
+	
+	@RequestMapping("selectPurchaes.pa")
+	public String detailPurchaes(HttpSession session, @RequestParam(value="page", required=false) Integer page, Model model, @RequestParam(value="productNo", required=false) Long pNo) {
+				
+		System.out.println(pNo);
+		
+		Product p = pService.detailPurchaes(pNo);
+		ProductPhoto photo = pService.selectPhoto(pNo);
+		
+		System.out.println("나옴?");
+		
+		return "pay/detailPurchaes";
+	}	
+	
+//	@RequestMapping("detailpurchaes.pa")
+//	public String test45() {
+//		return "pay/detailPurchaes";
+//	}
+	
+	@RequestMapping("deletePurchaes.pa")
+	public String delete(HttpSession session, @ModelAttribute Product p) {
+		// 관리자만 삭제할 수 있게 로직 짜기
+		
+//		selectPayList();
+//		Long pNo = p.getProductNo();
+//		System.out.println(pNo);
+//		
+//		int result = pService.deletePurchaes(pNo);
+//		
+		return "redirect:purchaes.pa";
 	}
 	
 	@GetMapping("payment.pa")
 	public String test2() {
-		return "payment";
+		return "pay/payment";
 	}
 	
-	@GetMapping("detailpurchaes.pa")
-	public String test3() {
-		return "detailPurchaes";
-	}	
 }
