@@ -18,12 +18,7 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
 
-		return new Class[] {ServletContext.class, BoardContext.class
-										, ChatContext.class, DiaryContext.class
-										, FriendContext.class, LoginContext.class
-										, MainContext.class, MypageContext.class
-										, PayContext.class, PhotoContext.class
-										, VisitContext.class};
+		return new Class[] {ServletContext.class};
 	}
 
 	@Override
