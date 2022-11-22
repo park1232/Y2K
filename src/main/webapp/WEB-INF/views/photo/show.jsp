@@ -57,13 +57,13 @@
 						<div id="storyCommentList-1">
 
 							<div class="sl__item__contents__comment" id="storyCommentItem-1">
-								<p>
+								<!-- <p>
 									<b>조현재 :</b> 제발 되어라..
 								</p>
 								<button type="button">
 									<i class="fas fa-times" id="change"></i>
 								</button>
-							</div>
+							</div> -->
 						</div>
 
 						<div class="sl__item__input">

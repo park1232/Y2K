@@ -20,15 +20,12 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/datepicker.css"/>
 	<script>
 		$( function() {
-	    	$( "#datepicker" ).datepicker();
-	    	$("#datepicker").val();
-	        
+	    	$("#datepicker").datepicker();
+	    	
 	        $("#datepicker").on("change",function(){
-	            var selected = $(this).val();
-	            alert(selected);
+	    		$("#hiddenDate").val($("#datepicker").val());
 	        });
 	  	} );
-
 	</script>
   </head>
   <body>
@@ -89,20 +86,28 @@
                   </div>
                 </div>
                 <div class="main">
+               	 	<form method="POST" action="${ contextPath }/diary3.di" method="POST">
                   <div class="home_contents">
 			<div class="c">
 			<h2>날짜별보기</h2>
 			</div>
 			
 			<div class="calendar">
-				<div id="datepicker"></div>
+				<div id="datepicker">
+					<input type="hidden" id="hiddenDate" name="datepicker">
+				</div>
 			</div>
 			
 			<div class="m">
+			
+			
 				<h2>지도별보기</h2>
 			</div>
 			
 			<div class="map">
+			</div>
+			<div class="write">
+				<button id="writeBtn">글쓰기</button>
 			</div>
         <div class="diary">
 			<div class="diary_contents">
@@ -147,6 +152,7 @@
 			</div>
 		</div>
                 </div>
+                </form>
               </div>
               
               <div class = "menu align-center expanded text-center SMN_effect-68">
@@ -163,23 +169,15 @@
 <!--              <div class="menu-item mi-7">방명록</div>-->
             </div>
           </div>
+          </div>
         </section>
       </main>
      
     </div>
     <script>
-    //    function openPopup(){
-    //        window.open("profil.html", "new", "toolbar=no, menubar=no, scrollbars=no, resizable=no, width=1280, height=721, left=0, top=0" );
-    //    }
-        /* $('.dropdown-btn').on('click',function(){
-            $('.dropdown-content').show();
-            }); */  
-            $(".mi-5").on('click', function(){
-
-              alert('마케팅 사이트 업데이트 진행중.');
-
-            });      
-      </script>
+    
+    
+    </script>
   </body>
 
 

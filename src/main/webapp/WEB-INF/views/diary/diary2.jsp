@@ -145,44 +145,6 @@
                 		
                 		
                 		</div>
-
-                	
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
                 </div>
               </div>
               <div class = "menu align-center expanded text-center SMN_effect-68">
@@ -198,6 +160,7 @@
 <!--              <div class="menu-item mi-6">게시판</div>-->
 <!--              <div class="menu-item mi-7">방명록</div>-->
             </div>
+          </div>
           </div>
         </section>
       </main>

@@ -30,7 +30,19 @@ hr.hr-2 {
   border-bottom: 2px dashed #eee;
   background: rgb(255, 198, 165);
 }
-#writeboard {width: 350px; height: 150px;}
+#writeboard {
+  width: 350px; 
+  height: 150px;
+  border:2px solid rgb(255, 221, 184); 
+  border-radius: 10px; 
+  resize: none;}
+
+#writeboard:hover{
+  border:3px solid rgb(255, 150, 52); 
+  border-radius: 10px; 
+  resize: none;
+  }
+
 #submitReply{
 	color:orange;
     position: relative;
@@ -70,12 +82,56 @@ hr.hr-2 {
 .fa-heart{color: rgb(248, 59, 90); height: 15px; width: 15px;}
 
 
-textarea{border:2px solid rgb(255, 221, 184); border-radius: 10px; resize: none;}
-textarea:hover{border:3px solid green; border-radius: 10px; resize: none;}
-
 .writeCard {
     width: 400px; height: 150px;
     border: 1px dashed rgb(127, 103, 81); border-radius: 10px;
     
 }
 #homepage{color:rgb(255, 86, 24)}
+
+/** 버튼 반짝이*/
+.side1 { top: 200px; left	: 400px; }
+.side2 { top: 240px; left: 400px; }
+.side3 { top: 500px; left: 400px; }
+.side4 { top: 540px; left: 400px; }
+
+.menu a {
+  color: rgba(255, 255, 255, 0.8);
+  /* font-family: tahoma; */
+  /* font-size: 17pt;
+  font-weight: 400; */
+  /* padding: 15px 25px; */
+  /**/
+  /* position: relative; */
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+
+.SMN_effect-68 a:hover{
+  animation: blur-a 3s ease-out infinite;
+  text-shadow: 0px 0px 5px #fff, 0px 0px 7px #fff;
+}
+@keyframes blur-a {
+  from {
+    text-shadow:0px 0px 10px #fff,
+      0px 0px 10px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 50px #fff,
+      0px 0px 50px #fff,
+      0px 0px 50px #7B96B8,
+      0px 0px 150px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px -10px 100px #7B96B8,
+      0px -10px 100px #7B96B8;
+  }
+}

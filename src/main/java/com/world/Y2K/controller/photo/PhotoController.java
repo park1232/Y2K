@@ -5,13 +5,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.world.Y2K.exception.PhotoException;
 import com.world.Y2K.model.vo.Photo;
+import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.photo.PhotoImageStore;
 import com.world.Y2K.service.photo.PhotoService;
 
@@ -37,26 +36,33 @@ public class PhotoController {
 	private PhotoService pService;
 	
 	@RequestMapping("/photo.ph")
-	public String photo(Model model) {
+	public String photo(Model model, Authentication authentication, HttpSession session) {
+		
+		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+		System.out.println("user : " + userDetails.getMember());
+		
+		Long userNo = (Long) session.getAttribute("loginUser");
 		
 		List<Photo> images = pService.photoList();
 		
 		model.addAttribute("images", images);
-		
+		model.addAttribute("dto", userDetails);
 	
-		return "photo";
+		return "photo/photo";
 	}
 	
 	@RequestMapping("/show.ph")
 	public ModelAndView selectImg(
 			HttpSession session, ModelAndView mv,
 			//@RequestParam("username") String username
-			@RequestParam("photoNo") Long photoNo
+			@RequestParam("photoNo") Long photoNo,
+			Authentication authentication
 			) {
+		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 		Photo p = pService.selectImg(photoNo);
-		
+		p.setUserNo(userDetails.getMember().getUserNo());
 		mv.addObject("photo", p);
-		
+		mv.setViewName("photo/show");
 		
 		return mv;
 	}
@@ -64,24 +70,26 @@ public class PhotoController {
 	@RequestMapping("/upload.ph")
 	public String upload() {
 
-		return "upload";
+		return "photo/upload";
 	}
 	
 	@RequestMapping("/image")
 	public String imageUpload(@ModelAttribute Photo p,
 			@RequestParam(value="file", required=false) MultipartFile file,
-			HttpServletRequest request, Model model) {
+			HttpServletRequest request, Model model,Authentication authentication) {
 		
-		//System.out.println(file);
+		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+		
+		
 		
 		if(file.isEmpty()) {
 			throw new PhotoException("실패");
 		}
 		
 		
-		photoImageStore.insertImage(p, file, request);
+		photoImageStore.insertImage(p, file, userDetails);
 		
-		return "redirect:photo.ph";
+		return "redirect:/photo.ph";
 	}
 	
 	
@@ -94,7 +102,7 @@ public class PhotoController {
 		
 		pService.deletetImg(photoNo);
 	
-			return "redirect:photo.ph";
+			return "redirect:/photo.ph";
 			
 		}
 	
@@ -102,7 +110,7 @@ public class PhotoController {
 	
 	
 	@RequestMapping("/edit.ph")
-	public void editFrom(
+	public String editFrom(
 			@RequestParam("photoNo") Long photoNo,
 			Model model
 			) {
@@ -111,7 +119,7 @@ public class PhotoController {
 		
 		model.addAttribute("photo", photo);
 		
-		
+		return "/photo/edit";
 	}
 	
 	@RequestMapping("/update")
@@ -140,7 +148,7 @@ public class PhotoController {
 			}
 
 		
-			return "redirect:photo.ph";
+			return "redirect:/photo.ph";
 	}
 
 	

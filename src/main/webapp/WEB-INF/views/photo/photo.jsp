@@ -88,25 +88,26 @@
 						</div>
 						<div class="main">
 							<div class="tab_content" id="tab-content">
+								<%-- <c:if test="${ dto.member.userNo eq image.userNo }"> --%>
 								<button id="photo_upload" onclick="up();">사진올리기</button>
+								<%-- </c:if> --%>
 								<br><br>
 								<div id="tab-1-content" class="tab-content-item show">
 									<!--게시물컨 그리드배열-->
 									<div class="tab-1-content-inner">
 
-										
-										
+										<!--${dto.member.userNo} -->
+										${dto.member}
 										<%-- ${images} --%>
 										
 										<c:forEach var="image" items="${images}">
-									
+										
 											<div class="img-box">
 												<img id="imgOne"class="imgOne"  src="/upload/${image.renameName}"/>
 												<input type="hidden" name="photoNo" id="photoNo" value=${image.photoNo }>
 												<!--<div class="comment"></div>-->
 											</div>
-												
-															
+													
 										</c:forEach>
 										<!--아이템들end-->
 									</div>

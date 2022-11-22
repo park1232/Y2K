@@ -10,8 +10,6 @@
     <link rel="short icon" href="${contextPath}/resources/img/2014.ico"/>
     <link rel="stylesheet" href="${contextPath}/resources/css/reset.css" />
     <link rel="stylesheet" href="${contextPath}/resources/css/style.css" />
-    <link rel="stylesheet" href="${contextPath}/resources/css/visit.css" />
-    <link rel="stylesheet" href="${contextPath}/resources/css/board.css" />
     <link rel="stylesheet" href="${contextPath}/resources/css/write.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://kit.fontawesome.com/7a738a6e1a.js" crossorigin="anonymous"></script>
@@ -81,34 +79,36 @@
 	<div class="main">
 	 <div><hr class="hrB"></div>
         <br>
+ <form action="${contextPath}/insertBoard.bo" method="post">
         <div id="writeDiv">
         <table>
           <thead>
             <tr style="text-align: center;">
                 <td width="50px">
-                  <select name="category">
-                    <option>잡담</option>
-                    <option>유머</option>
-                    <option>정보</option>
-                    <option>기타</option>
+                  <select name="category" id="category">
+                    <option>😳잡담</option>
+                    <option>😁유머</option>
+                    <option>📟정보</option>
+                    <option>💛기타</option>
                   </select>
                 </td>
-                <th width="50px" style="border-right : 1px dashed rgb(11, 82, 0); font-size: 12px;">제목</th>
+                <th width="55px" style="border-right : 2px dashed rgb(11, 82, 0); font-size: 12px;">제목</th>
                 <td>
-                  <input type="text" name="title" size="30">
+                  <input type="text" name="title" size="30" id="titleStyle">
                 </td>
-                <th width="50px" style="border-right : 1px dashed rgb(11, 82, 0); font-size: 12px;">작성자</th>
-                <td width="70px">${loginUser.nickName}</td>
+                <th width="55px" style="border-right : 2px dashed rgb(11, 82, 0); font-size: 12px;">작성자</th>
+                <td width="70px">곰돌이</td>
             </tr>
         </thead>
         </table>
         <br>
         <div><hr class="hrB"></div>
-        <br><br>
-                  <textarea id="text"></textarea>
+        <br>
+                  <textarea id="textBox"></textarea>
                   <br><br>
                   <div id="writeButton"><button class="button btnBorder btnOrange" >등록</button></div>
         </div>
+        </form>
         <br><br><br><br>
 			
 	</div>
@@ -118,9 +118,9 @@
               <a href="photo.html" class="menu-item mi-2" >사진첩</a>
               <a href="diary.html" class="menu-item mi-3">다이어리</a>
             </div>
-              <a class="menu-item mi-5 menu-checked" onclick="location.href='${contextPath}/board.bo'">게시판</a>
+              <a class="menu-item mi-5 menu-checked" onclick="location.href='${contextPath}/boardList.bo'">게시판</a>
               <div class = "menu align-center expanded text-center SMN_effect-68">
-              <a class="menu-item mi-4" onclick="location.href='${contextPath}/visit.bo'">방명록</a>
+              <a class="menu-item mi-4" onclick="location.href='${contextPath}/visit.vi'">방명록</a>
               </div>
               <!-- <a href="#" class="menu-item mi-5">마케팅</a> -->
 <!--              <div class="menu-item mi-6">게시판</div>-->
@@ -138,11 +138,7 @@
         /* $('.dropdown-btn').on('click',function(){
             $('.dropdown-content').show();
             }); */  
-            $(".mi-5").on('click', function(){
-
-              alert('마케팅 사이트 업데이트 진행중.');
-
-            });    
+   
       </script>
 </body>
 </html>

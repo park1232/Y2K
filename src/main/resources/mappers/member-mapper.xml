@@ -27,5 +27,11 @@
    	where username = #{username} and status = 'Y'
    </select>
    
+   <select id="checkUser" resultType="_int">
+   	select count(*)
+   	from member
+   	where status='Y'
+   </select>
+   
    
 </mapper>

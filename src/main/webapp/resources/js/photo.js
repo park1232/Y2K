@@ -15,11 +15,8 @@ for(const img of images){
 		let photoNo = img.nextElementSibling.value;
 		
 		console.log(photoNo);
-		window.open('show.ph?photoNo='+photoNo,'','width=600, height=650');
+		
+		window.open('show.ph?photoNo='+photoNo,'popup','width=600, height=650');
 		});
 	}
 
-
-
- //show.ph?bId='+bId+' 
-//$('.imgOne').click(function(){
