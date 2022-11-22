@@ -8,7 +8,6 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:root-context.xml
-			classpath:security-context.xml
 		</param-value>
 	</context-param>
 	
@@ -202,6 +201,19 @@
 		<url-pattern>*.vi</url-pattern>
 	</servlet-mapping>
 	
+<!-- 	
+	<servlet>
+		<servlet-name>securityServlet</servlet-name>
+		<servlet-class>com.world.Y2K.config.SecurityConfig</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>securityServlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping> -->
+
+	
 	
 	
 	
@@ -220,7 +232,18 @@
 		<url-pattern>/*</url-pattern>   <!-- 모든 필터에 적용하기 위헤 아스트로 -->
 	</filter-mapping>
 	
-	 <filter>
+<!-- <filter>
+	<filter-name>springSecurityFilterChain</filter-name>
+	<filter-class>com.world.Y2K.config.SecurityConfig</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> 
+	  -->
+	
+<!-- <filter>
 	<filter-name>springSecurityFilterChain</filter-name>
 	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
@@ -229,9 +252,7 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping> 
-	 
-	
-
+	  -->
 
 
 </web-app>

@@ -53,8 +53,8 @@ public class LoginController {
 	}
 	
 	@GetMapping("/kakao.lo")
-	public HttpSession kakaoLogin(String code, HttpServletRequest request) {
-		return kakaoLoginService.kakaoLogin(code, request);
+	public void kakaoLogin(String code, HttpServletRequest request) {
+		kakaoLoginService.kakaoLogin(code, request);
 		
 	}
 

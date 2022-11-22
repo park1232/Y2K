@@ -25,7 +25,7 @@
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
-
+	<!-- <bean id="securityFilterChain" class="org.springframework.security.web.SecurityFilterChain"/> -->
 	
  	 <bean id="bcryptPasswordEncoder"
  		  class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/> 

@@ -3,7 +3,6 @@ package com.world.Y2K.service.login.oauth;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -12,7 +11,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -33,7 +31,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+
 public class KakaoLoginService {
+	
+
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -41,8 +42,7 @@ public class KakaoLoginService {
 	@Autowired
 	private LoginDAO loginDAO;
 	
-	@SuppressWarnings("null")
-	public HttpSession kakaoLogin(String code, HttpServletRequest request) {
+	public void kakaoLogin(String code, HttpServletRequest request) {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-type","application/x-www-form-urlencoded;charset=utf-8");
@@ -118,11 +118,20 @@ public class KakaoLoginService {
 			loginDAO.registerMember(member);
 		}
 		
-		UserDetails userDetails = new UserDetailsImpl(member);
-		HttpSession session = request.getSession();
-		session.setAttribute("Authentication", new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities()));
-		return session;
+		/*
+		 * UsernamePasswordAuthenticationToken authenticationToken = new
+		 * UsernamePasswordAuthenticationToken(member.getUsername(),
+		 * member.getPassword());
+		 * 
+		 * Authentication authentication =
+		 * authenticationManager.authenticate(authenticationToken);
+		 * 
+		 * UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+		 * System.out.println(userDetails.getMember());
+		 */
 	}
+	
+	
 	
 	
 
