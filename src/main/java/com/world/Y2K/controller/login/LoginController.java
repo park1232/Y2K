@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.world.Y2K.exception.MemberException;
 import com.world.Y2K.model.vo.User;
+import com.world.Y2K.service.login.EditNicknameService;
 import com.world.Y2K.service.login.RegisterService;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.login.oauth.KakaoLoginService;
@@ -25,6 +26,9 @@ public class LoginController {
 	
 	@Autowired
 	private KakaoLoginService kakaoLoginService;
+	
+	@Autowired 
+	private EditNicknameService editNicknameService;
 
 	
 	@GetMapping("/loginpage.lo")
@@ -50,14 +54,26 @@ public class LoginController {
 	
 	@PostMapping("/login-success.lo")
 	public String loginSuccessHandler() {
-		System.out.println("로그인성공 실행됨");
 		return "login/loginSuccess";
 	}
 	
 	@GetMapping("/kakao.lo")
 	public ModelAndView kakaoLogin(String code, HttpServletRequest request, RedirectAttributes redirectAttributes)  {
 		return  kakaoLoginService.kakaoLogin(code, request);
-		
+	}
+	
+	
+	@PostMapping("/editpage.lo")
+	public String editNicknameView() {
+		return "/login/EditNickName";
+	}
+	
+	@PostMapping("/edit-nickname.lo")
+	public ModelAndView editNickname(Authentication authentication, String nickname) {
+		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+		System.out.println(nickname);
+		System.out.println(userDetails.getMember());
+		return editNicknameService.editNickname(userDetails.getMember());
 	}
 
 	
