@@ -39,7 +39,7 @@ String userId = request.getParameter("userId");
 
 
 $('#move-main-btn').click(function(){
-  window.open('/mainPage.ma?userId='+${userId},'Y2K World','width=1289, height=703, scrollbars=no, resizable=no, toolbars=no, menubar=no');
+  window.open('/mainPage.ma?userNo='+${userNo},'Y2K World','width=1289, height=703, scrollbars=no, resizable=no, toolbars=no, menubar=no');
   window.close();
 
   

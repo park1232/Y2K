@@ -80,6 +80,8 @@
                 </form>
                 <br>
          		<button class="Kakao" onclick="kakao();">Kakao</button>
+         		<br>
+         		<button class="Kakao" onclick="google();">Google</button>
                 <p>
                   <b>
                     <div id="forgot"><a href="#" style="text-decoration: none; color:black; font-size: 7px;">아이디 또는 비밀번호를 잊어버리셨나요?</a></div>

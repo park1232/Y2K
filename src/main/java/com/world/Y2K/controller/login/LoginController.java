@@ -58,8 +58,13 @@ public class LoginController {
 	}
 	
 	@GetMapping("/kakao.lo")
-	public ModelAndView kakaoLogin(String code, HttpServletRequest request, RedirectAttributes redirectAttributes)  {
-		return  kakaoLoginService.kakaoLogin(code, request);
+	public ModelAndView kakaoLogin(String code)  {
+		return  kakaoLoginService.kakaoLogin(code);
+	}
+	
+	@GetMapping("/google.lo")
+	public void googleLogin(String code)  {
+		System.out.println(code);
 	}
 	
 	
@@ -69,11 +74,9 @@ public class LoginController {
 	}
 	
 	@PostMapping("/edit-nickname.lo")
-	public ModelAndView editNickname(Authentication authentication, String nickname) {
+	public ModelAndView editNickname(Authentication authentication, String nickname) throws MemberException {
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
-		System.out.println(nickname);
-		System.out.println(userDetails.getMember());
-		return editNicknameService.editNickname(userDetails.getMember());
+		return editNicknameService.editNickname(userDetails.getMember(), nickname);
 	}
 
 	
