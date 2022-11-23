@@ -64,7 +64,7 @@
           <div class="col align-items-center flex-col sign-in" >
             <div class="form-wrapper align-items-center" id="loginForm">
               <div class="form sign-in">
-                <form action="/auth/login" method="POST">
+                <form action="/login" method="POST">
 	                <div class="input-group">
 	                  <i class='bx bxs-user'></i>
 	                  <input type="text" name="username" placeholder="Your Id">
@@ -76,6 +76,7 @@
                 <button id="loginBtn" >
                   Login
                 </button>
+                <input type="hidden" name="type" vlaue="local"/>
                 </form>
                 <br>
          		<button class="Kakao" onclick="kakao();">Kakao</button>

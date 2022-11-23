@@ -1,7 +1,6 @@
 package com.world.Y2K.controller.login;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -9,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.world.Y2K.exception.MemberException;
 import com.world.Y2K.model.vo.User;
@@ -53,8 +54,8 @@ public class LoginController {
 	}
 	
 	@GetMapping("/kakao.lo")
-	public void kakaoLogin(String code, HttpServletRequest request) {
-		kakaoLoginService.kakaoLogin(code, request);
+	public ModelAndView kakaoLogin(String code, HttpServletRequest request, RedirectAttributes redirectAttributes)  {
+		return  kakaoLoginService.kakaoLogin(code, request);
 		
 	}
 

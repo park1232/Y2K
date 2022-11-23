@@ -17,7 +17,9 @@ public class UserDetailsServiceImpl  implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
 		Member member = loginDAO.findUser(username);
+
 		if(member == null) {
 			return (UserDetails) new UsernameNotFoundException(username);
 		}

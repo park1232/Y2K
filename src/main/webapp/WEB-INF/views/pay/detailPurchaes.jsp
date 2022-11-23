@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" scope="application" />
 <!doctype html>
 <html lang="en">
@@ -25,29 +26,64 @@
 </head>
 <body>
 <div class="main">
-	<div class="wrap">
-	    <div class="productImg">
-	        <img src="${contextPath}/resources/img/mainSkin1.jpg" style="width: 600px; height: 300px;" alt="My Image">
-	    </div>
-	    <hr>
-	    
-	    <h3>별빛 바탕 화면의 스킨 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	    <img src="${contextPath}/resources/img/kumquat.jpg" style="width: 30px; height: 30px;"><span class="price">낑깡 50개</span></h3>
-	    
-	    <hr>
-	    <div id="area">
-	    	<p>밤 하늘 별빛 은하수가 보이는 스킨 <br> 지금 구매하세요!</p>
-	    </div>
-	</div>
-	    <div class="orderBtn">
-	        <button type="button" class="btn btn-primary" onclick="order()">구매하기</button>
-	        <button type="button" class="btn btn-primary" onClick='window.close()'>취소하기</button>
-    	</div>
+  		<c:forEach items="${ photo }" var="photo">
+			<c:forEach items="${ p }" var="p">
+			<div class="wrap">
+			    <div class="productImg">
+				    <c:if test="${ p.productNo eq photo.productNo }">
+				        <c:if test="${ fn:containsIgnoreCase(photo.productReNameName, 'jpg') or fn:containsIgnoreCase(photo.productReNameName, 'png') }">
+				        	<img src="/upload/${ photo.productReNameName }" style="width: 600px; height: 300px;" alt="My Image">
+				    	</c:if>
+					</c:if>
+			    </div>
+			    <hr>
+			    <h3>${ p.productName } &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			    <img src="${contextPath}/resources/img/kumquat.jpg" style="width: 30px; height: 30px;"><span class="price">낑깡 ${ p.price }개</span></h3>
+
+			    <hr>
+			    <div id="area">
+			    	<p>${ p.productContent } <br> 지금 구매하세요!</p>        
+			    </div>
+			</div>
+			    <div class="orderBtn">
+			        <button type="button" class="btn btn-primary" onclick="order()">구매하기</button>
+			        <button type="button" class="btn btn-primary" onClick='window.close()'>취소하기</button>
+			        <!-- 로그인 구현되면 if:test넣기 -->
+			        <button type="button" class="btn btn-primary" onclick="location.href='${ contextPath }/deletePurchaes.pa'">삭제하기</button>
+			        
+		    	</div>
+  			</c:forEach>
+		</c:forEach> 
+        			자식창 Sender : <input type="text" name="sender" id='productNo' size="10"><br>
+        			<input type="hidden" value='${ productNo }' name="productNo" id="productNo">	
 </div>
 	<script>
         function order(){
             alert("구매가 완료되었습니다.")
             close();
+        }
+        
+        function _GET(search) {
+            var obj = {};
+            var uri = decodeURI(search);
+                uri = uri.slice(1,uri.length);
+     
+            var param = uri.split('&');
+            
+            for (var i = 0; i < param.length; i++) {
+                var devide = param[i].split('=');
+                obj[devide[0]] = devide[1];
+            }
+     
+            return obj;
+        }
+     
+        window.onload = function () {
+            var search = window.location.search;
+            var getData =  _GET(search);
+            var sender = document.querySelector('#productNo');
+     
+            productNo.value = getData.val;
         }
     </script>
 
