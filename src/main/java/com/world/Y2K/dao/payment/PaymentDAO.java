@@ -55,4 +55,8 @@ public class PaymentDAO {
 	public int orderPurchaes(SqlSessionTemplate sqlSession, HashMap<String, Long> map) {
 		return sqlSession.update("paymentMapper.orderPurchaes", map);
 	}
+
+	public int getOrangeCount(SqlSessionTemplate sqlSession, HashMap<String, Long> map) {
+		return sqlSession.selectOne("paymentMapper.getOrangeCount", map);
+	}
 }

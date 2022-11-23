@@ -46,28 +46,48 @@
     </div>
   </div>
 </header>
-${ fList }
 <div class="main">
-   <table class="table">
+
+ <table class="table">
   <thead>
     <tr>
-      <th scope="col" width="360px">친구 인원 목록</th>
-      <th scope="col" width="360px">ID</th>
+      <th scope="col" width="360px">친구 신청 목록</th>
+      <th scope="col" width="360px">이름</th>
       <th scope="col" width="360px">닉네임</th>
-      <th scope="col" width="360px">친구삭제</th>
+      <th scope="col" width="360px">상세보기</th>
     </tr>
   </thead>
   <tbody>
-  	<c:forEach items="${ fList }" var="f">
-  	<c:forEach begin="1" end="99" step="1" var="count">
-	    <tr>
-	      <th scope="row">count</th>
-	      <td>${ f.userName }</td>
-	      <td>${ f.nickName }</td>
-	      <td><input type="checkbox" id="friend" name="using"></td>
-	    </tr>
-	</c:forEach>
-    </c:forEach>
+    <tr>
+      <th scope="row">1</th>
+      <td>박규민</td>
+      <td>바보</td>
+      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
+    </tr>
+ 	<tr>
+      <th scope="row">2</th>
+      <td>박규민</td>
+      <td>바보</td>
+      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>박규민</td>
+      <td>바보</td>
+      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td>박규민</td>
+      <td>바보</td>
+      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>박규민</td>
+      <td>바보</td>
+      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
+    </tr>
   </tbody>
 </table>
 <div class="search">
@@ -78,6 +98,7 @@ ${ fList }
      <input type="text" placeholder="검색어 입력">
      <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
 </div>
+
 <br>
 	<div class="pagingArea">
         <ul class="pagination justify-content-center">
@@ -158,15 +179,16 @@ ${ fList }
 	            </li>
 	        </ul>
     </div>
+</div>
     <br>
-    <div class="friendOption">
-	    <button type="button" class="btn btn-primary" onclick="window.open('friendAdd.html', 'friendAdd', 'width=460, height=570')">친추추가</button>
-	    <button type="button" class="btn btn-primary">친구삭제</button>
-    </div>
+<br>
+  
+<br>
+<div>
 </div>
 </body>
 <br>
-<footer class="sticky-footer bg-white" style="height: 15px;">
+<footer class="sticky-footer bg-white" style="height: 5px;">
         <div class="main-footer d-flex p-2 px-3 bg-white border-top">
               <a href="#">Y2K</a>
         </div>

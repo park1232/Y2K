@@ -28,5 +28,7 @@ public interface PaymentService {
 	int deleteProductPhoto(Long pNo);
 
 	int orderPurchaes(HashMap<String, Long> map);
+
+	int getOrangeCount(HashMap<String, Long> map);
 	
 }

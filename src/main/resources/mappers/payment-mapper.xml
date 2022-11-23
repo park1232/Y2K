@@ -45,7 +45,7 @@
 	
 	<insert id="insertBoard">
 		insert into product
-		values(y2k_product_seq.nextval, #{productName}, #{price}, #{productContent}, sysdate, sysdate, default, 3)
+		values(y2k_product_seq.nextval, #{productName}, #{price}, #{productContent}, sysdate, sysdate, default, #{userNo})
 	</insert>
 	
 	<insert id="insertPurchaes">
@@ -78,6 +78,14 @@
 	</select>
 	
 	<update id="orderPurchaes">
-		update 
+		update member
+		set ORANGE = ORANGE - #{price}
+		where USERNO = #{mNo}
 	</update>
+	
+	<select id="getOrangeCount" resultType="_int">
+		select orange
+		from member
+		where userNo = #{mNo}
+	</select>
 </mapper>

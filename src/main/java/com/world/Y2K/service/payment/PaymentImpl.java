@@ -70,4 +70,9 @@ public class PaymentImpl implements PaymentService{
 	public int orderPurchaes(HashMap<String, Long> map) {
 		return payDAO.orderPurchaes(sqlSession, map);
 	}
+	
+	@Override
+	public int getOrangeCount(HashMap<String, Long> map) {
+		return payDAO.getOrangeCount(sqlSession, map);
+	}
 }
