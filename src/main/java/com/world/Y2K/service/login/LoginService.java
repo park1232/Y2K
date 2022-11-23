@@ -1,24 +1,24 @@
-package com.world.Y2K.service.login.oauth;
+package com.world.Y2K.service.login;
 
+import java.io.IOException;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.world.Y2K.dao.login.LoginDAO;
-import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class AuthenticationStore extends UsernamePasswordAuthenticationFilter{
+public class LoginService extends UsernamePasswordAuthenticationFilter{
 	
 	private final AuthenticationManager authenticationManager;
 	
@@ -41,5 +41,14 @@ public class AuthenticationStore extends UsernamePasswordAuthenticationFilter{
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 		System.out.println("로그인완료됨"+userDetails.getMember().getUsername());
 		return authentication;
+	}
+	
+	@Override
+	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
+			Authentication authResult) throws IOException, ServletException {
+		
+		request.getRequestDispatcher("/login-success.lo").forward(request, response);
+		
+		super.successfulAuthentication(request, response, chain, authResult);
 	}
 }
