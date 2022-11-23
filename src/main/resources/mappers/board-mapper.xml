@@ -8,22 +8,60 @@
 		 <result column="BOARD_TITLE" property="boardTitle" />
 		 <result column="BOARD_CONTENT" property="boardContent" />
 		 <result column="NICKNAME" property="nickName" />
+		 <result column="BOARD_CATENAME" property="category" />
 		 <result column="CREATE_DATE" property="createDate" />
 		 <result column="MODIFY_DATE" property="modifyDate" />
 		 <result column="BOARD_COUNT" property="boardCount" />
 		 <result column="BOARD_STATUS" property="boardStatus" />
 		 <result column="BOARD_TYPEID" property="boardTypeId" />
 		 <result column="BOARD_WRITER" property="boardWriter" />
+		 <result column="BOARD_CATEID" property="boardCateId" />
+	 </resultMap>
+	 
+	 <resultMap type="Reply" id="replyResultSet">
+		 <id column="REPLYNO" property="replyId"/>
+		 <result column="REPLY_CONTENT" property="replyContent" />
+		 <result column="NICKNAME" property="nickName" />
+		 <result column="R_CREATEDATE" property="r_CreateDate" />
+		 <result column="R_MODIFYDATE" property="r_ModifyDate" />
+		 <result column="REPLY_STATUS" property="replyStatus" />
+		 <result column="REPLY_WRITER" property="replyWriter" />
+		 <result column="R_BOARDNO" property="r_boardNo" />
+		 <result column="REPLY_TYPEID" property="replyTypeId" />
 	 </resultMap>
 	 
 	<select id="getBoardListCount" resultType="_int">
-		select count(*) from board where boardstatus = 'Y'
+		select count(*) from board where board_status = 'Y'
 	</select>
 	
 	<select id="selectBoardList" resultMap="boardResultSet">
 		select * from board
-		join member on(boardwriter = userno)
-		where boardstatus = 'Y'
+		join member on(board_writer = userno)
+		where board_status = 'Y'
 		order by boardNo desc
+	</select>
+	
+	<insert id="insertBoard">
+		insert into board values(BOARD_SEQ.nextval, #{boardTitle}, #{boardContent}, sysdate, sysdate, default, default, #{boardTypeId}, #{boardWriter}, #{boardCateId})
+	</insert>
+	
+	<update id="boardCount">
+		update board 
+		set board_count = board_count + 1 
+		where boardNo = #{bNo}
+	</update>
+	
+	<select id="selectBoard" resultMap="boardResultSet">
+		select * from board
+		join member on(board_writer = userno)
+		join boardcate using(board_cateid)
+		where board_status = 'Y' and boardNo = #{bNo}
+	</select>
+	
+	<select id="selectReply" resultMap="replyResultSet">
+		select * from reply
+		join member on(reply_writer = userno)
+		where r_boardNo = #{bNo} and reply_status = 'Y'
+		order by replyno desc
 	</select>
 </mapper>

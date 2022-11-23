@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.world.Y2K.model.vo.Board;
 import com.world.Y2K.model.vo.PageInfo;
+import com.world.Y2K.model.vo.Reply;
 
 @Repository("bDAO")
 public class BoardDAO {
@@ -21,6 +22,25 @@ public class BoardDAO {
 		RowBounds row = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardList", null, row);
+	}
+	
+	
+	public int insertBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.insertBoard", b);
+	}
+	
+	public int boardCount(SqlSessionTemplate sqlSession, int bNo) {
+		
+		return sqlSession.update("boardMapper.boardCount", bNo);
+	}
+
+	public Board selectBoard(SqlSessionTemplate sqlSession, int bNo) {
+		return sqlSession.selectOne("boardMapper.selectBoard", bNo);
+	}
+	
+	public ArrayList<Reply> selectReply(SqlSessionTemplate sqlSession, int bNo) {
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.selectReply", bNo);
 	}
 
 }
