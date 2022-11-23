@@ -12,70 +12,61 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.world.Y2K.model.dto.Member;
-import com.world.Y2K.service.login.oauth.token.KakaoOAuthToken;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
-public class KakaoLoginService extends SocialLoginServiceTemplate{
-	
+public class NaverLoginService extends SocialLoginServiceTemplate{
+
 	@Override
 	protected String getAccessToken(String code) {
-		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-type","application/x-www-form-urlencoded;charset=utf-8");
 		
 		MultiValueMap<String, String> accessTokenBodyInfo = new LinkedMultiValueMap<String, String>();
 		accessTokenBodyInfo.add("grant_type", "authorization_code");
-		accessTokenBodyInfo.add("client_id", "505e36c739260bba34b117ded3d8b963");
-		accessTokenBodyInfo.add("redirect_uri", "http://localhost:8080/kakao.lo");
+		accessTokenBodyInfo.add("client_id", "uW6r_E14UIndVKWQMfWp");
+		accessTokenBodyInfo.add("client_secret", "xIleGMKB9u");
 		accessTokenBodyInfo.add("code", code);
+		accessTokenBodyInfo.add("state","STATE_STRING");
 		
 		ResponseEntity<String> response = new RestTemplate().exchange(
-				"https://kauth.kakao.com/oauth/token",
+				"https://nid.naver.com/oauth2.0/token",
 				HttpMethod.POST, 
 				new HttpEntity<MultiValueMap<String, String>>(accessTokenBodyInfo, headers),
 				String.class
 				);
+		return asString(response.getBody(),"access_token");
 		
-		return  asString(response.getBody(),"access_token");
 	}
-	
+
 	@Override
 	protected HashMap<String, String> getUserInfoFromKakaoResource(String accessToken) {
-		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "Bearer "+accessToken);
 		headers.add("Content-type","application/x-www-form-urlencoded;charset=utf-8");
 		
 		ResponseEntity<String> response = new RestTemplate().exchange(
-				"https://kapi.kakao.com/v2/user/me",
+				"https://openapi.naver.com/v1/nid/me",
 				HttpMethod.POST, 
 				new HttpEntity<String>(headers),
 				String.class
 				);
-			
+		System.out.println(response.getBody());
 		return setUserInfo(new JsonParser().parse(response.getBody()));
 	}
-
 
 	@Override
 	protected HashMap<String, String> setUserInfo(JsonElement userInfoJson) {
 		HashMap<String, String> userInfo = new HashMap<String, String>();
-		userInfo.put("provider", "KAKAO");
-		userInfo.put("providerId", userInfoJson.getAsJsonObject().get("id").getAsString());
-		userInfo.put("username", "KAKAO"+"_"+userInfoJson.getAsJsonObject().get("id").getAsString());
+		userInfo.put("provider", "NAVER");
+		userInfo.put("providerId", userInfoJson.getAsJsonObject().get("response").getAsJsonObject().get("id").getAsString());
+		userInfo.put("username", "NAVER"+"_"+userInfoJson.getAsJsonObject().get("response").getAsJsonObject().get("id").getAsString());
 		userInfo.put("password", "null");
 		return userInfo;
 	}
-	
+
 	@Override
 	protected ModelAndView setLogin(HashMap<String, String> userInfo) {
 		Member member = loginDAO.findUser(userInfo.get("username"));
@@ -105,9 +96,3 @@ public class KakaoLoginService extends SocialLoginServiceTemplate{
 
 	
 }
-
-	
-	
-
-
-

@@ -1,7 +1,5 @@
 package com.world.Y2K.controller.login;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -9,14 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.world.Y2K.exception.MemberException;
 import com.world.Y2K.model.vo.User;
 import com.world.Y2K.service.login.EditNicknameService;
 import com.world.Y2K.service.login.RegisterService;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
+import com.world.Y2K.service.login.oauth.GoogleLoginService;
 import com.world.Y2K.service.login.oauth.KakaoLoginService;
+import com.world.Y2K.service.login.oauth.NaverLoginService;
 
 @Controller
 public class LoginController {
@@ -27,9 +26,16 @@ public class LoginController {
 	@Autowired
 	private KakaoLoginService kakaoLoginService;
 	
+	@Autowired
+	private GoogleLoginService googleLoginService;
+	
+	@Autowired
+	private NaverLoginService naverLoginService;
+	
 	@Autowired 
 	private EditNicknameService editNicknameService;
 
+	
 	
 	@GetMapping("/loginpage.lo")
 	public String moveLoginView() {
@@ -59,12 +65,17 @@ public class LoginController {
 	
 	@GetMapping("/kakao.lo")
 	public ModelAndView kakaoLogin(String code)  {
-		return  kakaoLoginService.kakaoLogin(code);
+		return  kakaoLoginService.socialLogin(code);
 	}
 	
 	@GetMapping("/google.lo")
 	public void googleLogin(String code)  {
-		System.out.println(code);
+		googleLoginService.socialLogin(code);
+	}
+	
+	@GetMapping("/naver.lo")
+	public ModelAndView naverLogin(String code) {
+		return naverLoginService.socialLogin(code);
 	}
 	
 	
