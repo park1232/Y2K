@@ -99,13 +99,13 @@
 			</div>
 			
 			<div class="m">
-			
-			
 				<h2>지도별보기</h2>
 			</div>
 			
-			<div class="map">
-			</div>
+<!-- 			<div class="map"> -->
+<!-- 			</div> -->
+			<jsp:include page="map.jsp"/>
+			
 			<div class="write">
 				<button id="writeBtn">글쓰기</button>
 			</div>
