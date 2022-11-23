@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -47,8 +48,31 @@ public class LoginService extends UsernamePasswordAuthenticationFilter{
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
 		
-		request.getRequestDispatcher("/login-success.lo").forward(request, response);
 		
-		super.successfulAuthentication(request, response, chain, authResult);
+		UserDetailsImpl userDetails =  (UserDetailsImpl)authResult.getPrincipal();
+		Member member = userDetails.getMember();
+		
+		if(member.getNickName().equals("null")) {
+			request.getRequestDispatcher("/editpage.lo").forward(request, response);
+			super.successfulAuthentication(request, response, chain, authResult);
+		} else {
+			request.setAttribute("userId", member.getUserNo());	
+			request.getRequestDispatcher("/login-success.lo").forward(request, response);
+			super.successfulAuthentication(request, response, chain, authResult);
+		
+		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
