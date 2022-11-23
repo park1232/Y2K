@@ -1,6 +1,7 @@
 package com.world.Y2K.dao.payment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -46,5 +47,12 @@ public class PaymentDAO {
 	public ProductPhoto selectPhoto(SqlSessionTemplate sqlSession, Long pNo) {
 		return sqlSession.selectOne("paymentMapper.selectPhoto", pNo);
 	}
-	
+
+	public int deleteProductPhoto(SqlSessionTemplate sqlSession, Long pNo) {
+		return sqlSession.update("paymentMapper.deleteProductPhoto", pNo);
+	}
+
+	public int orderPurchaes(SqlSessionTemplate sqlSession, HashMap<String, Long> map) {
+		return sqlSession.update("paymentMapper.orderPurchaes", map);
+	}
 }

@@ -3,12 +3,14 @@ package com.world.Y2K.controller.pay;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ import com.world.Y2K.model.vo.PayPageInfo;
 import com.world.Y2K.model.vo.Product;
 import com.world.Y2K.model.vo.ProductPhoto;
 import com.world.Y2K.pagination.PayPagination;
+import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.payment.PaymentService;
 
 @Controller
@@ -31,7 +34,10 @@ public class PayController {
 	private PaymentService pService;
 	
 	@RequestMapping("purchaes.pa")
-	public String selectPayList(@RequestParam(value="page", required=false) Integer page, Model model) throws PaymentException {
+	public String selectPayList(@RequestParam(value="page", required=false) Integer page, Model model, Authentication authentication) throws PaymentException {
+		
+//		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
+//		String userRole = userdetails.getMember().getRole();
 		
 		int payCurrentPage = 1;
 		
@@ -48,6 +54,7 @@ public class PayController {
 			model.addAttribute("pi", pi);
 			model.addAttribute("pList", pList);
 			model.addAttribute("photoList", photoList);
+//			model.addAttribute("userRole", userRole);
 			return "pay/purchaes";
 		} else {
 			throw new PaymentException("구매 게시글 조회 실패");
@@ -56,7 +63,12 @@ public class PayController {
 	}
 	
 	@GetMapping("writePurchaes.pa")
-	public String writer() {
+	public String writer(Authentication authentication, Model model) {
+		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
+		Long userNo = userdetails.getMember().getUserNo();
+		
+		model.addAttribute("mNo", userNo);
+		
 		return "pay/writePurchaes";	
 	}
 	
@@ -116,34 +128,57 @@ public class PayController {
 	}
 	
 	@RequestMapping("selectPurchaes.pa")
-	public String detailPurchaes(HttpSession session, @RequestParam(value="page", required=false) Integer page, Model model, @RequestParam(value="productNo", required=false) Long pNo) {
+	public String detailPurchaes(HttpServletRequest request, @RequestParam(value="page", required=false) Integer page, Model model, @RequestParam(value="productNo", required=false) Long pNo) throws PaymentException {
 				
 		System.out.println(pNo);
 		
 		Product p = pService.detailPurchaes(pNo);
 		ProductPhoto photo = pService.selectPhoto(pNo);
-		
-		System.out.println("나옴?");
-		
-		return "pay/detailPurchaes";
+
+		if(p != null && photo != null) {
+			model.addAttribute("p", p);
+			model.addAttribute("photo", photo);
+			return "pay/detailPurchaes";
+		} else {
+			throw new PaymentException("구매게시글 상세 조회 실패");
+		}
 	}	
 	
-//	@RequestMapping("detailpurchaes.pa")
-//	public String test45() {
-//		return "pay/detailPurchaes";
-//	}
-	
 	@RequestMapping("deletePurchaes.pa")
-	public String delete(HttpSession session, @ModelAttribute Product p) {
+	public void deletePurchaes(HttpSession session, @RequestParam("productNo") Long pNo) throws PaymentException {
 		// 관리자만 삭제할 수 있게 로직 짜기
 		
-//		selectPayList();
-//		Long pNo = p.getProductNo();
-//		System.out.println(pNo);
-//		
-//		int result = pService.deletePurchaes(pNo);
-//		
-		return "redirect:purchaes.pa";
+		System.out.println(pNo);
+		
+		int result1 = pService.deletePurchaes(pNo);
+		int result2 = pService.deleteProductPhoto(pNo);
+		
+		System.out.println(result1);
+		System.out.println(result2);
+		
+		if(result1 > 0 && result2 > 0) {
+			
+		} else {
+			throw new PaymentException("구매게시글 삭제 실패");
+		}
+	}
+	
+	@RequestMapping("orderPurchaes.pa")
+	public void deletePurchaes(Authentication authentication, @RequestParam("productNo") Long pNo, @RequestParam("price") Long price, @ModelAttribute Product p) {
+		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
+		System.out.println(userdetails.getMember());
+		Long mNo = userdetails.getMember().getUserNo();
+		
+		System.out.println(pNo);
+		System.out.println(price);
+		System.out.println(mNo);
+		
+		HashMap<String, Long> map = new HashMap<String, Long>();
+		map.put("pNo", pNo);
+		map.put("price", price);
+		map.put("mNo", mNo);
+		
+		int result = pService.orderPurchaes(map);
 	}
 	
 	@GetMapping("payment.pa")

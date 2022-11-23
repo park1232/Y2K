@@ -1,6 +1,7 @@
 package com.world.Y2K.service.payment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,15 @@ public class PaymentImpl implements PaymentService{
 	@Override
 	public ProductPhoto selectPhoto(Long pNo) {
 		return payDAO.selectPhoto(sqlSession, pNo);
+	}
+	
+	@Override
+	public int deleteProductPhoto(Long pNo) {
+		return payDAO.deleteProductPhoto(sqlSession, pNo);
+	}
+	
+	@Override
+	public int orderPurchaes(HashMap<String, Long> map) {
+		return payDAO.orderPurchaes(sqlSession, map);
 	}
 }
