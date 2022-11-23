@@ -182,9 +182,13 @@
     }
   }
   
+
+ .sl__item__input:hover #have {
+ 	background-color: #E2E2E2;
+ }
   
-  
-  .modal-info {
+
+.modal-info {
   position: fixed;
   top: 0;
   left: 0;
@@ -212,8 +216,38 @@
 .modal-info .modal button:not(:last-child) {
   border-bottom: 1px solid #dbdbdb;
 }
-  
-  
-  
-  
-  
+ 
+.modal-info .modal button:not(:last-child) {
+    border-bottom: 1px solid #dbdbdb;
+}
+.modal-info .modal button {
+    border: 0;
+    background-color: transparent;
+    height: 48px;
+    cursor: pointer;
+} 
+
+button {
+    appearance: auto;
+    writing-mode: horizontal-tb !important;
+    font-style: ;
+    font-variant-ligatures: ;
+    font-variant-caps: ;
+    font-variant-numeric: ;
+    font-variant-east-asian: ;
+    font-weight: ;
+    font-stretch: ;
+    font-size: ;
+    font-family: ;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+}
