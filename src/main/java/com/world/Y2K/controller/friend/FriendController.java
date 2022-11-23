@@ -8,12 +8,12 @@ public class FriendController {
 	
 	@GetMapping("/friendAdd.fr")
 	public String test() {
-		return "friendAdd";
+		return "friend/friendAdd";
 	}
 	
 	@GetMapping("/friendList.fr")
 	public String test2() {
-		return "friendList";
+		return "friend/friendList";
 	}
 	
 }

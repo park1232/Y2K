@@ -1,11 +1,12 @@
 package com.world.Y2K.controller.pay;
 
 import java.io.File;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.world.Y2K.exception.paymentException;
-import com.world.Y2K.model.dto.Member;
+import com.world.Y2K.exception.PaymentException;
 import com.world.Y2K.model.vo.PayPageInfo;
 import com.world.Y2K.model.vo.Product;
 import com.world.Y2K.model.vo.ProductPhoto;
@@ -31,7 +31,7 @@ public class PayController {
 	private PaymentService pService;
 	
 	@RequestMapping("purchaes.pa")
-	public String selectPayList(@RequestParam(value="page", required=false) Integer page, Model model) {
+	public String selectPayList(@RequestParam(value="page", required=false) Integer page, Model model) throws PaymentException {
 		
 		int payCurrentPage = 1;
 		
@@ -48,57 +48,107 @@ public class PayController {
 			model.addAttribute("pi", pi);
 			model.addAttribute("pList", pList);
 			model.addAttribute("photoList", photoList);
-			return "purchaes";
+			return "pay/purchaes";
 		} else {
-			throw new paymentException("구매 게시글 조회 실패");
+			throw new PaymentException("구매 게시글 조회 실패");
 		}
 
 	}
 	
 	@GetMapping("writePurchaes.pa")
-	public String test4() {
-		return "writePurchaes";	
-	}
-	
-	// 글 작성, 글 수정, 글 삭제는 관리자만 할 수 있음 게시판 권한 구현
-	public String insertBoard(@ModelAttribute Product p, HttpServletRequest request) {
-		String userRole = ((Member)request.getAttribute("loginUser")).getRole();
-		
-		if(userRole.equals("admin")) {
-			Long userNo = ((Member)request.getAttribute("loginUser")).getUserNo();
-			
-			p.setUserNo(userNo);
-			
-			int result = pService.insertBoard(p);
-			
-			if(result > 0) {
-				return "redirect:purchase.pa";
-			} else {
-				throw new paymentException("구매 게시글 작성이 실패하였습니다.");
-			}
-		} else {
-			throw new paymentException("관리자만 게시글 작성이 가능합니다.");
-		}
+	public String writer() {
+		return "pay/writePurchaes";	
 	}
 	
 	// 파일 저장소를 만드는 메소드(실제 파일이 들어갈 폴더)
-//	S
+	public String[] addFile(MultipartFile file, HttpServletRequest request) {
+		
+		String uploadPath = "C:\\Users\\박유진\\Desktop\\uploadFolder/"; 
+		
+		UUID uuid = UUID.randomUUID();
+		
+		String originFileName = file.getOriginalFilename();
+		String renameFileName = uuid + "_" + originFileName.substring(originFileName.lastIndexOf("."));
+		
+		File fileFolder = new File(uploadPath + renameFileName);
+		
+		try {
+			file.transferTo(fileFolder);
+		} catch (IOException e) {
+			System.out.println("파일 전송 에러 : " + e.getMessage());
+		}
+		
+		String[] returnArr = new String[3];
+		returnArr[0] = uploadPath;
+		returnArr[1] = renameFileName;
+		returnArr[2] = originFileName;
+		
+		System.out.println("파일저장소 나옴?");
+		return returnArr;
+	}
 	
 	@RequestMapping("insertPurchaes.pa")
-	public String insertPurchaes(@ModelAttribute Product p, HttpServletRequest request) {
-		System.out.println("test2");
-		insertBoard(p, request);
+	public String insertPurchaes(@ModelAttribute Product p, @RequestParam("file") MultipartFile file, HttpServletRequest request) throws PaymentException {
 		
-		return "purchaes.pa";
+		
+		MultipartFile upload  = file;
+				
+		ProductPhoto pp = new ProductPhoto();
+		
+		if(!upload.getOriginalFilename().equals("")) {
+			String[] returnArr = addFile(upload, request);
+			
+			pp.setProductPhotoName(returnArr[2]);
+			pp.setProductReNameName(returnArr[1]);
+			pp.setProductPhotoPath(returnArr[0]);
+			
+		}
+	
+		int result1 = pService.insertBoard(p);
+		int result2 = pService.insertPurchaes(pp);		
+
+		System.out.println("나오냐");
+		if(result2 > 0 && result1 > 0) {
+			return "redirect:purchaes.pa";
+		} else {
+			throw new PaymentException("구매 게시글 작성이 실패하였습니다.");
+		}
+	}
+	
+	@RequestMapping("selectPurchaes.pa")
+	public String detailPurchaes(HttpSession session, @RequestParam(value="page", required=false) Integer page, Model model, @RequestParam(value="productNo", required=false) Long pNo) {
+				
+		System.out.println(pNo);
+		
+		Product p = pService.detailPurchaes(pNo);
+		ProductPhoto photo = pService.selectPhoto(pNo);
+		
+		System.out.println("나옴?");
+		
+		return "pay/detailPurchaes";
+	}	
+	
+//	@RequestMapping("detailpurchaes.pa")
+//	public String test45() {
+//		return "pay/detailPurchaes";
+//	}
+	
+	@RequestMapping("deletePurchaes.pa")
+	public String delete(HttpSession session, @ModelAttribute Product p) {
+		// 관리자만 삭제할 수 있게 로직 짜기
+		
+//		selectPayList();
+//		Long pNo = p.getProductNo();
+//		System.out.println(pNo);
+//		
+//		int result = pService.deletePurchaes(pNo);
+//		
+		return "redirect:purchaes.pa";
 	}
 	
 	@GetMapping("payment.pa")
 	public String test2() {
-		return "payment";
+		return "pay/payment";
 	}
 	
-	@GetMapping("detailpurchaes.pa")
-	public String test3() {
-		return "detailPurchaes";
-	}	
 }
