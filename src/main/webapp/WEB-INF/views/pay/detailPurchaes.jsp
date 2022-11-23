@@ -26,10 +26,8 @@
 </head>
 <body>
 <div class="main">
-	
-<!--  		<c:forEach items="${ photo }" var="photo">
-			<c:forEach items="${ p }" var="p"> -->
-		<form name="myform">
+  		<c:forEach items="${ photo }" var="photo">
+			<c:forEach items="${ p }" var="p">
 			<div class="wrap">
 			    <div class="productImg">
 				    <c:if test="${ p.productNo eq photo.productNo }">
@@ -54,12 +52,10 @@
 			        <button type="button" class="btn btn-primary" onclick="location.href='${ contextPath }/deletePurchaes.pa'">삭제하기</button>
 			        
 		    	</div>
-<!--  		</c:forEach>
-			</c:forEach> -->
+  			</c:forEach>
+		</c:forEach> 
         			자식창 Sender : <input type="text" name="sender" id='productNo' size="10"><br>
-        			<input type="hidden" value='${ productNo }' name="productNo" id="productNo">
-    			</form>	
-	
+        			<input type="hidden" value='${ productNo }' name="productNo" id="productNo">	
 </div>
 	<script>
         function order(){
