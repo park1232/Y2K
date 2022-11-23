@@ -97,7 +97,7 @@
 									<div class="tab-1-content-inner">
 
 										<!--${dto.member.userNo} -->
-										${dto.member}
+										<%-- ${dto.member} --%>
 										<%-- ${images} --%>
 										
 										<c:forEach var="image" items="${images}">
