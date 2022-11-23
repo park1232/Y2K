@@ -9,13 +9,13 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -24,17 +24,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.world.Y2K.dao.login.LoginDAO;
 import com.world.Y2K.model.dto.Member;
-import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.login.oauth.token.KakaoOAuthToken;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-
-public class KakaoLoginService {
+public class KakaoLoginService{
 	
-
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -42,7 +39,10 @@ public class KakaoLoginService {
 	@Autowired
 	private LoginDAO loginDAO;
 	
-	public void kakaoLogin(String code, HttpServletRequest request) {
+	
+	public ModelAndView kakaoLogin(String code, HttpServletRequest request) {
+	
+		System.out.println("Kakao실행됨");
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-type","application/x-www-form-urlencoded;charset=utf-8");
@@ -58,19 +58,19 @@ public class KakaoLoginService {
 		HttpEntity<MultiValueMap<String,String>> kakaoTokenRequest = 
 				new HttpEntity<MultiValueMap<String, String>>(accessTokenBodyInfo, headers);
 		
-		ResponseEntity<String> response = new RestTemplate().exchange(
+		ResponseEntity<String> response3 = new RestTemplate().exchange(
 				"https://kauth.kakao.com/oauth/token",
 				HttpMethod.POST, 
 				kakaoTokenRequest,
 				String.class
 				);
 		
-		System.out.println(response.getBody());
+		System.out.println(response3.getBody());
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		KakaoOAuthToken kakaoOAuthToken = null;
 		try {
-			kakaoOAuthToken = objectMapper.readValue(response.getBody(),KakaoOAuthToken.class);
+			kakaoOAuthToken = objectMapper.readValue(response3.getBody(),KakaoOAuthToken.class);
 		} catch (JsonMappingException e) {
 			log.error(e.getMessage());
 		} catch (JsonProcessingException e) {
@@ -97,15 +97,19 @@ public class KakaoLoginService {
 		String provider = "KAKAO";
 		String providerId = element.getAsJsonObject().get("id").getAsString();
 		String username = provider+"_"+providerId;
-		String password = UUID.randomUUID().toString();
+		String password = "null";
 		
+		 
+		System.out.println("카카오로그인 실행됨");
+		
+
 		Member member = loginDAO.findUser(username);
-
+		
 		if(member==null) {
-
+		
 			member = Member.builder()
 						.username(username)
-						.password("{bcrypt}"+bCryptPasswordEncoder.encode(password))
+						.password(bCryptPasswordEncoder.encode(password))
 						.nickName("null")
 						.status("Y")
 						.orange(0L)
@@ -116,24 +120,24 @@ public class KakaoLoginService {
 			
 			System.out.println(member);
 			loginDAO.registerMember(member);
+
 		}
+	
+	
+		System.out.println(member);
 		
-		/*
-		 * UsernamePasswordAuthenticationToken authenticationToken = new
-		 * UsernamePasswordAuthenticationToken(member.getUsername(),
-		 * member.getPassword());
-		 * 
-		 * Authentication authentication =
-		 * authenticationManager.authenticate(authenticationToken);
-		 * 
-		 * UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
-		 * System.out.println(userDetails.getMember());
-		 */
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("username", member.getUsername());
+		mv.addObject("password", member.getPassword());
+		mv.setViewName("/login/social");
+		return mv;
+
 	}
 	
-	
-	
-	
-
-
 }
+
+	
+	
+
+
+
