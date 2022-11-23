@@ -15,5 +15,13 @@ public interface PaymentService {
 	ArrayList<ProductPhoto> selectPhotoList();
 
 	int insertBoard(Product p);
+
+	int insertPurchaes(ProductPhoto pp);
+
+	int deletePurchaes(Long pNo);
+
+	Product detailPurchaes(Long pNo);
+
+	ProductPhoto selectPhoto(Long pNo);
 	
 }

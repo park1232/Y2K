@@ -1,7 +1,6 @@
 package com.world.Y2K.controller.login;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -9,9 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.world.Y2K.exception.MemberException;
 import com.world.Y2K.model.vo.User;
+import com.world.Y2K.service.login.EditNicknameService;
 import com.world.Y2K.service.login.RegisterService;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.login.oauth.KakaoLoginService;
@@ -24,6 +26,9 @@ public class LoginController {
 	
 	@Autowired
 	private KakaoLoginService kakaoLoginService;
+	
+	@Autowired 
+	private EditNicknameService editNicknameService;
 
 	
 	@GetMapping("/loginpage.lo")
@@ -49,13 +54,26 @@ public class LoginController {
 	
 	@PostMapping("/login-success.lo")
 	public String loginSuccessHandler() {
-		return "loginSuccess";
+		return "login/loginSuccess";
 	}
 	
 	@GetMapping("/kakao.lo")
-	public void kakaoLogin(String code, HttpServletRequest request) {
-		kakaoLoginService.kakaoLogin(code, request);
-		
+	public ModelAndView kakaoLogin(String code, HttpServletRequest request, RedirectAttributes redirectAttributes)  {
+		return  kakaoLoginService.kakaoLogin(code, request);
+	}
+	
+	
+	@PostMapping("/editpage.lo")
+	public String editNicknameView() {
+		return "/login/EditNickName";
+	}
+	
+	@PostMapping("/edit-nickname.lo")
+	public ModelAndView editNickname(Authentication authentication, String nickname) {
+		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+		System.out.println(nickname);
+		System.out.println(userDetails.getMember());
+		return editNicknameService.editNickname(userDetails.getMember());
 	}
 
 	

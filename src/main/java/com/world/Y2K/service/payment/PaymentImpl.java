@@ -39,4 +39,24 @@ public class PaymentImpl implements PaymentService{
 	public int insertBoard(Product p) {
 		return payDAO.insertBoard(sqlSession, p);
 	}
+	
+	@Override
+	public int insertPurchaes(ProductPhoto pp) {
+		return payDAO.insertPurchaes(sqlSession, pp);
+	}
+	
+	@Override
+	public int deletePurchaes(Long pNo) {
+		return payDAO.deletePurchaes(sqlSession, pNo);
+	}
+	
+	@Override
+	public Product detailPurchaes(Long pNo) {
+		return payDAO.detailPurchaes(sqlSession, pNo);
+	}
+	
+	@Override
+	public ProductPhoto selectPhoto(Long pNo) {
+		return payDAO.selectPhoto(sqlSession, pNo);
+	}
 }
