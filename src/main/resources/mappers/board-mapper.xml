@@ -5,15 +5,15 @@
 
 	<resultMap type="Board" id="boardResultSet">
 		 <id column="BOARDNO" property="boardNo"/>
-		 <result column="BOARDTITLE" property="boardTitle" />
-		 <result column="BOARDCONTENT" property="boardContent" />
+		 <result column="BOARD_TITLE" property="boardTitle" />
+		 <result column="BOARD_CONTENT" property="boardContent" />
 		 <result column="NICKNAME" property="nickName" />
-		 <result column="CREATEDATE" property="createDate" />
-		 <result column="MODIFYDATE" property="modifyDate" />
-		 <result column="BOARDCOUNT" property="boardCount" />
-		 <result column="BOARDSTATUS" property="boardStatus" />
-		 <result column="BOARDTYPEID" property="boardTypeId" />
-		 <result column="BOARDWRITER" property="boardWriter" />
+		 <result column="CREATE_DATE" property="createDate" />
+		 <result column="MODIFY_DATE" property="modifyDate" />
+		 <result column="BOARD_COUNT" property="boardCount" />
+		 <result column="BOARD_STATUS" property="boardStatus" />
+		 <result column="BOARD_TYPEID" property="boardTypeId" />
+		 <result column="BOARD_WRITER" property="boardWriter" />
 	 </resultMap>
 	 
 	<select id="getBoardListCount" resultType="_int">
