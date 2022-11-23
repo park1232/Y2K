@@ -50,7 +50,8 @@ public class LoginController {
 	
 	@PostMapping("/login-success.lo")
 	public String loginSuccessHandler() {
-		return "loginSuccess";
+		System.out.println("로그인성공 실행됨");
+		return "login/loginSuccess";
 	}
 	
 	@GetMapping("/kakao.lo")

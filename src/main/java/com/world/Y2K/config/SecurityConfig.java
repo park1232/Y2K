@@ -10,8 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.filter.CorsFilter;
 
 import com.world.Y2K.dao.login.LoginDAO;
+import com.world.Y2K.service.login.LoginService;
 import com.world.Y2K.service.login.auth.UserDetailsServiceImpl;
-import com.world.Y2K.service.login.oauth.AuthenticationStore;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,16 +41,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable();
-		http.formLogin().disable();
-		
-		http.userDetailsService(userDetailsService());
-	
+		http.csrf().disable();	
 		http.authorizeRequests()
 			.antMatchers("/*.lo").permitAll()
 			.anyRequest().permitAll()
 		.and()
-			.addFilter(new AuthenticationStore(authenticationManager()));	
+		.addFilter(new LoginService(authenticationManager()))
+		.addFilter(corsFilter)
+		.formLogin().disable()
+//		.loginPage("/loginpage.lo")
+//		.loginProcessingUrl("/login")
+//		.defaultSuccessUrl("/login-success.lo")
+		.userDetailsService(userDetailsService());
+			
+			
+		
 		
 	}
 
