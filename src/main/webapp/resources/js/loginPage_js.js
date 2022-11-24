@@ -18,12 +18,17 @@ const kakao = () =>{
 
 const google = () =>{
 	console.log('실행됨');
-	window.location.href="https://accounts.google.com/o/oauth2/v2/auth?client_id=448059245884-n0hf7sgq082enol9ag329m8g7il0qmtu.apps.googleusercontent.com&redirect_uri=http://localhost:8080/google.lo&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email"
+	window.location.href="https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A//www.googleapis.com/auth/drive.metadata.readonly&access_type=offline&include_granted_scopes=true&response_type=code&state=STATE_STRING&redirect_uri=http://localhost:8080/google.lo&client_id=250224335070-67ol1mh21l40c1cq7pb8p471o7v9sg9s.apps.googleusercontent.com"
 }
 
 const naver = () =>{
 	console.log('실행됨');
 	window.location.href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=uW6r_E14UIndVKWQMfWp&state=STATE_STRING&redirect_uri=http://localhost:8080/naver.lo"
+}
+
+const facebook = () =>{
+	console.log('실행됨');
+	window.location.href="http://www.facebook.com/v15.0/dialog/oauth?client_id=641158651025103&redirect_uri=http://localhost:8080/httpsfacebook.lo&state=STATE_STRING"
 }
 
 /*

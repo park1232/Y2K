@@ -1,5 +1,10 @@
 package com.world.Y2K.controller.login;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -13,6 +18,7 @@ import com.world.Y2K.model.vo.User;
 import com.world.Y2K.service.login.EditNicknameService;
 import com.world.Y2K.service.login.RegisterService;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
+import com.world.Y2K.service.login.oauth.FacebookLoginService;
 import com.world.Y2K.service.login.oauth.GoogleLoginService;
 import com.world.Y2K.service.login.oauth.KakaoLoginService;
 import com.world.Y2K.service.login.oauth.NaverLoginService;
@@ -31,6 +37,9 @@ public class LoginController {
 	
 	@Autowired
 	private NaverLoginService naverLoginService;
+	
+	@Autowired
+	private FacebookLoginService facebookLoginService;
 	
 	@Autowired 
 	private EditNicknameService editNicknameService;
@@ -76,6 +85,12 @@ public class LoginController {
 	@GetMapping("/naver.lo")
 	public ModelAndView naverLogin(String code) {
 		return naverLoginService.socialLogin(code);
+	}
+	
+	
+	@GetMapping("/facebook.lo")
+	public void facebookLogin(String code) throws IOException {	
+		facebookLoginService.socialLogin(code);
 	}
 	
 	

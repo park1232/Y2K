@@ -25,8 +25,8 @@ public class GoogleLoginService extends SocialLoginServiceTemplate{
 		
 		MultiValueMap<String, String> accessTokenBodyInfo = new LinkedMultiValueMap<String, String>();
 		accessTokenBodyInfo.add("code", code);
-		accessTokenBodyInfo.add("client_id", "448059245884-n0hf7sgq082enol9ag329m8g7il0qmtu.apps.googleusercontent.com");
-		accessTokenBodyInfo.add("client_secret", "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");
+		accessTokenBodyInfo.add("client_id", "250224335070-67ol1mh21l40c1cq7pb8p471o7v9sg9s.apps.googleusercontent.com");
+		accessTokenBodyInfo.add("client_secret", "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");
 		accessTokenBodyInfo.add("redirect_uri", "http://localhost:8080/google.lo");
 		accessTokenBodyInfo.add("grant_type", "authorization_code");
 		
@@ -48,12 +48,14 @@ public class GoogleLoginService extends SocialLoginServiceTemplate{
 		headers.add("Authorization","Bearer "+accessToken);
 		System.out.println("headers :" +headers);
 		ResponseEntity<String> response = new RestTemplate().exchange(
-				"https://www.googleapis.com/drive/v2/files",
+				"https://www.googleapis.com/drive/v2/files/fileId",
 				HttpMethod.GET, 
 				new HttpEntity<String>(headers),
 				String.class
 				);
-			System.out.println("google userInfo : "+response.getBody());
+		System.out.println(response.getBody());
+	//		System.out.println("google userInfo : "+response.getBody());
+	//		System.out.println(new JsonParser().parse(response.getBody()).getAsJsonObject().get("id").getAsJsonObject().get("permissionId").getAsJsonObject().get("permissionId").getAsJsonObject().get("permissionId").getAsString());
 		return setUserInfo(new JsonParser().parse(response.getBody()));
 	}
 
