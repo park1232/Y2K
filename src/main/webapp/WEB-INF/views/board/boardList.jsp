@@ -96,7 +96,7 @@
 	            <td>${b.boardTitle}</td>
 	            <td>${b.nickName}</td>
 	            <td>${b.createDate}</td>
-	            <td>${boardCount}</td>
+	            <td>${b.boardCount}</td>
 	        </tr>
         	</c:forEach>
         </tbody>
@@ -169,6 +169,20 @@
         </section>
       </main>
     </div>
+	<script>
+    	window.onload = () => {
+    		const tbody = document.querySelector('tbody');
+    		const tds = tbody.querySelectorAll('td');
+    		for(const td of tds) {
+    			td.addEventListener("click", function(){
+    				const trTds = this.parentElement.querySelectorAll('td'); //세로 한줄 td
+    				const boardNo = trTds[0].innerText;
+    				const writer = trTds[2].innerText;
+    				location.href='${contextPath}/selectBoard.bo?bNo=' + boardNo + '&writer=' + writer + '&page=' + ${pi.currentPage};
+    			});
+    		}
+    	}
+    </script>
 
 </body>
 </html>

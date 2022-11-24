@@ -10,6 +10,7 @@ public class Board {
 	private Long boardNo;
 	private String boardTitle;
 	private String boardContent;
+	private String category;
 	private String nickName;
 	private Date createDate;
 	private Date modifyDate;
@@ -17,4 +18,5 @@ public class Board {
 	private String boardStatus;
 	private String boardTypeId;
 	private Long boardWriter;
+	private String boardCateId;
 }
