@@ -60,6 +60,22 @@
 	                    <div id="checkNickname" class="checkbox"></div>
 	                    <input type="hidden" id="checkNicknameResult"/>
 	                  </div>
+	                  <div class="input-group">
+	                    <i class='bx bx-mail-send'></i>
+	                    <div>
+	                    <input type="text" name="email" placeholder="Enter your Email" id="email-box" required>
+	                    <div id="" class="checkbox"></div>
+	                    <input type="hidden" id="emailAuthCode"/>
+	                    <input type="hidden" id=""/>
+	                    <a id="emailAuth">전송</a>
+	                    </div>
+	                  </div>
+	                  <div class="input-group">
+	                    <i class='bx bx-mail-send'></i>
+	                    <input type="text" name="checkEmailAuth" placeholder="Enter EmailAuth Code" id="" required>
+	                    <div id="" class="checkbox"></div>
+	                    <input type="hidden" id=""/>
+	                  </div>
 	                
 	     
 	                <button>
@@ -116,6 +132,24 @@
                   <b onclick="toggle()" class="pointer">
                     회원가입하기
                   </b>
+                  <br>
+                  <br>
+                  <br>
+                  <span>
+                    아이디를 잊으셨나요?
+                  </span>
+                  <b class="pointer">
+                    아이디 찾기
+                  </b>
+                  <br>
+                  <br>
+                  <br>
+                   <span>
+                    비밀번호를 잊으셨나요?
+                  </span>
+                  <b class="pointer" >
+                    <a id="lookPwd">비밀번호 찾기</a>
+                  </b>
                 </p>
               </div>
             </div>
@@ -171,6 +205,30 @@
 </body>
 <script src="${contextPath}/resources/js/loginPage_js.js"></script>
 
+<script>
+
+$('#lookPwd').click(function(){
+	  window.open('/change-pwd.lo','lookPwd','width=600, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no');
+	  window.close();	  
+	});
+	
+$('#emailAuth').click(function(){
+	console.log($("#email-box").val());
+	
+	var params={
+			email : $("#email-box").val(),
+	}
+	$.ajax({
+		type:"POST",
+		url:"http://localhost:8080/email-auth.lo",
+		data:params,
+		success:function(res){
+			console.log(res.authenticationNumber);
+		}
+	});
+});
+
+</script>
 
 
 

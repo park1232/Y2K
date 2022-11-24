@@ -3,6 +3,7 @@ mybatis-config.xml
 log4j.xml
 root-context.xml
 RootConfig.java
+NavermailProperties.java
 
 
 lecture

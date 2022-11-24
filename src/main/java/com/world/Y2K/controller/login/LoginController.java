@@ -1,7 +1,8 @@
 package com.world.Y2K.controller.login;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -20,6 +21,7 @@ import com.world.Y2K.model.vo.User;
 import com.world.Y2K.service.login.CheckIdService;
 import com.world.Y2K.service.login.CheckNicknameService;
 import com.world.Y2K.service.login.EditNicknameService;
+import com.world.Y2K.service.login.MailAuthService;
 import com.world.Y2K.service.login.RegisterService;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.login.oauth.KakaoLoginService;
@@ -54,6 +56,9 @@ public class LoginController {
 
 	@Autowired
 	private CheckNicknameService checkNicknameService;
+	
+	@Autowired
+	private MailAuthService mailAuthService;
 	
 	
 	@GetMapping("/loginpage.lo")
@@ -109,6 +114,13 @@ public class LoginController {
 		return "/login/EditNickName";
 	}
 	
+	
+	// HttpSession
+	// Authentication ㅡ> 시큐리티 세션에 있는 객체.
+	// PrincpalDetails
+	// Member
+	
+	
 	@PostMapping("/edit-nickname.lo")
 	public ModelAndView editNickname(Authentication authentication, String nickname) throws MemberException {
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
@@ -128,7 +140,36 @@ public class LoginController {
 	}
 
 
+	
+	
+	@GetMapping("/change-pwd.lo")
+		public String moveChangePwdView() {
+			return "/login/changePwdByEmail";
+	}
 
+
+	@ResponseBody
+	@PostMapping("/email-auth.lo")
+	public Map<String, Object> emailAuth(@RequestBody String email) {		
+		return  mailAuthService.getEmailAuth(email.replace("%40", "@").substring(6));
+	}
+
+
+	@GetMapping("/test")
+	public String test() {
+		return "/login/test";
+	}
+	
+	protected String asString(String data,String dataname) {
+        try{
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(data);
+            return element.getAsJsonObject().get(dataname).getAsString();
+        } catch(Exception e) {
+            log.error("not JsonObject");
+        }
+        return "not JsonObject";
+    }
 	
 	
 }

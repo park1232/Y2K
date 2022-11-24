@@ -14,11 +14,12 @@
       <result column="ROLE" property="role"/>
       <result column="PROVIDER" property="provider"/>
       <result column="PROVIDERID" property="providerId"/>
+      <result column="EMAIL" property="email"/>
    </resultMap>
 
    <insert id="registerMember">
 			insert into Member
-			values(MEMBER_SEQ.nextval,#{username},#{password},#{nickName},sysdate,sysdate,#{status},#{orange},#{role},#{provider},#{providerId})
+			values(MEMBER_SEQ.nextval,#{username},#{password},#{nickName},sysdate,sysdate,#{status},#{orange},#{role},#{provider},#{providerId},#{email})
 	</insert>
    
    <select id="findUser" resultMap="memberResultSet" parameterType="string">
