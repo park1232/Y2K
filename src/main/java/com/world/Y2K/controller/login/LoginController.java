@@ -1,6 +1,9 @@
 package com.world.Y2K.controller.login;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -9,14 +12,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.world.Y2K.exception.MemberException;
 import com.world.Y2K.model.vo.User;
 import com.world.Y2K.service.login.EditNicknameService;
 import com.world.Y2K.service.login.RegisterService;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
+import com.world.Y2K.service.login.oauth.FacebookLoginService;
+import com.world.Y2K.service.login.oauth.GoogleLoginService;
 import com.world.Y2K.service.login.oauth.KakaoLoginService;
+import com.world.Y2K.service.login.oauth.NaverLoginService;
 
 @Controller
 public class LoginController {
@@ -27,9 +32,19 @@ public class LoginController {
 	@Autowired
 	private KakaoLoginService kakaoLoginService;
 	
+	@Autowired
+	private GoogleLoginService googleLoginService;
+	
+	@Autowired
+	private NaverLoginService naverLoginService;
+	
+	@Autowired
+	private FacebookLoginService facebookLoginService;
+	
 	@Autowired 
 	private EditNicknameService editNicknameService;
 
+	
 	
 	@GetMapping("/loginpage.lo")
 	public String moveLoginView() {
@@ -58,8 +73,24 @@ public class LoginController {
 	}
 	
 	@GetMapping("/kakao.lo")
-	public ModelAndView kakaoLogin(String code, HttpServletRequest request, RedirectAttributes redirectAttributes)  {
-		return  kakaoLoginService.kakaoLogin(code, request);
+	public ModelAndView kakaoLogin(String code)  {
+		return  kakaoLoginService.socialLogin(code);
+	}
+	
+	@GetMapping("/google.lo")
+	public void googleLogin(String code)  {
+		googleLoginService.socialLogin(code);
+	}
+	
+	@GetMapping("/naver.lo")
+	public ModelAndView naverLogin(String code) {
+		return naverLoginService.socialLogin(code);
+	}
+	
+	
+	@GetMapping("/facebook.lo")
+	public void facebookLogin(String code) throws IOException {	
+		facebookLoginService.socialLogin(code);
 	}
 	
 	
@@ -69,11 +100,9 @@ public class LoginController {
 	}
 	
 	@PostMapping("/edit-nickname.lo")
-	public ModelAndView editNickname(Authentication authentication, String nickname) {
+	public ModelAndView editNickname(Authentication authentication, String nickname) throws MemberException {
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
-		System.out.println(nickname);
-		System.out.println(userDetails.getMember());
-		return editNicknameService.editNickname(userDetails.getMember());
+		return editNicknameService.editNickname(userDetails.getMember(), nickname);
 	}
 
 	
