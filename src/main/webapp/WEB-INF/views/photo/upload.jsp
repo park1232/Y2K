@@ -11,6 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${contextPath}/resources/css/upload.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -28,8 +29,9 @@
              </div>
              <!--사진업로드 로고 end-->
              
-             <form class="upload-form" action="/image" method="post" enctype="multipart/form-data">
-                    <input  type="file" name="file"  onchange="imageChoose(this)" />
+             <form  name="popupClose();" class="upload-form" action="/image" method="post" 
+             			target="photo.ph" enctype="multipart/form-data">
+                    <input  type="file" name="file"  accept=".jpg, .jpeg" onchange="imageChoose(this)" />
                     <div class="upload-img">
                         <img src="../resources/img/duck.jpg" alt="" id="imageUploadPreview" />
                     </div>
@@ -37,7 +39,7 @@
                  <!--사진설명 + 업로드버튼-->
                  <div class="upload-form-detail">
                        <input type="text" placeholder="사진설명" name="photoComent" >  <!-- key=value로 날라감 -->
-                     <button class="cta blue"  id="upload" disabled='disabled' >업로드</button>
+                     <button type="submit" class="cta blue"  id="upload" disabled='disabled'  onclick="window.close();">업로드</button>
                  </div>
                  <!--사진설명end-->
                  
@@ -48,5 +50,6 @@
      </main>
      
      <script src="${contextPath}/resources/js/upload.js"></script>
+    
 </body>
 </html>

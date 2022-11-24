@@ -1,0 +1,115 @@
+
+/*�뾽濡쒕뱶�럹�씠吏� 以묒븰諛곗튂*/
+.uploadContainer{
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/*�뾽濡쒕뱶�꽮�뀡*/
+.upload {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 40px;
+  border: 1px solid #dbdbdb;
+}
+
+/*�뾽濡쒕뱶諛뺤뒪 濡쒓퀬*/
+.upload .upload-top {
+  text-align: center;
+}
+
+/*�뾽濡쒕뱶諛뺤뒪 �씠誘몄�*/
+.upload .upload-top img {
+  width: 200px;
+  margin: 10px 0 20px;
+}
+
+.upload .upload-top p {
+  text-align: center;
+  position: relative;
+}
+.upload .upload-top p::before {
+  content: "";
+  position: absolute;
+  left: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 150px;
+  height: 1px;
+  background: #222;
+}
+.upload .upload-top p::after {
+  content: "";
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 150px;
+  height: 1px;
+  background: #222;
+}
+
+/*�뾽濡쒕뱶 �뤌*/
+.upload .upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*�뾽濡쒕뱶 �씤�뭼*/
+.upload .upload-form input[type="file"] {
+  margin: 30px 0;
+  text-align: left;
+}
+
+/*�뾽濡쒕뱶 �씠誘몄� 諛뺤뒪*/
+.upload .upload-form .upload-img {
+  width: 400px;
+  height: 300px;
+  margin-bottom: 5px;
+}
+
+/*�뾽濡쒕뱶 �씠誘몄�*/
+.upload .upload-form .upload-img img {
+  width: 100%;
+  height: 100%;
+}
+
+/*�씠誘몄��뿉 ���븳 �꽕紐낅컯�뒪*/
+.upload .upload-form .upload-form-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*�씠誘몄��뿉 ���븳 �꽕紐낆씤�뭼 + 踰꾪듉*/
+.upload .upload-form .upload-form-detail input,
+.upload .upload-form .upload-form-detail button {
+  width: 340px;
+}
+.upload .upload-form .upload-form-detail input {
+  text-indent: 10px;
+  height: 45px;
+  margin-bottom: 5px;
+  border: 1px solid #ddd;
+}
+.upload .upload-form .upload-form-detail input::placeholder {
+  color: #222;
+}
+.upload .upload-form .upload-form-detail button {
+  height: 40px;
+  margin: 5px 0 10px 0;
+}
+.upload .upload-bottom {
+  text-align: center;
+}
+.upload .upload-bottom a {
+  display: block;
+  padding: 15px 0;
+  border-top: 1px solid #dbdbdb;
+  color: #0095f6;
+}

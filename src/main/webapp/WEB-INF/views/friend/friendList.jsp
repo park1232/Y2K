@@ -27,7 +27,7 @@
         <div class="col-sm-4 offset-md-1 py-4">
           <ul class="list-unstyled">
             <li><a href="#" class="text-white">메인페이지</a></li>
-            <li><a href="${contextPath}/payment.pa" class="text-white">결제페이지</a></li>
+            <li><a href="${contextPath}/friendment.pa" class="text-white">결제페이지</a></li>
             <li><a href="${contextPath}/purchaes.pa" class="text-white">구매페이지</a></li>
           </ul>
         </div>
@@ -46,201 +46,127 @@
     </div>
   </div>
 </header>
+${ fList }
 <div class="main">
    <table class="table">
   <thead>
     <tr>
-      <th scope="col" width="300px">친구 인원 목록</th>
-      <th scope="col" width="300px">이름</th>
-      <th scope="col" width="300px">닉네임</th>
-      <th scope="col" width="300px">나이</th>
-      <th scope="col" width="300px">친구삭제</th>
+      <th scope="col" width="360px">친구 인원 목록</th>
+      <th scope="col" width="360px">ID</th>
+      <th scope="col" width="360px">닉네임</th>
+      <th scope="col" width="360px">친구삭제</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>박규민</td>
-      <td>KH</td>
-      <td>28</td>
-      <td><input type="checkbox" id="friend" name="using"></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>박규민</td>
-      <td>KH</td>
-      <td>28</td>
-      <td><input type="checkbox" id="friend" name="using"></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>박규민</td>
-      <td>KH</td>
-      <td>28</td>
-      <td><input type="checkbox" id="friend" name="using"></td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-       <td>박규민</td>
-      <td>KH</td>
-      <td>28</td>
-      <td><input type="checkbox" id="friend" name="using"></td>
-    </tr>
-    <tr>
-      <th scope="row">5</th>
-       <td>박규민</td>
-      <td>KH</td>
-      <td>28</td>
-      <td><input type="checkbox" id="friend" name="using"></td>
-    </tr>
+  	<c:forEach items="${ fList }" var="f">
+  	<c:forEach begin="1" end="99" step="1" var="count">
+	    <tr>
+	      <th scope="row">count</th>
+	      <td>${ f.userName }</td>
+	      <td>${ f.nickName }</td>
+	      <td><input type="checkbox" id="friend" name="using"></td>
+	    </tr>
+	</c:forEach>
+    </c:forEach>
   </tbody>
 </table>
 <div class="search">
 	 <select>
      	<option>이름</option>
         <option>닉네임</option>
-        <option>나이</option>
      </select>
      <input type="text" placeholder="검색어 입력">
      <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
 </div>
 <br>
-<div>
+	<div class="pagingArea">
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link"
-                   href="#">
-                    <span>처음</span>
-                </a>
-            </li>
-            <li class="page-item disabled">
-                <a class="page-link"
-                   href="#">
-                    <span>이전</span>
-                </a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link"
-                   href="#">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link"
-                   href="#">2</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link"
-                   href="#">3</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link"
-                   href="#">
-                    <span>다음</span>
-                </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link"
-                   href="#">
-                    <span>마지막</span>
-                </a>
-            </li>
-        </ul>
+	            <li class="page-item">
+	           		<c:url var="FListFirst" value="${ loc }"> <!--  직접적으로 주소를 가져오지않아도 select주소를 가져오는것 loc -->
+						<c:param name="page" value="1"/>
+					</c:url>
+					<c:if test="${ pi.friendCurrentPage <= 1 }">
+						<a class="page-link">
+	                    	<span>처음</span>
+	                	</a>
+					</c:if>
+					<c:if test="${ pi.friendCurrentPage > 1 }">
+		                <a class="page-link" href="${ FListFirst }">
+		                    <span>처음</span>
+		                </a>
+	                </c:if>
+	            </li>
+	            <li class="page-item">
+	            	<c:url var="PListBack" value="${ loc }">
+						<c:param name="page" value="${ pi.friendCurrentPage -1 }"/>
+					</c:url>
+					<c:if test="${ pi.friendCurrentPage <= 1 }">
+		                <a class="page-link">
+	                    	<span>이전</span>
+	                	</a>
+	                </c:if>
+	                <c:if test="${ pi.friendCurrentPage > 1 }">
+						<a class="page-link" href="${ FListBack }">
+	                    	<span>이전</span>
+	                	</a>
+					</c:if>          
+	            </li>			
+	            <li class="page-item">
+	            	<c:forEach begin="${ pi.friendStartPage }" end="${ pi.friendEndPage }" var="p">
+	            		<c:if test="${ pi.friendCurrentPage eq p }">
+							<a class="page-link">
+								<font color="red">${ p }</font>
+							</a>
+						</c:if>
+						<c:if test="${ pi.friendCurrentPage ne p }">
+							<c:url var="FListCheck" value="${ loc }">
+								<c:param name="page" value="${ p }"/>
+							</c:url>
+							<li class="page-item"><a class="page-link" href="${ PListCheck }">${ p }</a></li>
+						</c:if>
+	            	</c:forEach>
+	            </li>
+	            <li class="page-item">
+	            	<c:url var="FListNext" value="${ loc }"> <!--  직접적으로 주소를 가져오지않아도 select주소를 가져오는것 loc -->
+						<c:param name="page" value="${ pi.friendCurrentPage + 1 }"/>
+					</c:url>
+					<c:if test="${ pi.friendCurrentPage >= pi.friendMaxPage }">
+						<a class="page-link">
+	                    	<span>다음</span>
+	                	</a>
+					</c:if>
+					<c:if test="${ pi.friendCurrentPage < pi.friendMaxPage }">
+						<a class="page-link" href="${ FListNext }">
+							<span>다음</span>
+						</a>
+					</c:if>
+	            </li>
+	            <li class="page-item">
+	            	<c:url var="FListLast" value="${ loc }"> <!--  직접적으로 주소를 가져오지않아도 select주소를 가져오는것 loc -->
+						<c:param name="page" value="${ pi.friendMaxPage }"/>
+					</c:url>
+					<c:if test="${ pi.friendCurrentPage >= pi.friendMaxPage }">
+						<a class="page-link">
+	                    	<span>마지막</span>
+	                	</a>
+					</c:if>
+					<c:if test="${ pi.friendCurrentPage < pi.friendMaxPage }">
+						<a class="page-link" href="${ FListLast }">
+							<span>마지막</span>
+						</a>
+					</c:if>
+	            </li>
+	        </ul>
     </div>
     <br>
     <div class="friendOption">
 	    <button type="button" class="btn btn-primary" onclick="window.open('friendAdd.html', 'friendAdd', 'width=460, height=570')">친추추가</button>
 	    <button type="button" class="btn btn-primary">친구삭제</button>
     </div>
-<br>
-   <table class="table">
-  <thead>
-    <tr>
-      <th scope="col" width="300px">친구 신청 목록</th>
-      <th scope="col" width="300px">이름</th>
-      <th scope="col" width="300px">닉네임</th>
-      <th scope="col" width="300px">나이</th>
-      <th scope="col" width="300px">상세보기</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>박규민</td>
-      <td>바보</td>
-      <td>28</td>
-      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
-    </tr>
- 	<tr>
-      <th scope="row">2</th>
-      <td>박규민</td>
-      <td>바보</td>
-      <td>28</td>
-      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>박규민</td>
-      <td>바보</td>
-      <td>28</td>
-      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
-    </tr>
-  </tbody>
-</table>
-<div class="search">
-	 <select>
-     	<option>이름</option>
-        <option>닉네임</option>
-     </select>
-     <input type="text" placeholder="검색어 입력">
-     <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
-</div>
-<br>
-<div>
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link"
-                   href="#">
-                    <span>처음</span>
-                </a>
-            </li>
-            <li class="page-item disabled">
-                <a class="page-link"
-                   href="#">
-                    <span>이전</span>
-                </a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link"
-                   href="#">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link"
-                   href="#">2</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link"
-                   href="#">3</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link"
-                   href="#">
-                    <span>다음</span>
-                </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link"
-                   href="#">
-                    <span>마지막</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <br>
-    <div class="friendOption">
-    </div>
 </div>
 </body>
 <br>
-<footer class="sticky-footer bg-white">
+<footer class="sticky-footer bg-white" style="height: 15px;">
         <div class="main-footer d-flex p-2 px-3 bg-white border-top">
               <a href="#">Y2K</a>
         </div>

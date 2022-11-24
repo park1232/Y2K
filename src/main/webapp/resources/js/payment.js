@@ -10,7 +10,7 @@ $(document).ready(function(){
 		IMP.request_pay({// param
 			pg: "kakaopay.TC0ONETIME", // pg사명 or pg사명.CID
 			pay_method: "card", // 지불방법
-			merchant_uid: "import" + date, // 가맹점 주문번호(아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
+			merchant_uid: "testcode1dsadasddkdksjdkfjdsa", // 가맹점 주문번호(아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
 			// 결제할때마다 계속 주문번호가 달라져야함 중복되면 이미 결제완료된 주문번호라고 결제 실패함
 			name: "도토리", // 결제창에 노출된 상품명
 			amount: 15000, //금액
@@ -36,7 +36,7 @@ $(document).ready(function(){
 		IMP.request_pay({// param
 			pg: "kakaopay.TC0ONETIME", // pg사명 or pg사명.CID
 			pay_method: "card", // 지불방법
-			merchant_uid: "dsalkjlsa1d", // 가맹점 주문번호(아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
+			merchant_uid: "dk123sjad", // 가맹점 주문번호(아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
 			// 결제할때마다 계속 주문번호가 달라져야함 중복되면 이미 결제완료된 주문번호라고 결제 실패함
 			name: "도토리", // 결제창에 노출된 상품명
 			amount: 15000, //금액
@@ -62,7 +62,7 @@ $(document).ready(function(){
 		IMP.request_pay({// param
 			pg: "kakaopay.TC0ONETIME", // pg사명 or pg사명.CID
 			pay_method: "card", // 지불방법
-			merchant_uid: "987wieas", // 가맹점 주문번호(아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
+			merchant_uid: "95585sdfaw", // 가맹점 주문번호(아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
 			// 결제할때마다 계속 주문번호가 달라져야함 중복되면 이미 결제완료된 주문번호라고 결제 실패함
 			name: "도토리", // 결제창에 노출된 상품명
 			amount: 15000, //금액

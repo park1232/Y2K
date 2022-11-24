@@ -13,14 +13,28 @@ h1 {
   	font-weight: 900;
   	text-align: center;
 }
+#title{
+	border: 2px dotted gray;
+	border-radius: 5px;
+	width: 400px;
+	height: 30px;
+	margin-left: 50px;
+}
+.title div{
+	background: #facf64;
+	padding: 
+}
+.title{
+	margin-bottom: 10px;
+}
 table{
 	margin-left: auto;
 	margin-right: auto;
-	width: 85%;
+	width: 90%;
 }
 td{border: none;}
 .map{
-	width: 110px;
+	width: 160px;
 	height: 25px;
 	border: 2px solid #facf64;
 	border-radius: 4px;
@@ -28,6 +42,7 @@ td{border: none;}
 	padding: 3px;
 	color: black;
 	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 12px;
 	cursor: pointer;
 }
 .selectBox {

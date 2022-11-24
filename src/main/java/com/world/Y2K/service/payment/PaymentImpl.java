@@ -1,6 +1,7 @@
 package com.world.Y2K.service.payment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,45 @@ public class PaymentImpl implements PaymentService{
 	@Override
 	public ArrayList<ProductPhoto> selectPhotoList() {
 		return payDAO.selectPhotoList(sqlSession);
+	}
+	
+	@Override
+	public int insertBoard(Product p) {
+		return payDAO.insertBoard(sqlSession, p);
+	}
+	
+	@Override
+	public int insertPurchaes(ProductPhoto pp) {
+		return payDAO.insertPurchaes(sqlSession, pp);
+	}
+	
+	@Override
+	public int deletePurchaes(Long pNo) {
+		return payDAO.deletePurchaes(sqlSession, pNo);
+	}
+	
+	@Override
+	public Product detailPurchaes(Long pNo) {
+		return payDAO.detailPurchaes(sqlSession, pNo);
+	}
+	
+	@Override
+	public ProductPhoto selectPhoto(Long pNo) {
+		return payDAO.selectPhoto(sqlSession, pNo);
+	}
+	
+	@Override
+	public int deleteProductPhoto(Long pNo) {
+		return payDAO.deleteProductPhoto(sqlSession, pNo);
+	}
+	
+	@Override
+	public int orderPurchaes(HashMap<String, Long> map) {
+		return payDAO.orderPurchaes(sqlSession, map);
+	}
+	
+	@Override
+	public int getOrangeCount(HashMap<String, Long> map) {
+		return payDAO.getOrangeCount(sqlSession, map);
 	}
 }

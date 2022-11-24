@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class ProductPhoto {
 	private Long productPhotoNo;
-	private String productPhotoName;
+	private String ProductPhotoName;
 	private String productReNameName;
 	private String productPhotoPath;
 	private String productPhotoStatus;

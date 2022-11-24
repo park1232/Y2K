@@ -10,15 +10,12 @@
     <link rel="short icon" href="${contextPath}/resources/img/2014.ico"/>
     <link rel="stylesheet" href="${contextPath}/resources/css/reset.css" />
     <link rel="stylesheet" href="${contextPath}/resources/css/style.css" />
-    <link rel="stylesheet" href="${contextPath}/resources/css/visit.css" />
     <link rel="stylesheet" href="${contextPath}/resources/css/board.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://kit.fontawesome.com/7a738a6e1a.js" crossorigin="anonymous"></script>
-    <style>
-        
-    </style>
+	<style>body{margin:0; padding:0;} td{cursor: pointer;}</style>
 </head>
-<body>
+<body id="b_body">
     <div class="bg">
       <main>
         <section class="pf-st">
@@ -77,82 +74,67 @@
                 </div>
 	<div class="main">
 	
-	  <img id="cyimg" src="${contextPath}/resources/img/cyimg.png"/><span>자유게시판</span>
-        <i class="fas fa-edit" onclick="location.href='${contextPath}/writeBoard.bo'"></i>
+	  <img id="cyimg" src="${contextPath}/resources/img/cyimg.png"/><br>
+	  <div id="boardMain">자유게시판</div>
+        <i class="fas fa-edit" onclick="location.href='${contextPath}/boardWrite.bo'"></i>
         <br>
     <table>
         <thead>
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>날짜</th>
-            <th>조회수</th>
-    
-        </tr>
-        </thead>
+	        <tr>
+	            <th>글번호</th>
+	            <th>제목</th>
+	            <th>작성자</th>
+	            <th>작성일</th>
+	            <th>조회수</th>
+	    
+	        </tr>
+    	</thead>
         <tbody>
-        <tr>
-            <td>132</td>
-            <td>지금은 싸이월드 테스트중이다</td>
-            <td>둘리</td>
-            <td>2022-02-03</td>
-            <td>37</td>
-        </tr>
-        <tr>
-            <td>131</td>
-            <td>오늘은 어디로 놀러갈까?</td>
-            <td>도롱뇽</td>
-            <td>2022-02-03</td>
-            <td>49</td>
-        </tr>
-        <tr>
-            <td>130</td>
-            <td>유니버셜 스튜디오로 떠나쟈</td>
-            <td>와조스키</td>
-            <td>2022-02-03</td>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td>129</td>
-            <td>디즈니랜드는 올렌도</td>
-            <td>디즈니</td>
-            <td>2022-02-03</td>
-            <td>24</td>
-        </tr>
-        <tr>
-            <td>128</td>
-            <td>디즈니씨 신난다</td>
-            <td>인어공주</td>
-            <td>2022-02-03</td>
-            <td>29</td>
-        </tr>
-        <tr>
-            <td>127</td>
-            <td>양탄자가 세상에서 제일 재밌어</td>
-            <td>알라딘</td>
-            <td>2022-02-03</td>
-            <td>9</td>
+        	<c:forEach items="${list}" var="b">	
+	        <tr>
+	            <td>${b.boardNo}</td>
+	            <td>${b.boardTitle}</td>
+	            <td>${b.nickName}</td>
+	            <td>${b.createDate}</td>
+	            <td>${b.boardCount}</td>
+	        </tr>
+        	</c:forEach>
         </tbody>
     </table>
     <br>
         <ul>  
-        <li><a class="way" href="#">◀</a></li>  
-        <li><a href="#">1</a></li>  
-        <li><a href="#">2</a></li>  
-        <li><a href="#">3</a></li>  
-        <li><a href="#">4</a></li>  
-        <li><a href="#">5</a></li>  
-        <li><a href="#">6</a></li>  
-        <li><a href="#">7</a></li>  
-        <li><a href="#">8</a></li>  
-        <li><a href="#">9</a></li>  
-        <li><a href="#">10</a></li>  
-        <li><a class="way" href="#">▶</a></li>  
+        <li>
+        <c:url var="back" value="${loc}">
+        	<c:param name="page" value="${pi.currentPage - 1}"></c:param>
+        </c:url>
+        <a class="way" href="${back}">◀</a>
+        </li>    
+        
+        
+         <li>
+            	<c:forEach begin="${pi.startPage}" end="${pi.endPage}" var="p">
+            		<c:if test="${ pi.currentPage eq p }">
+						<li><a>${ p }</a></li>
+					</c:if>
+					<c:if test="${ pi.currentPage ne p }">
+						<c:url var="goNum" value="${ loc }">
+							<c:param name="page" value="${ p }"/>
+						</c:url>
+	            		<li class="page-item"><a class="page-link" href="${goNum}">${ p }</a></li>
+					</c:if>
+            	</c:forEach>
+         </li>
+	                      
+        <li>
+        <c:url var="next" value="${loc}">
+        	<c:param name="page" value="${pi.currentPage + 1}"></c:param>
+        </c:url>
+        <a class="way" href="${next}">▶</a>
+        </li>  
     </ul>
     <br>
     <div class="search-box">
-        <select>
+        <select id="searchOption">
             <option>작성자</option>
             <option>제목</option>
             <option>내용</option>
@@ -164,7 +146,7 @@
     </div>
     <p class="p">Web Site Shortcuts.
         <a href="https://cyworld.com" target="_blank" id="cyLink" >See cyworld MainPage</a>.</p>
-</div>
+	</div>
 			
 	</div>
    <div class = "menu align-center expanded text-center SMN_effect-68">
@@ -174,22 +156,33 @@
               <a href="photo.html" class="menu-item mi-2" >사진첩</a>
               <a href="diary.html" class="menu-item mi-3">다이어리</a>
  </div>
-              <a class="menu-item mi-5 menu-checked" onclick="location.href='${contextPath}/board.bo'">게시판</a>
+              <a class="menu-item mi-5 menu-checked" onclick="location.href='${contextPath}/boardList.bo'">게시판</a>
               <div class = "menu align-center expanded text-center SMN_effect-68">
-                <a class="menu-item mi-4" onclick="location.href='${contextPath}/visit.bo'">방명록</a>
+                <a class="menu-item mi-4" onclick="location.href='${contextPath}/visit.vi'">방명록</a>
               </div>
               <!-- <a href="#" class="menu-item mi-5 menu-checked">마케팅</a> -->
-<!--              <div class="menu-item mi-6">게시판</div>-->
+<!--              <div class="menu-item mi-6">게시판</div>-->	
 <!--              <div class="menu-item mi-7">방명록</div>-->
 
             </div>
           </div>
         </section>
       </main>
-     
-        
     </div>
+	<script>
+    	window.onload = () => {
+    		const tbody = document.querySelector('tbody');
+    		const tds = tbody.querySelectorAll('td');
+    		for(const td of tds) {
+    			td.addEventListener("click", function(){
+    				const trTds = this.parentElement.querySelectorAll('td'); //세로 한줄 td
+    				const boardNo = trTds[0].innerText;
+    				const writer = trTds[2].innerText;
+    				location.href='${contextPath}/selectBoard.bo?bNo=' + boardNo + '&writer=' + writer + '&page=' + ${pi.currentPage};
+    			});
+    		}
+    	}
+    </script>
 
 </body>
-<script src="${path }/resources/js/y2k.js"></script>
 </html>

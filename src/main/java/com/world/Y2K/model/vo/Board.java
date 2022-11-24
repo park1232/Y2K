@@ -6,15 +6,17 @@ import lombok.Data;
 
 @Data
 public class Board {
-	
+
 	private Long boardNo;
 	private String boardTitle;
 	private String boardContent;
+	private String category;
+	private String nickName;
 	private Date createDate;
 	private Date modifyDate;
 	private Long boardCount;
 	private String boardStatus;
-	private Long bcId;
-	private Long userNo;
-
+	private String boardTypeId;
+	private Long boardWriter;
+	private String boardCateId;
 }

@@ -25,6 +25,7 @@ public class Photo {
 	private String photoPath;
 	private String photoStatus;
 	private String photoComent;
+	private Long userNo;
 	
 	
 }

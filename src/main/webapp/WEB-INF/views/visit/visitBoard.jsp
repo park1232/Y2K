@@ -80,13 +80,13 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
                        <div class="visitor_card">
           <div class="visitor_title">
               <span class="visitor_number">No. 121</span> &nbsp;
-              <span class="visitor_name">다람쥐</span> &nbsp;
+              <span class="visitor_name">${loginUser.nickName }</span> &nbsp;
               <i id="homepage" class="fas fa-home visitor_homepage"></i>
               <span id="visitor_date"></span>
           </div>
           <div class="visitor_content">
               <br>
-              <form>
+              <form action="insertVisit.vi">
               <table>
                   <tr>
                       <td><div class="minimi-border"><img class="photo" src="${contextPath}/resources/img/minimi/0.gif"/ name="ranimage"></img></div></td>
@@ -101,73 +101,6 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
       </div>
       <hr class="hr-2">
 
-      <div class="visitor_card">
-          <div class="visitor_title">
-              <span class="visitor_number">No. 121</span> &nbsp;
-              <span class="visitor_name">김둘리</span> &nbsp;
-              <i id="homepage" class="fas fa-home visitor_homepage"></i>&nbsp;&nbsp;
-              <span id="visitor_date"></span>
-          </div>
-          <div class="visitor_content">
-              <br>
-              <table>
-                  <tr>
-                      <td><div class="minimi-border"><img class="photo" id="visitor3" src="${contextPath}/resources/img/duck.jpg"></img></div></td>
-                      <td><div class="writeCard">
-                          안녕 하이 방가루~~~~~ 김둘리 왔다감 ㅎㅎㅎㅎㅎ
-                          
-                      </div></td>
-                      <td><i class="far fa-heart"></i></td>
-                  </tr>
-              </table>
-          </div>
-      </div>
-      <hr class="hr-2">
-
-      <div class="visitor_card">
-          <div class="visitor_title">
-              <span class="visitor_number">No. 121</span> &nbsp;
-              <span class="visitor_name">서강준</span> &nbsp;
-              <i id="homepage" class="fas fa-home visitor_homepage"></i>
-              <span id="visitor_date"></span>
-          </div>
-          <div class="visitor_content">
-              <br>
-              <table>
-                  <tr>
-                      <td><div class="minimi-border"><img class="photo" id="visitor3" src="${contextPath}/resources/img/duck.jpg"></img></div></td>
-                      <td><div class="writeCard">
-                          안녕하세요 이곳은 싸이월드!
-                      </div></td>
-                      <td><i class="far fa-heart"></i></td>
-                  </tr>
-              </table>
-          </div>
-      </div>
-      <hr class="hr-2">
-
-
-      <div class="visitor_card">
-          <div class="visitor_title">
-              <span class="visitor_number">No. 121</span> &nbsp;
-              <span class="visitor_name">곰돌이</span> &nbsp;
-              <i id="homepage" class="fas fa-home visitor_homepage"></i>
-              <span id="visitor_date"></span>
-          </div>
-          <div class="visitor_content">
-              <br>
-              <table>
-                  <tr>
-                      <td><div class="minimi-border"><img class="photo" id="visitor3" src="${contextPath}/resources/img/duck.jpg"></img></div></td>
-                      <td><div class="writeCard">
-                          안녕하세요 이곳은 싸이월드!
-                      </div></td>
-                      <td class="hreat"><i id="heart"class="fa-regular fa-heart"></i></td>
-                  </tr>
-              </table>
-          </div>
-      </div>
-      <hr class="hr-2">
               </div>
               <div class = "menu align-center expanded text-center SMN_effect-68">
                 <a href="mainPage.html">   <div class="menu-item mi-1"  onclick="location.href='${contextPath}'">홈</div></a>
@@ -175,9 +108,9 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
               <a href="photo.html" class="menu-item mi-2" >사진첩</a>
               <a href="diary.html" class="menu-item mi-3">다이어리</a>
               
-              <a class="menu-item mi-5" onclick="location.href='${contextPath}/board.bo'">게시판</a>
+              <a class="menu-item mi-5" onclick="location.href='${contextPath}/boardList.bo'">게시판</a>
               </div>
-              <a class="menu-item mi-4 menu-checked" onclick="location.href='${contextPath}/visit.bo'">방명록</a>
+              <a class="menu-item mi-4 menu-checked" onclick="location.href='${contextPath}/visit.vi'">방명록</a>
               <!-- <a href="#" class="menu-item mi-5">마케팅</a> -->
 <!--              <div class="menu-item mi-6">게시판</div>-->
 <!--              <div class="menu-item mi-7">방명록</div>-->
@@ -193,12 +126,7 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
     //    }
         /* $('.dropdown-btn').on('click',function(){
             $('.dropdown-content').show();
-            }); */  
-            $(".mi-5").on('click', function(){
-
-              alert('마케팅 사이트 업데이트 진행중.');
-
-            });    
+            }); */   
 
         document.ranimage.src="${contextPath}/resources/img/minimi/" + Math.round(Math.random()*3+.4)+".gif";
       </script>
