@@ -6,14 +6,14 @@ import org.springframework.stereotype.Service;
 import com.world.Y2K.dao.login.LoginDAO;
 
 @Service
-public class CheckIdServiceImpl  implements CheckIdService {
+public class CheckNicknameServiceImpl implements CheckNicknameService{
 
 	@Autowired
 	private LoginDAO loginDAO;
 	
 	@Override
-	public int checkId(String inputId) {	
-		if(loginDAO.checkId(inputId.substring(8))==1) {
+	public int checkNickname(String inputNickname){	
+		if(loginDAO.checkNickname(inputNickname.substring(14))==1) {
 			return 1;
 		}
 		return 0;

@@ -13,16 +13,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="${contextPath}/resources/css/loginPage_css.css" />
     <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
-     <style>
-      #checkId{
-        float: left;
-        font-size: 12px;
-        color : red;
-      }
 
-    </style>
 </head>
 <body>
+
+
+
+
     <div id="container" class="container">
         <!-- FORM SECTION -->
         <div class="row">
@@ -30,25 +27,32 @@
           <div class="col align-items-center flex-col sign-up">
             <div class="form-wrapper align-items-center">
               <div class="form sign-up">
-              <form action="${contextPath}/register.lo" method="POST">
+              <form action="${contextPath}/register.lo" method="POST"  id="signupform" >
                 <div class="input-group">
                
 	                  <i class='bx bxs-user'></i>
-	                  <input type="text"  name="username" placeholder="Enter your new ID" onkeydown="checkId();" id="id-box"  minlengh="4">
-	                   <div id="checkId"></div>
+	                  <input type="text"  name="username" placeholder="Enter your new ID" onblur="idBlurText();" id="id-box"  minlengh="4" required>
+	                  <div id="checkId" class="checkbox"></div>
+	                  <input type="hidden" id="checkIdResult" value="none"/>
+	                   
 	                </div>
-	                
 	                <div class="input-group">
 	                  <i class='bx bxs-lock-alt'></i>
-	                  <input type="password"  name="password" placeholder="Enter your new Password">
+	                  <input type="password"  name="password" placeholder="Enter your new Password" id="password-box" onblur=" passwordBlurText();" onkeyup="isValidPassword();" required>
+					  <div id="checkPw" class="checkbox"></div>
+					  <input type="hidden" id="checkPasswordResult"/>
 	                </div>
 	                <div class="input-group">
 	                    <i class='bx bxs-lock-alt'></i>
-	                    <input type="password" placeholder="Re-enter Password">
+	                    <input type="password" placeholder="Re-enter Password" id="check-password-box" onkeyup="isValidCheckPassword();" onblur="rePasswordBlurText();" required>
+						<div id="checkRePw" class="checkbox"></div>
+						<input type="hidden" id="checkRePasswordResult"/>
 	                  </div>
 	                <div class="input-group">
 	                    <i class='bx bx-mail-send'></i>
-	                    <input type="text" name="nickName" placeholder="Enter your new NickName">
+	                    <input type="text" name="nickName" placeholder="Enter your new NickName" id="nickname-box" onblur="nicknameBlurText();" required>
+	                    <div id="checkNickname" class="checkbox"></div>
+	                    <input type="hidden" id="checkNicknameResult"/>
 	                  </div>
 	                
 	     
@@ -160,44 +164,7 @@
       </div>
 </body>
 <script src="${contextPath}/resources/js/loginPage_js.js"></script>
-<script>
 
-   $("#id-box").keyup(function(){
-	  let params={
-			  inputId : $("#id-box").val()
-	  } 
-	  
-	  $.ajax({
-		  type:"POST",
-		  url:"/check-id.lo",
-		  data : params,
-		  success:function(res){
-			  
-			  if($("#id-box").val().length>4){
-				  if(res===0){
-				  successText();
-				} else if(res ===1){
-					failText();
-					return false;
-				}
-			 }
-		  }
-	  })
-  }); 
-  
-  
- const successText = () => {
-	 let checkIdDiv = document.getElementById('checkId');
-	 checkIdDiv.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp사용가능합니다.';
-	 checkIdDiv.style.color = 'green';
- }
- 
- const failText = () => {
-	 let checkIdDiv = document.getElementById('checkId');
-	 checkIdDiv.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp중복된 아이디 입니다.';
-	 checkIdDiv.style.color = 'red';
- }
-</script>
 
 
 

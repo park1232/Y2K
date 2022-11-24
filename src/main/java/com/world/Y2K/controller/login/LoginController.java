@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.world.Y2K.exception.MemberException;
 import com.world.Y2K.model.vo.User;
 import com.world.Y2K.service.login.CheckIdService;
+import com.world.Y2K.service.login.CheckNicknameService;
 import com.world.Y2K.service.login.EditNicknameService;
 import com.world.Y2K.service.login.RegisterService;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
@@ -43,6 +44,8 @@ public class LoginController {
 	@Autowired
 	private CheckIdService checkIdService;
 
+	@Autowired
+	private CheckNicknameService checkNicknameService;
 	
 	
 	@GetMapping("/loginpage.lo")
@@ -108,6 +111,12 @@ public class LoginController {
 	@PostMapping("/check-id.lo")
 	public int checkId(@RequestBody String inputId) {
 		return checkIdService.checkId(inputId);
+	}
+	
+	@ResponseBody
+	@PostMapping("/check-nickname.lo")
+	public int checkNickname(@RequestBody String inputNickname) {
+		return checkNicknameService.checkNickname(inputNickname);
 	}
 
 	
