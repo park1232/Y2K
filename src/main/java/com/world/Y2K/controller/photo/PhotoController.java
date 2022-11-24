@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.world.Y2K.exception.PhotoException;
+import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.Photo;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.photo.PhotoImageStore;
@@ -40,8 +41,8 @@ public class PhotoController {
 		
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 		System.out.println("user : " + userDetails.getMember());
-		
-		Long userNo = (Long) session.getAttribute("loginUser");
+		/* Member member = userDetails.getMember(); */
+		//Long userNo = (Long) session.getAttribute("loginUser");
 		
 		List<Photo> images = pService.photoList();
 		
@@ -58,10 +59,14 @@ public class PhotoController {
 			@RequestParam("photoNo") Long photoNo,
 			Authentication authentication
 			) {
+		
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+		Member member = userDetails.getMember();
+		
 		Photo p = pService.selectImg(photoNo);
 		p.setUserNo(userDetails.getMember().getUserNo());
 		mv.addObject("photo", p);
+		mv.addObject("member", member);
 		mv.setViewName("photo/show");
 		
 		return mv;

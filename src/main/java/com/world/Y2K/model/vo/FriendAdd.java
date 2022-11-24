@@ -12,4 +12,5 @@ public class FriendAdd {
 	private Date createDate;
 	private Long userNo;
 	private String friendNo;
+	private String friendStatus;
 }

@@ -27,4 +27,5 @@ public class Photo {
 	private String photoComent;
 	private Long userNo;
 	
+	
 }

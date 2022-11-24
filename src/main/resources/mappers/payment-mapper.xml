@@ -45,7 +45,7 @@
 	
 	<insert id="insertBoard">
 		insert into product
-		values(y2k_product_seq.nextval, #{productName}, #{price}, #{productContent}, sysdate, sysdate, default, 3)
+		values(y2k_product_seq.nextval, #{productName}, #{price}, #{productContent}, sysdate, sysdate, default, #{userNo})
 	</insert>
 	
 	<insert id="insertPurchaes">
@@ -59,15 +59,33 @@
 		where productNo = #{pNo}
 	</update>
 	
+	<update id="deleteProductPhoto">
+		update productPhoto
+		set PRODUCTPHOTOSTATUS = 'N'
+		where productNo = #{pNo}
+	</update>
+	
 	<select id="detailPurchaes" resultMap="productResultSet">
-		select count(*)
+		select *
 		from product
 		where PRODUCTSTATUS = 'Y' and productNo = #{pNo}
 	</select>
 	
 	<select id="selectPhoto" resultMap="productPhotoResultSet">
-		select count(*)
+		select *
 		from productPhoto
 		where PRODUCTPHOTOSTATUS = 'Y' and productNo = #{pNo}
+	</select>
+	
+	<update id="orderPurchaes">
+		update member
+		set ORANGE = ORANGE - #{price}
+		where USERNO = #{mNo}
+	</update>
+	
+	<select id="getOrangeCount" resultType="_int">
+		select orange
+		from member
+		where userNo = #{mNo}
 	</select>
 </mapper>

@@ -1,12 +1,26 @@
 package com.world.Y2K.model.vo;
 
+
+
 import java.sql.Date;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
 
-@Data
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+
+
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Reply {
-	private Long replyId;
+	private Long replyNo;
 	private String replyContent;
 	private String nickName;
 	private Date r_CreateDate;
@@ -15,5 +29,7 @@ public class Reply {
 	private Long replyWriter;
 	private Long r_boardNo;
 	private String replyTypeId;
+	private String rBoardTypeId;
+
 	
 }
