@@ -13,7 +13,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="${contextPath}/resources/css/loginPage_css.css" />
     <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
-
+<style>
+	  .checkbox{
+        float: left;
+        font-size: 12px;
+        color : red;
+      }
+</style>
 </head>
 <body>
 

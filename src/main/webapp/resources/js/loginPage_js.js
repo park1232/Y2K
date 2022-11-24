@@ -39,7 +39,7 @@ $("#id-box").keyup(function(){
 			  inputId : $("#id-box").val()
 	  } 
 	  $.ajax({
-		  type:"POST",
+		  type:"GET",
 		  url:"/check-id.lo",
 		  data : params,
 		  success:function(res){			  
@@ -163,7 +163,7 @@ $("#nickname-box").keyup(function(){
 			  inputNickname : $("#nickname-box").val()
 	  } 
 	  $.ajax({
-		  type:"POST",
+		  type:"GET",
 		  url:"/check-nickname.lo",
 		  data : params,
 		  success:function(res){			  
@@ -197,7 +197,7 @@ const nicknameSuccessText = () => {
 
 const nicknameFailText = () => {
 	 let checkNicknameDiv = document.getElementById('checkNickname');
-	 checkNicknameDiv.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp중복된 아이디 입니다.';
+	 checkNicknameDiv.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp중복된 닉네임 입니다.';
 	 checkNicknameDiv.style.color = 'red';
 	 document.getElementById('checkNicknameResult').value = "fail";
 }

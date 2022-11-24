@@ -1,5 +1,8 @@
 package com.world.Y2K.controller.login;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.world.Y2K.exception.MemberException;
 import com.world.Y2K.model.vo.User;
 import com.world.Y2K.service.login.CheckIdService;
@@ -20,7 +25,10 @@ import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.login.oauth.KakaoLoginService;
 import com.world.Y2K.service.login.oauth.NaverLoginService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class LoginController {
 	
 	@Autowired
@@ -108,18 +116,18 @@ public class LoginController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/check-id.lo")
-	public int checkId(@RequestBody String inputId) {
+	@GetMapping("/check-id.lo")
+	public int checkId(String inputId) {
 		return checkIdService.checkId(inputId);
 	}
 	
 	@ResponseBody
-	@PostMapping("/check-nickname.lo")
-	public int checkNickname(@RequestBody String inputNickname) {
+	@GetMapping(value="/check-nickname.lo")
+	public int checkNickname(String inputNickname){
 		return checkNicknameService.checkNickname(inputNickname);
 	}
 
-	
+
 
 	
 	

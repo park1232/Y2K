@@ -12,8 +12,8 @@ public class CheckNicknameServiceImpl implements CheckNicknameService{
 	private LoginDAO loginDAO;
 	
 	@Override
-	public int checkNickname(String inputNickname){	
-		if(loginDAO.checkNickname(inputNickname.substring(14))==1) {
+	public int checkNickname(String inputNickname){		
+		if(loginDAO.checkNickname(inputNickname)==1) {
 			return 1;
 		}
 		return 0;

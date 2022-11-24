@@ -13,7 +13,7 @@ public class CheckIdServiceImpl  implements CheckIdService {
 	
 	@Override
 	public int checkId(String inputId) {	
-		if(loginDAO.checkId(inputId.substring(8))==1) {
+		if(loginDAO.checkId(inputId)==1) {
 			return 1;
 		}
 		return 0;
