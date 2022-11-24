@@ -13,6 +13,14 @@
     <title>Document</title>
     <link rel="stylesheet" href="${contextPath}/resources/css/loginPage_css.css" />
     <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+     <style>
+      #checkId{
+        float: left;
+        font-size: 12px;
+        color : red;
+      }
+
+    </style>
 </head>
 <body>
     <div id="container" class="container">
@@ -26,7 +34,8 @@
                 <div class="input-group">
                
 	                  <i class='bx bxs-user'></i>
-	                  <input type="text"  name="username" placeholder="Enter your new ID">
+	                  <input type="text"  name="username" placeholder="Enter your new ID" onkeydown="checkId();" id="id-box"  minlengh="4">
+	                   <div id="checkId"></div>
 	                </div>
 	                
 	                <div class="input-group">
@@ -151,6 +160,44 @@
       </div>
 </body>
 <script src="${contextPath}/resources/js/loginPage_js.js"></script>
+<script>
+
+   $("#id-box").keyup(function(){
+	  let params={
+			  inputId : $("#id-box").val()
+	  } 
+	  
+	  $.ajax({
+		  type:"POST",
+		  url:"/check-id.lo",
+		  data : params,
+		  success:function(res){
+			  
+			  if($("#id-box").val().length>4){
+				  if(res===0){
+				  successText();
+				} else if(res ===1){
+					failText();
+					return false;
+				}
+			 }
+		  }
+	  })
+  }); 
+  
+  
+ const successText = () => {
+	 let checkIdDiv = document.getElementById('checkId');
+	 checkIdDiv.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp사용가능합니다.';
+	 checkIdDiv.style.color = 'green';
+ }
+ 
+ const failText = () => {
+	 let checkIdDiv = document.getElementById('checkId');
+	 checkIdDiv.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp중복된 아이디 입니다.';
+	 checkIdDiv.style.color = 'red';
+ }
+</script>
 
 
 

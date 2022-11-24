@@ -30,7 +30,7 @@
    <select id="checkUser" resultType="_int">
    	select count(*)
    	from member
-   	where status='Y'
+   	where status='Y' and username=#{username}
    </select>
    
    <update id="updateNickname">
