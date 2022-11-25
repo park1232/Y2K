@@ -53,6 +53,7 @@ public class DiaryController {
 		HttpSession session =  request.getSession();
 		session.setAttribute("loginUser", userDetails.getMember());
 		model.getAttribute("loginUser");
+		System.out.println("안녕");
 		return "diary/diary";
 	}
 	
