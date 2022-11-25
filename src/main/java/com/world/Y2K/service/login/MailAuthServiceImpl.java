@@ -30,7 +30,7 @@ public class MailAuthServiceImpl implements MailAuthService{
 		String contents = getContents(authCode);
 		System.out.println("contents : " + contents);
 		if(isValidEmail(email)) {
-			sendMail("이메일 인증코드 입니다.",contents, email);
+			sendMail("Your EmailAuthCode.",contents, email);
 			map.put("authCode", authCode);
 			return map;
 		}
@@ -106,8 +106,8 @@ public class MailAuthServiceImpl implements MailAuthService{
 	
 	public String getContents(String authCode) {
 		 StringBuffer contents = new StringBuffer();
-		   contents.append("<h1>이메일 인증코드</h1><br><br>");
-		   contents.append("<p> 이메일 인증코드는 "+authCode+" 입니다.</p><br>");
+		   contents.append("<h1>Email AuthCode</h1><br><br>");
+		   contents.append("<p> Your EmailAuthCode "+authCode+" <br>Please input authcode.</p><br>");
 		return contents.toString();
 	}
 	
