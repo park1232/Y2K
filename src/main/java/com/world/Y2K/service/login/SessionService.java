@@ -24,7 +24,7 @@ public class SessionService {
 			Member member = loginDAO.findUser(userDetails.getMember().getUsername());
 			mv.addObject("loginUser", member);
 		}
-		mv.setViewName("login/loginSuccess");
+		mv.setViewName("login/EditNickName");
 		return mv;
 	}
 	

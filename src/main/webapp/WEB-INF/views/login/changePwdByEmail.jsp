@@ -144,7 +144,21 @@
   </div>
    <script>
    
-
+   $('#emailAuth').click(function(){
+		let params={
+				email : $("#email").val(),
+		}
+		$.ajax({
+			type:"POST",
+			url:"http://localhost:8080/change-pwd.lo",
+			data:params,
+			success:function(res){
+				console.log(res.authenticationNumber);
+			}
+		})
+	});
+   
+   
    
 
    const em=()=>{
