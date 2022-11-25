@@ -235,6 +235,16 @@ $("#signupform").submit(function(){
 		alert("닉네임 확인 바랍니다.");
 		return false;
 	}
+	
+	if($("#checkEmailResult").val()=="fail"){
+		alert("이메일 확인 바랍니다.");
+		return false;
+	}
+	
+	if($("#checkAuthResult").val()=="fail"){
+		alert("인증코드 확인 바랍니다.");
+		return false;
+	}
 	return true;
 });
 

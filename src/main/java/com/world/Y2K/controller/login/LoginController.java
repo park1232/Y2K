@@ -2,7 +2,7 @@ package com.world.Y2K.controller.login;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,6 +23,7 @@ import com.world.Y2K.service.login.CheckNicknameService;
 import com.world.Y2K.service.login.EditNicknameService;
 import com.world.Y2K.service.login.MailAuthService;
 import com.world.Y2K.service.login.RegisterService;
+import com.world.Y2K.service.login.SessionService;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.login.oauth.KakaoLoginService;
 import com.world.Y2K.service.login.oauth.NaverLoginService;
@@ -60,6 +61,9 @@ public class LoginController {
 	@Autowired
 	private MailAuthService mailAuthService;
 	
+	@Autowired
+	private SessionService sessionService;
+	
 	
 	@GetMapping("/loginpage.lo")
 	public String moveLoginView() {
@@ -83,8 +87,8 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login-success.lo")
-	public String loginSuccessHandler() {
-		return "login/loginSuccess";
+	public ModelAndView loginSuccessHandler(HttpServletRequest request,Authentication authentication) {
+		return sessionService.editNicknameView(request, authentication);
 	}
 	
 	@GetMapping("/kakao.lo")
@@ -110,8 +114,8 @@ public class LoginController {
 	
 	
 	@PostMapping("/editpage.lo")
-	public String editNicknameView() {
-		return "/login/EditNickName";
+	public String editNicknameView(HttpServletRequest request,Authentication authentication) {
+		return "login/EditNickName";
 	}
 	
 	

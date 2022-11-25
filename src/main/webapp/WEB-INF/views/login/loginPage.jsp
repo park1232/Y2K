@@ -19,6 +19,21 @@
         font-size: 12px;
         color : red;
       }
+      
+       #emailAuth{
+      	/* float:left; */
+        color: darkgoldenrod;
+        font-size : 10px;
+        border: 1px solid wheat;
+        border-radius: 10px;
+      	
+      }
+      
+      #emailAuth:hover{
+      	font-weight: bold;
+      	 border: 3px solid wheat;
+      }
+    	
 </style>
 </head>
 <body>
@@ -63,18 +78,24 @@
 	                  <div class="input-group">
 	                    <i class='bx bx-mail-send'></i>
 	                    <div>
-	                    <input type="text" name="email" placeholder="Enter your Email" id="email-box" required>
-	                    <div id="" class="checkbox"></div>
-	                    <input type="hidden" id="emailAuthCode"/>
-	                    <input type="hidden" id=""/>
-	                    <a id="emailAuth">전송</a>
+	                    <input type="text" name="email" placeholder="Enter your Email" id="email-box" onkeyup="isVaildEmail();" onblur="emailBlurText();"  required>
+	                    
+	                    <div id="checkEmail" class="checkbox"></div>
+	                    <input type="hidden" id="emailAuthCode" />
+	                    <input type="hidden" id="checkEmailResult"/>
+	                    <div>
+	                    	
+	                    </div>
 	                    </div>
 	                  </div>
-	                  <div class="input-group">
+	                  <a id="emailAuth">이메일로 코드값 전송</a>
+	                  <br>
+	                  <br>
+	                  <div class="input-group" id="auth-div">
 	                    <i class='bx bx-mail-send'></i>
-	                    <input type="text" name="checkEmailAuth" placeholder="Enter EmailAuth Code" id="" required>
-	                    <div id="" class="checkbox"></div>
-	                    <input type="hidden" id=""/>
+	                    <input type="text" name="checkEmailAuth" placeholder="Enter EmailAuth Code" id="auth-box" onkeyup="isValidAuthCode();" onblur="authBlurText();" required>
+	                    <div id="checkAuth" class="checkbox"></div>
+	                    <input type="hidden" id="checkAuthResult"/>
 	                  </div>
 	                
 	     
@@ -207,26 +228,73 @@
 
 <script>
 
+let emailAuthCode = "";
+$("#auth-div").hide();
+
 $('#lookPwd').click(function(){
 	  window.open('/change-pwd.lo','lookPwd','width=600, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no');
 	  window.close();	  
 	});
-	
+
+
+const emailBlurText = () =>{
+	document.getElementById('checkEmail').innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
+}
+
+const isVaildEmail =  () => {
+	let email = document.getElementById('email-box').value;
+	const exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+	let checkEmail = document.getElementById('checkEmail');
+		if(exptext.test(email)==false){
+			checkEmail.innerHTML= '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp이메일 형식이 올바르지 않습니다.';
+			checkEmail.style.color='red';
+			document.getElementById('checkEmailResult').value = "fail";
+		} else{
+			checkEmail.innerHTML= '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp올바른 형식입니다.';
+			checkEmail.style.color='green';
+			document.getElementById('checkEmailResult').value = "success";
+		}
+}
+
+
 $('#emailAuth').click(function(){
-	console.log($("#email-box").val());
 	
 	var params={
 			email : $("#email-box").val(),
 	}
 	$.ajax({
 		type:"POST",
-		url:"http://localhost:8080/email-auth.lo",
+		url:"/email-auth.lo",
 		data:params,
 		success:function(res){
-			console.log(res.authenticationNumber);
+			alert('이메일에 코드를 전송하였습니다.');
+			emailAuthCode = res.authCode;
+			showEmailAuthDiv();
 		}
 	});
 });
+
+const showEmailAuthDiv = () => {
+	$("#auth-div").show();
+}
+
+const isValidAuthCode = () => {
+	let authCode = document.getElementById('auth-box').value;
+	let checkAuth = document.getElementById('checkAuth');
+	if(emailAuthCode != authCode){
+		checkAuth.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp코드가 일치하지 않습니다.';
+		checkAuth.style.color = 'red';
+		document.getElementById('checkAuthResult').value = "fail";
+	} else {
+		checkAuth.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp코드가 일치 합니다.';
+		checkAuth.style.color = 'green';
+		document.getElementById('checkAuthResult').value = "success";
+	}
+}
+
+const authBlurText = () =>{
+	document.getElementById('checkAuth').innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
+}
 
 </script>
 

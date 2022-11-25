@@ -31,10 +31,10 @@ public class MailAuthServiceImpl implements MailAuthService{
 		System.out.println("contents : " + contents);
 		if(isValidEmail(email)) {
 			sendMail("이메일 인증코드 입니다.",contents, email);
-			map.put("emailAuthCode", authCode);
+			map.put("authCode", authCode);
 			return map;
 		}
-		map.put("rn map;emailAuthCode",  "It's not an appropriate email format");
+		map.put("authCode",  "It's not an appropriate email format");
 		return map;
 	}
 	
