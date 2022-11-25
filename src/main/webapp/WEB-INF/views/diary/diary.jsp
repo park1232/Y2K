@@ -115,7 +115,7 @@
             	<table>
             		<tr>
             			<td width="100px;">30</td>
-            			<td>안녕!</td>
+            			<td>안녕!${ loginUser.nickName }</td>
             		</tr>
             	</table>
 			</div>
