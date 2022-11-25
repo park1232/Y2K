@@ -87,8 +87,8 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login-success.lo")
-	public ModelAndView loginSuccessHandler(HttpServletRequest request,Authentication authentication) {
-		return sessionService.editNicknameView(request, authentication);
+	public String loginSuccessHandler(HttpServletRequest request,Authentication authentication) {
+		return "login/loginSuccess";
 	}
 	
 	@GetMapping("/kakao.lo")
@@ -163,6 +163,8 @@ public class LoginController {
 	public String test() {
 		return "/login/test";
 	}
+	
+	@PostMapping("/admin/asdfsadf")
 	
 	protected String asString(String data,String dataname) {
         try{
