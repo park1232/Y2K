@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" scope="application" />
 <!DOCTYPE html>
 <html lang="ko">
@@ -99,12 +100,12 @@
 										<!--${dto.member.userNo} -->
 										<%-- ${dto.member} --%>
 										<%-- ${images} --%>
-										
+										<input type="hidden" name="nickName" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.nickName}">
 										<c:forEach var="image" items="${images}">
-										
+											${image}
 											<div class="img-box">
 												<img id="imgOne"class="imgOne"  src="/upload/${image.renameName}"/>
-												<input type="hidden" name="photoNo" id="photoNo" value=${image.photoNo }>
+												<input type="hidden" name="boardNo" id="boardNo" value=${image.boardNo }>
 												<!--<div class="comment"></div>-->
 											</div>
 													

@@ -1,5 +1,6 @@
 package com.world.Y2K.controller.photo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.world.Y2K.exception.PhotoException;
 import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.Photo;
+import com.world.Y2K.model.vo.Reply;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.photo.PhotoImageStore;
 import com.world.Y2K.service.photo.PhotoService;
@@ -56,18 +58,26 @@ public class PhotoController {
 	public ModelAndView selectImg(
 			HttpSession session, ModelAndView mv,
 			//@RequestParam("username") String username
-			@RequestParam("photoNo") Long photoNo,
+			@RequestParam("boardNo") Long boardNo,
 			Authentication authentication
 			) {
 		
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 		Member member = userDetails.getMember();
 		
-		Photo p = pService.selectImg(photoNo);
+		Photo p = pService.selectImg(boardNo);
+		
+		ArrayList<Reply> list =pService.selectReply(boardNo);
+		
 		p.setUserNo(userDetails.getMember().getUserNo());
 		mv.addObject("photo", p);
 		mv.addObject("member", member);
+		mv.addObject("list", list);
 		mv.setViewName("photo/show");
+		
+		
+		
+		System.out.println(list);
 		
 		return mv;
 	}
@@ -100,12 +110,12 @@ public class PhotoController {
 	
 	@RequestMapping("/delete.ph")
 	public String deleteImage(
-			@RequestParam("photoNo") Long photoNo
+			@RequestParam("boardNo") Long boardNo
 			) {
 		
 		System.out.println("result");
 		
-		pService.deletetImg(photoNo);
+		pService.deletetImg(boardNo);
 	
 			return "redirect:/photo.ph";
 			
@@ -116,11 +126,11 @@ public class PhotoController {
 	
 	@RequestMapping("/edit.ph")
 	public String editFrom(
-			@RequestParam("photoNo") Long photoNo,
+			@RequestParam("boardNo") Long boardNo,
 			Model model
 			) {
 
-		Photo photo = pService.selectImg(photoNo);
+		Photo photo = pService.selectImg(boardNo);
 		
 		model.addAttribute("photo", photo);
 		
@@ -135,16 +145,15 @@ public class PhotoController {
 			Model model,
 			@RequestParam("renameName") String renameName,
 			@RequestParam("photoName") String photoName,
-			@RequestParam("photoNo") Long photoNo
+			@RequestParam("boardNo") Long boardNo
 			
 			) {
 			
 			if(file.getOriginalFilename().equals("") && p.getRenameName()==renameName ) {
 				
 				p.setPhotoComent(photoComent);
-				p.setPhotoNo(photoNo);
+				p.setBoardNo(boardNo);
 				pService.updateComent(p);
-				System.out.println("여기로가니?");
 				
 			}else {
 			
@@ -156,10 +165,4 @@ public class PhotoController {
 			return "redirect:/photo.ph";
 	}
 
-	
-	}
-	
-	
-	
-	
-	
+}

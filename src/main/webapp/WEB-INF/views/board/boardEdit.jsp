@@ -79,8 +79,10 @@
 	<div class="main">
 	 <div><hr class="hrB"></div>
         <br>
-        <form action="${contextPath}/insertBoard.bo" method="post">
+        <form action="${contextPath}/updateBoard.bo" method="post">
         <div id="writeDiv">
+        <input type="hidden" value="${b.boardNo}" name="boardNo">
+		<input type="hidden" value="${page }" name="page">
         <table>
           <thead>
             <tr style="text-align: center;">
@@ -96,7 +98,7 @@
                 
                 <th width="55px" style="border-right : 2px dashed rgb(11, 82, 0); font-size: 12px;">제목</th>
                 <td>
-                  <input type="text" name="boardTitle" size="30" id="boardTitle">
+                  <input type="text" name="boardTitle" size="30" id="boardTitle" value="${b.boardTitle }">
                 </td>
             </tr>
         </thead>
@@ -104,7 +106,7 @@
         <br>
         <div><hr class="hrB"></div>
         <br>
-                  <textarea id="boardContent" name="boardContent" placeholder="게시글 내용을 입력해주세요"></textarea>
+                  <textarea id="boardContent" name="boardContent">${b.boardContent }</textarea>
                   <br><br>
                   <div id="writeButton"><button class="button btnBorder btnOrange" >등록</button></div>
         </div>

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.world.Y2K.exception.DiaryException;
+import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.Diary;
 import com.world.Y2K.service.diary.DiaryService;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
@@ -26,7 +28,13 @@ public class DiaryController {
 	private DiaryService dService;
 	
 	@GetMapping("/diary.di")
-	public String diary() {
+	public String diary(HttpServletRequest request, Authentication authentication) {
+		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+		Member member = userDetails.getMember();
+		HttpSession session = request.getSession();
+		session.setAttribute("loginUser", member);
+		
+		
 		return "diary/diary";
 	}
 	
@@ -43,18 +51,22 @@ public class DiaryController {
 	}
 	
 	@RequestMapping("/insertDiary.di")
-	public String insertDiary(@ModelAttribute Diary d, Authentication authentication, HttpServletRequest request, Model model) {
-		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
-		System.out.println("user:" + userDetails.getMember().getUsername());
-//		String diaryWriter = ((Member)userDetails.getMember()).getUsername();
-//		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("diary/diary");
-//		mv.addObject("loginUser",userDetails.getMember());
-		HttpSession session =  request.getSession();
-		session.setAttribute("loginUser", userDetails.getMember());
-		model.getAttribute("loginUser");
-		System.out.println("안녕");
-		return "diary/diary";
+	public String insertDiary(@ModelAttribute Diary d, HttpServletRequest request, Model model) {
+		System.out.println(d);
+		
+		
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("loginUser");
+		System.out.println(member);
+		Long diaryWriter = member.getUserNo();
+		d.setDiaryWriter(diaryWriter);
+		int result = dService.insertDiary(d);
+		System.out.println(d);
+		if(result > 0) {
+			return "redirect:diary.di";
+		}else {
+			throw new DiaryException("다이어리글 작성 실패");
+		}
 	}
 	
 	@GetMapping("/diary2.di")

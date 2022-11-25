@@ -42,7 +42,7 @@ hr.hr-2 {
   border-radius: 10px; 
   resize: none;
   }
-
+.menu-item{cursor:pointer;}
 #submitReply{
 	color:orange;
     position: relative;
@@ -88,6 +88,11 @@ hr.hr-2 {
     
 }
 #homepage{color:rgb(255, 86, 24)}
+/**좋아요*/
+    #btnh{
+        font-size: 25px;
+        cursor: pointer;
+    }
 
 /** 버튼 반짝이*/
 .side1 { top: 200px; left	: 400px; }

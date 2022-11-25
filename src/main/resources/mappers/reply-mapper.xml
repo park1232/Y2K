@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="replyMapper">
+  
+   <resultMap type="Photo" id="photoResultSet">
+      <id column="BOARDNO" property="boardNo"/>
+      <result column="PHOTONAME" property="photoName"/>
+      <result column="RENAMENAME" property="renameName"/>
+      <result column="PHOTOPATH" property="photoPath"/>
+      <result column="PHOTOSTATUS" property="photoStatus"/>
+      <result column="PHOTOCOMENT" property="photoComent"/>
+      <result column="USERNO" property="userNo"/>
+   </resultMap>
+
+    <resultMap type="Reply" id="replyResultSet">
+		 <id column="REPLYNO" property="replyNo"/>
+		 <result column="REPLY_CONTENT" property="replyContent" />
+		 <result column="NICKNAME" property="nickName" />
+		 <result column="R_CREATEDATE" property="rCreateDate" />
+		 <result column="R_MODIFYDATE" property="rModifyDate" />
+		 <result column="REPLY_STATUS" property="replyStatus" />
+		 <result column="REPLY_WRITER" property="replyWriter" />
+		 <result column="REF_BOARDNO" property="rboardNo" />
+	 </resultMap>
+   
+   	<insert id="insertReply">
+   		insert into reply
+	 	values(REPLY_SEQ.nextval, #{content}, sysdate, sysdate, default, #{userNo},#{boardNo})
+   	
+   	
+   	</insert>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+</mapper>

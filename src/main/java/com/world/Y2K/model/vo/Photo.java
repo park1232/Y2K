@@ -19,7 +19,7 @@ import lombok.ToString;
 public class Photo {
 	
 	
-	private Long photoNo;
+	private Long boardNo;
 	private String photoName;
 	private String renameName;
 	private String photoPath;

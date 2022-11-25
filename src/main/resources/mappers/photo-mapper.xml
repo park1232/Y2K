@@ -3,35 +3,33 @@
 <mapper namespace="photoMapper">
   
    <resultMap type="Photo" id="photoResultSet">
-      <id column="PHOTONO" property="photoNo"/>
+      <id column="BOARDNO" property="boardNo"/>
       <result column="PHOTONAME" property="photoName"/>
       <result column="RENAMENAME" property="renameName"/>
       <result column="PHOTOPATH" property="photoPath"/>
       <result column="PHOTOSTATUS" property="photoStatus"/>
       <result column="PHOTOCOMENT" property="photoComent"/>
       <result column="USERNO" property="userNo"/>
-      
-      
-      
-      
    </resultMap>
+
+
 
    <insert id="insertPhoto">
 		INSERT INTO photo
-		VALUES(PHOTO_SEQ.nextval, #{photoName}, #{renameName}, #{photoPath}, default, #{photoComent}, #{userNo})
+		VALUES(BOARD_SEQ.nextval, #{photoName}, #{renameName}, #{photoPath}, default, #{photoComent}, #{userNo})
 	</insert>
    
    <select id="selectPhotoList" resultMap="photoResultSet">
    		select *
    		from photo
    		where photoStatus = 'Y'
-   		order by photoNo desc
+   		order by boardNo desc
    </select>
    
    <select id="selectPhoto" resultMap="photoResultSet">
    		select *
    		from photo
-   		where photoStatus = 'Y' and photoNo = #{photoNo} 
+   		where photoStatus = 'Y' and boardNo = #{boardNo} 
    		
    </select>
    
@@ -45,7 +43,7 @@
    <update id="updateComent">
    		update photo
    		set photoComent = #{photoComent}
-   		where photoNo = #{photoNo}		
+   		where boardNo = #{boardNo}		
    
    </update>
    
@@ -56,7 +54,41 @@
    				photoPath = #{photoPath},
    				photoComent = #{photoComent}
    				
-   		where photoNo = #{photoNo}
+   		where boardNo = #{boardNo}
    </update>
+    
+   <resultMap type="Reply" id="replyResultSet">
+		 <id column="REPLYNO" property="replyNo"/>
+		 <result column="REPLY_CONTENT" property="replyContent" />
+		 <result column="NICKNAME" property="nickName" />
+		 <result column="R_CREATEDATE" property="rCreateDate" />
+		 <result column="R_MODIFYDATE" property="rModifyDate" />
+		 <result column="REPLY_STATUS" property="replyStatus" />
+		 <result column="REPLY_WRITER" property="replyWriter" />
+		 <result column="REF_BOARDNO" property="rboardNo" />
+	 </resultMap>
+   
+   	<insert id="insertPreply">
+   		insert into reply
+	 	values(REPLY_SEQ.nextval, #{replyContent}, #{nickName}, sysdate, sysdate, default, #{boardNo})
+   	</insert>
+   
+   <select id="selectReply" resultMap="replyResultSet">
+	 	select *
+	 	from reply r
+	 		left join photo p on(boardNo =REF_BOARDNO)
+            left join member m using(userno)
+	 	where REF_BOARDNO = #{boardNo} and reply_status = 'Y'
+	 	order by REPLYNO desc
+	 </select>
+<!-- 	 
+	select nickname m , reply_content r
+	 	from member m
+            join photo p using(userno)
+	 		join reply r on(boardNo =REF_BOARDNO) 
+	 	where REF_BOARDNO = #{boardNo} and reply_status = 'Y'
+	 	order by REPLYNO desc -->
+
+   
    
 </mapper>

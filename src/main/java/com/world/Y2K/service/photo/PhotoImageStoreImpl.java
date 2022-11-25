@@ -25,7 +25,7 @@ public class PhotoImageStoreImpl extends PhotoStore implements PhotoImageStore{
 	@Autowired
 	private PhotoDAO pDAO;
 
-	private String uploadFolder ="C:/Users/82107/Desktop/upload/";
+	private String uploadFolder ="C:/upload/";
 
 
 	@Override
