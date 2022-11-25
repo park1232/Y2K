@@ -19,10 +19,10 @@ public class Diary {
 	private String weather;
 	private String privacyBounds;
 	private String location;
-	private Date diaryDate;
+	private String diaryDate;
 	private String diaryContent;
 	private Date createDate;
 	private Date modifyDate;
 	private String diaryStatus;
-	private int diaryWriter;
+	private Long diaryWriter;
 }
