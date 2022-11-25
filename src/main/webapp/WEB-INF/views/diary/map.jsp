@@ -342,6 +342,8 @@ function removeAllChildNods(el) {
 	
 	$("#choiceBtn").click(function(){
 		opener.document.getElementById('mapValue').innerText = $('#choice').val();
+		document.getElementById('location').vlaue = $('#choice').val();
+		console.log(document.getElementById('location').vlaue);
 		window.close();
 	});
 	

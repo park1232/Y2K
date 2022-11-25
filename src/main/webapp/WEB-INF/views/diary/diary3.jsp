@@ -78,6 +78,7 @@
                 	<form action="${ contextPath }/insertDiary.di" method="POST">
 					<c:set var="date" value="${fn:split(datepicker, '/')}"/>
                 	<h1>${ date[2] }.${ date[0] }.${ date[1] }</h1>
+                	<input type="hidden" id="diaryDate" name="diaryDate" value="${ datepicker }">
                 	
                 	<table>
                 		<tr>
@@ -109,13 +110,14 @@
                 			</td>
                 			<td>
                 				<div class="map" id="mapValue">${ mapValue }</div>
+                				<input type="hidden" id="location" name="location" value="${ mapValue }">
                 			</td>
                 			<td>
                 				<div class="selectBox">
-								  <select name="fruits" class="select">
+								  <select name="privacyBounds" class="select">
 								    <option disabled selected>공개범위💌</option>
-								    <option value="apple">전체공개</option>
-								    <option value="grape">비공개</option>
+								    <option value="public">전체공개</option>
+								    <option value="closed">비공개</option>
 								  </select>
 								  <span class="icoArrow"><img src="https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png" alt=""></span>
 								</div>
@@ -125,9 +127,8 @@
                 	
                 	<hr>
                 	
-                	<div class="diary" contenteditable="true">
+                	<textarea class="diary" name="diaryContent"></textarea>
                 	
-                	</div>
                 	
                 	<hr class="hr2">
                 	

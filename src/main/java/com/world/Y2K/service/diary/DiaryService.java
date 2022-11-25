@@ -1,8 +1,9 @@
 package com.world.Y2K.service.diary;
 
-import org.springframework.stereotype.Service;
+import com.world.Y2K.model.vo.Diary;
 
-@Service
-public class DiaryService {
+public interface DiaryService {
+
+	int insertDiary(Diary d);
 
 }

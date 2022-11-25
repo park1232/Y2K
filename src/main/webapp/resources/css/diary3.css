@@ -97,6 +97,11 @@ hr{
 /*다이어리*/
 .diary{
 	height: 300px;
+	width: 100%;
+	border: none;
+	resize: none;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 15px;
 	overflow: auto;
 }
 button{
