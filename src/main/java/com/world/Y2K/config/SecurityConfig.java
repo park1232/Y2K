@@ -3,66 +3,67 @@ package com.world.Y2K.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.filter.CorsFilter;
 
+import com.world.Y2K.dao.login.LoginDAO;
+import com.world.Y2K.service.login.LoginService;
 import com.world.Y2K.service.login.auth.UserDetailsServiceImpl;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
-public class SecurityConfig {
+@RequiredArgsConstructor
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	@Bean
+	public BCryptPasswordEncoder bcryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	private final CorsFilter corsFilter;
 	
 	
+	@Bean
+	public LoginDAO loginDAO() {
+		return new LoginDAO();
+	}
 	
 	@Bean
 	public UserDetailsService userDetailsService() {
 		return new UserDetailsServiceImpl();
 	}
 	
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-		System.out.println("½ÇÇàµÊ?");
-		
-		http.userDetailsService(userDetailsService());
-		
-		http.csrf().disable();
-		
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable();	
 		http.authorizeRequests()
 			.antMatchers("/*.lo").permitAll()
 			.anyRequest().permitAll()
 		.and()
-			.formLogin()
-			.loginPage("/loginpage.lo")
-			.loginProcessingUrl("/auth/login")
-			.defaultSuccessUrl("/login-success.lo")
-			.usernameParameter("username")
-			.passwordParameter("password");
+		.addFilter(new LoginService(authenticationManager()))
+		.addFilter(corsFilter)
+		.formLogin().disable()
+//		.loginPage("/loginpage.lo")
+//		.loginProcessingUrl("/login")
+//		.defaultSuccessUrl("/login-success.lo")
+		.userDetailsService(userDetailsService());
 			
-		http.headers().frameOptions().sameOrigin();
+			
 		
-		return http.build();
+		
 	}
-	
 
-	 @Bean
-	    public WebSecurityCustomizer webSecurityCustomizer() {
-	        return new WebSecurityCustomizer() {
-				@Override
-				public void customize(WebSecurity web) {
-					web.ignoring().antMatchers("/resources/**");
-				}
-			};
-	    }
-	
 	
 }
+
+
+	
 
 
 

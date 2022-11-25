@@ -86,7 +86,7 @@
                   </div>
                 </div>
                 <div class="main">
-               	 	<form method="POST" action="${ contextPath }/diary3.di" method="POST">
+               	 	<form action="${ contextPath }/diary3.di" method="POST">
                   <div class="home_contents">
 			<div class="c">
 			<h2>날짜별보기</h2>
@@ -102,11 +102,12 @@
 				<h2>지도별보기</h2>
 			</div>
 			
-<!-- 			<div class="map"> -->
-<!-- 			</div> -->
-			<jsp:include page="map.jsp"/>
+			<div class="map">
+				<img src="${ contextPath }/resources/img/map.png" id="mapImg">
+			</div>
 			
 			<div class="write">
+			<input type="text" id="mapValue" name="mapValue" readonly>
 				<button id="writeBtn">글쓰기</button>
 			</div>
         <div class="diary">
@@ -175,8 +176,12 @@
      
     </div>
     <script>
-    
-    
+    	$(".map").click(function(){
+    		var url = "map.di";
+    		var name = "map popup"
+    		var option = "width= 610, height= 560"
+    		window.open(url, name, option);
+    	});
     </script>
   </body>
 

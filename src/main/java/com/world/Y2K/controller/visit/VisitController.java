@@ -19,7 +19,7 @@ public class VisitController {
 	
 	@RequestMapping("visit.vi")
 	public String visitBoard() {
-		return "visitBoard";
+		return "visit/visitBoard";
 	}
 	
 	@RequestMapping("insertVisit.vi")

@@ -8,6 +8,8 @@ import com.world.Y2K.dao.login.LoginDAO;
 import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.User;
 
+import lombok.RequiredArgsConstructor;
+
 
 @Service("registerService")
 public class RegisterServiceImpl implements RegisterService {
@@ -28,7 +30,7 @@ public class RegisterServiceImpl implements RegisterService {
 	private Member setMember(User user) {
 		return Member.builder()
 				.username(user.getUsername())
-				.password("{bcrypt}"+bCryptPasswordEncoder.encode(user.getPassword()))
+				.password(bCryptPasswordEncoder.encode(user.getPassword()))
 				.nickName(user.getNickName())
 				.status("Y")
 				.orange(0L)

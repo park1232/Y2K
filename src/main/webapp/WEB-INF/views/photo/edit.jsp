@@ -38,7 +38,7 @@
                         <img src="/upload/${photo.renameName}"  alt="" id="imageUploadPreview"  />
                         <input type="hidden" name="renameName" id="renameName" value="${photo.renameName }" >
                         <input type="hidden" name="photoName" id="photoName" value="${photo.photoName }" >
-                        <input type="hidden" name="photoNo" id="photoNo" value="${photo.photoNo }" >
+                        <input type="hidden" name="boardNo" id="boardNo" value="${photo.boardNo }" >
                     </div>
                  
                  

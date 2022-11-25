@@ -80,7 +80,7 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
                        <div class="visitor_card">
           <div class="visitor_title">
               <span class="visitor_number">No. 121</span> &nbsp;
-              <span class="visitor_name">다람쥐</span> &nbsp;
+              <span class="visitor_name">${loginUser.nickName }</span> &nbsp;
               <i id="homepage" class="fas fa-home visitor_homepage"></i>
               <span id="visitor_date"></span>
           </div>

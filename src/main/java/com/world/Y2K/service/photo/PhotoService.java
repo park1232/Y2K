@@ -1,5 +1,6 @@
 package com.world.Y2K.service.photo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.world.Y2K.model.vo.Photo;
+import com.world.Y2K.model.vo.Reply;
 
 public interface PhotoService{
 	
@@ -14,11 +16,15 @@ public interface PhotoService{
 
 //	void insertImage(Photo p, MultipartFile file, HttpServletRequest request);
 
-	Photo selectImg(Long photoNo);
+	Photo selectImg(Long boardNo);
 
-	int deletetImg(Long photoNo);
+	int deletetImg(Long boardNo);
 
 	void updateComent(Photo p);
+
+	int insertPreply(Reply r);
+
+	ArrayList<Reply> selectReply(Long boardNo);
 	
 	
 }

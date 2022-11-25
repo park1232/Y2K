@@ -3,13 +3,13 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>키워드로 장소검색하고 목록으로 표출하기</title>
-<!--     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script> -->
+    <title>키워드로 장소검색</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:11px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:absolute;width:300px;height:220px; top: 40px; left: 330px; bottom: 477px; right: 20px; border-radius: 5px;}
-#menu_wrap {position:absolute;top:0;left:310px;bottom:0;width:200px;height:210px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+.map_wrap {position:absolute;width:600px;height:500px; top: 0; left: 0; bottom: 477px; right: 20px; border-radius: 5px;}
+#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:200px;height:450px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
 #menu_wrap .option{text-align: center;}
@@ -56,7 +56,9 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
-button{background: white; border: 1px solid gray; border-radius: 2px; width: 30px; cursor: pointer;}
+#search{background: white; border: 1px solid gray; border-radius: 2px; width: 30px; cursor: pointer;}
+#choiceBtn{background: white; border: 1px solid lightgray; width: 70px; height: 30px; border-radius: 5px; cursor: pointer; float:left; margin-left: 10px;}
+#choice{margin-left: 310px; height: 25px; width: 200px; border-radius: 5px; border: 1px solid lightgray;}
 </style>
 </head>
 <body>
@@ -68,7 +70,7 @@ button{background: white; border: 1px solid gray; border-radius: 2px; width: 30p
             <div>
                 <form onsubmit="searchPlaces(); return false;">
                     <input type="text" id="keyword" size="18"> 
-                    <button type="submit">검색</button> 
+                    <button type="submit" id="search">검색</button> 
                 </form>
             </div>
         </div>
@@ -76,6 +78,18 @@ button{background: white; border: 1px solid gray; border-radius: 2px; width: 30p
         <ul id="placesList"></ul>
         <div id="pagination"></div>
     </div>
+    	<br>
+    	<table>
+    		<tr>
+    			<td><input type="text" id="choice" readonly></td>
+    			<td><button type="submit" id="choiceBtn">선택</button></td>
+    		</tr>
+    	</table>
+    	<input type="hidden" id="placeName" name="placeName" value="">
+<input type="hidden" id="latitude" name="latitude" value="">
+<input type="hidden" id="longitude" name="longitude" value="">
+    	
+    	
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ca321a5811ec7bd78b88fbdc6d97e558&libraries=services"></script>
@@ -194,9 +208,22 @@ function displayPlaces(places) {
             itemEl.onmouseout =  function () {
                 infowindow.close();
             };
+            
+            kakao.maps.event.addListener(marker, 'click', function(placePosition){
+            	displayInfowindow(marker, title);
+            	return function(){
+            	     $("#placeName").val(title);
+            	     // #result 영역에 좌표정보 출력
+            	     var result = document.getElementById('choice');
+            	     result.value = title;
+            	}
+            }(placePosition));
+            
         })(marker, places[i].place_name);
 
         fragment.appendChild(itemEl);
+        
+        
     }
 
     // 검색결과 항목들을 검색결과 목록 Element에 추가합니다
@@ -305,21 +332,19 @@ function removeAllChildNods(el) {
         el.removeChild (el.lastChild);
     }
 }
+
 </script>
 <script>
-	$("#map").click(function(){
-		$("#menu_wrap").toggle();
+	$("#choiceBtn").click(function(){
+		opener.document.getElementById('mapValue').value = $('#choice').val();
+		window.close();
 	});
 	
-// 	$(".info").click(function(){
-// 		console.log($('h5').text());
-// 	});
-// 	marker.id = markId;
-// 	$('#id').click(function(){
-// 		var id = this.id;
-// 		console.log(id);
-		
-// 	});
+	$("#choiceBtn").click(function(){
+		opener.document.getElementById('mapValue').innerText = $('#choice').val();
+		window.close();
+	});
+	
 </script>
 </body>
 </html>

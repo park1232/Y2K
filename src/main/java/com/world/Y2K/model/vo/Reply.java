@@ -22,10 +22,13 @@ import lombok.ToString;
 public class Reply {
 	private Long replyNo;
 	private String replyContent;
-	private Date r_CreateDate;
-	private Date r_ModifyDate;
+	private String rNickName;
+	private Date rCreateDate;
+	private Date rModifyDate;
 	private String replyStatus;
 	private Long replyWriter;
-	private String rBoardTypeId;
+	private Long rboardNo;
+
+
 	
 }

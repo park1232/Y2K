@@ -49,8 +49,6 @@
     </div>
   </div>
 </header>
-
-${ photoList }
 	<div class="main">
 	  <div class="album py-5">
 	    <div class="container">
@@ -61,21 +59,19 @@ ${ photoList }
 		          <div class="card shadow-sm">
 		          <!-- 이미지 foreach문 -->
 		          	<c:forEach items="${ photoList }" var="photo">
-		          		<c:if test="${ p.productNo eq photo.productNo }">
+						<c:if test="${ p.productNo eq photo.productNo }">
 			          		<c:if test="${ fn:containsIgnoreCase(photo.productReNameName, 'jpg') or fn:containsIgnoreCase(photo.productReNameName, 'png') }">
-			            		<img src="${contextPath}/resources/img/mainSkin1.jpg" style="height: 300px;">
+			            		<img src="/upload/${ photo.productReNameName }" style="height: 300px;">
 			            	</c:if>
-			            	<c:if test="${ !fn:containsIgnoreCase(photo.productReNameName, 'jpg') or !fn:containsIgnoreCase(photo.productReNameName, 'png') }">
-			            		<img src="${contextPath}/resources/img/mainSkin1.jpg" style="height: 300px;">
-			            	</c:if>
-			            </c:if>
+						</c:if>
 					</c:forEach>
 		            <div class="card-body">
+		            <div class="productNo"></div>
 		              <p class="card-text"><strong>${ p.productName }&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${ p.productCreateDate }</strong></p>
 		              <hr>
 		              <div class="d-flex justify-content-between align-items-center">
 		                <div class="btn-group">
-		                  <button type="button" class="btn btn-warning" id="detailSelect">상세보기</button>
+		                  <button type="button" class="btn btn-warning" id="detailpurchaes" value="${ p.productNo }">상세보기</button>
 		                </div>
 		               	  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<h4>낑깡 ${ p.price }개</h4><img src="${contextPath}/resources/img/kumquat.jpg" style="height: 35px; width: 35px;">
 		              </div>
@@ -179,22 +175,27 @@ ${ photoList }
 	    
 
  <!-- c:if 로 로그인 유저만 작성할 수 있게 로그인 구현되면 작성 -->
+ 		<c:if test="${ userRole eq ROLE_ADMIN }">
 	 		<div id="writerPurchaes">
 		    	<button type="button" class="btn btn-primary" onclick="location.href='${ contextPath }/writePurchaes.pa'">작성하기</button>
 		    </div>
-
-	 
+		</c:if>
 	    <br>
-	    
+
 	</div>
+<footer class="sticky-footer bg-white" style="height: 15px;">
+        <div class="main-footer d-flex p-2 px-3 bg-white border-top">
+              <a href="https://github.com/bmm522/Y2K">Y2K</a>
+        </div>
+</footer>	
 <script>
-	$(document).ready(function(){
-		$("#detailSelect").click(function(){
-		window.open("<%= request.getContextPath() %>/detailpurchaes.pa", "detail", "width=605, height=510, scrollbars=no, resizable=no, toolbars=no, menubar=no")
-		});
-	});
-	
-	
+	const datas = document.getElementsByClassName('btn btn-warning');
+	for(const data of datas) {
+		 data.addEventListener('click', function(){		
+			const productNo = this.value; 
+			window.open("${ contextPath }/selectPurchaes.pa?productNo=" + productNo, "detail", "width=630, height=530, scrollbars=no, resizable=no, toolbars=no, menubar=no")
+		 });
+	} 
 </script>
 </body>
 </html>

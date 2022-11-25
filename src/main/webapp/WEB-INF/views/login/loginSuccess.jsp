@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%-- <%@ import = import javax.servlet.http.HttpServletRequest %> --%>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" scope="application" />
+<%-- <%
+String userId = request.getParameter("userId");
+%> --%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +39,7 @@
 
 
 $('#move-main-btn').click(function(){
-  window.open('/mainPage.ma','Y2K World','width=1289, height=703, scrollbars=no, resizable=no, toolbars=no, menubar=no');
+  window.open('/mainPage.ma?userNo='+${userNo},'Y2K World','width=1289, height=703, scrollbars=no, resizable=no, toolbars=no, menubar=no');
   window.close();
 
   
