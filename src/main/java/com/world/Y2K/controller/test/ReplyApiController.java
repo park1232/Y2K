@@ -30,8 +30,8 @@ public class ReplyApiController {
 			Authentication authentication){
 			UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 			System.out.println(replyDto);
-			System.out.println("controller : " +replyDto.getRNickName());
-			return replyService.insertReply(replyDto.getContent(), replyDto.getBoardNo(), replyDto.getRNickName(),userDetails.getMember().getUserNo());
+			System.out.println("controller : " +replyDto.getNickName());
+			return replyService.insertReply(replyDto.getContent(), replyDto.getBoardNo(), replyDto.getNickName(),userDetails.getMember().getUserNo());
 
 	}
 	

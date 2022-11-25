@@ -65,8 +65,6 @@ public class PhotoController {
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 		Member member = userDetails.getMember();
 		
-		
-		
 		Photo p = pService.selectImg(boardNo);
 		
 		ArrayList<Reply> list =pService.selectReply(boardNo);
@@ -76,6 +74,10 @@ public class PhotoController {
 		mv.addObject("member", member);
 		mv.addObject("list", list);
 		mv.setViewName("photo/show");
+		
+		
+		
+		System.out.println(list);
 		
 		return mv;
 	}

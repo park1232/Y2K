@@ -14,7 +14,7 @@ public class ReplyDto {
 	
 	private String content;
 	
-	private String rNickName;
+	private String nickName;
 	
 	private Long boardNo;
 	

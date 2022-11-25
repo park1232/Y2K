@@ -40,7 +40,7 @@
 							<img src="/upload/${photo.renameName}" />
 						</div>
 						<input type="hidden" value=' ${ photo.boardNo }' name="boardNo" id="boardNo">
-						<input type="hidden" value=' ${ member.nickName }' name="nickName" id="nickName">
+						<input type="hidden" value=' ${ member.nickName }' name="nickName">
 
 						<div class="sl__item__contents">
 
@@ -55,11 +55,12 @@
 								<p>${photo.photoComent}</p>
 
 							</div>
-							<input type="hidden"  id="rNickName" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.nickName}">
+							<input type="hidden"  id="nickName" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.nickName}">
 							<div id="storyCommentList-1">
-							${rNickname}
+							
+							
 							<c:forEach items="${ list }" var="r">
-						 	${r}
+						 	
 						 	<div class="sl__item__contents__comment" id="storyCommentItem-${photo.boardNo}" >
 									<%--  <p>
 										<a ></a>${r.replyContent}
@@ -70,7 +71,7 @@
 							
 							<div class="sl__item__contents__comment" id="storyCommentItem-2">
 									<p>
-										<b> :</b>${r.replyContent}
+										<b>${r.nickName} :</b> ${r.replyContent}
 									</p>
 									<button type="button" onclick="deleteComment()"><i class="fas fa-times"></i></button>
 									
@@ -111,7 +112,7 @@
 	
 	
 	let contentt = "";
-	let rNicknamee = "";
+	let nickName = "";
 	let boardNoo = "";
 	$("#have").on("click", function(){
 		event.preventDefault();
@@ -121,7 +122,7 @@
 		
 		let data = {
 				content : $("#storyCommentInput-1").val(),
-				rNickName : $("#rNickName").val(),
+				nickName : $("#nickName").val(),
 				boardNo : $("#boardNo").val()
 		}
 		$.ajax({
@@ -130,9 +131,9 @@
 			data : data,
 			success:(data)=>{
 				contentt = data.content;
-				rNickname = data.rNickname;
+				nickName = data.nickName;
 				boardNoo = data.boardNo;
-				
+				console.log(nickName);
 	/* 			console.log(contentt);
 				console.log(nicknamee);
 				console.log(boardNoo);
@@ -150,7 +151,7 @@
 // 							    <button><i class="fas fa-times"></i></button>
 // 							  </div>
 // 					`; 
-				newComment.innerHTML = '<div class="sl__item__contents__comment" id="storyCommentItem-2"><p><b>' + rNickname + ' :</b>' + contentt + '</p><button type="button" onclick="deleteComment()"><i class="fas fa-times"></i></button></div>';
+				newComment.innerHTML = '<div class="sl__item__contents__comment" id="storyCommentItem-2"><p><b>' + nickName + ' :</b>' + contentt + '</p><button type="button" onclick="deleteComment()"><i class="fas fa-times"></i></button></div>';
 
 					commentList.prepend(newComment);
 					
