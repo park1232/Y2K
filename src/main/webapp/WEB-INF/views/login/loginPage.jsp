@@ -406,44 +406,6 @@ const nicknameBlurText = () => {
 	 
 }
 
-
-$("#signupform").submit(function(){
-	
-	if($("#checkIdResult").val()=="fail"){
-		alert("아이디 확인 바랍니다.");
-		return false;
-	}
-	
-	if($("#checkPasswordResult").val()=="fail"){
-		alert("비밀번호를 형식에 맞게 작성해주세요.");
-		return false;
-	}
-	
-	if($("#checkRePasswordResult").val()=="fail"){
-		alert("비밀번호가 일치하지 않습니다.")
-		return false;
-	}
-	
-	if($("#checkNicknameResult").val()=="fail"){
-		alert("닉네임 확인 바랍니다.");
-		return false;
-	}
-	
-	if($("#checkEmailResult").val()=="fail"){
-		alert("이메일 확인 바랍니다.");
-		return false;
-	}
-	
-	if($("#checkAuthResult").val()=="fail"){
-		alert("인증코드 확인 바랍니다.");
-		return false;
-	}
-	return true;
-});
-
-
-
-
 $('#lookPwd').click(function(){
 	  window.open('/change-pwd.lo','lookPwd','width=600, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no');
 	  window.close();	  
@@ -508,6 +470,42 @@ const isValidAuthCode = () => {
 const authBlurText = () =>{
 	document.getElementById('checkAuth').innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
 }
+
+
+
+$("#signupform").submit(function(){
+	
+	if($("#checkIdResult").val()=="fail"){
+		alert("아이디 확인 바랍니다.");
+		return false;
+	}
+	
+	if($("#checkPasswordResult").val()=="fail"){
+		alert("비밀번호를 형식에 맞게 작성해주세요.");
+		return false;
+	}
+	
+	if($("#checkRePasswordResult").val()=="fail"){
+		alert("비밀번호가 일치하지 않습니다.")
+		return false;
+	}
+	
+	if($("#checkNicknameResult").val()=="fail"){
+		alert("닉네임 확인 바랍니다.");
+		return false;
+	}
+	
+	if($("#checkEmailResult").val()=="fail"){
+		alert("이메일 확인 바랍니다.");
+		return false;
+	}
+	
+	if($("#checkAuthResult").val()=="fail"){
+		alert("인증코드 확인 바랍니다.");
+		return false;
+	}
+	return true;
+});
 
 </script>
 

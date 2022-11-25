@@ -36,6 +36,11 @@ public class LoginDAO {
 	public int checkNickname(String nickname) {
 		return sqlSession.selectOne("memberMapper.checkNickname", nickname);
 	}
+
+	public int updatePassword(HashMap<String, String> map) {
+		return sqlSession.update("memberMapper.updatePassword", map);
+		
+	}
 	
 
 }
