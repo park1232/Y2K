@@ -34,7 +34,6 @@ public class DiaryController {
 	public String diaryWrite(@RequestParam("datepicker") String datepicker, @RequestParam("mapValue") String mapValue, Model model) {
 		model.addAttribute("datepicker", datepicker);
 		model.addAttribute("mapValue", mapValue);
-		
 		return "diary/diary3";
 	}
 	
