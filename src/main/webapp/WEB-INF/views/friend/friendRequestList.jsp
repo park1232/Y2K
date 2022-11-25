@@ -27,9 +27,9 @@
         <div class="col-sm-4 offset-md-1 py-4">
           <ul class="list-unstyled">
             <li><a href="#" class="text-white">메인페이지</a></li>
-            <li><a href="${contextPath}/payment.pa" class="text-white">결제페이지</a></li>
+            <li><a href="${contextPath}/friendment.pa" class="text-white">결제페이지</a></li>
             <li><a href="${contextPath}/purchaes.pa" class="text-white">구매페이지</a></li>
-            <li><a href="${contextPath}/friendRequestList.fr" class="text-white">친구 요청 페이지</a></li>
+            <li><a href="${contextPath}/friendList.fr" class="text-white">친구페이지</a></li>
           </ul>
         </div>
       </div>
@@ -47,25 +47,26 @@
     </div>
   </div>
 </header>
+${ fAList }
 <div class="main">
-   <table class="table">
+ <table class="table">
   <thead>
     <tr>
-      <th scope="col" width="360px">친구 인원 목록</th>
+      <th scope="col" width="360px">친구 신청 목록</th>
       <th scope="col" width="360px">ID</th>
       <th scope="col" width="360px">닉네임</th>
-      <th scope="col" width="360px">친구삭제</th>
+      <th scope="col" width="360px">상세보기</th>
     </tr>
   </thead>
   <tbody>
-  	<c:forEach items="${ fList }" var="f">
+  <c:forEach items="${ fList }" var="fl">
 	    <tr>
 	      <th scope="row">count</th>
-	      <td>${ f.username }</td>
-	      <td>${ f.nickName }</td>
-	      <td><input type="checkbox" id="friend" name="using"></td>
+	      <td>${ fl.username }</td>
+	      <td>${ fl.nickName }</td>
+	      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
 	    </tr>
-	</c:forEach>
+    </c:forEach>
   </tbody>
 </table>
 <div class="search">
@@ -76,6 +77,7 @@
      <input type="text" placeholder="검색어 입력">
      <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
 </div>
+
 <br>
 	<div class="pagingArea">
         <ul class="pagination justify-content-center">
@@ -155,21 +157,19 @@
 					</c:if>
 	            </li>
 	        </ul>
-    </div>
+    	</div>
+</div>
     <br>
-    <div class="friendOption">
-	    <button type="button" class="btn btn-primary" onclick="window.open('${ contextPath }/friendAdd.fr', 'friendAdd', 'width=460, height=570')">친추추가</button>
-	    <button type="button" class="btn btn-primary">친구삭제</button>
-    </div>
+<br>
+  
+<br>
+<div>
 </div>
 </body>
 <br>
-<footer class="sticky-footer bg-white" style="height: 15px;">
+<footer class="sticky-footer bg-white" style="height: 5px;">
         <div class="main-footer d-flex p-2 px-3 bg-white border-top">
               <a href="#">Y2K</a>
         </div>
 </footer>
-<script>
-
-</script>
 </html>

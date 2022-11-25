@@ -18,6 +18,7 @@
 	
 body{font-family: 'Gowun Dodum', sans-serif;cursor: url(cursor.cur), auto}
 #board{text-align: center; font-size: 30px;}
+
 .fa-edit{font-size: 40px; text-align: right; color:#ff8000; cursor: pointer; margin-top: -40px;}
 .fa-edit:hover{color: #facf64;}
 .pagination a {color: rgb(255, 197, 71);padding: 8px 16px;text-decoration: none;border-radius:50%; font-size: 18px;}
@@ -187,10 +188,12 @@ vertical-align:middle;
 }
 
 
-
-.fa-hand-holding-heart{font-size: 60px; color: rgb(255, 207, 162); text-align: center;}
-.fa-hand-holding-heart:hover{font-size: 70px; color: rgb(255, 91, 21);}
+/** 좋아요 */
+.fa-hand-holding-heart{font-size: 60px; color: rgb(255, 91, 21); text-align: center;}
+.fa-hand-holding-heart:hover{font-size: 70px; color: rgb(255, 207, 162); cursor:pointer;}
 #good{text-align: center;}
+
+
 .link-icon { position: relative; display: inline-block; width: auto;    font-size: 14px; font-weight: 500; color: #333; margin-right: 3px; padding-top: 50px; }
 .link-icon.twitter { background-image: url(resources/img/icon-twitter.png); background-repeat: no-repeat; text-decoration: none; }
 .link-icon.facebook { background-image: url(resources/img/icon-facebook.png); background-repeat: no-repeat; text-decoration: none;} 
@@ -223,7 +226,6 @@ transition: all 0.2s ;
 }
 .fa-circle-up{font-size:25px; color:#FFAA40; }
 .fa-circle-down{font-size:25px; color:#FFAA40; }
-.scrollbar{text-align:right;}
 .fa-comment-dots{font-size:25px; color:#FFAA40; }
 
 
@@ -242,10 +244,18 @@ transition: all 0.2s ;
   }
   #writeButton{display: block; margin: auto;text-align: center;} 
 
+#updateForm{width:90px; height:30px; color: white; font-weight:bold; background:#fce29e; border:none; border-radius: 10px;}
+#deleteForm{width:90px; height:30px; color: white; font-weight:bold; background:#fce29e; border:none; border-radius: 10px;}
+#boardListBack{width:90px; height:30px; color: white; font-weight:bold; background:#fce29e; border:none; border-radius: 10px;}
+#updateForm:hover{width:95px; height:35px; cursor:pointer;}
+#deleteForm:hover{width:95px; height:35px; cursor:pointer;}
+#boardListBack:hover{width:95px; height:35px; cursor:pointer;}
+#ViewForm{text-align: center;}
 /***/
 #searchOption{background-color:#ffd9e9; border-radius:5px;}
-
-
+.sns{margin-bottom: -20px;}
+.scrollbar{margin-top: -50px; text-align:right;}
+.btnOrange{cursor: pointer;}
 /** 버튼 반짝이*/
 .side1 { top: 200px; left	: 400px; }
 .side2 { top: 240px; left: 400px; }

@@ -1,6 +1,7 @@
 package com.world.Y2K.service.payment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.world.Y2K.model.vo.PayPageInfo;
 import com.world.Y2K.model.vo.Product;
@@ -23,5 +24,11 @@ public interface PaymentService {
 	Product detailPurchaes(Long pNo);
 
 	ProductPhoto selectPhoto(Long pNo);
+
+	int deleteProductPhoto(Long pNo);
+
+	int orderPurchaes(HashMap<String, Long> map);
+
+	int getOrangeCount(HashMap<String, Long> map);
 	
 }

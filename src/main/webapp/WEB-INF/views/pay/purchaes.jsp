@@ -49,7 +49,6 @@
     </div>
   </div>
 </header>
-${ pList }
 	<div class="main">
 	  <div class="album py-5">
 	    <div class="container">
@@ -72,7 +71,7 @@ ${ pList }
 		              <hr>
 		              <div class="d-flex justify-content-between align-items-center">
 		                <div class="btn-group">
-		                  <button type="button" class="btn btn-warning" id="detailpurchaes" value="${ p.productNo }">${ p.productNo }상세보기</button>
+		                  <button type="button" class="btn btn-warning" id="detailpurchaes" value="${ p.productNo }">상세보기</button>
 		                </div>
 		               	  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<h4>낑깡 ${ p.price }개</h4><img src="${contextPath}/resources/img/kumquat.jpg" style="height: 35px; width: 35px;">
 		              </div>
@@ -176,10 +175,11 @@ ${ pList }
 	    
 
  <!-- c:if 로 로그인 유저만 작성할 수 있게 로그인 구현되면 작성 -->
+ 		<c:if test="${ userRole eq ROLE_ADMIN }">
 	 		<div id="writerPurchaes">
 		    	<button type="button" class="btn btn-primary" onclick="location.href='${ contextPath }/writePurchaes.pa'">작성하기</button>
 		    </div>
-
+		</c:if>
 	    <br>
 
 	</div>
@@ -190,19 +190,12 @@ ${ pList }
 </footer>	
 <script>
 	const datas = document.getElementsByClassName('btn btn-warning');
-	console.log(datas);
 	for(const data of datas) {
-		//	${data}.on('click', (e) => {
-		//		console.log(e.target.value);	
-		//	});
-		 data.addEventListener('click', function(){
-			
-			const productNo = this.val; 
-			console.log(productNo);
-			window.open("${ contextPath }/selectPurchaes.pa?val=" + productNo, "detail", "width=605, height=510, scrollbars=no, resizable=no, toolbars=no, menubar=no")
+		 data.addEventListener('click', function(){		
+			const productNo = this.value; 
+			window.open("${ contextPath }/selectPurchaes.pa?productNo=" + productNo, "detail", "width=630, height=530, scrollbars=no, resizable=no, toolbars=no, menubar=no")
 		 });
 	} 
-
 </script>
 </body>
 </html>

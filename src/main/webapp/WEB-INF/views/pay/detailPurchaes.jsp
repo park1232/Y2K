@@ -26,8 +26,7 @@
 </head>
 <body>
 <div class="main">
-  		<c:forEach items="${ photo }" var="photo">
-			<c:forEach items="${ p }" var="p">
+	<form class="needs-validation" method="POST" id="detailForm">
 			<div class="wrap">
 			    <div class="productImg">
 				    <c:if test="${ p.productNo eq photo.productNo }">
@@ -36,9 +35,11 @@
 				    	</c:if>
 					</c:if>
 			    </div>
+			    <input type="hidden" value='${ p.productNo }' name="productNo">
+			    <input type="hidden" value='${ p.price }' name="price">
 			    <hr>
 			    <h3>${ p.productName } &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-			    <img src="${contextPath}/resources/img/kumquat.jpg" style="width: 30px; height: 30px;"><span class="price">낑깡 ${ p.price }개</span></h3>
+			    &emsp;&emsp;&emsp;&emsp;&emsp;<img src="${contextPath}/resources/img/kumquat.jpg" style="width: 30px; height: 30px;"><span class="price">낑깡 ${ p.price }개</span></h3>
 
 			    <hr>
 			    <div id="area">
@@ -46,45 +47,36 @@
 			    </div>
 			</div>
 			    <div class="orderBtn">
-			        <button type="button" class="btn btn-primary" onclick="order()">구매하기</button>
+			        <button type="button" class="btn btn-primary" id="order">구매하기</button>
 			        <button type="button" class="btn btn-primary" onClick='window.close()'>취소하기</button>
 			        <!-- 로그인 구현되면 if:test넣기 -->
-			        <button type="button" class="btn btn-primary" onclick="location.href='${ contextPath }/deletePurchaes.pa'">삭제하기</button>
-			        
+
+			        	<button type="button" class="btn btn-primary" id="delete">삭제하기</button>
+			        	<button type="button" class="btn btn-primary" id="update">수정하기</button>
+			        	        
 		    	</div>
-  			</c:forEach>
-		</c:forEach> 
-        			자식창 Sender : <input type="text" name="sender" id='productNo' size="10"><br>
-        			<input type="hidden" value='${ productNo }' name="productNo" id="productNo">	
+	</form>
 </div>
 	<script>
-        function order(){
-            alert("구매가 완료되었습니다.")
-            close();
-        }
-        
-        function _GET(search) {
-            var obj = {};
-            var uri = decodeURI(search);
-                uri = uri.slice(1,uri.length);
-     
-            var param = uri.split('&');
-            
-            for (var i = 0; i < param.length; i++) {
-                var devide = param[i].split('=');
-                obj[devide[0]] = devide[1];
-            }
-     
-            return obj;
-        }
-     
-        window.onload = function () {
-            var search = window.location.search;
-            var getData =  _GET(search);
-            var sender = document.querySelector('#productNo');
-     
-            productNo.value = getData.val;
-        }
+        window.onload = () =>{
+        	const deleteForm = document.getElementById('detailForm');
+        	document.getElementById("delete").addEventListener('click', ()=>{
+				deleteForm.action = '${contextPath}/deletePurchaes.pa';
+				deleteForm.submit();
+        	});
+			
+        	const orderForm = document.getElementById('detailForm');
+		    document.getElementById("order").addEventListener('click', ()=>{
+				orderForm.action = '${contextPath}/orderPurchaes.pa';
+				orderForm.submit();
+			});
+		    
+		    const updateForm = document.getElementById('detailForm');
+		    document.getElementById("update").addEventListener('click', ()=>{
+				updateForm.action = '${contextPath}/updatePurchaes.pa';
+				updateForm.submit();
+			});		
+        } 
     </script>
 
 </body>

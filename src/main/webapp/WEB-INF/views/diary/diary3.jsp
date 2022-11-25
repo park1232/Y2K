@@ -13,7 +13,7 @@
     <link rel="short icon" href="${contextPath}/resources/img/2014.ico">
     <link rel="stylesheet" href="${contextPath}/resources/css/reset.css" />
     <link rel="stylesheet" href="${contextPath}/resources/css/style.css" />
-    <link rel="stylesheet" href="${contextPath}/resources/css/diary3.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/diary3.css?after" />
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://kit.fontawesome.com/203ce9d742.js" crossorigin="anonymous"></script>
   </head>
@@ -75,8 +75,9 @@
                   </div>
                 </div>
                 <div class="main">
+                	<form action="${ contextPath }/insertDiary.di" method="POST">
 					<c:set var="date" value="${fn:split(datepicker, '/')}"/>
-                		<h1>${ date[2] }.${ date[0] }.${ date[1] }</h1>
+                	<h1>${ date[2] }.${ date[0] }.${ date[1] }</h1>
                 	
                 	<table>
                 		<tr>
@@ -107,7 +108,7 @@
 								</div>
                 			</td>
                 			<td>
-                				<div class="map">위치선택</div>
+                				<div class="map" id="mapValue">${ mapValue }</div>
                 			</td>
                 			<td>
                 				<div class="selectBox">
@@ -122,17 +123,6 @@
                 		</tr>
                 	</table>
                 	
-					
-					
-                	
-                	
-                	
-                	
-                	
-                	
-                	
-                	
-                	
                 	<hr>
                 	
                 	<div class="diary" contenteditable="true">
@@ -141,8 +131,8 @@
                 	
                 	<hr class="hr2">
                 	
-					<button>등록하기</button>                	
-
+						<button type="submit">등록하기</button>                	
+					</form>
                 </div>
               </div>
               <div class = "menu align-center expanded text-center SMN_effect-68">
@@ -166,19 +156,13 @@
       
     </div>
     <script>
-    //    function openPopup(){
-    //        window.open("profil.html", "new", "toolbar=no, menubar=no, scrollbars=no, resizable=no, width=1280, height=721, left=0, top=0" );
-    //    }
-        /* $('.dropdown-btn').on('click',function(){
-            $('.dropdown-content').show();
-            }); */  
-            $(".mi-5").on('click', function(){
-
-              alert('마케팅 사이트 업데이트 진행중.');
-
-            });
-            
-      </script>
+	    $(".map").click(function(){
+			var url = "map.di";
+			var name = "map popup"
+			var option = "width= 610, height= 560"
+			window.open(url, name, option);
+		});
+    </script>
   </body>
 
 

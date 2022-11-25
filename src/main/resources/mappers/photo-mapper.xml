@@ -12,11 +12,13 @@
       <result column="USERNO" property="userNo"/>
       
       
+      
+      
    </resultMap>
 
    <insert id="insertPhoto">
 		INSERT INTO photo
-		VALUES(seq_rid.nextval, #{photoName}, #{renameName}, #{photoPath}, default, #{photoComent}, #{userNo})
+		VALUES(PHOTO_SEQ.nextval, #{photoName}, #{renameName}, #{photoPath}, default, #{photoComent}, #{userNo})
 	</insert>
    
    <select id="selectPhotoList" resultMap="photoResultSet">
