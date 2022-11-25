@@ -14,11 +14,12 @@
       <result column="ROLE" property="role"/>
       <result column="PROVIDER" property="provider"/>
       <result column="PROVIDERID" property="providerId"/>
+      <result column="EMAIL" property="email"/>
    </resultMap>
 
    <insert id="registerMember">
 			insert into Member
-			values(MEMBER_SEQ.nextval,#{username},#{password},#{nickName},sysdate,sysdate,#{status},#{orange},#{role},#{provider},#{providerId})
+			values(MEMBER_SEQ.nextval,#{username},#{password},#{nickName},sysdate,sysdate,#{status},#{orange},#{role},#{provider},#{providerId},#{email})
 	</insert>
    
    <select id="findUser" resultMap="memberResultSet" parameterType="string">
@@ -27,11 +28,23 @@
    	where username = #{username} and status = 'Y'
    </select>
    
-   <select id="checkUser" resultType="_int">
+   <select id="checkId" resultType="_int">
    	select count(*)
    	from member
-   	where status='Y'
+   	where status='Y' and username=#{username}
    </select>
+   
+    <select id="checkNickname" resultType="_int">
+   	select count(*)
+   	from member
+   	where status='Y' and NICKNAME=#{nickname}
+   </select>
+   
+   <update id="updateNickname">
+   		update Member
+   		set nickname = #{nickname}
+   		where userNo=#{userNo}
+   </update>
    
    
 </mapper>

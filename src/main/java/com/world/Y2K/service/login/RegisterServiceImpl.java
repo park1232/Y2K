@@ -32,6 +32,7 @@ public class RegisterServiceImpl implements RegisterService {
 				.username(user.getUsername())
 				.password(bCryptPasswordEncoder.encode(user.getPassword()))
 				.nickName(user.getNickName())
+				.email(user.getEmail())
 				.status("Y")
 				.orange(0L)
 				.role("ROLE_USER")

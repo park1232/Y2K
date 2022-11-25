@@ -65,10 +65,10 @@ hr.hrB {
 
 /** 게시글 쓰기 */
 
-#textBox {width: 580px; height: 500px; resize:none; border: 3px solid #facf64; border-radius: 7px;}
-#textBox:hover{border-color: rgb(255, 183, 0);}
+#boardContent {width: 580px; height: 500px; resize:none; border: 3px solid #facf64; border-radius: 7px;}
+#boardContent:hover{border-color: rgb(255, 183, 0);}
 #category{background-color: #facf64; border-radius: 7px;}
-#titleStyle{border-style: none;}
+#boardTitle{border-style: none;}
 
  /** 게시글 쓰기 버튼 */
  .btnOrange.btnBorder {
