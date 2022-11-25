@@ -50,10 +50,10 @@
 			        <button type="button" class="btn btn-primary" id="order">구매하기</button>
 			        <button type="button" class="btn btn-primary" onClick='window.close()'>취소하기</button>
 			        <!-- 로그인 구현되면 if:test넣기 -->
-
+					<c:if test="${ userRole eq ROLE_ADMIN }">
 			        	<button type="button" class="btn btn-primary" id="delete">삭제하기</button>
 			        	<button type="button" class="btn btn-primary" id="update">수정하기</button>
-			        	        
+			        </c:if>        
 		    	</div>
 	</form>
 </div>

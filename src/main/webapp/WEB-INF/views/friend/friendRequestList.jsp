@@ -18,6 +18,7 @@
 </head>
 <body>
 <header>
+${ requestList }
   <div class="collapse bg-dark" id="navbarHeader">
     <div class="container">
       <div class="row">

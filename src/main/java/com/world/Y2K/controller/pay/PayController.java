@@ -132,9 +132,7 @@ public class PayController {
 			}
 		} else {
 			throw new PaymentException("관리자만 게시글을 작성할 수 있습니다.");
-		}
-		
-		
+		}	
 	}
 	
 	@RequestMapping("selectPurchaes.pa")

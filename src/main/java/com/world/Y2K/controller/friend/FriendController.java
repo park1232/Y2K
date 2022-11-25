@@ -39,7 +39,7 @@ public class FriendController {
 		
 		int friendListCount = fService.getFriendListCount();
 		FriendPageInfo pi = FriendPagination.getPageInfo(friendCurrentPage, friendListCount, 5);
-		ArrayList<Member> fList = fService.selectFriendList(pi, userNo);
+		ArrayList<Member> fList = fService.selectFriendList(pi, userNo); // 친구 신청 보낸 사람의 친구 목록
 		
 		if(fList != null) {
 			model.addAttribute("pi", pi);
@@ -118,9 +118,9 @@ public class FriendController {
 				int resultFinal = fService.friendAdd(list); // 신청자와 받는 사람 정보 가져가서 친구 테이블에 데이터 넣기 status는 'n'으로
 			
 				if(resultFinal > 0) {			
-					return "redirect:friendList.fr";
+					return "redirect:friendList.fr"; // 최종 db에 삽입 결과 확인
 				} else {
-					throw new FriendException("친구 신청 실패"); // 최종 db에 삽입 결과 확인
+					throw new FriendException("친구 신청 실패"); 
 				}
 			} else {
 				throw new FriendException("이미 등록된 친구입니다.");
@@ -145,14 +145,14 @@ public class FriendController {
 		FriendPageInfo pi = FriendPagination.getPageInfo(friendCurrentPage, friendListCount, 5);
 		
 		ArrayList<FriendAdd> requestList = fService.requestList(userDetail);
-		
-		System.out.println(requestList);
-		
-		
-		
-//		ArrayList<Member> requestFriendList = fService.requestFriendList(pi, );
-		
-		return null;
+				
+		if(requestList != null) {
+			model.addAttribute("pi", pi);
+			model.addAttribute("requestList", requestList);
+			return "friend/friendRequestList";
+		} else {
+			throw new FriendException("친구 요청 목록 조회 실패");
+		}
 	}
 	
 //	 친구 요청 한거 볼 수 있는 페이지
