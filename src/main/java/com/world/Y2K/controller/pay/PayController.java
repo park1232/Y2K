@@ -75,7 +75,7 @@ public class PayController {
 	// 파일 저장소를 만드는 메소드(실제 파일이 들어갈 폴더)
 	public String[] addFile(MultipartFile file, HttpServletRequest request) {
 		
-		String uploadPath = "C:\\Users\\박유진\\Desktop\\uploadFolder/"; 
+		String uploadPath = "C:/upload/"; 
 		
 		UUID uuid = UUID.randomUUID();
 		

@@ -15,6 +15,75 @@
     	order by friends.friendNo desc
 	</select>
 	
+	<select id="selectMember" resultMap="memberResultSet">
+		select *
+		from member
+		where userNo = #{userNo}
+	</select>
+	
+	<select id="checkNickName" resultType="_int">
+		select count(*)
+		from member 
+		where NICKNAME = #{nickName}
+	</select>
+	
+	<insert id="friendAdd2">
+		insert into friendAdd
+        values(y2k_friendadd_seq.nextval, #{friendContent}, sysdate, #{userNo}, default, #{nickName})
+	</insert>
+	
+	<select id="searchAddUser" resultMap="memberResultSet">
+		select *
+		from member
+		where userNo = #{userNo}
+	</select>
+	
+	<select id="searchRequestUser" resultMap="memberResultSet">
+		select *
+		from member
+		where nickName = #{nickName}
+	</select>
+	
+	<insert id="friendAdd">
+		insert into friends
+		values(Y2K_FRIENDS_SEQ.nextval, default, #{addUser2}, #{requestUser2})
+	</insert>
+	
+	<select id="checkFriendList" resultType="_int">
+		select count(*)
+		from friends
+		where userNo2 = #{addUser2} and userNo3 = #{requestUser2} and FRIENDSTATUS = 'Y'
+	</select>
+	
+	<select id="selectFriendAcceptList" resultMap="memberResultSet">
+		select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid
+    	from member m
+        	join friends on (friends.userNo3 = m.userNo)
+    	where userNo2 = #{userNo} and friends.friendstatus = 'N'
+    	order by friends.friendNo desc
+	</select>
+	
+	<select id="checkFriendAdd" resultType="_int">
+		select count(*)
+		from friendAdd
+		where userNo = #{userNo} and friendStatus = 'Y' and nickName = #{nickName}
+	</select>
+	
+	<select id="requestList" resultMap="friendAddResultMap">
+		select *
+		from friendAdd
+		where nickName = #{nickName}
+	</select>
+	
+	<resultMap type="FriendAdd" id="friendAddResultMap">
+		<id column="FRIENDADDNO" property="friendAddNo"/>
+		<result column="FRIENDCONTENT" property="friendContent"/>
+		<result column="CREATEDATE" property="createDate"/>
+		<result column="USERNO" property="userNo"/>		
+		<result column="FRIENDSTATUS" property="friendStatus"/>		
+		<result column="NICKNAME" property="nickName"/>		
+	</resultMap>
+	
 	<resultMap type="Friends" id="friendsResultMap">
 		<id column="FRIENDNO" property="friendNo"/>
 		<result column="FRIENDSTATUS" property="friendStatus"/>

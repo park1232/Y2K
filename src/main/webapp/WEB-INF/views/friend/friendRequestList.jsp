@@ -29,6 +29,7 @@
             <li><a href="#" class="text-white">메인페이지</a></li>
             <li><a href="${contextPath}/friendment.pa" class="text-white">결제페이지</a></li>
             <li><a href="${contextPath}/purchaes.pa" class="text-white">구매페이지</a></li>
+            <li><a href="${contextPath}/friendList.fr" class="text-white">친구페이지</a></li>
           </ul>
         </div>
       </div>
@@ -46,53 +47,31 @@
     </div>
   </div>
 </header>
+${ fAList }
 <div class="main">
-
  <table class="table">
   <thead>
     <tr>
       <th scope="col" width="360px">친구 신청 목록</th>
-      <th scope="col" width="360px">이름</th>
+      <th scope="col" width="360px">ID</th>
       <th scope="col" width="360px">닉네임</th>
       <th scope="col" width="360px">상세보기</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>박규민</td>
-      <td>바보</td>
-      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
-    </tr>
- 	<tr>
-      <th scope="row">2</th>
-      <td>박규민</td>
-      <td>바보</td>
-      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>박규민</td>
-      <td>바보</td>
-      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td>박규민</td>
-      <td>바보</td>
-      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
-    </tr>
-    <tr>
-      <th scope="row">5</th>
-      <td>박규민</td>
-      <td>바보</td>
-      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
-    </tr>
+  <c:forEach items="${ fList }" var="fl">
+	    <tr>
+	      <th scope="row">count</th>
+	      <td>${ fl.username }</td>
+	      <td>${ fl.nickName }</td>
+	      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
+	    </tr>
+    </c:forEach>
   </tbody>
 </table>
 <div class="search">
 	 <select>
-     	<option>이름</option>
+     	<option>ID</option>
         <option>닉네임</option>
      </select>
      <input type="text" placeholder="검색어 입력">
@@ -118,7 +97,7 @@
 	                </c:if>
 	            </li>
 	            <li class="page-item">
-	            	<c:url var="PListBack" value="${ loc }">
+	            	<c:url var="FListBack" value="${ loc }">
 						<c:param name="page" value="${ pi.friendCurrentPage -1 }"/>
 					</c:url>
 					<c:if test="${ pi.friendCurrentPage <= 1 }">
@@ -143,7 +122,7 @@
 							<c:url var="FListCheck" value="${ loc }">
 								<c:param name="page" value="${ p }"/>
 							</c:url>
-							<li class="page-item"><a class="page-link" href="${ PListCheck }">${ p }</a></li>
+							<li class="page-item"><a class="page-link" href="${ FListCheck }">${ p }</a></li>
 						</c:if>
 	            	</c:forEach>
 	            </li>
@@ -178,7 +157,7 @@
 					</c:if>
 	            </li>
 	        </ul>
-    </div>
+    	</div>
 </div>
     <br>
 <br>

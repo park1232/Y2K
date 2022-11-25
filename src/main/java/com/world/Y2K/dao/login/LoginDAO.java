@@ -25,12 +25,16 @@ public class LoginDAO {
 		
 	}
 	
-	public int checkUser(String username) {
-		return sqlSession.selectOne("memberMapper.checkUser", username);
+	public int checkId(String username) {
+		return sqlSession.selectOne("memberMapper.checkId", username);
 	}
 	
 	public int updateNickname(HashMap<String, Object> map) {
 		return sqlSession.update("memberMapper.updateNickname", map);
+	}
+
+	public int checkNickname(String nickname) {
+		return sqlSession.selectOne("memberMapper.checkNickname", nickname);
 	}
 	
 

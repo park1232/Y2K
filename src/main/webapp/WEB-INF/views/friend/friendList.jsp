@@ -27,8 +27,9 @@
         <div class="col-sm-4 offset-md-1 py-4">
           <ul class="list-unstyled">
             <li><a href="#" class="text-white">메인페이지</a></li>
-            <li><a href="${contextPath}/friendment.pa" class="text-white">결제페이지</a></li>
+            <li><a href="${contextPath}/payment.pa" class="text-white">결제페이지</a></li>
             <li><a href="${contextPath}/purchaes.pa" class="text-white">구매페이지</a></li>
+            <li><a href="${contextPath}/friendRequestList.fr" class="text-white">친구 요청 페이지</a></li>
           </ul>
         </div>
       </div>
@@ -46,7 +47,6 @@
     </div>
   </div>
 </header>
-${ fList }
 <div class="main">
    <table class="table">
   <thead>
@@ -59,20 +59,18 @@ ${ fList }
   </thead>
   <tbody>
   	<c:forEach items="${ fList }" var="f">
-  	<c:forEach begin="1" end="99" step="1" var="count">
 	    <tr>
 	      <th scope="row">count</th>
-	      <td>${ f.userName }</td>
+	      <td>${ f.username }</td>
 	      <td>${ f.nickName }</td>
 	      <td><input type="checkbox" id="friend" name="using"></td>
 	    </tr>
 	</c:forEach>
-    </c:forEach>
   </tbody>
 </table>
 <div class="search">
 	 <select>
-     	<option>이름</option>
+     	<option>ID</option>
         <option>닉네임</option>
      </select>
      <input type="text" placeholder="검색어 입력">
@@ -97,7 +95,7 @@ ${ fList }
 	                </c:if>
 	            </li>
 	            <li class="page-item">
-	            	<c:url var="PListBack" value="${ loc }">
+	            	<c:url var="FListBack" value="${ loc }">
 						<c:param name="page" value="${ pi.friendCurrentPage -1 }"/>
 					</c:url>
 					<c:if test="${ pi.friendCurrentPage <= 1 }">
@@ -122,7 +120,7 @@ ${ fList }
 							<c:url var="FListCheck" value="${ loc }">
 								<c:param name="page" value="${ p }"/>
 							</c:url>
-							<li class="page-item"><a class="page-link" href="${ PListCheck }">${ p }</a></li>
+							<li class="page-item"><a class="page-link" href="${ FListCheck }">${ p }</a></li>
 						</c:if>
 	            	</c:forEach>
 	            </li>
@@ -160,7 +158,7 @@ ${ fList }
     </div>
     <br>
     <div class="friendOption">
-	    <button type="button" class="btn btn-primary" onclick="window.open('friendAdd.html', 'friendAdd', 'width=460, height=570')">친추추가</button>
+	    <button type="button" class="btn btn-primary" onclick="window.open('${ contextPath }/friendAdd.fr', 'friendAdd', 'width=460, height=570')">친추추가</button>
 	    <button type="button" class="btn btn-primary">친구삭제</button>
     </div>
 </div>
@@ -171,4 +169,7 @@ ${ fList }
               <a href="#">Y2K</a>
         </div>
 </footer>
+<script>
+
+</script>
 </html>

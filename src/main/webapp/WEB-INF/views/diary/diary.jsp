@@ -87,73 +87,74 @@
                 </div>
                 <div class="main">
                	 	<form action="${ contextPath }/diary3.di" method="POST">
-                  <div class="home_contents">
-			<div class="c">
-			<h2>날짜별보기</h2>
-			</div>
-			
-			<div class="calendar">
-				<div id="datepicker">
-					<input type="hidden" id="hiddenDate" name="datepicker">
-				</div>
-			</div>
-			
-			<div class="m">
-				<h2>지도별보기</h2>
-			</div>
-			
-			<div class="map">
-				<img src="${ contextPath }/resources/img/map.png" id="mapImg">
-			</div>
-			
-			<div class="write">
-			<input type="text" id="mapValue" name="mapValue" readonly>
-				<button id="writeBtn">글쓰기</button>
-			</div>
-        <div class="diary">
-			<div class="diary_contents">
-            	<table>
-            		<tr>
-            			<td width="100px;">30</td>
-            			<td>안녕!</td>
-            		</tr>
-            	</table>
-			</div>
-			<div class="diary_contents">
-            	<table>
-            		<tr>
-            			<td width="100px;">25</td>
-            			<td>오늘은 경복궁감</td>
-            		</tr>
-            	</table>
-			</div>
-			<div class="diary_contents">
-            	<table>
-            		<tr>
-            			<td width="100px;">15</td>
-            			<td>초밥먹음</td>
-            		</tr>
-            	</table>
-			</div>
-			<div class="diary_contents">
-            	<table class="test111">
-            		<tr>
-            			<td width="100px;">11</td>
-            			<td>오늘은 DB모델링 다 끝냈다~</td>
-            		</tr>
-            	</table>
-			</div>
-			<div class="diary_contents">
-            	<table>
-            		<tr>
-            			<td width="100px;">7</td>
-            			<td>야호</td>
-            		</tr>
-            	</table>
-			</div>
-		</div>
-                </div>
-                </form>
+						<div class="c">
+							<h2>날짜별보기</h2>
+						</div>
+						
+						<div class="calendar">
+							<div id="datepicker">
+								<input type="hidden" id="hiddenDate" name="datepicker">
+							</div>
+						</div>
+						
+						<div class="m">
+							<h2>지도별보기</h2>
+						</div>
+						
+						<div class="map">
+							<img src="${ contextPath }/resources/img/map.png" id="mapImg">
+						</div>
+						
+						<div class="write">
+							<input type="text" id="mapValue" name="mapValue" readonly>
+							<button type="submit" id="writeBtn">글쓰기</button>
+						</div>
+					</form>
+					
+					<form>
+				        <div class="diary">
+							<div class="diary_contents">
+				            	<table>
+				            		<tr>
+				            			<td width="100px;">30</td>
+				            			<td>안녕!${ loginUser.nickName }</td>
+				            		</tr>
+				            	</table>
+							</div>
+							<div class="diary_contents">
+				            	<table>
+				            		<tr>
+				            			<td width="100px;">25</td>
+				            			<td>오늘은 경복궁감</td>
+				            		</tr>
+				            	</table>
+							</div>
+							<div class="diary_contents">
+				            	<table>
+				            		<tr>
+				            			<td width="100px;">15</td>
+				            			<td>초밥먹음</td>
+				            		</tr>
+				            	</table>
+							</div>
+							<div class="diary_contents">
+				            	<table class="test111">
+				            		<tr>
+				            			<td width="100px;">11</td>
+				            			<td>오늘은 DB모델링 다 끝냈다~</td>
+				            		</tr>
+				            	</table>
+							</div>
+							<div class="diary_contents">
+				            	<table>
+				            		<tr>
+				            			<td width="100px;">7</td>
+				            			<td>야호</td>
+				            		</tr>
+				            	</table>
+							</div>
+						</div>
+           			 </form>    
               </div>
               
               <div class = "menu align-center expanded text-center SMN_effect-68">
