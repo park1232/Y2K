@@ -86,6 +86,7 @@ public class KakaoLoginService extends SocialLoginServiceTemplate{
 						.username(userInfo.get("username"))
 						.password(bCryptPasswordEncoder.encode(userInfo.get("password")))
 						.nickName("null")
+						.email("null")
 						.status("Y")
 						.orange(0L)
 						.role("ROLE_USER")
