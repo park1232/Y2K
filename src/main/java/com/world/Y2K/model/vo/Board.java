@@ -16,7 +16,6 @@ public class Board {
 	private Date modifyDate;
 	private Long boardCount;
 	private String boardStatus;
-	private String boardTypeId;
 	private Long boardWriter;
 	private String boardCateId;
 }
