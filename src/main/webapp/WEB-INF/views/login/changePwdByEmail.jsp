@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>비밀번호 찾기</title>
-    <link rel="stylesheet" href="../css/SearchPwd.css">
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
     <style>
     .custom-btn {
@@ -143,7 +142,6 @@
     
     
   </div>
-   <script src="../js/ChangePwdByEmail.js"></script> 
    <script>
    
 
