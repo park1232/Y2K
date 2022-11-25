@@ -50,6 +50,7 @@ public class DiaryController {
 //		ModelAndView mv = new ModelAndView();
 //		mv.setViewName("diary/diary");
 //		mv.addObject("loginUser",userDetails.getMember());
+		System.out.println("제발..");
 		HttpSession session =  request.getSession();
 		session.setAttribute("loginUser", userDetails.getMember());
 		model.getAttribute("loginUser");
