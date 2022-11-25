@@ -100,9 +100,9 @@
 										<!--${dto.member.userNo} -->
 										<%-- ${dto.member} --%>
 										<%-- ${images} --%>
-										<input type="hidden" name="rNickName" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.nickName}">
+										<input type="hidden" name="nickName" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.nickName}">
 										<c:forEach var="image" items="${images}">
-										
+											${image}
 											<div class="img-box">
 												<img id="imgOne"class="imgOne"  src="/upload/${image.renameName}"/>
 												<input type="hidden" name="boardNo" id="boardNo" value=${image.boardNo }>

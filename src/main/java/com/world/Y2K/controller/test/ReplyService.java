@@ -4,6 +4,6 @@ import java.util.Map;
 
 public interface ReplyService {
 
-	Map<String, Object> insertReply(String content, Long boardNo, String rNickName,Long userNo);
+	Map<String, Object> insertReply(String content, Long boardNo, String nickName,Long userNo);
 
 }

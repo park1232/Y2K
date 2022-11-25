@@ -1,19 +1,13 @@
 package com.world.Y2K.service.photo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.world.Y2K.dao.photo.PhotoDAO;
-import com.world.Y2K.model.entity.PhotoEntity;
 import com.world.Y2K.model.vo.Photo;
 import com.world.Y2K.model.vo.Reply;
 import com.world.Y2K.service.PhotoStore;
@@ -32,6 +26,7 @@ public class PhotoServiceImpl extends PhotoStore implements PhotoService {
 	
 	@Autowired
 	private PhotoDAO pDAO;
+	
 	
 	private String uploadFolder ="C:/Users/82107/Desktop/upload/";
 	
@@ -66,6 +61,8 @@ public class PhotoServiceImpl extends PhotoStore implements PhotoService {
 	
 	@Override
 	public ArrayList<Reply> selectReply(Long boardNo) {
+		
+		System.out.println(boardNo);
 		
 		return pDAO.selectReply(sqlSession, boardNo);
 	}

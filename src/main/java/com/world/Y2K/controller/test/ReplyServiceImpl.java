@@ -19,20 +19,20 @@ public class ReplyServiceImpl implements ReplyService{
 	private ReplyDAO rDAO;
 
 	@Override
-	public Map<String, Object> insertReply(String content, Long boardNo, String rNickName, Long userNo) {
+	public Map<String, Object> insertReply(String content, Long boardNo, String nickName, Long userNo) {
 		
 //		Photo photo = new Photo();
 //		photo.setBoardNo(boardNo);
 		
-		System.out.println("서비스 : " + content);
-		System.out.println("서비스 : " + boardNo);
-		System.out.println("서비스 : " + rNickName);
-		System.out.println("서비스 : " + userNo);
+//		System.out.println("서비스 : " + content);
+//		System.out.println("서비스 : " + boardNo);
+//		System.out.println("서비스 : " + rNickName);
+//		System.out.println("서비스 : " + userNo);
 		
 		
 		HashMap<String, Object> map = new HashMap<String,Object>();
 		map.put("content", content);
-		map.put("rNickname", rNickName);
+		map.put("nickname", nickName);
 		map.put("boardNo", boardNo);
 		map.put("userNo", userNo);
 		rDAO.insertReply(sqlSession, map);

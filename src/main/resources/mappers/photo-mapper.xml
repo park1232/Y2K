@@ -75,13 +75,20 @@
    
    <select id="selectReply" resultMap="replyResultSet">
 	 	select *
-	 	from reply
-	 		join photo on(boardNo =REF_BOARDNO)
+	 	from reply r
+	 		left join photo p on(boardNo =REF_BOARDNO)
+            left join member m using(userno)
 	 	where REF_BOARDNO = #{boardNo} and reply_status = 'Y'
 	 	order by REPLYNO desc
 	 </select>
+<!-- 	 
+	select nickname m , reply_content r
+	 	from member m
+            join photo p using(userno)
+	 		join reply r on(boardNo =REF_BOARDNO) 
+	 	where REF_BOARDNO = #{boardNo} and reply_status = 'Y'
+	 	order by REPLYNO desc -->
 
-   
    
    
 </mapper>
