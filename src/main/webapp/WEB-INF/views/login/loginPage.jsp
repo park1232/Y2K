@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="kor">
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,9 +81,13 @@
                 </form>
                 <br>
          		<button class="Kakao" onclick="kakao();">Kakao</button>
+         		<br>
+         		<button class="Kakao" onclick="naver();">Naver</button>
+         		<br>
+         		<div class="g-signin2" data-onsuccess="onSignIn"></div>
+
                 <p>
                   <b>
-                    <div id="forgot"><a href="#" style="text-decoration: none; color:black; font-size: 7px;">아이디 또는 비밀번호를 잊어버리셨나요?</a></div>
                   </b>
                 </p>
                 <p>
@@ -146,6 +151,7 @@
       </div>
 </body>
 <script src="${contextPath}/resources/js/loginPage_js.js"></script>
+
 
 
 </html>

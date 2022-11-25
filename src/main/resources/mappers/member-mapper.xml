@@ -33,5 +33,11 @@
    	where status='Y'
    </select>
    
+   <update id="updateNickname">
+   		update Member
+   		set nickname = #{nickname}
+   		where userNo=#{userNo}
+   </update>
+   
    
 </mapper>
