@@ -27,7 +27,8 @@ public class EditNicknameServiceImpl implements EditNicknameService{
 		if(loginDAO.updateNickname(map)==0) {
 			throw new MemberException("닉네임 수정에 실패하였습니다.");
 		}
-		
+		Member loginUser = loginDAO.findUser(member.getUsername());
+		mv.addObject("loginUser", loginUser);
 		mv.setViewName("/login/loginSuccess");
 		return mv;
 		

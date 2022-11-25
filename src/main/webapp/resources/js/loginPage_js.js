@@ -31,6 +31,8 @@ const facebook = () =>{
 	window.location.href="http://www.facebook.com/v15.0/dialog/oauth?client_id=641158651025103&redirect_uri=http://localhost:8080/httpsfacebook.lo&state=STATE_STRING"
 }
 
+
+
 /*
 *$('#loginBtn').click(function(){
 *  window.open('test3.html','tistory','width=1289, height=703, scrollbars=no, resizable=no, toolbars=no, menubar=no');

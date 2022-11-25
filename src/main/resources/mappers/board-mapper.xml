@@ -13,21 +13,19 @@
 		 <result column="MODIFY_DATE" property="modifyDate" />
 		 <result column="BOARD_COUNT" property="boardCount" />
 		 <result column="BOARD_STATUS" property="boardStatus" />
-		 <result column="BOARD_TYPEID" property="boardTypeId" />
 		 <result column="BOARD_WRITER" property="boardWriter" />
 		 <result column="BOARD_CATEID" property="boardCateId" />
 	 </resultMap>
 	 
 	 <resultMap type="Reply" id="replyResultSet">
-		 <id column="REPLYNO" property="replyId"/>
+		 <id column="REPLYNO" property="replyNo"/>
 		 <result column="REPLY_CONTENT" property="replyContent" />
 		 <result column="NICKNAME" property="nickName" />
-		 <result column="R_CREATEDATE" property="r_CreateDate" />
-		 <result column="R_MODIFYDATE" property="r_ModifyDate" />
+		 <result column="R_CREATEDATE" property="rCreateDate" />
+		 <result column="R_MODIFYDATE" property="rModifyDate" />
 		 <result column="REPLY_STATUS" property="replyStatus" />
 		 <result column="REPLY_WRITER" property="replyWriter" />
-		 <result column="R_BOARDNO" property="r_boardNo" />
-		 <result column="REPLY_TYPEID" property="replyTypeId" />
+		 <result column="REF_BOARDNO" property="rboardNo" />
 	 </resultMap>
 	 
 	<select id="getBoardListCount" resultType="_int">
@@ -42,7 +40,7 @@
 	</select>
 	
 	<insert id="insertBoard">
-		insert into board values(BOARD_SEQ.nextval, #{boardTitle}, #{boardContent}, sysdate, sysdate, default, default, #{boardTypeId}, #{boardWriter}, #{boardCateId})
+		insert into board values(BOARD_SEQ.nextval, #{boardTitle}, #{boardContent}, sysdate, sysdate, default, default, #{boardWriter}, #{boardCateId})
 	</insert>
 	
 	<update id="boardCount">
@@ -58,10 +56,61 @@
 		where board_status = 'Y' and boardNo = #{bNo}
 	</select>
 	
+	
+	<select id="getSearchListCount" parameterType="map" resultType="_int">
+		select count(*) from board b
+						join member on(board_writer = userno)
+		where board_status = 'Y'
+		<if test="condition == 'writer'">
+			and nickname like '%' || #{value} || '%'
+		</if>
+		<if test="condition == 'title'">
+			and board_title like '%' || #{value} || '%'
+		</if>
+		<if test="condition == 'content'">
+			and board_content like '%' || #{value} || '%'
+		</if>
+	</select>
+	
+	<select id="selectSearchList" parameterType="hashmap" resultMap="boardResultSet">
+		select * from board
+					join member on(board_writer = userno)
+		where board_status = 'Y'
+		<choose>
+			<when test="condition == 'writer'">
+				and nickname like '%' || #{value} || '%'
+			</when>
+			<when test="condition == 'title'">
+				and board_title like '%' || #{value} || '%'
+			</when>
+			<otherwise>
+				and board_content like '%' || #{value} || '%'
+			</otherwise>
+		</choose>
+		order by boardNo desc
+	</select>
+	
+	<update id="updateBoard">
+		update board
+		set board_title = #{boardTitle}, board_content = #{boardContent}, modify_date = sysdate 
+		where boardNo = #{boardNo}
+	</update>
+	
+	<update id="deleteBoard">
+		update board
+		set board_status = 'N'
+		where boardNo = #{bNo}
+	</update>
+	
 	<select id="selectReply" resultMap="replyResultSet">
 		select * from reply
 		join member on(reply_writer = userno)
-		where r_boardNo = #{bNo} and reply_status = 'Y'
+		where ref_boardNo = #{bNo} and reply_status = 'Y'
 		order by replyno desc
 	</select>
+	
+	<insert id="insertReply">
+		insert into reply 
+		values(REPLY_SEQ.nextval, #{replyContent}, sysdate, sysdate, default, #{replyWriter}, #{rboardNo})
+	</insert>
 </mapper>
