@@ -78,7 +78,7 @@
         <br>
         <form id="detailForm">
         <input type="hidden" value="${b.boardNo}" name="boardNo">
-		<input type="hidden" value="${page }" name="page">
+		<input type="hidden" value="${page}" name="page">
         <table>
         <thead>
             <tr id="titlebar" style="text-align: center;">
@@ -134,25 +134,32 @@
          
          <div id="replyDiv">
             <table>
+            	<thead>
                 <tr>
-                    <td colspan="2">
-                        <textarea id="reply" rows="3" cols="50" id="replyContent" style="resize: none;" placeholder='일촌에게 댓글을 작성해보세요!'></textarea>
-                    </td>
-                    <td>
-  					    <div id="replyButton"><button class="button btnBorder btnOrange" onclick="location.href='${contextPath}/insertBoardReply.bo'">등록</button></div>
-                    </td>
+                    <th colspan="2">
+                        <textarea rows="3" cols="50" id="replyContent" style="resize: none;" placeholder='일촌에게 댓글을 작성해보세요!'></textarea>
+                    </th>
+                    <th>
+  					    <div id="replyButton"><button class="button btnBorder btnOrange" id="replySubmit" type="button">등록</button></div>
+                    </th>
                 </tr>
+                </thead>
+                			<tr>
+								<th width="80px">작성자</th>
+								<th>작성내용</th>
+								<th>작성일자</th>
+							</tr>
                 <tbody id="replyList">
                 <c:forEach items="${list}" var="r">
                             <tr>
                                 <td width="80px">${r.nickName}</td>
                                 <td>${r.replyContent }</td>
-                                <td>${r.r_createDate }</td>
+                              <%--   <td>${r.rCreateDate }</td> --%>
                             </tr>
                 </c:forEach>
                 </tbody>
             </table>
-            
+       
             <div><hr class="hrB" id="down"></div>
         </div>
         </form>
@@ -193,7 +200,7 @@
 			}
 			
 			document.getElementById('deleteForm').addEventListener('click', ()=> {
-				 if (confirm("게시글을 삭제하시겠습니까?") == true){ 
+				 if (confirm("게시글을 삭제하시겠습니까?")){ 
 						form.action = '${contextPath}/deleteForm.bo';
 						form.submit();
 					 }else{
@@ -244,6 +251,47 @@
             });
 
           });
+            
+           
+           //댓글
+           
+           document.getElementById('replySubmit').addEventListener('click', ()=>{
+        	   $.ajax({
+        		   url:'${contextPath}/insertReply.bo',
+        		   data:{replyContent: document.getElementById('replyContent').value,
+        			   rboardNo:${b.boardNo}, replyWriter:'${b.boardWriter}'},
+        		success: (data) => {
+        			console.log(data);
+        			const tbody = document.querySelector('tbody');
+        			tbody.innerHTML = '';
+        			
+        			for(const r of data) {
+        				const tr = document.createElement('tr');
+        				
+        				const writerTd = document.createElement('td');
+						writerTd.innerText = r.nickName;
+						const contentTd = document.createElement('td');
+						contentTd.innerText = r.replyContent;
+						const dateTd = document.createElement('td');
+						dateTd.innerText = r.rModifyDate;
+						
+						tr.append(writerTd);
+						tr.append(contentTd);
+						tr.append(dateTd);
+						
+						tbody.append(tr);
+        			}
+        			
+        			document.getElementById('replyContent').value = '';
+        		
+        			},
+        			error: (data) => {
+        				console.log(data);
+        			}
+        			
+        		   
+        	   });
+           });
           
       </script>
 </body>

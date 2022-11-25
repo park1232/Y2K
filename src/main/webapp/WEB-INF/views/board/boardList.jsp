@@ -75,8 +75,8 @@
 	<div class="main">
 	
 	  <img id="cyimg" src="${contextPath}/resources/img/cyimg.png"/><br>
-	  <div id="boardMain">자유게시판</div>
-        <i class="fas fa-edit" onclick="location.href='${contextPath}/boardWrite.bo'"></i>
+	  <div id="boardMain" onclick="location.href='${contextPath}/boardList.bo'">Y2K WORLD</div>
+        <div id="writeStyle"><i class="fas fa-edit" onclick="location.href='${contextPath}/boardWrite.bo'"></i></div>
         <br>
     <table>
         <thead>
@@ -133,16 +133,16 @@
         </li>  
     </ul>
     <br>
-    <div class="search-box">
-        <select id="searchOption">
-            <option>작성자</option>
-            <option>제목</option>
-            <option>내용</option>
+    <div class="searchArea">
+        <select id="searchCondition" name="searchCondition">
+            <option>---------</option>
+            <option value="writer">작성자</option>
+            <option value="title">제목</option>
+            <option value="content">내용</option>
         </select>
-        <span action="." method="post">
-          <input class="search-txt" type="text" placeholder="검색어를 입력해 주세요">
-          <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
-        </span>
+        
+          <input id="searchValue" type="search" placeholder="검색어를 입력해 주세요">
+          <button id="searchBoardButton" onclick="searchBoard();"><i class="fas fa-search"></i></button>
     </div>
     <p class="p">Web Site Shortcuts.
         <a href="https://cyworld.com" target="_blank" id="cyLink" >See cyworld MainPage</a>.</p>
@@ -181,7 +181,16 @@
     				location.href='${contextPath}/selectBoard.bo?bNo=' + boardNo + '&writer=' + writer + '&page=' + ${pi.currentPage};
     			});
     		}
+    		
     	}
+		const searchBoard = () => {
+				
+				 const searchCondition = document.getElementById("searchCondition").value;
+				 const searchValue = document.getElementById("searchValue").value;
+				 
+				 location.href='${contextPath}/search.bo?searchCondition=' + searchCondition + "&searchValue=" + searchValue;
+				
+		}
     </script>
 
 </body>

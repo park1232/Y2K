@@ -89,7 +89,7 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
               <form action="insertVisit.vi">
               <table>
                   <tr>
-                      <td><div class="minimi-border"><img class="photo" src="${contextPath}/resources/img/minimi/0.gif"/ name="ranimage"></img></div></td>
+                      <td><div class="minimi-border"><img class="photo" src="${contextPath}/resources/img/minimi/0.gif" name="ranimage"></img></div></td>
                       <td></td><td></td>
                       <td><textarea id="writeboard" placeholder="방명록을 작성해주세요"></textarea></td>
                       <td></td>
@@ -100,6 +100,19 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
           </div>
       </div>
       <hr class="hr-2">
+      
+<%--        	<div class="visitor_content">
+              <br>
+              <table>
+                  <tr>
+                      <td><div class="minimi-border"><img class="photo" src="${contextPath}/resources/img/minimi/0.gif" name="ranimage"></img></div></td>
+                      <td></td><td></td>
+                      <td><textarea id="writeboard" placeholder="방명록을 작성해주세요"></textarea></td>
+                      <td></td>
+                      <td><div onclick="Toggle4()" id="btnh" class="btn"><i class="far fa-heart"></i></div></td>
+                  </tr>
+              </table>
+          </div>  --%>
 
               </div>
               <div class = "menu align-center expanded text-center SMN_effect-68">
@@ -130,5 +143,18 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
 
         document.ranimage.src="${contextPath}/resources/img/minimi/" + Math.round(Math.random()*3+.4)+".gif";
       </script>
+      
+      <script>
+	      var btnvar4 = document.getElementById('btnh');
+	      function Toggle4(){
+	        if(btnvar4.style.color=="red"){
+	          btnvar4.style.color="grey";
+	          btnvar4.innerHTML = '<i class="far fa-heart"></i>';
+	        } else {
+	          btnvar4.style.color = "red";
+	          btnvar4.innerHTML = '<i class="fas fa-heart"></i>';
+	        }
+	      }
+    </script>
 </body>
 </html>
