@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" scope="application" />
 <!DOCTYPE html>
 <html lang="ko">
@@ -47,11 +48,11 @@
                       <div class="dropdown-title">친구와 채팅</div>
                       <div class="triangle-down"></div>
                     </div>
-                   <div class="dropdown-content">
-                    <a href="${contextPath}/chat/chat.html">김지인</a>
-                    <a href="${contextPath}/chat/chat.html">박규민</a>
-                    <a href="${contextPath}/chat/chat.html">조소연</a>
-                    <a href="${contextPath}/chat/chat.html">김민주</a>
+                   <div class="dropdown-content" id="chatList">
+	                    <a href="${contextPath}/chat/chat.html">김지인</a>
+	                    <a href="${contextPath}/chat/chat.html">박규민</a>
+	                    <a href="${contextPath}/chat/chat.html">조소연</a>
+	                    <a href="${contextPath}/chat/chat.html">김민주</a>
                   </div>
                   </div>
                 </div>
@@ -148,6 +149,78 @@
       </main>
       
     </div>
+     
+     <script>
+     	
+    	let countAll = 0;
+    	
+    	function getRoomList(){
+    		//채팅 방 목록 가져오기
+    		
+    		$.ajax({
+    			url:"chatRoomList.ch",
+    			data:{
+    				nickname:"${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.nickName}"
+    			},
+    			dataType:"json",
+    			//async: false를 줌으로써 비동기를 동기로 처리한다
+    			async:false,
+    			success: function(data){
+    				//로그인한 친구들 목록
+    				let loginList = "";
+    				//로그인 유저
+    				$.ajax({
+    					url: "chatSession.ch",
+    					data:{
+    					},
+    					async:false,
+    					dataType: "json",
+    					success: function(data){
+    						for(let i =0; i<data.length; i++){
+    							loginList += data[i];
+    						}
+    					}
+    				});
+    			
+    				$chatWrap = $("#chatList");
+    				$chatWrap.
+    				
+    				
+    				
+    			}
+    		})
+    	}
+    	
+    	
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     </script>
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
      
   </body>
 </html>
