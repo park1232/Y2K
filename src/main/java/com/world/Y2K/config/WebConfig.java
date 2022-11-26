@@ -3,6 +3,7 @@ package com.world.Y2K.config;
 import javax.servlet.Filter;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 
@@ -16,8 +17,7 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-
-		return new Class[] {ServletContext.class};
+		return new Class[] {ServletContext.class, WebSocketConfig.class};
 	}
 
 	@Override
@@ -33,9 +33,8 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 	     characterEncodingFilter.setEncoding("UTF-8");
 	     characterEncodingFilter.setForceEncoding(true);
 	    
-
-	    
 	    return new Filter[] { characterEncodingFilter };
-		
 	}
+	
+
 }
