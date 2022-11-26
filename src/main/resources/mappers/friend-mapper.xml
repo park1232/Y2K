@@ -8,12 +8,12 @@
 	</select>
 
 	<select id="selectFriendList" resultMap="memberResultSet">
-		select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid
+		select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid, m.email
     	from member m
         	join friends on (friends.userNo3 = m.userNo)
     	where userNo2 = #{userNo} and friends.friendstatus = 'Y'
     	UNION
-    	select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid
+    	select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid, m.email
     	from member m
         	join friends on (friends.userNo2 = m.userNo)
     	where userNo3 = #{userNo} and friends.friendstatus = 'Y'
@@ -77,10 +77,17 @@
 		where userNo = #{userNo} and friendStatus = 'Y' and nickName = #{nickName}
 	</select>
 	
-	<select id="requestList" resultMap="friendAddResultMap">
-		select *
-		from friendAdd
-		where nickName = #{nickName}
+	<select id="requestList" resultMap="memberResultSet">
+		select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid, m.email
+        from friendAdd f
+            join member m on (f.userNo = m.userNo)
+        where f.nickName = #{nickName}
+	</select>
+	
+	<select id="checkFriendAddSelf" resultType="_int">
+		select count(*)
+		from Member
+		where userNo = #{userNo}
 	</select>
 	
 	<resultMap type="FriendAdd" id="friendAddResultMap">

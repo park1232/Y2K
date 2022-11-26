@@ -34,6 +34,8 @@ public interface FriendService {
 
 	int checkFriendAdd(FriendAdd fa);
 
-	ArrayList<FriendAdd> requestList(Member userDetail);
+	ArrayList<Member> requestList(String nickName, FriendPageInfo pi);
+
+	int checkFriendAddSelf(FriendAdd fa);
 
 }

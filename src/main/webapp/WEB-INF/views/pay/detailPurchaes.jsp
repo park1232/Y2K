@@ -50,26 +50,40 @@
 			        <button type="button" class="btn btn-primary" id="order">구매하기</button>
 			        <button type="button" class="btn btn-primary" onClick='window.close()'>취소하기</button>
 			        <!-- 로그인 구현되면 if:test넣기 -->
-					<c:if test="${ userRole eq ROLE_ADMIN }">
+			        <c:if test="${ userRole eq 'ROLE_ADMIN' }">
 			        	<button type="button" class="btn btn-primary" id="delete">삭제하기</button>
 			        	<button type="button" class="btn btn-primary" id="update">수정하기</button>
-			        </c:if>        
+		    		</c:if>
 		    	</div>
 	</form>
 </div>
 	<script>
         window.onload = () =>{
-        	const deleteForm = document.getElementById('detailForm');
-        	document.getElementById("delete").addEventListener('click', ()=>{
-				deleteForm.action = '${contextPath}/deletePurchaes.pa';
-				deleteForm.submit();
-        	});
-			
+        	
         	const orderForm = document.getElementById('detailForm');
 		    document.getElementById("order").addEventListener('click', ()=>{
 				orderForm.action = '${contextPath}/orderPurchaes.pa';
 				orderForm.submit();
 			});
+		    
+		    const result = '${result}';
+		    if(result != ''){
+		    	self.close();
+		    }
+		    
+        	const deleteForm = document.getElementById('detailForm');
+        	document.getElementById("delete").addEventListener('click', ()=>{
+				deleteForm.action = '${contextPath}/deletePurchaes.pa';
+				deleteForm.submit();
+        	});
+        	
+        	const result1 = '${result1}';
+        	console.log('${result1}');
+        	const result2 = '${result2}';
+        	console.log('${result2}');
+		    if(result1 != '' && result2 != ''){
+		    	self.close();
+		    }
 		    
 		    const updateForm = document.getElementById('detailForm');
 		    document.getElementById("update").addEventListener('click', ()=>{
@@ -78,6 +92,5 @@
 			});		
         } 
     </script>
-
 </body>
 </html>

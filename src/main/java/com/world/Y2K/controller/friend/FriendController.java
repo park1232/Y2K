@@ -111,16 +111,21 @@ public class FriendController {
 		
 		int checkFriendAdd = fService.checkFriendAdd(fa); // 이미 요청을 보냈는지 확인
 		int checkFriendList = fService.checkFriendList(list); // 이미 친구 인지 확인
+		int checkFriendAddSelf = fService.checkFriendAddSelf(fa); // 자기 자신에게 보내는지 확인
 		
 		if(checkFriendAdd == 0) {
 			if(checkFriendList == 0) {
-				int result = fService.friendAdd2(fa); // 친구 신청 테이블에 요청 데이터 넣기
-				int resultFinal = fService.friendAdd(list); // 신청자와 받는 사람 정보 가져가서 친구 테이블에 데이터 넣기 status는 'n'으로
-			
-				if(resultFinal > 0) {			
-					return "redirect:friendList.fr"; // 최종 db에 삽입 결과 확인
+				if(checkFriendAddSelf == 0) {
+					int result = fService.friendAdd2(fa); // 친구 신청 테이블에 요청 데이터 넣기
+					int resultFinal = fService.friendAdd(list); // 신청자와 받는 사람 정보 가져가서 친구 테이블에 데이터 넣기 status는 'n'으로
+				
+					if(resultFinal > 0) {			
+						return "redirect:friendList.fr"; // 최종 db에 삽입 결과 확인
+					} else {
+						throw new FriendException("친구 신청 실패"); 
+					}
 				} else {
-					throw new FriendException("친구 신청 실패"); 
+					throw new FriendException("자신한테는 친구 요청을 할 수 없습니다.");
 				}
 			} else {
 				throw new FriendException("이미 등록된 친구입니다.");
@@ -133,7 +138,9 @@ public class FriendController {
 	@RequestMapping("/friendRequestList.fr")
 	public String friendRequestList(@RequestParam(value="page", required=false) Integer page, Model model, Authentication authentication) throws FriendException {
 		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
-		Member userDetail = userdetails.getMember();
+		String nickName = userdetails.getMember().getNickName();
+		System.out.println("나오냐?");
+		System.out.println(nickName);
 		
 		int friendCurrentPage = 1;
 		
@@ -144,8 +151,9 @@ public class FriendController {
 		int friendListCount = fService.getFriendListCount();
 		FriendPageInfo pi = FriendPagination.getPageInfo(friendCurrentPage, friendListCount, 5);
 		
-		ArrayList<FriendAdd> requestList = fService.requestList(userDetail);
-				
+		ArrayList<Member> requestList = fService.requestList(nickName, pi);	
+		
+		System.out.println(requestList);
 		if(requestList != null) {
 			model.addAttribute("pi", pi);
 			model.addAttribute("requestList", requestList);

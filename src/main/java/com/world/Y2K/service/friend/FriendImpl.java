@@ -83,7 +83,12 @@ public class FriendImpl implements FriendService{
 	}
 	
 	@Override
-	public ArrayList<FriendAdd> requestList(Member userDetail) {
-		return friendDAO.requestList(sqlSession, userDetail);
+	public ArrayList<Member> requestList(String nickName, FriendPageInfo pi) {
+		return friendDAO.requestList(sqlSession, pi, nickName);
+	}
+	
+	@Override
+	public int checkFriendAddSelf(FriendAdd fa) {
+		return friendDAO.checkFriendAddSelf(sqlSession, fa);
 	}
 }

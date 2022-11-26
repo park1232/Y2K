@@ -18,7 +18,6 @@
 </head>
 <body>
 <header>
-${ requestList }
   <div class="collapse bg-dark" id="navbarHeader">
     <div class="container">
       <div class="row">
@@ -48,7 +47,6 @@ ${ requestList }
     </div>
   </div>
 </header>
-${ fAList }
 <div class="main">
  <table class="table">
   <thead>
@@ -60,11 +58,11 @@ ${ fAList }
     </tr>
   </thead>
   <tbody>
-  <c:forEach items="${ fList }" var="fl">
+  	<c:forEach items="${ requestList }" var="fa">
 	    <tr>
 	      <th scope="row">count</th>
-	      <td>${ fl.username }</td>
-	      <td>${ fl.nickName }</td>
+	      <td>${ fa.username }</td>
+	      <td>${ fa.nickName }</td>
 	      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
 	    </tr>
     </c:forEach>

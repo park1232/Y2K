@@ -172,10 +172,10 @@
 	            </li>
 	        </ul>
 	    </div>
-	    
+	    ${ userRole }
 
  <!-- c:if 로 로그인 유저만 작성할 수 있게 로그인 구현되면 작성 -->
- 		<c:if test="${ userRole eq ROLE_ADMIN }">
+ 		<c:if test="${ userRole eq 'ROLE_ADMIN' }">
 	 		<div id="writerPurchaes">
 		    	<button type="button" class="btn btn-primary" onclick="location.href='${ contextPath }/writePurchaes.pa'">작성하기</button>
 		    </div>

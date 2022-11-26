@@ -65,7 +65,13 @@ public class FriendDAO {
 		return sqlSession.selectOne("friendMapper.checkFriendAdd", fa);
 	}
 
-	public ArrayList<FriendAdd> requestList(SqlSessionTemplate sqlSession, Member userDetail) {
-		return (ArrayList)sqlSession.selectList("friendMapper.requestList", userDetail);
+	public ArrayList<Member> requestList(SqlSessionTemplate sqlSession, FriendPageInfo pi, String nickName) {
+		int offset = (pi.getFriendCurrentPage() -1) * pi.getFriendBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getFriendBoardLimit());
+		return (ArrayList)sqlSession.selectList("friendMapper.requestList", nickName, rowBounds);
+	}
+
+	public int checkFriendAddSelf(SqlSessionTemplate sqlSession, FriendAdd fa) {
+		return sqlSession.selectOne("friendMapper.checkFriendAddSelf", fa);
 	}
 }
