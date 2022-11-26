@@ -148,6 +148,7 @@
           <br>
           </div>
           <input type="hidden" id="checkRePasswordResult"/>
+          <input type="hidden" id="username"/>
           <div>
           <div>
           <button class="custom-btn btn-14" id="changeNewPwd" >변경</button>
@@ -178,7 +179,8 @@
 			url:"/check-email.lo",
 			data:params,
 			success:function(res){
- 				let result = res.result;
+ 				console.log('실행됨');
+				let result = res.result;
 				if(result == 'Not User'){
  					alert('등록되지 않은 아이디입니다.');
  					console.log(result);
@@ -187,7 +189,6 @@
  					console.log(result);
  				}  else if(result == 'success'){
  					alert('이메일에 인증코드를 전송했습니다.');
- 					$("#username").val() = $("#userId").val();
  					authCode = res.authCode;
  					em();
  				}
@@ -207,14 +208,16 @@
    
    
    
-
+	
    const em=()=>{
-       var e = document.getElementById('email-form');
+      console.log('em 실행됨');
+      var e = document.getElementById('email-form');
        var c = document.getElementById('email-check');
        e.style.transform="translateY(-1000px)";
        e.style.transition="2s";
        c.style.transform="translateY(-400px)";
        c.style.transition="2s";
+       
    }
 
    const dm=()=>{
@@ -294,7 +297,7 @@
 
   
    $("#passwordForm").submit(function(){
-
+	   document.getElementById('username').value=document.getElementById('userId').value;
 		if($("#checkPasswordResult").val()=="fail"){
 			alert("비밀번호를 형식에 맞게 작성해주세요.");
 			return false;
