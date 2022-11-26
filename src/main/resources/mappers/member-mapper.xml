@@ -46,5 +46,17 @@
    		where userNo=#{userNo}
    </update>
    
+   <update id="updatePassword">
+   		update Member
+   		set userpwd = #{password}
+   		where username = #{username}
+   </update>
+   
+   <select id="searchIdFormEmail" resultType="string">
+   	select username
+   	from member
+   	where status='Y' and email=#{email}
+   </select>
+   
    
 </mapper>
