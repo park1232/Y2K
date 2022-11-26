@@ -41,6 +41,10 @@ public class LoginDAO {
 		return sqlSession.update("memberMapper.updatePassword", map);
 		
 	}
+
+	public String searchIdFormEmail(String email) {
+		return sqlSession.selectOne("memberMapper.searchIdFormEmail", email);
+	}
 	
 
 }

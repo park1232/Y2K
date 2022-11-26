@@ -7,11 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,6 +23,7 @@ import com.world.Y2K.service.login.CheckNicknameService;
 import com.world.Y2K.service.login.EditNicknameService;
 import com.world.Y2K.service.login.MailAuthService;
 import com.world.Y2K.service.login.RegisterService;
+import com.world.Y2K.service.login.SearchIdFromEmailService;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.login.oauth.KakaoLoginService;
 import com.world.Y2K.service.login.oauth.NaverLoginService;
@@ -62,6 +61,8 @@ public class LoginController {
 	@Autowired
 	private ChangePasswordService changePasswordService;
 	
+	@Autowired
+	private SearchIdFromEmailService searchIdFromEmailService;
 	
 	@GetMapping("/loginpage.lo")
 	public String moveLoginView() {
@@ -125,6 +126,17 @@ public class LoginController {
 	@GetMapping("/change-pwd.lo")
 		public String moveChangePwdView() {
 			return "/login/changePwdByEmail";
+	}
+	
+	@GetMapping("/search-id.lo")
+		public String moveSearchIdView() {
+			return "/login/searchId";
+		}
+	
+	@ResponseBody
+	@PostMapping("/search-id-from-email.lo")
+	public Map<String,Object> searchIdFromEmail(String email){
+		return searchIdFromEmailService.searchIdFromEamil(email);
 	}
 
 	@ResponseBody

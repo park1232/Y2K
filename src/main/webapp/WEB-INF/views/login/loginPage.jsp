@@ -160,7 +160,7 @@
                     아이디를 잊으셨나요?
                   </span>
                   <b class="pointer">
-                    아이디 찾기
+                     <a id="lookId">아이디 찾기</a>
                   </b>
                   <br>
                   <br>
@@ -169,7 +169,7 @@
                     비밀번호를 잊으셨나요?
                   </span>
                   <b class="pointer" >
-                    <a id="lookPwd">비밀번호 찾기</a>
+                    <a id="lookPwd">비밀번호 변경</a>
                   </b>
                 </p>
               </div>
@@ -227,6 +227,23 @@
 <script src="${contextPath}/resources/js/loginPage_js.js"></script>
 
 <script>
+
+const kakao = () =>{
+	window.location.href="https://kauth.kakao.com/oauth/authorize?client_id=505e36c739260bba34b117ded3d8b963&redirect_uri=http://localhost:8080/kakao.lo&response_type=code"
+}
+
+const google = () =>{
+	window.location.href="https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A//www.googleapis.com/auth/drive.metadata.readonly&access_type=offline&include_granted_scopes=true&response_type=code&state=STATE_STRING&redirect_uri=http://localhost:8080/google.lo&client_id=250224335070-67ol1mh21l40c1cq7pb8p471o7v9sg9s.apps.googleusercontent.com"
+}
+
+const naver = () =>{
+	window.location.href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=uW6r_E14UIndVKWQMfWp&state=STATE_STRING&redirect_uri=http://localhost:8080/naver.lo"
+}
+
+const facebook = () =>{
+	window.location.href="http://www.facebook.com/v15.0/dialog/oauth?client_id=641158651025103&redirect_uri=http://localhost:8080/httpsfacebook.lo&state=STATE_STRING"
+}
+
 
 let emailAuthCode = "";
 $("#auth-div").hide();
@@ -410,6 +427,11 @@ $('#lookPwd').click(function(){
 	  window.open('/change-pwd.lo','lookPwd','width=600, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no');
 	  window.close();	  
 	});
+	
+$('#lookId').click(function(){
+	  window.open('/search-id.lo','lookId','width=600, height=500, scrollbars=no, resizable=no, toolbars=no, menubar=no');
+	  window.close();	  
+	});	
 
 
 const emailBlurText = () =>{

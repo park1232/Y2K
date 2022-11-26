@@ -52,5 +52,11 @@
    		where username = #{username}
    </update>
    
+   <select id="searchIdFormEmail" resultType="string">
+   	select username
+   	from member
+   	where status='Y' and email=#{email}
+   </select>
+   
    
 </mapper>
