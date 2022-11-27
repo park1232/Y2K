@@ -19,7 +19,6 @@ public class ChangePasswordServiceImpl implements ChangePasswordService{
 	
 	@Override
 	public void changePassword(String username, String password) {
-		System.out.println("½ÇÇàµÊ?");
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("username", username);
 		map.put("password", bCryptPasswordEncoder.encode(password));

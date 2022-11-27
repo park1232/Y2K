@@ -31,8 +31,7 @@ public class LoginService extends UsernamePasswordAuthenticationFilter{
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		System.out.println(username);
-		System.out.println(password);
+
 		if(request.getParameter("type").equals("social")) {
 			password = "null";
 		}

@@ -154,9 +154,6 @@ public class LoginController {
 	@ResponseBody
 	@PostMapping("/new-password.lo")
 		public void changePassword(String username, String password) {
-		System.out.println("½ÇÇàµÊ?");
-		System.out.println("username :" +  username);
-		System.out.println("password : " + password);
 		changePasswordService.changePassword(username, password);
 	}
 
