@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" scope="application" />
 <!DOCTYPE html>
 <html lang="ko">
@@ -20,6 +22,8 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/datepicker.css"/>
 	<script>
 		$( function() {
+	    	$("#datepicker").datepicker({dateFormat: 'yy.mm.dd'});
+	    	
 	    	$("#datepicker").datepicker();
 	    	
 	        $("#datepicker").on("change",function(){
@@ -111,50 +115,22 @@
 						</div>
 					</form>
 					
-					<form>
 				        <div class="diary">
-							<div class="diary_contents">
-				            	<table>
-				            		<tr>
-				            			<td width="100px;">30</td>
-				            			<td>안녕!${ loginUser.nickName }</td>
-				            		</tr>
-				            	</table>
-							</div>
-							<div class="diary_contents">
-				            	<table>
-				            		<tr>
-				            			<td width="100px;">25</td>
-				            			<td>오늘은 경복궁감</td>
-				            		</tr>
-				            	</table>
-							</div>
-							<div class="diary_contents">
-				            	<table>
-				            		<tr>
-				            			<td width="100px;">15</td>
-				            			<td>초밥먹음</td>
-				            		</tr>
-				            	</table>
-							</div>
-							<div class="diary_contents">
-				            	<table class="test111">
-				            		<tr>
-				            			<td width="100px;">11</td>
-				            			<td>오늘은 DB모델링 다 끝냈다~</td>
-				            		</tr>
-				            	</table>
-							</div>
-							<div class="diary_contents">
-				            	<table>
-				            		<tr>
-				            			<td width="100px;">7</td>
-				            			<td>야호</td>
-				            		</tr>
-				            	</table>
-							</div>
+				        
+				        	<c:forEach items="${ list }" var="d">
+				        	<c:set var="date" value="${d.diaryDate}"/>
+								<div class="diary_contents">
+					            	<table>
+						            		<tr>
+						            			<td width="100px;">${ fn:split(date, '.')[2] }</td>
+						            			<td style="border-right: none;">${ d.diaryContent }</td>
+						            			<td style="border-left: none;">${ d.boardNo }</td>
+						            		</tr>
+					            	</table>
+								</div>
+							</c:forEach>
+							
 						</div>
-           			 </form>    
               </div>
               
               <div class = "menu align-center expanded text-center SMN_effect-68">
@@ -183,6 +159,23 @@
     		var option = "width= 610, height= 560"
     		window.open(url, name, option);
     	});
+    	
+    	window.onload = () =>{
+    		const diaryLists = document.getElementsByClassName('diary_contents');
+//     		console.log(diaryLists);
+			for(const diaryList of diaryLists){
+				const tds = diaryList.querySelectorAll('td');
+				for(const td of tds){
+					td.addEventListener('click', function(){
+						const trTds = this.parentElement.querySelectorAll('td');
+						const boardNo = trTds[2].innerText;
+						location.href='${contextPath}/selectDiary.di?bId=' + boardNo;
+					});
+				}
+			}
+    		
+    	}
+    		
     </script>
   </body>
 

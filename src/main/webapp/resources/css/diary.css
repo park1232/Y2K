@@ -72,7 +72,7 @@
 .diary table{border: 2px solid silver; height: 40px; text-align: center;}
 .diary td{border : 2px solid silver;}
 .diary td:first-child{color: white; font-family: 'Sigmar One', cursive; font-size: 25px; background: #facf64;}
-.diary td:last-child{font-family: 'Gowun Dodum', sans-serif; font-size: 18px;}
+.diary td:last-child{color: white; width: 20px; font-size: 3px;}
 .today-date{
     flex: 0.25;
     text-align: center;
@@ -95,6 +95,7 @@
 .side4 { top: 540px; left: 405px; }
 /*다이어리*/
 .diary{position: absolute; top: 275px; bottom: 15px; left: 10px; right: 5px; overflow: auto;}
+.diary_contents{cursor: pointer;}
 .diary::-webkit-scrollbar {
     width: 10px;
     border-radius: 10px;

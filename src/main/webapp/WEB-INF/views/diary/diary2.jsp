@@ -73,80 +73,66 @@
                     <script src="https://kit.fontawesome.com/203ce9d742.js" crossorigin="anonymous"></script>
                   </div>
                 </div>
-                <div class="main">
-                	<h1>2022.11.05</h1>
-                	<table>
-                		<tr>
-                			<td><i class="fa-solid fa-cloud"></i>&nbsp;흐림</td>
-                			<td><i class="fa-regular fa-face-laugh-beam"></i>&nbsp;기쁨</td>
-                			<td><i class="fa-solid fa-location-dot"></i>&nbsp;명동</td>
-                			<td><i class="fa-solid fa-earth-africa"></i>&nbsp;전체공개</td>
-                		</tr>
-                	</table>
-                	
-                	<hr>
-                	
-                	<div class="diary">
-                		오늘은 카페에서 바스크 초코케이크 먹었다 너무 맛있음<br><br>
-                		대체 언제쯤 다 끝낼 수 있을까^^....<br><br>
-                		이제 쓸말이 없네..어쩌구 저쩌구<br><br>
-                		블라블라<br><br>
-                		아직도 멀음<br><br>
-                		그만쓰고 싶다<br><br>
-                		아아아아아<br><br>
-                		라라라랄라<br><br>
-                	</div>
-                	
-                	<hr class="hr2">
-                	
-                	<div class="comment">
-                		<div class="write">
-                			<textarea placeholder="댓글을 작성해주세요"></textarea>
-                			<button>등록하기</button>
-                		</div>
-                		<div class="comm">
-                			<table>
-                				<tr class="nickname">
-                					<td width="100px">닉네임</td>
-                					<td>22.11.06</td>
-                				</tr>
-                				<tr>
-                					<td colspan="2">댓글쓰기이이이</td>
-                				</tr>
-                				<tr class="nickname">
-                					<td width="100px">닉네임</td>
-                					<td>22.11.06</td>
-                				</tr>
-                				<tr>
-                					<td colspan="2">댓글쓰기이이이</td>
-                				</tr>
-                				<tr class="nickname">
-                					<td width="100px">닉네임</td>
-                					<td>22.11.06</td>
-                				</tr>
-                				<tr>
-                					<td colspan="2">댓글쓰기이이이</td>
-                				</tr>
-                				<tr class="nickname">
-                					<td width="100px">닉네임</td>
-                					<td>22.11.06</td>
-                				</tr>
-                				<tr>
-                					<td colspan="2">댓글쓰기이이이</td>
-                				</tr>
-                				<tr class="nickname">
-                					<td width="100px">닉네임</td>
-                					<td>22.11.06</td>
-                				</tr>
-                				<tr>
-                					<td colspan="2">댓글쓰기이이이</td>
-                				</tr>
-                			</table>
-                		
-                		
-                		</div>
-                </div>
-              </div>
+                <form id="detailForm" method="POST">
+	                <div class="main">
+	                	<h1>${ d.diaryDate }</h1>
+	                	<table>
+	                		<tr>
+	                			<td>
+	                				<c:if test="${ d.weather == 'sunny' }">☀맑음</c:if>
+	                				<c:if test="${ d.weather == 'cloudy' }">☁흐림</c:if>
+	                				<c:if test="${ d.weather == 'rain' }"> 🌨비</c:if>
+	                				<c:if test="${ d.weather == 'snow' }">❄눈</c:if>
+	                			</td>
+	                			<td>
+	                				<c:if test="${ d.mood == 'joy' }">😄기쁨</c:if>
+	                				<c:if test="${ d.mood == 'sad' }">😭슬픔</c:if>
+	                				<c:if test="${ d.mood == 'mad' }">😡화남</c:if>
+	                				<c:if test="${ d.mood == 'tired' }">🥱피곤</c:if>
+	                				<c:if test="${ d.mood == 'happy' }">😆행복</c:if>
+	                				<c:if test="${ d.mood == 'bisy' }">😵바쁨</c:if>
+	                			</td>
+	                			<td><i class="fa-solid fa-location-dot"></i>${ d.location }</td>
+	                			<td>
+	                				<c:if test="${ d.privacyBounds == 'public' }">전체공개</c:if>
+	                				<c:if test="${ d.privacyBounds == 'closed' }">비공개</c:if>
+	                			</td>
+	                		</tr>
+	                	</table>
+	                	
+	                	<hr>
+	                	
+	                	<div class="diary">
+	                		${ d.diaryContent }
+	                	</div>
+	                	
+	                	<hr class="hr2">
+	                	
+	                	<div class="comment">
+	                		<div class="write">
+	                			<textarea id="replyContent" placeholder="댓글을 작성해주세요"></textarea>
+	                			<button type="button" id="replySubmit">등록하기</button>
+	                		</div>
+	                		<div class="comm">
+	                			<table>
+	                				<tbody>
+	                					<c:forEach items="${ list }" var="r">
+			                				<tr class="nickname">
+			                					<td width="100px">${ r.nickName }</td>
+			                					<td>${ r.rModifyDate }</td>
+			                				</tr>
+			                				<tr>
+			                					<td colspan="2">${ r.replyContent }</td>
+			                				</tr>
+		                				</c:forEach>
+	                				</tbody>
+	                			</table>
+	                		
+	                		
+	                		</div>
+	                </div>
+	              </div>
+              </form>
               <div class = "menu align-center expanded text-center SMN_effect-68">
 	              <a href="home.html" class="menu-item mi-1" >홈</a>
 	<!--              <a href="photo.html" class="menu-item mi-2" onclick="openPopup()">사진첩</a>-->
@@ -167,18 +153,41 @@
       
     </div>
     <script>
-    //    function openPopup(){
-    //        window.open("profil.html", "new", "toolbar=no, menubar=no, scrollbars=no, resizable=no, width=1280, height=721, left=0, top=0" );
-    //    }
-        /* $('.dropdown-btn').on('click',function(){
-            $('.dropdown-content').show();
-            }); */  
-            $(".mi-5").on('click', function(){
-
-              alert('마케팅 사이트 업데이트 진행중.');
-
-            });      
-      </script>
+    	document.getElementById('replySubmit').addEventListener('click', ()=>{
+    		$.ajax({
+    			url: '${contextPath}/insertReply.di',
+    			data: {replyContent: document.getElementById('replyContent').value,
+    				   rboardNo:${d.boardNo}, replyWriter: '${loginUser.userNo}'},
+    			success: (data)=>{
+    				console.log(data);
+    				const tbody = document.querySelector('tbody');
+    				tbody.innerHTML = '';
+    				
+    				for(const r of data){
+    					const tr = document.createElement('tr');
+    					
+    					const writerTd = document.createElement('td');
+    					writerTd.innerText = r.nickName;
+    					const contentTd = document.createElement('td');
+    					contentTd.innerText = r.replyContent;
+    					const dateTd = document.createElement('td');
+    					dateTd.innerText = r.rModifyDate;
+    					
+    					tr.append(writerTd);
+    					tr.append(dateTd);
+    					tr.append(contentTd);
+    					
+    					tbody.append(tr);
+    				}
+    				document.getElementById('replyContent').value = '';
+    			},
+    			error: (data)=>{
+    				console.log(data);
+    			}
+    		});
+    	});
+    	
+    </script>
   </body>
 
 

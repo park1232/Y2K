@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" scope="application" />
 <!DOCTYPE html>
@@ -76,10 +76,8 @@
                 </div>
                 <div class="main">
                 	<form action="${ contextPath }/insertDiary.di" method="POST">
-					<c:set var="date" value="${fn:split(datepicker, '/')}"/>
-                	<h1>${ date[2] }.${ date[0] }.${ date[1] }</h1>
+                	<h1>${ datepicker }</h1>
                 	<input type="hidden" id="diaryDate" name="diaryDate" value="${ datepicker }">
-                	
                 	<table>
                 		<tr>
                 			<td>
