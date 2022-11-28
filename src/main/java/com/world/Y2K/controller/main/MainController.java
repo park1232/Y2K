@@ -39,7 +39,7 @@ public class MainController {
 			Authentication authentication
 			) {
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
-		
+		System.out.println("123");
 		
 		//System.out.println("controller°ª"+userNo);
 		
