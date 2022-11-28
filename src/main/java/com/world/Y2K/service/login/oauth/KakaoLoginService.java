@@ -2,6 +2,7 @@ package com.world.Y2K.service.login.oauth;
 
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -12,19 +13,19 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.world.Y2K.dao.mypage.MypageDAO;
 import com.world.Y2K.model.dto.Member;
-import com.world.Y2K.service.login.oauth.token.KakaoOAuthToken;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
 public class KakaoLoginService extends SocialLoginServiceTemplate{
+	
+	@Autowired
+	private MypageDAO mypageDAO;
 	
 	@Override
 	protected String getAccessToken(String code) {
@@ -37,6 +38,7 @@ public class KakaoLoginService extends SocialLoginServiceTemplate{
 		accessTokenBodyInfo.add("client_id", "505e36c739260bba34b117ded3d8b963");
 		accessTokenBodyInfo.add("redirect_uri", "http://localhost:8080/kakao.lo");
 		accessTokenBodyInfo.add("code", code);
+		
 		
 		ResponseEntity<String> response = new RestTemplate().exchange(
 				"https://kauth.kakao.com/oauth/token",
@@ -96,7 +98,13 @@ public class KakaoLoginService extends SocialLoginServiceTemplate{
 		
 			loginDAO.registerMember(member);
 
-		}		
+		}
+		
+		if(mypageDAO.checkFirst(member.getUserNo()) == 0 ){
+			 mypageDAO.insertDefault(member.getUserNo());
+		}
+		
+		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("username", member.getUsername());
 		mv.addObject("password", member.getPassword());

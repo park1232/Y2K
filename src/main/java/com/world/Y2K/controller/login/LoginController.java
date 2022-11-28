@@ -171,6 +171,8 @@ public class LoginController {
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 		return deleteMemberService.deleteMember(userDetails.getMember().getUserNo());
 	}
+	
+	
 
 }
 

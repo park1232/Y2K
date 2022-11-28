@@ -8,12 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.world.Y2K.dao.mypage.MypageDAO;
+import com.world.Y2K.model.dto.Mypage;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class LoginService extends UsernamePasswordAuthenticationFilter{
+	
 	
 	private final AuthenticationManager authenticationManager;
 	
@@ -35,6 +39,7 @@ public class LoginService extends UsernamePasswordAuthenticationFilter{
 		if(request.getParameter("type").equals("social")) {
 			password = "null";
 		}
+		
 		UsernamePasswordAuthenticationToken authenticationToken = null;
 		
 		
@@ -50,12 +55,6 @@ public class LoginService extends UsernamePasswordAuthenticationFilter{
 		} catch(Exception e) {
 			log.error("401 Error (권한없음)");
 		}
-//		
-//		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
-//		if(userDetails.getMember().getStatus().equals("N")){
-//			log.error("멤버가 삭제된 상태임");
-//			return null;
-//		}
 		
 		return authentication;
 	}
@@ -76,6 +75,8 @@ public class LoginService extends UsernamePasswordAuthenticationFilter{
 			session.setAttribute("loginUser", userDetails.getMember());
 			super.successfulAuthentication(request, response, chain, authResult);
 		}
+		
+		
 	}
 }
 

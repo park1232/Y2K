@@ -164,4 +164,14 @@
 	
 	
 </body>
+
+<script>
+	$(document).ready(function(){
+		
+		
+		
+		$(".bg").css({"background":"url('${skinPath}')"}); 
+	});
+</script>
+
 </html>

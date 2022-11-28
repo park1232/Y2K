@@ -225,7 +225,7 @@
       </div>
 </body>
 <script src="${contextPath}/resources/js/loginPage_js.js"></script>
-
+CORS
 <script>
 
 const kakao = () =>{
