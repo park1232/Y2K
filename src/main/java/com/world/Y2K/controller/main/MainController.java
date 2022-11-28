@@ -1,28 +1,20 @@
 package com.world.Y2K.controller.main;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonIOException;
 import com.world.Y2K.model.dto.Member;
-import com.world.Y2K.model.dto.ReplyDto;
 import com.world.Y2K.model.vo.MainReply;
-import com.world.Y2K.model.vo.Reply;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.main.MainService;
+import com.world.Y2K.service.mypage.OnloadEntityService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,6 +25,8 @@ public class MainController {
 	
 	private MainService mService;
 	
+	@Autowired
+	private OnloadEntityService onloadEntityService;
 	
 	
 	@RequestMapping("/mainPage.ma")
@@ -61,7 +55,7 @@ public class MainController {
 //			return mv;
 //			
 //		}else {
-		
+			mv = onloadEntityService.getOnloadEntity(userNo, authentication);
 			mv.addObject("member", member);
 		//	mv.addObject("boardNo", boardNo);
 			mv.setViewName("main/mainPage");
