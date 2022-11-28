@@ -39,16 +39,23 @@ String userId = request.getParameter("userId");
 
 
 $('#move-main-btn').click(function(){
-  window.open('/mainPage.ma?userNo='+${userNo},'Y2K World','width=1289, height=703, scrollbars=no, resizable=no, toolbars=no, menubar=no');
-  window.close();
+	
+	window.open('/mainPage.ma?userNo='+${userNo},'Y2K World','width=1289, height=703, scrollbars=no, resizable=no, toolbars=no, menubar=no');
+	 closeForm();
 
   
 });
 
 $('#move-purchaes-btn').click(function(){
-	  window.open('/purchaes.pa','Y2K Purchaes Page','width=1289, height=703, scrollbars=no, resizable=no, toolbars=no, menubar=no');
-	  window.close();  
+	
+	window.open('/purchaes.pa','Y2K Purchaes Page','width=1289, height=703, scrollbars=no, resizable=no, toolbars=no, menubar=no');
+	 closeForm();
 	});
+	
+	
+const closeForm=()=>{
+	window.close();
+}
 </script>
 
 </html>

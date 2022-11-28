@@ -31,11 +31,12 @@ public class LoginService extends UsernamePasswordAuthenticationFilter{
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-
+		
 		if(request.getParameter("type").equals("social")) {
 			password = "null";
 		}
 		UsernamePasswordAuthenticationToken authenticationToken = null;
+		
 		
 		try {
 		authenticationToken =new UsernamePasswordAuthenticationToken(username, password);
@@ -44,12 +45,17 @@ public class LoginService extends UsernamePasswordAuthenticationFilter{
 		}
 		
 		Authentication authentication = null;
-		
 		try {
 		authentication = authenticationManager.authenticate(authenticationToken);
 		} catch(Exception e) {
 			log.error("401 Error (권한없음)");
 		}
+//		
+//		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+//		if(userDetails.getMember().getStatus().equals("N")){
+//			log.error("멤버가 삭제된 상태임");
+//			return null;
+//		}
 		
 		return authentication;
 	}
