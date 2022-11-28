@@ -22,7 +22,7 @@ public interface PhotoService{
 
 	void updateComent(Photo p);
 
-	int insertPreply(Reply r);
+//	int insertPreply(Reply r);
 
 	ArrayList<Reply> selectReply(Long boardNo);
 	

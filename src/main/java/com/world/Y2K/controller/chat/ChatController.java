@@ -1,93 +1,52 @@
 package com.world.Y2K.controller.chat;
 
+
 import java.io.IOException;
-import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
-import javax.websocket.server.ServerEndpoint;
+import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+import com.world.Y2K.model.vo.chat.ChatMessage;
+import com.world.Y2K.model.vo.chat.ChatSession;
+import com.world.Y2K.service.chat.ChatService;
 
+import lombok.RequiredArgsConstructor;
+
+/*@RequiredArgsConstructor*/
 @Controller
-@ServerEndpoint("/websocket")
-public class ChatController extends Socket{
+public class ChatController {
+	
+	//@Autowired
+	/*ChatService chatSevice;
+	
+	@Autowired
+	private ChatSession chatSession;
+	
 
-	private Logger logger = LoggerFactory.getLogger(ChatController.class);
-	
-	//chat.ch/user로 바꾸기 
-	
-	
-	private static final List<Session> session = new ArrayList<Session>();
-	
-	public ChatController() {}
-	
-	
-	@GetMapping("/testchat.ch")
-	public String chat(Model model) {
-		
-		logger.info("[Controller] : testchat.do");
-		
-		return "testchat";
-	}
-	
-	@OnOpen
-	public void open(Session newUser) {
-		
-	
-	}
-	
-	@OnMessage
-	public void getMsg(Session recieveSession, String msg) {
-				for (int i = 0; i < session.size(); i++) {
-		            if (!recieveSession.getId().equals(session.get(i).getId())) {
-		                try {
-		                    session.get(i).getBasicRemote().sendText("상대 : "+msg);
-		                } catch (IOException e) {
-		                    e.printStackTrace();
-		                }
-		            }else{
-		                try {
-		                    session.get(i).getBasicRemote().sendText("나 : "+msg);
-		                } catch (IOException e) {
-		                    e.printStackTrace();
-		                }
-		            }
-		        }
-		    }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	안되면 핸들러 수정해보기	
-//	<websocket:handlers>
-//	<websocket:mapping handler="당신의 handler 이름" path="당신의 path" />
-//	<websocket:handshake-interceptors>
-//		<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
-//	</websocket:handshake-interceptors>
-//	<websocket:sockjs/>
-//	</websocket:handlers>
-	
-	
-	
-	
-	
+	 @RequestMapping(value="{roomId}.ch")
+	    public void messageList(@PathVariable String roomId, String userEmail, Model model, HttpServletResponse response) throws JsonIOException, IOException {
+	        
+	        List<ChatMessage> mList = chatService.messageList(roomId);
+	        response.setContentType("application/json; charset=utf-8");
+	 
+	        // 안읽은 메세지의 숫자 0으로 바뀌기
+	        ChatMessage message = new ChatMessage();
+	        message.setEmail(userEmail);
+	        message.setRoomId(roomId);
+	        chatService.updateCount(message);
+	        
+	        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+	        gson.toJson(mList,response.getWriter());
+	    }*/
+	    
 	
 }

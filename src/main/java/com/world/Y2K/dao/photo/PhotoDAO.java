@@ -46,13 +46,12 @@ public class PhotoDAO {
 		sqlSession.update("photoMapper.updateComent", p);
 	}
 
-	public int insertPreply(SqlSessionTemplate sqlSession, Reply r) {
-		return sqlSession.insert("replyMapper.insertPreply", r);
-	}
+//	public int insertPreply(SqlSessionTemplate sqlSession, Reply r) {
+//		return sqlSession.insert("replyMapper.insertPreply", r);
+//	}
 
 	public ArrayList<Reply> selectReply(SqlSessionTemplate sqlSession, Long boardNo) {
-		System.out.println("½ÇÇàµÊ??");
-		System.out.println(boardNo);
+		
 		return (ArrayList)sqlSession.selectList("photoMapper.selectReply", boardNo);
 	}
 

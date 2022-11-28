@@ -118,14 +118,17 @@
                   <h2 class="friends-say">일촌평</h2>
                   <div class="friends-say-section">
                     <label for="friends-say">friends say</label>
-                    <input
-                      type="text"
-                      placeholder="일촌과 나누고 싶은 이야기를 남겨보세요~!"
-                    />
-                    <button class="fr-bt">확인</button>
+                    <input type="text"
+                      placeholder="일촌과 나누고 싶은 이야기를 남겨보세요~!" id="storyCommentInput"  name="content" />
+                    <button type="button" class="fr-bt" id="replySubmit">확인</button>
                   </div>
-                  <div class="friends-say-list">
-                    <p>안녕하세요? 구경 잘 하고 갑니다~ (퍼포마 <span>김마켓</span>)</p>
+                  	
+                  	<input type="hidden"  id="nickName" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.nickName}">
+                  	<input type="hidden"  name="replyWriter" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}">
+                  	<%-- <input type="hidden" value="${userNo}" name="userNo"> --%>
+                  <div class="friends-say-list"  id="storyCommentList">
+            		
+                    	
                     <p>ENFP 미니홈피 예쁘네요 ~ 일촌 맺어요~~ (MZ세대 <span>쫑이쫑E</span>)</p>
                     <p>노는게 제일좋아 !!  (ENFP <span>뽀롱뽀롱뽀로로</span>)</p>
                     <p>고돌이는 바다가 너무 좋아 !! (마스코트 <span>고돌이</span>)</p>
@@ -134,11 +137,11 @@
                 </div>
               </div>
               
-              <a href="${contextPath}/main/mainPage.html" class="menu-item mi-1 menu-checked">홈</a>
+              <a href="${contextPath}/mainPage.ma" class="menu-item mi-1 menu-checked">홈</a>
               <div class = "menu align-center expanded text-center SMN_effect-68">
-              <a href="${contextPath}/photo/photo.html" class="menu-item mi-2">사진첩</a>
-              <a href="${contextPath}/diray/diary.html" class="menu-item mi-3">다이어리</a>
-              <a href="${contextPath}/visit/visitBoard.html" class="menu-item mi-4">방명록</a>
+              <a href="${contextPath}/photo.ph" class="menu-item mi-2">사진첩</a>
+              <a href="${contextPath}/diary.di" class="menu-item mi-3">다이어리</a>
+              <a href="${contextPath}/visitBoard.vi" class="menu-item mi-4">방명록</a>
               <a class="menu-item mi-5" onclick="location.href='${contextPath}/board.bo'">게시판</a>
               </div>
               
@@ -152,7 +155,7 @@
      
      <script>
      	
-    	let countAll = 0;
+  /*   	let countAll = 0;
     	
     	function getRoomList(){
     		//채팅 방 목록 가져오기
@@ -189,13 +192,61 @@
     				
     			}
     		})
-    	}
+    	} */
     	
     	
+     window.onload=()=>{
+    	 
+    	 
+    		 let commentInput = $("#storyCommentInput");
+    		let commentList = $("#storyCommentList");
+    	 
+    	
+    	 
+    	 let contentt = "";
+   		let nickNamee = "";
+   		let boardNoo = "";
+ 		  /* 	 document.getElementById('replySubmit') */
+    	$("#replySubmit").on('click', function(){
+    			event.preventDefault();
+	    		let data = {
+	       			 	content : $("#storyCommentInput").val(),
+	     				nickName : $("#nickName").val(),
+	     				replyWriter : $("#replyWriter").val()		
+	     		}
+	    		console.log(data);
+    		 $.ajax({
+    			type: "POST",
+    	 		url:"/insertReply.ma",
+    	 		data: data,
+    	 		success:(data)=>{
+    	 			contentt = data.content;
+    	 			nickName = data.nickName;
+    	 			boardNoo = data.boardNo;
+    	 			
+    	 			
+    	 			console.log(contentt);
+    	 			console.log("성공");
+    	 			
+    	 			const newComment =document.createElement('p');
+    	 			newComment.innerHTML = '<p>'+contentt + '('+$("#nickName").val() + ')</p>';
+    	 			
+    	 			commentList.prepend(newComment);
+    	 		}
+    	 		
+    	 		
+    	 		});
+    	 
+	    		commentInput.val(""); 
+    	 
+    	 
+    	 
+    	 
+    	 
+     		});
      
      
-     
-     
+     }
      
      
      

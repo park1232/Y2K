@@ -12,31 +12,8 @@
       <result column="USERNO" property="userNo"/>
    </resultMap>
 
-   <resultMap type="Reply" id="replyResultSet">
-		 <id column="REPLYNO" property="replyNo"/>
-		 <result column="REPLY_CONTENT" property="replyContent" />
-		 <result column="NICKNAME" property="nickName" />
-		 <result column="R_CREATEDATE" property="rCreateDate" />
-		 <result column="R_MODIFYDATE" property="rModifyDate" />
-		 <result column="REPLY_STATUS" property="replyStatus" />
-		 <result column="REPLY_WRITER" property="replyWriter" />
-		 <result column="REF_BOARDNO" property="rboardNo" />
-	 </resultMap>
 
-	<resultMap type="Board" id="boardResultSet">
-		 <id column="BOARDNO" property="boardNo"/>
-		 <result column="BOARD_TITLE" property="boardTitle" />
-		 <result column="BOARD_CONTENT" property="boardContent" />
-		 <result column="NICKNAME" property="nickName" />
-		 <result column="BOARD_CATENAME" property="category" />
-		 <result column="CREATE_DATE" property="createDate" />
-		 <result column="MODIFY_DATE" property="modifyDate" />
-		 <result column="BOARD_COUNT" property="boardCount" />
-		 <result column="BOARD_STATUS" property="boardStatus" />
-		 <result column="BOARD_WRITER" property="boardWriter" />
-		 <result column="BOARD_CATEID" property="boardCateId" />
-	 </resultMap>
-	 
+
    <insert id="insertPhoto">
 		INSERT INTO photo
 		VALUES(BOARD_SEQ.nextval, #{photoName}, #{renameName}, #{photoPath}, default, #{photoComent}, #{userNo})
@@ -52,20 +29,14 @@
    <select id="selectPhoto" resultMap="photoResultSet">
    		select *
    		from photo
-   		join member using(userNo)
-   		where photoStatus = 'Y'  and boardNo =  #{boardNo}
+   		where photoStatus = 'Y' and boardNo = #{boardNo} 
    		
    </select>
-   
-   <!--         select *
-   		from photo
-        join member using(userno)
-   		where photoStatus = 'Y'  and boardNo =  22-->
    
    <update id="deletePhoto">
    		update photo
 		set photoStatus = 'N'
-		where boardNo = #{boardNo}
+		
 
    </update>
    
@@ -86,17 +57,27 @@
    		where boardNo = #{boardNo}
    </update>
     
-
+   <resultMap type="Reply" id="replyResultSet">
+		 <id column="REPLYNO" property="replyNo"/>
+		 <result column="REPLY_CONTENT" property="replyContent" />
+		 <result column="NICKNAME" property="nickName" />
+		 <result column="R_CREATEDATE" property="rCreateDate" />
+		 <result column="R_MODIFYDATE" property="rModifyDate" />
+		 <result column="REPLY_STATUS" property="replyStatus" />
+		 <result column="REPLY_WRITER" property="replyWriter" />
+		 <result column="REF_BOARDNO" property="rboardNo" />
+	 </resultMap>
    
-   	<!-- <insert id="insertPreply">
+   	<insert id="insertPreply">
    		insert into reply
 	 	values(REPLY_SEQ.nextval, #{replyContent}, #{nickName}, sysdate, sysdate, default, #{boardNo})
-   	</insert> -->
+   	</insert>
    
    <select id="selectReply" resultMap="replyResultSet">
-	 	select * 
+	 	select *
 	 	from reply r
-        join member m on(reply_writer = userNo)
+	 		left join photo p on(boardNo =REF_BOARDNO)
+            left join member m using(userno)
 	 	where REF_BOARDNO = #{boardNo} and reply_status = 'Y'
 	 	order by REPLYNO desc
 	 </select>

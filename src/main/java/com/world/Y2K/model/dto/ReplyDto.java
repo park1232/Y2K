@@ -1,4 +1,4 @@
-package com.world.Y2K.controller.test;
+package com.world.Y2K.model.dto;
 
 
 
