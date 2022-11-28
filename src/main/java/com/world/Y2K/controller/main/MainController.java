@@ -1,25 +1,20 @@
 package com.world.Y2K.controller.main;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.UUID;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonIOException;
+import com.world.Y2K.model.dto.MainRe;
 import com.world.Y2K.model.dto.Member;
-import com.world.Y2K.model.dto.ReplyDto;
-import com.world.Y2K.model.vo.MainReply;
 import com.world.Y2K.model.vo.Reply;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.main.MainService;
@@ -28,9 +23,10 @@ import lombok.RequiredArgsConstructor;
 
 
 @RequiredArgsConstructor
-@Controller
+@RestController
 public class MainController {
 	
+	@Autowired
 	private MainService mService;
 	
 	
@@ -44,43 +40,42 @@ public class MainController {
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 		
 		
-		System.out.println("controller값"+userNo);
+		//System.out.println("controller값"+userNo);
 		
 		Member member = userDetails.getMember();
+
 		
-		//ArrayList<Reply> list = mService.replyList(boardNo);
 		
-		//System.out.println("리플리스트"+ list);
-		
-//		if(list !=null) {
-//			mv.addObject("list", list);
-//			mv.addObject("member", member);
-//			mv.addObject("boardNo", boardNo);
-//			mv.setViewName("main/mainPage");
-//			
-//			return mv;
-//			
-//		}else {
-		
+			ArrayList<Reply> list = mService.replyList(userNo);
+			mv.addObject("list", list);
+			System.out.println("리플리스트"+ list);
 			mv.addObject("member", member);
-		//	mv.addObject("boardNo", boardNo);
 			mv.setViewName("main/mainPage");
 			
 			return mv;
+
+		
+
+	
 			
-		}
+	}
 		
-		
+	@ResponseBody	
 	@RequestMapping("/insertReply.ma")
-	public void insertReply(MainReply mainReply, 
-			BindingResult bindingResult,
-			Authentication authentication, 
-			HttpServletResponse response) {
+	public Map<String,Object> insertReply(
+			MainRe mainRe, HttpServletResponse response,
+			Authentication authentication
+			) {
+		response.setContentType("application/json; charset=UTF-8");
 		
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
-		System.out.println(mainReply);
 		
-		//mService.insertReply(r);
+		System.out.println("Controller mainRe : "  + mainRe);
+		
+		
+		return mService.insertReply(mainRe.getContent(), mainRe.getNickName(), userDetails.getMember().getUserNo());
+		
+		
 //		ArrayList<Reply> list = bService.selectReply(r.getRboardNo());
 //		
 //		response.setContentType("application/json; charset=UTF-8");

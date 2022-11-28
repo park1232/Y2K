@@ -92,12 +92,12 @@
                     <div class="menu-table">
                       <table>
                         <tr>
-                          <td>쥬크박스<a href="#">0/999</a></td>
-                          <td class="new-post">사진첩<a href="#">10/777</a></td>
+                          <td>사진첩<a href="#">0/999</a></td>
+                          <td class="new-post">다이어리<a href="#">10/777</a></td>
                         </tr>
                         <tr>
                           <td class="new-post">방명록<a href="#">153/11195</a></td>
-                          <td>즐겨찾기<a href="#">9/20</a></td>
+                          <td>게시판<a href="#">9/20</a></td>
                         </tr>
                         <tr>
                           <td></td>
@@ -124,15 +124,15 @@
                   </div>
                   	
                   	<input type="hidden"  id="nickName" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.nickName}">
-                  	<input type="hidden"  name="replyWriter" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}">
+                  	<input type="hidden"  id="replyWriter" name="replyWriter" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}">
                   	<%-- <input type="hidden" value="${userNo}" name="userNo"> --%>
                   <div class="friends-say-list"  id="storyCommentList">
             		
+                    		<c:forEach items="${ list }" var="r">
+                    				
+                    				<p>${r.content}: <span>${r.nickName}</span></p>	
                     	
-                    <p>ENFP 미니홈피 예쁘네요 ~ 일촌 맺어요~~ (MZ세대 <span>쫑이쫑E</span>)</p>
-                    <p>노는게 제일좋아 !!  (ENFP <span>뽀롱뽀롱뽀로로</span>)</p>
-                    <p>고돌이는 바다가 너무 좋아 !! (마스코트 <span>고돌이</span>)</p>
-                    <p>안녕~나는 랑이! (아지랑이 <span>랑이</span>)</p>
+                    		</c:forEach>
                   </div>
                 </div>
               </div>
@@ -200,7 +200,8 @@
     	 
     		 let commentInput = $("#storyCommentInput");
     		let commentList = $("#storyCommentList");
-    	 
+    	 	let replyWriter = $("#replyWriter");
+    	 	
     	
     	 
     	 let contentt = "";
@@ -229,7 +230,7 @@
     	 			console.log("성공");
     	 			
     	 			const newComment =document.createElement('p');
-    	 			newComment.innerHTML = '<p>'+contentt + '('+$("#nickName").val() + ')</p>';
+    	 			newComment.innerHTML = '<p>'+contentt + '('+$("#nickName").val() + ')</p>'+r.mModifyDate';
     	 			
     	 			commentList.prepend(newComment);
     	 		}
