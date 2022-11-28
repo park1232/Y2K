@@ -19,6 +19,7 @@ import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.Reply;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.main.MainService;
+import com.world.Y2K.service.mypage.OnloadEntityService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +31,8 @@ public class MainController {
 	@Autowired
 	private MainService mService;
 	
-	
+	@Autowired
+	private OnloadEntityService onloadEntityService;
 	
 	@RequestMapping("/mainPage.ma")
 	public ModelAndView mainPage(
@@ -45,8 +47,8 @@ public class MainController {
 		
 			Member member = userDetails.getMember();
 
+			mv = onloadEntityService.getOnloadEntity(userNo, authentication);
 			
-		
 			ArrayList<Reply> list = mService.replyList(userNo);
 			mv.addObject("list", list);
 			System.out.println("리플리스트"+ list);
