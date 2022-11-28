@@ -10,8 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.filter.CorsFilter;
 
 import com.world.Y2K.dao.login.LoginDAO;
+import com.world.Y2K.dao.mypage.MypageDAO;
 import com.world.Y2K.service.login.LoginService;
-import com.world.Y2K.service.login.LogoutSuccessHandler;
 import com.world.Y2K.service.login.auth.UserDetailsServiceImpl;
 
 import lombok.RequiredArgsConstructor;

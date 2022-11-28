@@ -15,7 +15,7 @@ a {text-decoration: none;}
 }
 
 .bg {
-  background-image: url(../img/test1.jpg);
+/*  background-image: url(../img/test1.jpg); */
   background-position: center;
   width: 1280px;
   height: 720px;
@@ -293,7 +293,7 @@ h2 {
   }
 
 .text-video::before {
-  content: "사진첩";
+  content: "�궗吏꾩꺽";
   border-radius: 5px;
   color: white;
   background-color: #99d2db;
@@ -302,7 +302,7 @@ h2 {
   vertical-align: top;
 }
 .text-board::before {
-  content: "다이어리";
+  content: "�떎�씠�뼱由�";
   border-radius: 5px;
   color: white;
   background-color: bisque;
@@ -312,7 +312,7 @@ h2 {
   margin-right: 4px;
 }
 .text-gallery::before {
-  content: "방명록";
+  content: "諛⑸챸濡�";
   border-radius: 5px;
   color: white;
   background-color: green;
@@ -322,7 +322,7 @@ h2 {
   margin-right: 4px;
 }
 .text-photo::before {
-  content: "마케팅";
+  content: "留덉��똿";
   border-radius: 5px;
   color: white;
   background-color: pink;
@@ -379,11 +379,11 @@ h2 {
   font-weight: 900;
 }
 .history::before {
-  content: "▶";
+  content: "�뼳";
   color: #000;
 }
 /* .history::after {
-  content: " ▼";
+  content: " �뼹";
 
   margin-left: 60%;
 } */
@@ -405,7 +405,7 @@ h2 {
 }
 
 .info-name:after {
-  content: "(♂) 1996.01.06+";
+  content: "(�셽) 1996.01.06+";
   color: #a5a8aa;
   font-size: 10px;
   margin-left: 5px;
@@ -526,7 +526,7 @@ td a:hover {
 }
 
 .info-wrap-1 p:before {
-  content: "▶";
+  content: "�뼳";
   color: skyblue;
   font-size: 5px;
   margin-left: 3px;
@@ -560,7 +560,7 @@ td a:hover {
   padding: 10px 3px;
 }
 .friends-say-list p:before {
-  content: "·";
+  content: "쨌";
   margin-right: 3px;
   color: #aaa5a5;
 }

@@ -5,10 +5,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.world.Y2K.dao.login.LoginDAO;
+import com.world.Y2K.dao.mypage.MypageDAO;
 import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.User;
-
-import lombok.RequiredArgsConstructor;
 
 
 @Service("registerService")
@@ -20,10 +19,21 @@ public class RegisterServiceImpl implements RegisterService {
 	@Autowired
 	private LoginDAO loginDAO;
 	
+	@Autowired
+	private MypageDAO mypageDAO;
+	
 	
 	@Override
 	public int registerMember(User user) {
-		return loginDAO.registerMember(setMember(user));	
+		
+		loginDAO.registerMember(setMember(user));
+		
+		Member member = loginDAO.findUser(user.getUsername());
+		
+		if(mypageDAO.checkFirst(member.getUserNo()) == 0 ){
+			return mypageDAO.insertDefault(member.getUserNo());
+		}
+		return 0;
 
 	}
 	

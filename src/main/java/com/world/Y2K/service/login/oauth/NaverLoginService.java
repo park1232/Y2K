@@ -2,6 +2,7 @@ package com.world.Y2K.service.login.oauth;
 
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -14,11 +15,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.world.Y2K.dao.mypage.MypageDAO;
 import com.world.Y2K.model.dto.Member;
 
 @Service
 public class NaverLoginService extends SocialLoginServiceTemplate{
 
+	@Autowired
+	private MypageDAO mypageDAO;
+	
 	@Override
 	protected String getAccessToken(String code) {
 		HttpHeaders headers = new HttpHeaders();
@@ -88,6 +93,11 @@ public class NaverLoginService extends SocialLoginServiceTemplate{
 			loginDAO.registerMember(member);
 
 		}		
+		
+		if(mypageDAO.checkFirst(member.getUserNo()) == 0 ){
+			 mypageDAO.insertDefault(member.getUserNo());
+		}
+		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("username", member.getUsername());
 		mv.addObject("password", member.getPassword());

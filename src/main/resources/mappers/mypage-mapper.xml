@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mypageMapper">
+  
+   <resultMap type="Mypage" id="MypageResultSet">
+      <id column="USERNO" property="userNo"/>
+      <result column="SKINPATH" property=" skinPath"/>
+      <result column="MAINTITLE" property="mainTitle"/>
+      <result column="PROFILEPATH" property="ProfilePath"/>
+      <result column="SIDECONTENT" property=" sideContent"/>
+   </resultMap>
+
+   <select id="getMypageEntity" resultMap="MypageResultSet">
+   	select *
+   	from mypage
+   	where userno = #{userNo}
+   </select>
+   
+   <insert id="insertDefaulEntity">
+   	insert into mypage
+   	values(#{userNo}, '../../resources/mypage/defaultSkin.jpg','입력된 내용이 없습니다.','../../resources/mypage/profile.jpg','아직 내용이없습니다')
+   </insert>
+   
+   <select id="checkFirst" resultType="_int">
+   	select count(*)
+   	from mypage
+   	where userno = #{userNo}
+   </select>
+   
+   
+   
+</mapper>

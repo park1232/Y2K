@@ -39,7 +39,7 @@ String userId = request.getParameter("userId");
 
 
 $('#move-main-btn').click(function(){
-	
+	console.log("실행됨?");
 	window.open('/mainPage.ma?userNo='+${userNo},'Y2K World','width=1289, height=703, scrollbars=no, resizable=no, toolbars=no, menubar=no');
 	 closeForm();
 
