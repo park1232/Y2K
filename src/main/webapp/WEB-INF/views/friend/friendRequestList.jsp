@@ -26,8 +26,8 @@
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
           <ul class="list-unstyled">
-            <li><a href="#" class="text-white">메인페이지</a></li>
-            <li><a href="${contextPath}/friendment.pa" class="text-white">결제페이지</a></li>
+            <li><a href="${contextPath}/loginSuccess.lo" class="text-white">메인페이지</a></li>
+            <li><a href="${contextPath}/payment.pa" class="text-white">결제페이지</a></li>
             <li><a href="${contextPath}/purchaes.pa" class="text-white">구매페이지</a></li>
             <li><a href="${contextPath}/friendList.fr" class="text-white">친구페이지</a></li>
           </ul>
@@ -63,7 +63,7 @@
 	      <th scope="row">count</th>
 	      <td>${ fa.username }</td>
 	      <td>${ fa.nickName }</td>
-	      <td><button type="button" class="btn btn-primary" onclick="window.open('friendAccept.html', 'friendAdd', 'width=460, height=570')">상세보기</button></td>
+	      <td><button type="button" class="btn btn-primary" id="friendAccept" value="${ fa.userNo }">상세보기</button></td>
 	    </tr>
     </c:forEach>
   </tbody>
@@ -171,4 +171,13 @@
               <a href="#">Y2K</a>
         </div>
 </footer>
+<script>
+	const datas = document.getElementsByClassName('btn btn-primary');
+	for(const data of datas) {
+		 data.addEventListener('click', function(){		
+			const userNo = this.value; 
+			window.open("${ contextPath }/friendAccept.fr?userNo=" + userNo, "friendAdd", "width=460, height=570, scrollbars=no, resizable=no, toolbars=no, menubar=no")
+		 });
+	} 
+</script>
 </html>

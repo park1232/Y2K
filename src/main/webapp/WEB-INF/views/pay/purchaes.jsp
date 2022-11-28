@@ -29,9 +29,10 @@
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
           <ul class="list-unstyled">
-            <li><a href="#" class="text-white">메인페이지</a></li>
+            <li><a href="${contextPath}/loginSuccess.lo" class="text-white">메인페이지</a></li>
             <li><a href="${contextPath}/payment.pa" class="text-white">결제페이지</a></li>
             <li><a href="${contextPath}/friendList.fr" class="text-white">친구페이지</a></li>
+            <li><a href="${contextPath}/friendRequestList.fr" class="text-white">친구 요청 페이지</a></li>
           </ul>
         </div>
       </div>
@@ -172,7 +173,6 @@
 	            </li>
 	        </ul>
 	    </div>
-	    ${ userRole }
 
  <!-- c:if 로 로그인 유저만 작성할 수 있게 로그인 구현되면 작성 -->
  		<c:if test="${ userRole eq 'ROLE_ADMIN' }">

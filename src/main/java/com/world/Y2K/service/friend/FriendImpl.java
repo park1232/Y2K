@@ -91,4 +91,19 @@ public class FriendImpl implements FriendService{
 	public int checkFriendAddSelf(FriendAdd fa) {
 		return friendDAO.checkFriendAddSelf(sqlSession, fa);
 	}
+	
+	@Override
+	public FriendAdd selectFriendAddList(Long userNo) {
+		return friendDAO.selectFriendAddList(sqlSession, userNo);
+	}
+	
+	@Override
+	public int accpetFriendResult(Long loginuserNo) {
+		return friendDAO.acceptFriendResult(sqlSession, loginuserNo);
+	}
+	
+	@Override
+	public int hideAccept(Long userNo) {
+		return friendDAO.hideAccept(sqlSession, userNo);
+	}
 }

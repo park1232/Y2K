@@ -81,14 +81,32 @@
 		select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid, m.email
         from friendAdd f
             join member m on (f.userNo = m.userNo)
-        where f.nickName = #{nickName}
+        where f.nickName = #{nickName} and f.friendStatus = 'Y'
 	</select>
 	
 	<select id="checkFriendAddSelf" resultType="_int">
 		select count(*)
-		from Member
+		from friends
+		where userNo3 = #{userNo}
+	</select>
+	
+	<select id="selectFriendAddList" resultMap="friendAddResultMap">
+		select *
+		from friendAdd
 		where userNo = #{userNo}
 	</select>
+	
+	<update id="acceptFriendResult">
+		update friends
+		set friendStatus = 'Y'
+		where userNo3 = #{loginuserNo}  
+	</update>
+	
+	<update id="hideAccept">
+		update friendAdd
+		set friendStatus = 'N'
+		where userNo = #{userNo}
+	</update>
 	
 	<resultMap type="FriendAdd" id="friendAddResultMap">
 		<id column="FRIENDADDNO" property="friendAddNo"/>

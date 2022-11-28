@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -139,8 +141,6 @@ public class FriendController {
 	public String friendRequestList(@RequestParam(value="page", required=false) Integer page, Model model, Authentication authentication) throws FriendException {
 		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
 		String nickName = userdetails.getMember().getNickName();
-		System.out.println("나오냐?");
-		System.out.println(nickName);
 		
 		int friendCurrentPage = 1;
 		
@@ -153,7 +153,6 @@ public class FriendController {
 		
 		ArrayList<Member> requestList = fService.requestList(nickName, pi);	
 		
-		System.out.println(requestList);
 		if(requestList != null) {
 			model.addAttribute("pi", pi);
 			model.addAttribute("requestList", requestList);
@@ -189,19 +188,42 @@ public class FriendController {
 //		}	
 //	}
 	
-//	@RequestMapping("friendAccept.fr")
-//	public String friendAccept(Authentication authentication, Model model) throws FriendException {
-//		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
-//		Long userNo = userdetails.getMember().getUserNo();
-//		
-//		ArrayList<Member> mList = fService.selectMember(userNo);
-//		
-//		
-//		if(mList != null) {
-//			model.addAttribute("mList", mList);
-//			return "friend/friendAccept";
-//		} else {
-//			throw new FriendException("친구 추가 페이지 조회 실패");
-//		}
-//	}
+	// 친구 요청 받은 페이지
+	@RequestMapping("friendAccept.fr")
+	public String friendAccept(Authentication authentication, Model model, @RequestParam("userNo") Long userNo, HttpServletRequest request) throws FriendException {
+		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
+		String loginUserNickName = userdetails.getMember().getNickName();
+		System.out.println(loginUserNickName);
+		ArrayList<Member> mList = fService.selectMember(userNo);
+		System.out.println(mList);
+		FriendAdd fList = fService.selectFriendAddList(userNo);
+		System.out.println(fList);
+	
+		if(mList != null) {
+			model.addAttribute("loginUserNickName", loginUserNickName);
+			model.addAttribute("fList", fList);
+			model.addAttribute("mList", mList);
+			return "friend/friendAccept";
+		} else {
+			throw new FriendException("친구 추가 페이지 조회 실패");
+		}
+	}
+	
+	@RequestMapping("acceptFriend.fr")
+	public String accpetFriend(Authentication authentication, Model model, @RequestParam("userNo") Long userNo) throws FriendException {
+		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
+		Long loginuserNo = userdetails.getMember().getUserNo();
+		System.out.println(loginuserNo);
+		int result = fService.accpetFriendResult(loginuserNo);
+		System.out.println(result);
+		int result2 = fService.hideAccept(userNo);
+		System.out.println(result2);
+		
+		if(result > 0) {
+			model.addAttribute("result", result);
+			return "friend/friendAccept"; // submit으로 값 전달 후 팝업창 닫고 부모 게시판 갱신 찾기
+		} else {
+			throw new FriendException("친구 추가 실패");
+		}
+	}
 }

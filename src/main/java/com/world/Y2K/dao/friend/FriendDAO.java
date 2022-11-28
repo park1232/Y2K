@@ -74,4 +74,16 @@ public class FriendDAO {
 	public int checkFriendAddSelf(SqlSessionTemplate sqlSession, FriendAdd fa) {
 		return sqlSession.selectOne("friendMapper.checkFriendAddSelf", fa);
 	}
+
+	public FriendAdd selectFriendAddList(SqlSessionTemplate sqlSession, Long userNo) {
+		return sqlSession.selectOne("friendMapper.selectFriendAddList", userNo);
+	}
+
+	public int acceptFriendResult(SqlSessionTemplate sqlSession, Long loginuserNo) {
+		return sqlSession.update("friendMapper.acceptFriendResult", loginuserNo);
+	}
+
+	public int hideAccept(SqlSessionTemplate sqlSession, Long userNo) {
+		return sqlSession.update("friendMapper.hideAccept", userNo);
+	}
 }

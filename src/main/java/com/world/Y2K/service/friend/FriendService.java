@@ -38,4 +38,10 @@ public interface FriendService {
 
 	int checkFriendAddSelf(FriendAdd fa);
 
+	FriendAdd selectFriendAddList(Long userNo);
+
+	int accpetFriendResult(Long loginuserNo);
+
+	int hideAccept(Long userNo);
+
 }

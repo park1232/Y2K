@@ -26,7 +26,7 @@
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
           <ul class="list-unstyled">
-            <li><a href="#" class="text-white">메인페이지</a></li>
+            <li><a href="${contextPath}/login-success.lo" class="text-white">메인페이지</a></li>
             <li><a href="${contextPath}/payment.pa" class="text-white">결제페이지</a></li>
             <li><a href="${contextPath}/purchaes.pa" class="text-white">구매페이지</a></li>
             <li><a href="${contextPath}/friendRequestList.fr" class="text-white">친구 요청 페이지</a></li>
