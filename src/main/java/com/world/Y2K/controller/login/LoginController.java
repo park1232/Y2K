@@ -90,6 +90,11 @@ public class LoginController {
 		return "login/loginSuccess";
 	}
 	
+	@GetMapping("/main.lo")
+	public String moveLoginSuccesspage() {
+		return "login/loginSuccess";
+	}
+	
 	@GetMapping("/kakao.lo")
 	public ModelAndView kakaoLogin(String code)  {
 		return  kakaoLoginService.socialLogin(code);

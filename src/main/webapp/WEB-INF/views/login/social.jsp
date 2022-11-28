@@ -12,6 +12,7 @@ String password = request.getParameter("password");
 <title>Insert title here</title>
 </head>
 <body>
+
 	<form action="/login" method="POST" id="frm">
 		<input type="hidden" id="a" name="username" value="${username}"/>
 		<input type="hidden" id="b" name="password" value="${password}"/>
@@ -28,6 +29,7 @@ String password = request.getParameter("password");
 		console.log("실행됨됨");
 		document.getElementById('frm').submit();
 	});
+	
 	
 </script>
 </html>

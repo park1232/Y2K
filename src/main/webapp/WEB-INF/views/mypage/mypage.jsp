@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/mypage.css" />
     <title>Document</title>
+    <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
     <style>
     @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700);
 html {
@@ -103,6 +104,18 @@ ol.large-numbers li:hover:before {
     border:1px solid wheat;
 }
 
+#logout_submit{
+	height:40px;
+    border-radius: 10px;
+    border:1px solid wheat;
+}
+
+#member-delete-submit{
+	height:40px;
+    border-radius: 10px;
+    border:1px solid wheat;
+}
+
 #title-rayout{
     display: none;
     transition: 2s;
@@ -119,6 +132,14 @@ ol.large-numbers li:hover:before {
 }
 #update-rayout{
     display: none;
+}
+
+#logout-rayout{
+    display: none;
+}
+
+#member-delete-rayout{
+	display: none;
 }
 /* 
 @keyframes fade-in {
@@ -192,6 +213,18 @@ ol.large-numbers li:hover:before {
             <input type="submit" id="update_submit" value="변경">
         </form>
         </div>
+         <li id="logout-click">로그아웃</li>
+          <div id="logout-rayout">  
+        <form action="/logout">
+            <input type="submit" id="logout_submit" value="로그아웃 하기">
+        </form>
+        </div>
+         <li id="member-delete-click">회원탈퇴</li>
+          <div id="member-delete-rayout">  
+        <form action="/member-delete.lo" id="form-id">
+            <button type="button" id="member-delete-submit" onclick="confirmDelete();" >회원탈퇴 하기</button>
+        </form>
+        </div>
         </ol>
       </div>
     
@@ -239,6 +272,43 @@ ol.large-numbers li:hover:before {
 
        
     });
+    
+    document.getElementById('logout-click').addEventListener("click",function(){ 
+        var logout = document.getElementById('logout-rayout');
+         if(logout.style.display == 'none'){
+             logout.style.display='block';
+         } else {
+             logout.style.display='none';
+         }
+
+       
+    });
+    
+    document.getElementById('member-delete-click').addEventListener("click",function(){ 
+        var memberDelete = document.getElementById('member-delete-rayout');
+         if(memberDelete.style.display == 'none'){
+        	 memberDelete.style.display='block';
+         } else {
+        	 memberDelete.style.display='none';
+         }
+
+       
+    });
+    
+    $("#form-id").submit(function(){
+    	
+    	if(confirmDelete()){
+    		return true;
+    	}
+    	return false;
+    });
+    
+   
+   const confirmDelete = () => {
+	   window.confirm("정말 삭제하시겠습니까?");
+   }
+    
+    
 
     
 
