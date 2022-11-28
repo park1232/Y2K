@@ -8,11 +8,15 @@
 	</select>
 
 	<select id="selectFriendList" resultMap="memberResultSet">
-		select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid
+		select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid, m.email
     	from member m
         	join friends on (friends.userNo3 = m.userNo)
     	where userNo2 = #{userNo} and friends.friendstatus = 'Y'
-    	order by friends.friendNo desc
+    	UNION
+    	select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid, m.email
+    	from member m
+        	join friends on (friends.userNo2 = m.userNo)
+    	where userNo3 = #{userNo} and friends.friendstatus = 'Y'
 	</select>
 	
 	<select id="selectMember" resultMap="memberResultSet">
@@ -53,6 +57,10 @@
 		select count(*)
 		from friends
 		where userNo2 = #{addUser2} and userNo3 = #{requestUser2} and FRIENDSTATUS = 'Y'
+        UNION
+        select count(*)
+		from friends
+		where userNo2 = #{requestUser2} and userNo3 = #{addUser2} and FRIENDSTATUS = 'Y'
 	</select>
 	
 	<select id="selectFriendAcceptList" resultMap="memberResultSet">
@@ -69,11 +77,36 @@
 		where userNo = #{userNo} and friendStatus = 'Y' and nickName = #{nickName}
 	</select>
 	
-	<select id="requestList" resultMap="friendAddResultMap">
+	<select id="requestList" resultMap="memberResultSet">
+		select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid, m.email
+        from friendAdd f
+            join member m on (f.userNo = m.userNo)
+        where f.nickName = #{nickName} and f.friendStatus = 'Y'
+	</select>
+	
+	<select id="checkFriendAddSelf" resultType="_int">
+		select count(*)
+		from friends
+		where userNo3 = #{userNo}
+	</select>
+	
+	<select id="selectFriendAddList" resultMap="friendAddResultMap">
 		select *
 		from friendAdd
-		where nickName = #{nickName}
+		where userNo = #{userNo}
 	</select>
+	
+	<update id="acceptFriendResult">
+		update friends
+		set friendStatus = 'Y'
+		where userNo3 = #{loginuserNo}  
+	</update>
+	
+	<update id="hideAccept">
+		update friendAdd
+		set friendStatus = 'N'
+		where userNo = #{userNo}
+	</update>
 	
 	<resultMap type="FriendAdd" id="friendAddResultMap">
 		<id column="FRIENDADDNO" property="friendAddNo"/>

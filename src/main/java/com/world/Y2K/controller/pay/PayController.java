@@ -37,8 +37,9 @@ public class PayController {
 	public String selectPayList(@RequestParam(value="page", required=false) Integer page, Model model, Authentication authentication) throws PaymentException {
 		
 		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
+		System.out.println(userdetails.getMember());
 		String userRole = userdetails.getMember().getRole();
-		
+		System.out.println(userRole);
 		int payCurrentPage = 1;
 		
 		if(page != null) {
@@ -132,9 +133,7 @@ public class PayController {
 			}
 		} else {
 			throw new PaymentException("관리자만 게시글을 작성할 수 있습니다.");
-		}
-		
-		
+		}	
 	}
 	
 	@RequestMapping("selectPurchaes.pa")
@@ -159,7 +158,7 @@ public class PayController {
 	}	
 	
 	@RequestMapping("deletePurchaes.pa")
-	public String deletePurchaes(HttpSession session, @RequestParam("productNo") Long pNo) throws PaymentException {
+	public String deletePurchaes(HttpSession session, @RequestParam("productNo") Long pNo, Model model) throws PaymentException {
 		// 관리자만 삭제할 수 있게 로직 짜기
 		
 		System.out.println(pNo);
@@ -171,16 +170,18 @@ public class PayController {
 		System.out.println(result2);
 		
 		if(result1 > 0 && result2 > 0) {
-			return "redirect:purchaes.pa"; // submit으로 값 전달 후 팝업창 닫고 부모 게시판 갱신 찾기
+			model.addAttribute("result1", result1);
+			model.addAttribute("result2", result2);
+			return "pay/detailPurchaes";	// submit으로 값 전달 후 팝업창 닫고 부모 게시판 갱신 찾기
 		} else {
 			throw new PaymentException("구매게시글 삭제 실패");
 		}
 	}
 	
 	@RequestMapping("orderPurchaes.pa")
-	public String deletePurchaes(Authentication authentication, @RequestParam("productNo") Long pNo, @RequestParam("price") Long price, @ModelAttribute Product p) throws PaymentException {
+	public String deletePurchaes(Authentication authentication, @RequestParam("productNo") Long pNo, @RequestParam("price") Long price, @ModelAttribute Product p, Model model) throws PaymentException {
 		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
-		System.out.println(userdetails.getMember());
+//		System.out.println(userdetails.getMember());
 		Long mNo = userdetails.getMember().getUserNo();
 		
 		System.out.println(mNo);
@@ -189,8 +190,6 @@ public class PayController {
 		map.put("pNo", pNo);
 		map.put("price", price);
 		map.put("mNo", mNo);
-			
-		int result = pService.orderPurchaes(map);
 		
 		int conutOrange = pService.getOrangeCount(map);
 		System.out.println(conutOrange);
@@ -198,8 +197,10 @@ public class PayController {
 		if(conutOrange < price) {
 			throw new PaymentException("낑깡이 부족합니다.");
 		} else {
+			int result = pService.orderPurchaes(map);
 			if(result > 0) {
-				return "redirect:purchaes.pa"; // submit으로 값 전달 후 팝업창 닫고 부모 게시판 갱신 찾기
+				model.addAttribute("result", result);
+				return "pay/detailPurchaes"; // submit으로 값 전달 후 팝업창 닫고 부모 게시판 갱신 찾기
 			} else {
 				throw new PaymentException("상품 구매 실패");
 			}
