@@ -44,4 +44,9 @@ public class DiaryServiceImpl implements DiaryService{
 		return dDAO.selectReply(sqlSession, rboardNo);
 	}
 
+	@Override
+	public int deleteDiary(Long boardNo) {
+		return dDAO.deleteDiary(sqlSession, boardNo);
+	}
+
 }

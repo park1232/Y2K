@@ -106,7 +106,16 @@
 	                		${ d.diaryContent }
 	                	</div>
 	                	
+	                	<input type="hidden" value="${ d.boardNo }" name="boardNo">
+	                	
 	                	<hr class="hr2">
+	                	
+	                	<table id="info">
+	                		<tr>
+		                		<td><button type="button" id="updateDiary">수정하기</button></td>
+		                		<td><button type="button" id="deleteDiary">삭제하기</button></td>
+		                	</tr>
+	                	</table>
 	                	
 	                	<div class="comment">
 	                		<div class="write">
@@ -115,22 +124,21 @@
 	                		</div>
 	                		<div class="comm">
 	                			<table>
-	                				<tbody>
+	                				<tbody id="replyTbody">
 	                					<c:forEach items="${ list }" var="r">
-			                				<tr class="nickname">
+			                				<tr class="replyNickName">
 			                					<td width="100px">${ r.nickName }</td>
-			                					<td>${ r.rModifyDate }</td>
+<%-- 			                					<td>${ r.rModifyDate }</td> --%>
 			                				</tr>
-			                				<tr>
+			                				<tr class="replyContent">
 			                					<td colspan="2">${ r.replyContent }</td>
+			                					<td><button class="deleteReply" type="button">x</button></td>
 			                				</tr>
 		                				</c:forEach>
 	                				</tbody>
 	                			</table>
-	                		
-	                		
 	                		</div>
-	                </div>
+	                	</div>
 	              </div>
               </form>
               <div class = "menu align-center expanded text-center SMN_effect-68">
@@ -153,40 +161,60 @@
       
     </div>
     <script>
-    	document.getElementById('replySubmit').addEventListener('click', ()=>{
-    		$.ajax({
-    			url: '${contextPath}/insertReply.di',
-    			data: {replyContent: document.getElementById('replyContent').value,
-    				   rboardNo:${d.boardNo}, replyWriter: '${loginUser.userNo}'},
-    			success: (data)=>{
-    				console.log(data);
-    				const tbody = document.querySelector('tbody');
-    				tbody.innerHTML = '';
-    				
-    				for(const r of data){
-    					const tr = document.createElement('tr');
-    					
-    					const writerTd = document.createElement('td');
-    					writerTd.innerText = r.nickName;
-    					const contentTd = document.createElement('td');
-    					contentTd.innerText = r.replyContent;
-    					const dateTd = document.createElement('td');
-    					dateTd.innerText = r.rModifyDate;
-    					
-    					tr.append(writerTd);
-    					tr.append(dateTd);
-    					tr.append(contentTd);
-    					
-    					tbody.append(tr);
-    				}
-    				document.getElementById('replyContent').value = '';
-    			},
-    			error: (data)=>{
-    				console.log(data);
-    			}
-    		});
-    	});
-    	
+    	window.onload = () =>{
+	    	document.getElementById('replySubmit').addEventListener('click', ()=>{
+	    		$.ajax({
+	    			url: '${contextPath}/insertReply.di',
+	    			data: {replyContent: document.getElementById('replyContent').value,
+	    				   rboardNo:${d.boardNo}, replyWriter: '${loginUser.userNo}'},
+	    			success: (data)=>{
+	    				console.log(data);
+	    				console.log(typeof(data));
+	    				const tbodys = document.getElementById('replyTbody');
+	    				
+	    				tbodys.innerHTML = '';
+	    				
+	    				for(const r of data){
+	    					console.log(r);
+	    					const tr1 = document.createElement('tr');
+	    					const tr2 = document.createElement('tr');
+	    					
+	    					const writerTd = document.createElement('td');
+	    					writerTd.innerText = r.nickName;
+	    					const contentTd = document.createElement('td');
+	    					contentTd.innerText = r.replyContent;
+	    					
+	    					tr1.append(writerTd);
+	    					tr2.append(contentTd);
+	    					
+	    					tbodys.append(tr1);
+	    					tbodys.append(tr2);
+	    				}
+	    				document.getElementById('replyContent').value = '';
+	    			},
+	    			error: (data)=>{
+	    				console.log(data);
+	    			}
+	    		});
+	    	});
+	    	
+	    	const upd = document.getElementById('updateDiary');
+	    	if(upd != null){
+	    		upd.addEventListener('click', ()=>{
+	    			form.action = '${contextPath}/updateForm.di';
+	    			form.submit();
+	    		});
+	    	}
+    		
+	    	const form = document.getElementById('detailForm');
+	       	document.getElementById('deleteDiary').addEventListener('click', ()=>{
+	    		if(confirm('정말로 삭제하시겠습니까?')){
+	    			form.action = 	'${contextPath}/deleteDiary.di';
+	    			form.submit();
+	    		}
+	    	});
+       	
+    	}
     </script>
   </body>
 

@@ -56,15 +56,36 @@ hr{
    
   }
 .diary::-webkit-scrollbar-track {
-    
     border-radius: 10px;
     box-shadow: inset 0px 0px10px white;
   }
 .write{
-	margin-top: 10px;
+	margin-top: 5px;
 	background: #fce7ad;
 	height: 50px;
 	border-radius: 10px;
+}
+#info{
+	text-align: right;
+	margin-top: 10px;
+}
+#updateDiary{
+	width: 80px;
+	margin-left: 400px;
+	border-radius: 5px;
+	border: 2px solid orange;
+	background: orange;
+	color: white;
+	cursor: pointer;
+}
+#deleteDiary{
+	width: 80px;
+	margin-left: 10px;
+	border-radius: 5px;
+	border: 2px solid #333333;
+	background: #333333;
+	color: white;
+	cursor: pointer;
 }
 .comment textarea{
 	resize: none;
@@ -104,9 +125,15 @@ hr{
 	border-bottom: 1px solid lightgray;
 	padding: 10px;
 }
-.nickname td{
+.replyNickName td{
 	font-size: 11px;
 }
+.replyContent td:first-child{
+	color: black;
+	font-size: 18px;
+	width: 600px;
+}
+.deleteReply{width: 18px; align-items: center; height: 18px;}
 .side1 { top: 200px; left: 405px; }
 .side2 { top: 240px; left: 405px; }
 .side3 { top: 500px; left: 405px; }

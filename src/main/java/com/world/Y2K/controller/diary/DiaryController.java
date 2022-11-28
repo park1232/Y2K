@@ -70,9 +70,11 @@ public class DiaryController {
 		}
 		
 		Diary d = dService.selectDiary(bId);
+		ArrayList<Reply> list = dService.selectReply(bId);
 		
 		if(d != null) {
 			mv.addObject("d", d);
+			mv.addObject("list", list);
 			mv.setViewName("diary/diary2");
 			return mv;
 		}else {
@@ -101,21 +103,39 @@ public class DiaryController {
 		}
 	}
 	
+	@RequestMapping("/updateForm.di")
+	public String updateForm(@RequestParam("boardNo") Long boardNo, Model model) {
+		Diary d = dService.selectDiary(boardNo);
+		model.addAttribute("d", d);
+		return "diary/editDiary";
+	}
+	
+	@RequestMapping("updateDiary.di")
+	public String updateDiary(@ModelAttribute Diary d, Model model) {
+		
+		return null;
+	}
+	
+	@RequestMapping("/deleteDiary.di")
+	public String deleteDiary(@RequestParam("boardNo") Long boardNo) {
+		int result = dService.deleteDiary(boardNo);
+		
+		if(result > 0) {
+			return "redirect:diary.di";
+		}else {
+			throw new DiaryException("다이어리글 삭제 실패");
+		}
+	}
 	
 	
 	
 	
-	
-	
-	
-	
-	@RequestMapping(value="insertReply.di")
-	@ResponseBody
+	@RequestMapping("insertReply.di")
 	public void insertReply(@ModelAttribute Reply r, HttpServletResponse response) {
 		int result = dService.insertReply(r);
 		ArrayList<Reply> list = dService.selectReply(r.getRboardNo());
 		
-//		response.setCharacterEncoding("application/json; charset=UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
 		GsonBuilder gb = new GsonBuilder();
 		GsonBuilder gb2 = gb.setDateFormat("yyyy-MM-dd");
 		Gson gson = gb2.create();

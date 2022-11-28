@@ -31,4 +31,8 @@ public class DiaryDAO {
 		return (ArrayList)sqlSession.selectList("diaryMapper.selectReply", rboardNo);
 	}
 
+	public int deleteDiary(SqlSessionTemplate sqlSession, Long boardNo) {
+		return sqlSession.update("diaryMapper.deleteDiary", boardNo);
+	}
+
 }

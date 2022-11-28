@@ -8,7 +8,7 @@
 		<result column="MOOD" property="mood"/>
 		<result column="WEATHER" property="weather"/>
 		<result column="PRIVACY_BOUNDS" property="privacyBounds"/>
-		<result column="LOACTION" property="location"/>
+		<result column="LOCATION" property="location"/>
 		<result column="DIARY_DATE" property="diaryDate"/>
 		<result column="DIARY_CONTENT" property="diaryContent"/>
 		<result column="CREATE_DATE" property="createDate"/>
@@ -60,4 +60,10 @@
 			  and reply_status = 'Y'
 		order by replyno desc
 	</select>
+	
+	<update id="deleteDiary">
+		update diary
+		set diary_status = 'N'
+		where boardno = #{boardNo}
+	</update>
 </mapper>

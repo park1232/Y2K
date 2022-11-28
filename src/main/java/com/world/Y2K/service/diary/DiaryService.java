@@ -17,4 +17,6 @@ public interface DiaryService {
 
 	ArrayList<Reply> selectReply(Long rboardNo);
 
+	int deleteDiary(Long boardNo);
+
 }
