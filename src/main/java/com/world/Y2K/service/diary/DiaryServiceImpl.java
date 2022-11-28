@@ -49,4 +49,9 @@ public class DiaryServiceImpl implements DiaryService{
 		return dDAO.deleteDiary(sqlSession, boardNo);
 	}
 
+	@Override
+	public int updateDiary(Diary d) {
+		return dDAO.updateDiary(sqlSession, d);
+	}
+
 }

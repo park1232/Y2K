@@ -35,4 +35,8 @@ public class DiaryDAO {
 		return sqlSession.update("diaryMapper.deleteDiary", boardNo);
 	}
 
+	public int updateDiary(SqlSessionTemplate sqlSession, Diary d) {
+		return sqlSession.update("diaryMapper.updateDiary", d);
+	}
+
 }

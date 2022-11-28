@@ -71,7 +71,7 @@
 }
 .diary table{border: 2px solid silver; height: 40px; text-align: center;}
 .diary td{border : 2px solid silver;}
-.diary td:first-child{color: white; font-family: 'Sigmar One', cursive; font-size: 25px; background: #facf64;}
+.diary td:first-child{color: white; font-family: 'Sigmar One', cursive; font-size: 25px; background: #facf64; width: 100px;}
 .diary td:last-child{color: white; width: 20px; font-size: 3px;}
 .today-date{
     flex: 0.25;

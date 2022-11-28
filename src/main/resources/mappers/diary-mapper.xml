@@ -61,6 +61,17 @@
 		order by replyno desc
 	</select>
 	
+	<update id="updateDiary">
+		update diary
+		set weather = #{weather},
+			mood = #{mood},
+			location = #{location},
+			privacy_bounds = #{privacyBounds},
+			diary_content = #{diaryContent},
+			modify_date = sysdate
+		where boardno = #{boardNo}
+	</update>
+	
 	<update id="deleteDiary">
 		update diary
 		set diary_status = 'N'

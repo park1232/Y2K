@@ -69,9 +69,17 @@ hr{
 	text-align: right;
 	margin-top: 10px;
 }
+#selectDiary{
+	width: 80px;
+	border-radius: 5px;
+	border: 2px solid #D2691E;
+	background: #D2691E;
+	color: white;
+	cursor: pointer;
+}
 #updateDiary{
 	width: 80px;
-	margin-left: 400px;
+	margin-left: 320px;
 	border-radius: 5px;
 	border: 2px solid orange;
 	background: orange;

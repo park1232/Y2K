@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -75,7 +74,7 @@ public class DiaryController {
 		if(d != null) {
 			mv.addObject("d", d);
 			mv.addObject("list", list);
-			mv.setViewName("diary/diary2");
+			mv.setViewName("diary/diaryDetail");
 			return mv;
 		}else {
 			throw new DiaryException("다이어리글 상세보기 실패");
@@ -86,7 +85,7 @@ public class DiaryController {
 	public String diaryWrite(@RequestParam("datepicker") String datepicker, @RequestParam("mapValue") String mapValue, Model model) {
 		model.addAttribute("datepicker", datepicker);
 		model.addAttribute("mapValue", mapValue);
-		return "diary/diary3";
+		return "diary/writeDiary";
 	}
 	
 	@RequestMapping("/insertDiary.di")
@@ -111,9 +110,16 @@ public class DiaryController {
 	}
 	
 	@RequestMapping("updateDiary.di")
-	public String updateDiary(@ModelAttribute Diary d, Model model) {
+	public String updateDiary(@ModelAttribute Diary d, Model model, HttpSession session) {
+		int result = dService.updateDiary(d);
 		
-		return null;
+		if(result > 0) {
+			model.addAttribute("bId", d.getBoardNo());
+			model.addAttribute("diaryWriter", ((Member)session.getAttribute("loginUser")).getUserNo());
+			return "redirect:selectDiary.di";
+		}else {
+			throw new DiaryException("다이어리글 수정 실패");
+		}
 	}
 	
 	@RequestMapping("/deleteDiary.di")
@@ -126,9 +132,6 @@ public class DiaryController {
 			throw new DiaryException("다이어리글 삭제 실패");
 		}
 	}
-	
-	
-	
 	
 	@RequestMapping("insertReply.di")
 	public void insertReply(@ModelAttribute Reply r, HttpServletResponse response) {
@@ -150,10 +153,5 @@ public class DiaryController {
 	}
 	
 	
-	
-	@GetMapping("/diary2.di")
-	public String test2() {
-		return "diary/diary2";
-	}
 	
 }

@@ -78,6 +78,7 @@
                 	<form action="${ contextPath }/updateDiary.di" method="POST">
                 	<h1>${ d.diaryDate }</h1>
                 	<input type="hidden" id="diaryDate" name="diaryDate" value="${ d.diaryDate }">
+                	<input type="hidden" id="boardNo" name="boardNo" value="${ d.boardNo }">
                 	<table>
                 		<tr>
                 			<td>
@@ -130,7 +131,7 @@
                 	
                 	<hr class="hr2">
                 	
-						<button type="submit">수정하기</button>                	
+						<button type="submit">수정하기</button>
 					</form>
                 </div>
               </div>

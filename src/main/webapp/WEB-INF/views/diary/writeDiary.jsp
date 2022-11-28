@@ -82,7 +82,7 @@
                 		<tr>
                 			<td>
                 				<div class="selectBox">
-								  <select name="weather" class="select">
+								  <select id="weather" name="weather" class="select">
 								    <option disabled selected>날씨⭐</option>
 								    <option value="sunny">☀맑음</option>
 								    <option value="cloudy">☁흐림</option>
@@ -94,7 +94,7 @@
                 			</td>
                 			<td>
                 				<div class="selectBox">
-								  <select name="mood" class="select">
+								  <select id="mood" name="mood" class="select">
 								    <option disabled selected>기분💕</option>
 								    <option value="joy">😄기쁨</option>
 								    <option value="sad">😭슬픔</option>
@@ -112,7 +112,7 @@
                 			</td>
                 			<td>
                 				<div class="selectBox">
-								  <select name="privacyBounds" class="select">
+								  <select id="privacyBounds" name="privacyBounds" class="select">
 								    <option disabled selected>공개범위💌</option>
 								    <option value="public">전체공개</option>
 								    <option value="closed">비공개</option>
@@ -130,7 +130,7 @@
                 	
                 	<hr class="hr2">
                 	
-						<button type="submit">등록하기</button>                	
+						<button id="diaryBtn" type="submit">등록하기</button>                	
 					</form>
                 </div>
               </div>
@@ -161,6 +161,17 @@
 			var option = "width= 610, height= 560"
 			window.open(url, name, option);
 		});
+	    
+// 	    const weather = document.getElementbyId('weather');
+// 	    const mood = document.getElementById('mood');
+// 	    const location = document.getElementById('location');
+// 	    const privacyBounds = document.getElementById('privacyBounds');
+// 	    const diaryBtn = document.getElementById('diaryBtn');
+	    
+// 	    diaryBtn.addEventListener('click', function(){
+// 	    	return false;
+// 	    });
+	    
     </script>
   </body>
 

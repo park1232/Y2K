@@ -112,6 +112,7 @@
 	                	
 	                	<table id="info">
 	                		<tr>
+		                		<td><button type="button" id="selectDiary" onclick="location.href='${contextPath}/diary.di'">목록가기</button></td>
 		                		<td><button type="button" id="updateDiary">수정하기</button></td>
 		                		<td><button type="button" id="deleteDiary">삭제하기</button></td>
 		                	</tr>
@@ -175,7 +176,6 @@
 	    				tbodys.innerHTML = '';
 	    				
 	    				for(const r of data){
-	    					console.log(r);
 	    					const tr1 = document.createElement('tr');
 	    					const tr2 = document.createElement('tr');
 	    					
@@ -199,6 +199,8 @@
 	    	});
 	    	
 	    	const upd = document.getElementById('updateDiary');
+	    	const form = document.getElementById('detailForm');
+	       	
 	    	if(upd != null){
 	    		upd.addEventListener('click', ()=>{
 	    			form.action = '${contextPath}/updateForm.di';
@@ -206,13 +208,20 @@
 	    		});
 	    	}
     		
-	    	const form = document.getElementById('detailForm');
 	       	document.getElementById('deleteDiary').addEventListener('click', ()=>{
 	    		if(confirm('정말로 삭제하시겠습니까?')){
-	    			form.action = 	'${contextPath}/deleteDiary.di';
+	    			form.action = '${contextPath}/deleteDiary.di';
 	    			form.submit();
 	    		}
 	    	});
+	       	
+	       	
+// 	       	const deleteReplys = document.getElementsByClassName('deleteReply');
+// 	       	for(const deleteReply of deleteReplys){
+// 	       		deleteReply.
+// 	       	}
+	       	
+	       	
        	
     	}
     </script>

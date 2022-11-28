@@ -117,17 +117,18 @@
 					
 				        <div class="diary">
 				        
+				        	
 				        	<c:forEach items="${ list }" var="d">
-				        	<c:set var="date" value="${d.diaryDate}"/>
-								<div class="diary_contents">
-					            	<table>
-						            		<tr>
-						            			<td width="100px;">${ fn:split(date, '.')[2] }</td>
-						            			<td style="border-right: none;">${ d.diaryContent }</td>
-						            			<td style="border-left: none;">${ d.boardNo }</td>
-						            		</tr>
-					            	</table>
-								</div>
+					        	<c:set var="date" value="${d.diaryDate}"/>
+									<div class="diary_contents">
+						            	<table>
+							            		<tr>
+							            			<td width="100px;">${ fn:split(date, '.')[1] }.${ fn:split(date, '.')[2] }</td>
+							            			<td style="border-right: none;">${ d.diaryContent }</td>
+							            			<td style="border-left: none;">${ d.boardNo }</td>
+							            		</tr>
+						            	</table>
+									</div>
 							</c:forEach>
 							
 						</div>
@@ -175,7 +176,20 @@
 			}
     		
     	}
-    		
+    	
+    	const writeBtn = document.getElementById('writeBtn');
+    	writeBtn.addEventListener('click', function(){
+    		if($("#hiddenDate").val() == ''){
+    			alert('날짜를 선택해주세요');
+    			writeBtn.disabled = true;
+    		}
+    	});
+    	
+    	$("#datepicker").on("change",function(){
+    	        writeBtn.disabled = false;
+    	});
+    	
+    	
     </script>
   </body>
 

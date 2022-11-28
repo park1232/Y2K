@@ -19,4 +19,6 @@ public interface DiaryService {
 
 	int deleteDiary(Long boardNo);
 
+	int updateDiary(Diary d);
+
 }
