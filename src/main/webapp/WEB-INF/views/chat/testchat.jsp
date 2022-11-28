@@ -38,7 +38,7 @@
 	<script type="text/javascript">
 		$("#sendBtn").click(function(){
 			sendMessage();
-			$('#message').val('')
+			$('#message').val(' ')
 			
 			
 		});

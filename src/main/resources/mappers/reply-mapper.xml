@@ -26,13 +26,21 @@
    	<insert id="insertReply">
    		insert into reply
 	 	values(REPLY_SEQ.nextval, #{content}, sysdate, sysdate, default, #{userNo},#{boardNo})
-   	
-   	
    	</insert>
    
+   <update id="deleteReply">
+   		update reply
+   		set reply_Status = 'N'
+   		where REPLYNO = #{replyNo}
+   </update>
    
-   
-   
+   <select id="selectReply" resultMap="replyResultSet">
+ 		 select * 
+	 	from reply r
+        join member m on(reply_writer = userNo)
+	 	where REF_BOARDNO = #{boardNo} and reply_status = 'Y'
+	 	order by REPLYNO desc
+   </select>
    
    
    

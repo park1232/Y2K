@@ -42,7 +42,7 @@ public class PhotoController {
 	public String photo(Model model, Authentication authentication, HttpSession session) {
 		
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
-		System.out.println("user : " + userDetails.getMember());
+		//System.out.println("user : " + userDetails.getMember());
 		/* Member member = userDetails.getMember(); */
 		//Long userNo = (Long) session.getAttribute("loginUser");
 		
@@ -57,28 +57,34 @@ public class PhotoController {
 	@RequestMapping("/show.ph")
 	public ModelAndView selectImg(
 			HttpSession session, ModelAndView mv,
-			//@RequestParam("username") String username
+			
 			@RequestParam("boardNo") Long boardNo,
 			Authentication authentication
 			) {
 		
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+		
 		Member member = userDetails.getMember();
 		
+		//System.out.println("===="+boardNo);
+		
 		Photo p = pService.selectImg(boardNo);
+		//p.setUserNo(userDetails.getMember().getUserNo());
+		
+		
+		//System.out.println("맴버 :"+ member);
 		
 		ArrayList<Reply> list =pService.selectReply(boardNo);
 		
-		p.setUserNo(userDetails.getMember().getUserNo());
+		//System.out.println("--"+p);
+		
+		
+		
 		mv.addObject("photo", p);
 		mv.addObject("member", member);
 		mv.addObject("list", list);
 		mv.setViewName("photo/show");
-		
-		
-		
-		System.out.println(list);
-		
+
 		return mv;
 	}
 	

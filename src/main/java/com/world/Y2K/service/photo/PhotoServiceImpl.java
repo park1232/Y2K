@@ -54,10 +54,10 @@ public class PhotoServiceImpl extends PhotoStore implements PhotoService {
 	}
 
 
-	@Override
-	public int insertPreply(Reply r) {
-		return pDAO.insertPreply(sqlSession, r);
-	}
+//	@Override
+//	public int insertPreply(Reply r) {
+//		return pDAO.insertPreply(sqlSession, r);
+//	}
 	
 	@Override
 	public ArrayList<Reply> selectReply(Long boardNo) {

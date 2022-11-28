@@ -26,7 +26,7 @@
 <body>
 	<main class="main">
 		<section class="container">
-			<form method="POST" id="detailForm" target="self">
+			<form method="POST" id="detailForm" target="self" onsubmit="return false;">
 				<!--전체 리스트 시작-->
 				<article class="story-list" id="storyList">
 
@@ -35,7 +35,7 @@
 					</button>
 					<!--전체 리스트 아이템-->
 					<div class="story-list__item">
-
+						
 						<div class="sl__item__img">
 							<img src="/upload/${photo.renameName}" />
 						</div>
@@ -59,33 +59,28 @@
 							<div id="storyCommentList-1">
 							
 							
-							<c:forEach items="${ list }" var="r">
-						 	
-						 	<div class="sl__item__contents__comment" id="storyCommentItem-${photo.boardNo}" >
-									<%--  <p>
-										<a ></a>${r.replyContent}
-									</p>
-									<button type="button">
-										<i class="fas fa-times" id="change"></i>
-									</button> --%>
-							
-							<div class="sl__item__contents__comment" id="storyCommentItem-2">
-									<p>
-										<b>${r.nickName} :</b> ${r.replyContent}
-									</p>
-									<button type="button" onclick="deleteComment()"><i class="fas fa-times"></i></button>
+									<c:forEach items="${ list }" var="r">
+						 						
+										 		<div class="sl__item__contents__comment" id="storyCommentItem-${ r.replyNo}"  >
+															 <input type="hidden" id="replyNo" value="${r.replyNo}"> 
+															 
+															
+														 	<p>
+																		<b>${r.nickName} :		</b> ${r.replyContent}
+																		
+															</p> 
+															
+														 	<button id="delRe">
+																	
+																	<i class="fas fa-times"></i>
+																	
+															</button> 
+															
+													</div>
 									
-									</div>
-
-									
-							</div>
+										</c:forEach>
 								
-								
-								
-								
-							</c:forEach>
-							
-							</div> 
+									</div> 
 							
 							<div class="sl__item__input">
 								
@@ -107,12 +102,15 @@
 	
 	<script type="text/javascript">
 	
+
+	
 	let commentInput = $("#storyCommentInput-1");
 	let commentList = $("#storyCommentList-1");
-	
+	let nickName = $("#nickName");
+	console.log(nickName);
 	
 	let contentt = "";
-	let nickName = "";
+	let nickNamee = "";
 	let boardNoo = "";
 	$("#have").on("click", function(){
 		event.preventDefault();
@@ -124,6 +122,7 @@
 				content : $("#storyCommentInput-1").val(),
 				nickName : $("#nickName").val(),
 				boardNo : $("#boardNo").val()
+				
 		}
 		$.ajax({
 			type:"POST",
@@ -133,7 +132,7 @@
 				contentt = data.content;
 				nickName = data.nickName;
 				boardNoo = data.boardNo;
-				console.log(nickName);
+				console.log(nickNamee);
 	/* 			console.log(contentt);
 				console.log(nicknamee);
 				console.log(boardNoo);
@@ -141,7 +140,7 @@
 				console.log(data); */
 				
 				const newComment =document.createElement('div');
-			
+					console.log($("#nickName"));
 // 				newComment.innerHTML = `
 // 							  <div class="sl__item__contents__comment" id="storyCommentItem-2""> 
 // 							    <p>
@@ -151,7 +150,7 @@
 // 							    <button><i class="fas fa-times"></i></button>
 // 							  </div>
 // 					`; 
-				newComment.innerHTML = '<div class="sl__item__contents__comment" id="storyCommentItem-2"><p><b>' + nickName + ' :</b>' + contentt + '</p><button type="button" onclick="deleteComment()"><i class="fas fa-times"></i></button></div>';
+				newComment.innerHTML = '<div class="sl__item__contents__comment" id="storyCommentItem-1"><p><b>' + $("#nickName").val() + ' :</b>' + contentt + '</p><button id="delRe"><i class="fas fa-times"></i></button></div>';
 
 					commentList.prepend(newComment);
 					
@@ -163,23 +162,69 @@
 		
 	});
 	
+	//let delbutton = $("#del");	
+	//console.log(nickName);
 	
 	
 	
-	function deleteComment(${boardNo}){
-		$.ajax({
-			type:"delete",
-			url: "/api/reply/${rNickName}",
-			dataType: "json"
-			//console.log(${boardNo});
-		}).done(res=>{
-			console.log("성공");
-		}).fail(error=>{
-			console.log("오류");
-		});
 		
-		
-		
+		/* 	event.preventDefault();	
+				let data = {
+						replyNo : $("#replyNo").val()
+				}	
+				console.log(data);
+				$.ajax({
+					type:"delete",
+					url: "/api/reply/delete",
+					data: JSON.stringify(data),
+					success:(data)=>{
+						
+					console.log("성공");
+					
+					$(`#storyCommentItem-2`).remove();
+				}
+					
+			
+				});
+		*/
+			
+			let divs= document.querySelectorAll('.sl__item__contents__comment');
+			console.log(divs);
+			for(const div of divs){
+				const input = div.querySelector('input').value;
+				const button = div.querySelector('button');
+			
+				//console.log(input);
+				//console.log(button);
+				
+				//console.log(nickName.value);
+				button.addEventListener('click', ()=>{
+					console.log(input);
+					event.preventDefault();
+				
+					
+				$.ajax({
+					type:"post",
+					url:"/api/reply/delete",
+					
+					data : { 
+						replyNo : input
+				},
+					success:(data)=>{
+						
+						console.log("성공");
+						$(`#storyCommentItem-${ replyNo}`).remove();
+						 window.location.reload();
+					}
+				})
+					
+					
+					
+				}
+				
+			)}
+			
+			
 		
 	/* 	if(principalId == comment.user.id){
 			item += `	<button onclick="deleteComment(${comment.id})">
@@ -187,10 +232,6 @@
 							</button>`;
 		} */
 		
-		
-		
-	}
-	
 	
 	
 

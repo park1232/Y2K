@@ -1,4 +1,4 @@
-package com.world.Y2K.controller.test;
+package com.world.Y2K.service.reply;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,6 +6,10 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.world.Y2K.dao.reply.ReplyDAO;
+import com.world.Y2K.model.vo.Board;
+import com.world.Y2K.model.vo.Reply;
 
 
 
@@ -20,14 +24,8 @@ public class ReplyServiceImpl implements ReplyService{
 
 	@Override
 	public Map<String, Object> insertReply(String content, Long boardNo, String nickName, Long userNo) {
+
 		
-//		Photo photo = new Photo();
-//		photo.setBoardNo(boardNo);
-		
-//		System.out.println("서비스 : " + content);
-//		System.out.println("서비스 : " + boardNo);
-//		System.out.println("서비스 : " + rNickName);
-//		System.out.println("서비스 : " + userNo);
 		
 		
 		HashMap<String, Object> map = new HashMap<String,Object>();
@@ -36,18 +34,18 @@ public class ReplyServiceImpl implements ReplyService{
 		map.put("boardNo", boardNo);
 		map.put("userNo", userNo);
 		rDAO.insertReply(sqlSession, map);
-//		Reply reply = new Reply();
-//		reply.setReplyContent(content);
-//		reply.setRboardNo(boardNo);
-//		reply.setReplyWriter(userNo);
-//		reply.setRNickName(rNickName);
-	
-		
 		
 		
 		return map;
 	}
-	
-	
+
+	@Override
+	public void deleteReply(Long userNo, Long replyNo) {
+
+
+				
+				rDAO.deleteReply(sqlSession, replyNo);
+		
+	}
 	
 }
