@@ -20,6 +20,7 @@ import com.world.Y2K.service.login.ChangePasswordService;
 import com.world.Y2K.service.login.CheckEmailService;
 import com.world.Y2K.service.login.CheckIdService;
 import com.world.Y2K.service.login.CheckNicknameService;
+import com.world.Y2K.service.login.DeleteMemberService;
 import com.world.Y2K.service.login.EditNicknameService;
 import com.world.Y2K.service.login.MailAuthService;
 import com.world.Y2K.service.login.RegisterService;
@@ -63,6 +64,9 @@ public class LoginController {
 	
 	@Autowired
 	private SearchIdFromEmailService searchIdFromEmailService;
+	
+	@Autowired
+	private DeleteMemberService deleteMemberService;
 	
 	@GetMapping("/loginpage.lo")
 	public String moveLoginView() {
@@ -160,6 +164,12 @@ public class LoginController {
 	@PostMapping("/new-password.lo")
 		public void changePassword(String username, String password) {
 		changePasswordService.changePassword(username, password);
+	}
+	
+	@GetMapping("/member-delete.lo")
+	public String deleteMember(Authentication authentication) {
+		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+		return deleteMemberService.deleteMember(userDetails.getMember().getUserNo());
 	}
 
 }

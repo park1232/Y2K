@@ -222,7 +222,7 @@ ol.large-numbers li:hover:before {
          <li id="member-delete-click">회원탈퇴</li>
           <div id="member-delete-rayout">  
         <form action="/member-delete.lo" id="form-id">
-            <button type="button" id="member-delete-submit" onclick="confirmDelete();" >회원탈퇴 하기</button>
+            <button id="member-delete-submit" >회원탈퇴 하기</button>
         </form>
         </div>
         </ol>
@@ -296,18 +296,18 @@ ol.large-numbers li:hover:before {
     });
     
     $("#form-id").submit(function(){
-    	
-    	if(confirmDelete()){
+    	console.log("실행");
+    	let result = window.confirm("정말 삭제하시겠습니까?");
+    	if(result){
+    		console.log("삭제");
     		return true;
     	}
+    	console.log("삭제안함");
     	return false;
     });
     
    
-   const confirmDelete = () => {
-	   window.confirm("정말 삭제하시겠습니까?");
-   }
-    
+
     
 
     

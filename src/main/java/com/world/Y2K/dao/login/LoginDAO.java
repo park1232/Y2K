@@ -45,6 +45,11 @@ public class LoginDAO {
 	public String searchIdFormEmail(String email) {
 		return sqlSession.selectOne("memberMapper.searchIdFormEmail", email);
 	}
+
+	public int deleteMember(Long userNo) {
+		return sqlSession.update("memberMapper.deleteMember", userNo);
+		
+	}
 	
 
 }
