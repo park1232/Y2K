@@ -14,8 +14,8 @@ public class MypageDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public Mypage getOnloadEntity(Long userNo) {
-		return sqlSession.selectOne("mypageMapper.getMypageEntity", userNo);
+	public Mypage getOnloadEntity(Long myUserNo) {
+		return sqlSession.selectOne("mypageMapper.getMypageEntity", myUserNo);
 	}
 	
 	public int insertDefault(Long userNo) {

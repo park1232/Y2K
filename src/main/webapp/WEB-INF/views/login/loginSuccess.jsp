@@ -38,13 +38,14 @@ String userId = request.getParameter("userId");
 <script>
 
 
-$('#move-main-btn').click(function(){
+ $('#move-main-btn').click(function(){
 	console.log("실행됨?");
 	window.open('/mainPage.ma?userNo='+${userNo},'Y2K World','width=1289, height=703, scrollbars=no, resizable=no, toolbars=no, menubar=no');
-	 closeForm();
-
+/* 	window.open('/test.lo?userNo='+${userNo},'Y2K World','width=1289, height=703'); */
+ 	 closeForm(); 
+/* 	 , scrollbars=no, resizable=no, toolbars=no, menubar=no'  */
   
-});
+}); 
 
 $('#move-purchaes-btn').click(function(){
 	

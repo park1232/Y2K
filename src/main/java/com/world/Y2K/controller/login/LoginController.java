@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.world.Y2K.exception.MemberException;
+import com.world.Y2K.model.dto.Member;
+import com.world.Y2K.model.dto.Mypage;
 import com.world.Y2K.model.vo.User;
 import com.world.Y2K.service.login.ChangePasswordService;
 import com.world.Y2K.service.login.CheckEmailService;
@@ -28,6 +30,7 @@ import com.world.Y2K.service.login.SearchIdFromEmailService;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.login.oauth.KakaoLoginService;
 import com.world.Y2K.service.login.oauth.NaverLoginService;
+import com.world.Y2K.service.mypage.OnloadEntityService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -67,6 +70,9 @@ public class LoginController {
 	
 	@Autowired
 	private DeleteMemberService deleteMemberService;
+	
+	@Autowired
+	private OnloadEntityService onloadEntityService;
 	
 	@GetMapping("/loginpage.lo")
 	public String moveLoginView() {
@@ -171,6 +177,29 @@ public class LoginController {
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 		return deleteMemberService.deleteMember(userDetails.getMember().getUserNo());
 	}
+	
+	@GetMapping("/test.lo")
+	public ModelAndView test(Long userNo, Authentication authentication, ModelAndView mv) {
+		
+		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+		System.out.println("123");
+		//System.out.println("controller°ª"+userNo);
+		
+			Member member = userDetails.getMember();
+			Mypage mypage = null;
+			if(userNo != member.getUserNo()) {
+				mypage = onloadEntityService.getOnloadEntity(userNo);
+				mv.addObject("visit_rayout", mypage);
+				mv.addObject("my_rayout", "null");
+			}  else {
+				mypage = onloadEntityService.getOnloadEntity(member.getUserNo());
+				mv.addObject("my_rayout", mypage);
+				mv.addObject("visit_rayout", "null");
+			}
+			mv.setViewName("login/loginSuccess");
+			return mv;
+	}
+	
 	
 	
 

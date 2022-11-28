@@ -167,10 +167,22 @@
 
 <script>
 	$(document).ready(function(){
+/* 		if("${visit_rayout}"=="null"){
+			console.log("비지트 널임")
+		} else {
+			console.log("작성자 널임");
+		} */
+		
+/* 		console.log("${visit_rayout.skinpath}"); */
+		console.log("${my_rayout}");
+		console.log("${my_rayout.myUserNo}");
+		console.log("${my_rayout.skinPath}");
+		console.log("${my_rayout.mainTitle}");
+		console.log("${my_rayout.sideContent}");
 		
 		
 		
-		$(".bg").css({"background":"url('${skinPath}')"}); 
+		$(".bg").css({"background":"url('${my_rayout.skinPath}')"}); 
 	});
 </script>
 
