@@ -11,6 +11,7 @@ import org.springframework.web.filter.CorsFilter;
 
 import com.world.Y2K.dao.login.LoginDAO;
 import com.world.Y2K.service.login.LoginService;
+import com.world.Y2K.service.login.LogoutSuccessHandler;
 import com.world.Y2K.service.login.auth.UserDetailsServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,14 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	
+
+//	@Bean
+//	public LogoutSuccessHandler logoutSuccessHandler() {
+//		return new LogoutSuccessHandler();
+//	}
+	
 	
 	@Bean
 	public BCryptPasswordEncoder bcryptPasswordEncoder() {
@@ -54,7 +63,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //		.defaultSuccessUrl("/login-success.lo")
 		.userDetailsService(userDetailsService());
 			
-			
+		
+		http.logout()
+		       .logoutUrl("/logout")
+		       .logoutSuccessUrl("/")
+		       .invalidateHttpSession(true);
 		
 		
 	}

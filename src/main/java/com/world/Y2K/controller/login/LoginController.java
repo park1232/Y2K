@@ -90,6 +90,11 @@ public class LoginController {
 		return "login/loginSuccess";
 	}
 	
+	@GetMapping("/main.lo")
+	public String moveLoginSuccesspage() {
+		return "login/loginSuccess";
+	}
+	
 	@GetMapping("/kakao.lo")
 	public ModelAndView kakaoLogin(String code)  {
 		return  kakaoLoginService.socialLogin(code);
@@ -154,9 +159,6 @@ public class LoginController {
 	@ResponseBody
 	@PostMapping("/new-password.lo")
 		public void changePassword(String username, String password) {
-		System.out.println("½ÇÇàµÊ?");
-		System.out.println("username :" +  username);
-		System.out.println("password : " + password);
 		changePasswordService.changePassword(username, password);
 	}
 

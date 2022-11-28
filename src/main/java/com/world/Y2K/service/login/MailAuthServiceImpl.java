@@ -24,12 +24,12 @@ import lombok.extern.slf4j.Slf4j;
 public class MailAuthServiceImpl implements MailAuthService{
 
 	public Map<String, Object> getEmailAuth(String email) {
-		System.out.println("email : " + email);
+
 		HashMap<String, Object> map =new HashMap<String, Object>();
 		String authCode = makeRandomNumber();
-		System.out.println("authCode : " + authCode);
+
 		String contents = getContents(authCode);
-		System.out.println("contents : " + contents);
+
 		if(isValidEmail(email)) {
 			sendMail("Your EmailAuthCode.",contents, email);
 			map.put("authCode", authCode);

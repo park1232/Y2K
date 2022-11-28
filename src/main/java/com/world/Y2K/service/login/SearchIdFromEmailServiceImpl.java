@@ -19,7 +19,7 @@ public class SearchIdFromEmailServiceImpl implements SearchIdFromEmailService{
 	public Map<String, Object> searchIdFromEamil(String email) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		String username = loginDAO.searchIdFormEmail(email);
-		System.out.println(username);
+
 		map.put("searchIdResult", username);
 		return map;
 	}
