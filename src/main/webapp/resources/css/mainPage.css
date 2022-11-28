@@ -81,7 +81,7 @@
 
 
 
-/* 위  */
+/* �쐞  */
 
    .new ul>li:hover{
       font-weight: bold; text-decoration: underline; cursor:pointer;
@@ -113,12 +113,12 @@
      padding: 10px 3px;
    }
    .friends-say-list p:before {
-     content: "·";
+     
      margin-right: 3px;
      color: orange;
    }
    .friends-say-list p:after {
-     content: "2021.11.19";
+     
      font-size: 10px;
      margin-left: 5px;
      color: #aaa5a5;
