@@ -40,13 +40,13 @@
    -->
    
    
-  <!--  <select id="selectReply" resultMap="mainReplyResultSet">
+    <select id="selectReply" resultMap="mainReplyResultSet">
  		select * 
 	 	from mainreply
         join member m on(reply_writer = userNo)
 	 	where reply_status = 'Y'  
 	 	order by REPLYNO desc
-   </select> -->
+   </select> 
    
     
    
