@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.world.Y2K.model.dto.MainRe;
 import com.world.Y2K.model.dto.Member;
+import com.world.Y2K.model.dto.Mypage;
 import com.world.Y2K.model.vo.Reply;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.main.MainService;
@@ -46,8 +47,19 @@ public class MainController {
 		//System.out.println("controller°ª"+userNo);
 		
 			Member member = userDetails.getMember();
-
-			mv = onloadEntityService.getOnloadEntity(userNo, authentication);
+			Mypage mypage = null;
+			if(userNo != member.getUserNo()) {
+				mypage = onloadEntityService.getOnloadEntity(userNo);
+				mv.addObject("visit_rayout", mypage);
+				mv.addObject("my_rayout", "null");
+			}  else {
+				mypage = onloadEntityService.getOnloadEntity(member.getUserNo());
+				mv.addObject("my_rayout", mypage);
+				mv.addObject("visit_rayout", "null");
+			}
+			
+			
+			
 			
 			ArrayList<Reply> list = mService.replyList(userNo);
 			mv.addObject("list", list);
