@@ -42,9 +42,9 @@ public class MainController {
 		
 		//System.out.println("controller°ª"+userNo);
 		
-		Member member = userDetails.getMember();
+			Member member = userDetails.getMember();
 
-		
+			
 		
 			ArrayList<Reply> list = mService.replyList(userNo);
 			mv.addObject("list", list);
