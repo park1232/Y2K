@@ -42,8 +42,7 @@
 									src="${contextPath}/resources/img/profile.jpg" alt="profile" />
 								<div class="desc-wrap">
 									<p class="text-desc">
-										안녕하세요. <br> 퍼포먼스 마케터 <br>유현종입니다. <br> 제 미니홈피에
-										오신것을 환영합니다.
+										<div id="sideContentDiv" class="desc-wrap text-desc"></div>
 									</p>
 									
 									<a class="history" href="#">HISTORY</a>
@@ -81,7 +80,7 @@
 						<div class="main-wrap">
 							<div class="title-wrap">
 								<p class="title">
-									<a href="#">마케팅이 좋은 사람들, 마케팅월드</a>
+									<div id="mainDiv" class="title title-wrap"><a href="#">마케팅이 좋은 사람들, 마케팅월드</a></div>
 								</p>
 								<div class="link-wrap">
 									<a href="https://www.instagram.com/hyunjong_yoo/"
@@ -167,11 +166,64 @@
 
 <script>
 	$(document).ready(function(){
+		let skinPath = "";
+		let mainTitle = "";
+		let profilePath = "";
+		let sideContent = "";
+		let myUserNo = "";
+/* 		let sideContentDiv = $("#sideContentDiv").html(); */
 		
 		
 		
-		$(".bg").css({"background":"url('${skinPath}')"}); 
+		
+		if("${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}" != 64){
+			myUserNo = 64;
+		} else {
+			myUserNo = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}";
+		}
+		
+		let params={
+				userNo : myUserNo
+		}
+		
+		$.ajax({
+			type:"GET",
+			url:"/onload.my",
+			data : params,
+			success:function(res){
+				skinPath = res.skinPath;
+				mainTitle = res.mainTitle;
+				profilePath = res.profilePath;
+				sideContent = res.sideContent;
+				document.getElementById('sideContentDiv').innerHTML = sideContent;
+				document.getElementById('mainDiv').innerHTML = mainTitle;
+				
+				$(".bg").css({"background":"url("+skinPath+")"}); 
+				
+				console.log(skinPath);
+				console.log(mainTitle);
+				console.log(profilePath);
+				console.log(sideContent);
+			}
+		})
+		
+		
+		/* let myUserNo = "${my_rayout.myUserNo}";
+		let skinPath = "${my_rayout.skinPath}";
+		console.log("userNo : " + myUserNo);
+		console.log("skinPath : " + skinPath);
+		
+		console.log("${my_rayout}");
+		console.log("${my_rayout.myUserNo}");
+		console.log("${my_rayout.skinPath}");
+		console.log("${my_rayout.mainTitle}");
+		console.log("${my_rayout.sideContent}"); */
+		
+		
+		
+		
 	});
+	
 </script>
 
 </html>

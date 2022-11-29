@@ -73,6 +73,16 @@ public class LoginService extends UsernamePasswordAuthenticationFilter{
 			request.getRequestDispatcher("/login-success.lo").forward(request, response);
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", userDetails.getMember());
+			Mypage mypage = Mypage.builder()
+					.myUserNo(20L)
+					.skinPath("../../resources/mypage/defaultSkin.jpg")
+					.mainTitle("입력된 내용이 없습니다.")
+					.profilePath("../../resources/mypage/profile.jpg")
+					.sideContent("아직 내용이없습니다")
+					.build();
+					
+					
+			session.setAttribute("my_rayout",mypage);
 			super.successfulAuthentication(request, response, chain, authResult);
 		}
 		

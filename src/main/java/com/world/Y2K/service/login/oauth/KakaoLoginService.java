@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.world.Y2K.dao.mypage.MypageDAO;
+import com.world.Y2K.dao.skin.SkinDAO;
 import com.world.Y2K.model.dto.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,9 @@ public class KakaoLoginService extends SocialLoginServiceTemplate{
 	
 	@Autowired
 	private MypageDAO mypageDAO;
+	
+	@Autowired
+	private SkinDAO skinDAO;
 	
 	@Override
 	protected String getAccessToken(String code) {
@@ -81,7 +85,7 @@ public class KakaoLoginService extends SocialLoginServiceTemplate{
 	@Override
 	protected ModelAndView setLogin(HashMap<String, String> userInfo) {
 		Member member = loginDAO.findUser(userInfo.get("username"));
-		
+
 		if(member==null) {
 		
 			member = Member.builder()
@@ -100,14 +104,17 @@ public class KakaoLoginService extends SocialLoginServiceTemplate{
 
 		}
 		
-		if(mypageDAO.checkFirst(member.getUserNo()) == 0 ){
-			 mypageDAO.insertDefault(member.getUserNo());
+		Member member2 = loginDAO.findUser(member.getUsername());
+		
+		if(mypageDAO.checkFirst(member2.getUserNo()) == 0 ){
+			skinDAO.insertDefault(member2.getUserNo());
+			mypageDAO.insertDefault(member2.getUserNo());
 		}
 		
 		
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("username", member.getUsername());
-		mv.addObject("password", member.getPassword());
+		mv.addObject("username", member2.getUsername());
+		mv.addObject("password", member2.getPassword());
 		mv.setViewName("/login/social");
 		return mv;
 	}
