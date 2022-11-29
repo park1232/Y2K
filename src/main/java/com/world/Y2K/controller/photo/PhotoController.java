@@ -39,7 +39,8 @@ public class PhotoController {
 	private PhotoService pService;
 	
 	@RequestMapping("/photo.ph")
-	public String photo(Model model, Authentication authentication, HttpSession session) {
+	public String photo(Model model, Authentication authentication, HttpSession session
+			,@RequestParam("userNo") Long userNo) {
 		
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 		//System.out.println("user : " + userDetails.getMember());
@@ -50,7 +51,7 @@ public class PhotoController {
 		
 		model.addAttribute("images", images);
 		model.addAttribute("dto", userDetails);
-	
+		model.addAttribute("userNo", userNo);
 		return "photo/photo";
 	}
 	
