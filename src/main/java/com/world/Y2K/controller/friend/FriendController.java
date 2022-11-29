@@ -113,22 +113,19 @@ public class FriendController {
 		
 		int checkFriendAdd = fService.checkFriendAdd(fa); // 이미 요청을 보냈는지 확인
 		int checkFriendList = fService.checkFriendList(list); // 이미 친구 인지 확인
-		int checkFriendAddSelf = fService.checkFriendAddSelf(fa); // 자기 자신에게 보내는지 확인
+//		int checkFriendAddSelf = fService.checkFriendAddSelf(fa); // 자기 자신에게 보내는지 확인
 		
 		if(checkFriendAdd == 0) {
 			if(checkFriendList == 0) {
-				if(checkFriendAddSelf == 0) {
 					int result = fService.friendAdd2(fa); // 친구 신청 테이블에 요청 데이터 넣기
 					int resultFinal = fService.friendAdd(list); // 신청자와 받는 사람 정보 가져가서 친구 테이블에 데이터 넣기 status는 'n'으로
 				
-					if(resultFinal > 0) {			
-						return "redirect:friendList.fr"; // 최종 db에 삽입 결과 확인
+					if(resultFinal > 0) {
+						model.addAttribute("result", result);
+						return "friend/friendAdd"; // 최종 db에 삽입 결과 확인
 					} else {
 						throw new FriendException("친구 신청 실패"); 
 					}
-				} else {
-					throw new FriendException("자신한테는 친구 요청을 할 수 없습니다.");
-				}
 			} else {
 				throw new FriendException("이미 등록된 친구입니다.");
 			}	
@@ -224,6 +221,32 @@ public class FriendController {
 			return "friend/friendAccept"; // submit으로 값 전달 후 팝업창 닫고 부모 게시판 갱신 찾기
 		} else {
 			throw new FriendException("친구 추가 실패");
+		}
+	}
+	
+	@RequestMapping("deleteFriend.fr")
+	public String deleteFriend(@RequestParam(value="page", required=false) Integer page, Authentication authentication, Model model, @RequestParam("friendUsing") Long friendUsing) throws FriendException {
+		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
+		Long userNo = userdetails.getMember().getUserNo();
+		
+		int result = fService.deleteFriend(friendUsing);
+		
+		int friendCurrentPage = 1;
+
+		if(page != null) {
+			friendCurrentPage = page;
+		}
+		
+		int friendListCount = fService.getFriendListCount();
+		FriendPageInfo pi = FriendPagination.getPageInfo(friendCurrentPage, friendListCount, 5);
+		ArrayList<Member> fList = fService.selectFriendList(pi, userNo);
+		
+		if(result > 0) {
+			model.addAttribute("fList", fList);
+			model.addAttribute("userNo", userNo);
+			return "friend/friendList";
+		} else {
+			throw new FriendException("친구 삭제 실패");
 		}
 	}
 }

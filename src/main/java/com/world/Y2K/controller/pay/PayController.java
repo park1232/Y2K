@@ -2,6 +2,7 @@ package com.world.Y2K.controller.pay;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.world.Y2K.exception.PaymentException;
+import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.PayPageInfo;
 import com.world.Y2K.model.vo.Product;
 import com.world.Y2K.model.vo.ProductPhoto;
@@ -37,9 +40,7 @@ public class PayController {
 	public String selectPayList(@RequestParam(value="page", required=false) Integer page, Model model, Authentication authentication) throws PaymentException {
 		
 		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
-		System.out.println(userdetails.getMember());
 		String userRole = userdetails.getMember().getRole();
-		System.out.println(userRole);
 		int payCurrentPage = 1;
 		
 		if(page != null) {
@@ -178,8 +179,40 @@ public class PayController {
 		}
 	}
 	
+	// 스킨 구매 후 저장되는 폴더 
+//	public String[] saveSkinFile(@RequestParam(value="skin", required = false) MultipartFile skin, HttpServletRequest request) {
+//		// HttpServletRequest를 쓴건 작은 resources에 도달하기 위함 getServletContext는 webapp까지 도달한 것
+//		String root = request.getSession().getServletContext().getRealPath("resources");
+//		String savePath = root + "\\myPage"; // \\를 쓴건 \하나를 의미하는 것(resource에 폴더 하나를 더 만드는 것 이미지용으로)
+//			
+//		File folder = new File(savePath);
+//		if(!folder.exists()) {
+//			folder.mkdirs();
+//		}
+//			
+//		// 사진의 rename값을 지정할 때 쓰는 클래스
+//		UUID uuid = UUID.randomUUID();
+//		String originFileName = skin.getOriginalFilename();
+//		String renameFileName = uuid + "_" + originFileName.substring(originFileName.lastIndexOf("."));
+//			
+//		String renamePath = folder + "\\" + renameFileName;
+//			
+//		try {
+//			skin.transferTo(new File(renamePath));
+//		} catch (Exception e) {
+//			System.out.println("파일 전송 에러 : " + e.getMessage());
+//		}
+//			
+//		String[] returnArr = new String[2];
+//		returnArr[0] = savePath;
+//		returnArr[1] = renameFileName;
+//		
+//		System.out.println("스킨 저장소 나옴?");
+//		return returnArr;
+//	}	
+	
 	@RequestMapping("orderPurchaes.pa")
-	public String deletePurchaes(Authentication authentication, @RequestParam("productNo") Long pNo, @RequestParam("price") Long price, @ModelAttribute Product p, Model model) throws PaymentException {
+	public String deletePurchaes(Authentication authentication, @RequestParam("productNo") Long pNo, @RequestParam("price") Long price, @ModelAttribute Product p, Model model, HttpServletRequest request, @RequestParam(value="skin", required = false) MultipartFile skin) throws PaymentException {
 		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
 //		System.out.println(userdetails.getMember());
 		Long mNo = userdetails.getMember().getUserNo();
@@ -199,6 +232,9 @@ public class PayController {
 		} else {
 			int result = pService.orderPurchaes(map);
 			if(result > 0) {
+//				MultipartFile upload  = skin;
+//				String[] returnArr = saveSkinFile(upload, request);
+//				model.addAttribute("mNo", mNo);
 				model.addAttribute("result", result);
 				return "pay/detailPurchaes"; // submit으로 값 전달 후 팝업창 닫고 부모 게시판 갱신 찾기
 			} else {
@@ -207,9 +243,40 @@ public class PayController {
 		}	
 	}
 	
-	@GetMapping("payment.pa")
-	public String test2() {
-		return "pay/payment";
+	@RequestMapping("payment.pa")
+	public String payment(Authentication authentication, Model model) throws PaymentException {
+		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
+		Long mNo = userdetails.getMember().getUserNo();
+		
+		Member loginUser = pService.selectLoginUser(mNo);
+		
+		UUID uuid = UUID.randomUUID();
+		LocalDate now = LocalDate.now();
+		String merchant_uid = uuid + "_" + now;
+		
+		if(loginUser != null) {
+			model.addAttribute("merchant_uid", merchant_uid);
+			model.addAttribute("loginUser", loginUser);
+			return "pay/payment";
+		} else {
+			throw new PaymentException("결제창 조회 실패");
+		}
 	}
 	
+	@RequestMapping("paymentRequest.pa")
+	public String paymentRequest(Authentication authentication, Model model, @RequestParam("mNo") Long mNo, @RequestParam("name") String name, @RequestParam("amount") String amount) throws PaymentException {
+		System.out.println(mNo);
+		System.out.println(name);
+		System.out.println(amount);
+		
+		System.out.println("------------------------");
+		int result = pService.paymentRequest(mNo);
+		System.out.println(result);
+		System.out.println("=-----------------------");
+		if(result > 0) {
+			return "pay/payment";
+		} else {
+			throw new PaymentException("결제 실패");
+		}
+	}
 }

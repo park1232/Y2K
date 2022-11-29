@@ -108,6 +108,12 @@
 		where userNo = #{userNo}
 	</update>
 	
+	<update id="deleteFriend">
+		update friends
+		set friendStatus = 'N'
+		where userNo2 = #{friendUsing}
+	</update>
+	
 	<resultMap type="FriendAdd" id="friendAddResultMap">
 		<id column="FRIENDADDNO" property="friendAddNo"/>
 		<result column="FRIENDCONTENT" property="friendContent"/>

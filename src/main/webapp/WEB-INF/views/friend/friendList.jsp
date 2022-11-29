@@ -26,7 +26,7 @@
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
           <ul class="list-unstyled">
-            <li><a href="${contextPath}/login-success.lo" class="text-white">메인페이지</a></li>
+            <li><a href="${contextPath}/main.lo" class="text-white" target="_blank">메인페이지</a></li>
             <li><a href="${contextPath}/payment.pa" class="text-white">결제페이지</a></li>
             <li><a href="${contextPath}/purchaes.pa" class="text-white">구매페이지</a></li>
             <li><a href="${contextPath}/friendRequestList.fr" class="text-white">친구 요청 페이지</a></li>
@@ -47,7 +47,9 @@
     </div>
   </div>
 </header>
+
 <div class="main">
+	<form class="needs-validation" action="${ contextPath }/insertPurchaes.pa" method="POST" id="friendDeleteForm">
    <table class="table">
   <thead>
     <tr>
@@ -63,7 +65,7 @@
 	      <th scope="row">count</th>
 	      <td>${ f.username }</td>
 	      <td>${ f.nickName }</td>
-	      <td><input type="checkbox" id="friend" name="using"></td>
+	      <td><input type="checkbox" id="friendUsing" name="friendUsing" value="${ f.userNo }"></td>
 	    </tr>
 	</c:forEach>
   </tbody>
@@ -159,8 +161,9 @@
     <br>
     <div class="friendOption">
 	    <button type="button" class="btn btn-primary" onclick="window.open('${ contextPath }/friendAdd.fr', 'friendAdd', 'width=460, height=570')">친추추가</button>
-	    <button type="button" class="btn btn-primary">친구삭제</button>
+	    <button type="button" class="btn btn-primary" id="delete">친구삭제</button>
     </div>
+   </form>
 </div>
 </body>
 <br>
@@ -170,6 +173,10 @@
         </div>
 </footer>
 <script>
-
+	const friendDeleteForm = document.getElementById('friendDeleteForm');
+	document.getElementById("delete").addEventListener('click', ()=>{
+		friendDeleteForm.action = '${contextPath}/deleteFriend.fr';
+		friendDeleteForm.submit();
+	});
 </script>
 </html>

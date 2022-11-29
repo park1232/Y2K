@@ -97,6 +97,7 @@
     	document.getElementById("submit").addEventListener('click', ()=>{
     		friendAddForm.action = '${contextPath}/friendAdd2.fr';
     		friendAddForm.submit();
+    		self.close();
     	});
 	}
 </script>

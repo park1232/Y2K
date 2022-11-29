@@ -106,4 +106,9 @@ public class FriendImpl implements FriendService{
 	public int hideAccept(Long userNo) {
 		return friendDAO.hideAccept(sqlSession, userNo);
 	}
+	
+	@Override
+	public int deleteFriend(Long friendUsing) {
+		return friendDAO.deleteFriend(sqlSession, friendUsing);
+	}
 }

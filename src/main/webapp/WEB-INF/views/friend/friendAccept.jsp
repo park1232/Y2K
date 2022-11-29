@@ -59,7 +59,7 @@
    
 <script>
 	window.onload = () =>{
-	
+		
 		const acceptForm = document.getElementById('acceptForm');
 	    document.getElementById("accept").addEventListener('click', ()=>{
 	    	acceptForm.action = '${contextPath}/acceptFriend.fr';
