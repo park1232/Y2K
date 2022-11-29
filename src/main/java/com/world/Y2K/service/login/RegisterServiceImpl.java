@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.world.Y2K.dao.login.LoginDAO;
 import com.world.Y2K.dao.mypage.MypageDAO;
+import com.world.Y2K.dao.skin.SkinDAO;
 import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.User;
 
@@ -22,6 +23,9 @@ public class RegisterServiceImpl implements RegisterService {
 	@Autowired
 	private MypageDAO mypageDAO;
 	
+	@Autowired
+	private SkinDAO skinDAO;
+	
 	
 	@Override
 	public int registerMember(User user) {
@@ -31,10 +35,12 @@ public class RegisterServiceImpl implements RegisterService {
 		Member member = loginDAO.findUser(user.getUsername());
 		
 		if(mypageDAO.checkFirst(member.getUserNo()) == 0 ){
+			skinDAO.insertDefault(member.getUserNo());
 			return mypageDAO.insertDefault(member.getUserNo());
 		}
 		return 0;
-
+		
+		
 	}
 	
 	private Member setMember(User user) {

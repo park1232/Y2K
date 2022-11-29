@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="skinMapper">
+  
+   <resultMap type="Skin" id="skinResultSet">
+     
+      
+      <result column="SKINNAME" property="skinName"/>
+      <result column="SKINSTATUS" property="skinStatus"/>
+      <result column="SKINUSERNO" property="skinUserNo"/>
+      <result column="SKINKOREANAME" property="skinKoreaName"/>
+      
+  
+   </resultMap>
+   
+   <insert id="insertDefault1" parameterType="long">
+   		insert into skin
+   		values('milkyWay','N',#{userNo},'은하수')
+   </insert>
+   
+   <insert id="insertDefault2" parameterType="long">
+   		insert into skin
+   		values('green','N',#{userNo},'초록색')
+   </insert>
+   
+   <insert id="insertDefault3" parameterType="long">
+   		insert into skin
+   		values('red','N',#{userNo},'빨간색')
+   </insert>
+   
+   <insert id="insertDefault4" parameterType="long">
+   		insert into skin
+   		values('blue','N',#{userNo},'파란색')
+   </insert>
+   
+   <insert id="insertDefault5" parameterType="long">
+   		insert into skin
+   		values('purple','N',#{userNo},'보라색')
+   </insert>
+   
+   <insert id="insertDefault6" parameterType="long">
+   		insert into skin
+   		values('pink','N',#{userNo},'분홍색')
+   </insert>
+   
+   <insert id="insertDefault7" parameterType="long">
+   		insert into skin
+   		values('sky','N',#{userNo},'하늘')
+   </insert>
+   
+   <select id="getListSkin" resultMap="skinResultSet">
+   	select skinname, skinkoreaname
+   	from skin
+   	where skinuserno = #{userNo} and skinstatus='Y'
+   </select>
+
+   
+   
+</mapper>

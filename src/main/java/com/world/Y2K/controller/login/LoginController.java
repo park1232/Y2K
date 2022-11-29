@@ -178,27 +178,27 @@ public class LoginController {
 		return deleteMemberService.deleteMember(userDetails.getMember().getUserNo());
 	}
 	
-	@GetMapping("/test.lo")
-	public ModelAndView test(Long userNo, Authentication authentication, ModelAndView mv) {
-		
-		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
-		System.out.println("123");
-		//System.out.println("controller°ª"+userNo);
-		
-			Member member = userDetails.getMember();
-			Mypage mypage = null;
-			if(userNo != member.getUserNo()) {
-				mypage = onloadEntityService.getOnloadEntity(userNo);
-				mv.addObject("visit_rayout", mypage);
-				mv.addObject("my_rayout", "null");
-			}  else {
-				mypage = onloadEntityService.getOnloadEntity(member.getUserNo());
-				mv.addObject("my_rayout", mypage);
-				mv.addObject("visit_rayout", "null");
-			}
-			mv.setViewName("login/loginSuccess");
-			return mv;
-	}
+//	@GetMapping("/test.lo")
+//	public ModelAndView test(Long userNo, Authentication authentication, ModelAndView mv) {
+//		
+//		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+//		System.out.println("123");
+//		//System.out.println("controller°ª"+userNo);
+//		
+//			Member member = userDetails.getMember();
+//			Mypage mypage = null;
+//			if(userNo != member.getUserNo()) {
+//				mypage = onloadEntityService.getOnloadEntity(userNo);
+//				mv.addObject("visit_rayout", mypage);
+//				mv.addObject("my_rayout", "null");
+//			}  else {
+//				mypage = onloadEntityService.getOnloadEntity(member.getUserNo());
+//				mv.addObject("my_rayout", mypage);
+//				mv.addObject("visit_rayout", "null");
+//			}
+//			mv.setViewName("login/loginSuccess");
+//			return mv;
+//	}
 	
 	
 	

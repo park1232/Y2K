@@ -1,9 +1,9 @@
 package com.world.Y2K.service.mypage;
 
-import com.world.Y2K.model.dto.Mypage;
+import java.util.HashMap;
 
 public interface OnloadEntityService {
 
-	Mypage getOnloadEntity(Long userNo);
+	HashMap<String, Object> getOnloadEntity(Long userNo);
 
 }

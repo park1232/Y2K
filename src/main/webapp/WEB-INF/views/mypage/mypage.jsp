@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -182,24 +184,30 @@ ol.large-numbers li:hover:before {
             <div id="profile-rayout">
                 프로필 사진 선택
             </div>
+            
           <li id="title-click">타이틀 제목 변경</li>
             <div id="title-rayout">
-                <form>
+                <form action="/title-change.my">
                 
-                    <input type ="text" id="title_inputbox">
+                    <input type ="text" id="title_inputbox" name="inputTitle">
+                    <input type="submit" id="title_submit">
+                </form>
+            </div>
+            
+             <li id="content-click">담벼락 변경</li>
+            <div id="content-rayout">
+                <form action="/content-change.my">            
+                    <input type ="textarea" id="content_inputbox" name="inputContent" >
                     <input type="submit" id="title_submit">
                 </form>
             </div>
           <li id="background-click">배경색 변경</li>
             <div id="background-rayout">
-                <form>
-                    <select id="background-select">
-                        <option value="노란색">yellow</option>
-                        <option value="빨간색">red</option>
-                        <option value="초록색">green</option>
-                        <option value="파란색">blue</option>
-                        <option value="회색">gray</option>
-                        <option value="검정색">black</option>
+                <form action="/background-change.my">
+                    <select name="skinName" id="background-select">
+                        <c:forEach var="skinList" items="${ skinList}">
+                        	<option value="${skinList.skinName }" >${skinList.skinKoreaName }</option>
+                        </c:forEach>
 
                     </select>
                     <input type="submit" id="update_submit" value="변경">
@@ -294,6 +302,19 @@ ol.large-numbers li:hover:before {
 
        
     });
+    
+    document.getElementById('content-click').addEventListener("click",function(){ 
+        var contentRayout = document.getElementById('content-rayout');
+         if(contentRayout.style.display == 'none'){
+        	 contentRayout.style.display='block';
+         } else {
+        	 contentRayout.style.display='none';
+         }
+
+       
+    });
+    
+    
     
     $("#form-id").submit(function(){
     	console.log("실행");
