@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -50,18 +51,18 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/background-change.my")
-	public String backgroundChange(String skinName, Authentication authentication) {
-		return backgroundChangeService.backgroundChange(skinName, getUserDetails(authentication) );
+	public String backgroundChange(String skinName, Authentication authentication, Model model) {
+		return backgroundChangeService.backgroundChange(skinName, getUserDetails(authentication),model );
 	}
 	
 	@GetMapping("/title-change.my")
-	public String titleChange(String inputTitle,  Authentication authentication) {
-		return titleChangeService.titleChange(inputTitle, getUserDetails(authentication));
+	public String titleChange(String inputTitle,  Authentication authentication ,Model model) {
+		return titleChangeService.titleChange(inputTitle, getUserDetails(authentication),model);
 	}
 	
 	@GetMapping("/content-change.my")
-	public String contentChange(String inputContent,  Authentication authentication) {
-		return contentChangeService.contentChange(inputContent, getUserDetails(authentication));
+	public String contentChange(String inputContent,  Authentication authentication, Model model) {
+		return contentChangeService.contentChange(inputContent, getUserDetails(authentication), model);
 	}
 	
 	

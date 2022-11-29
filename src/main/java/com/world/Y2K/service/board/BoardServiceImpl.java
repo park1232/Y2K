@@ -50,7 +50,7 @@ public class BoardServiceImpl implements BoardService {
 		if(bDAO.insertBoard(sqlSession, getBoard(b, boardWriter, category))>0) {
 			return "redirect:boardList.bo";
 		}else {
-			throw new BoardException("게시글 등록 실패");
+			throw new BoardException("寃뚯떆湲� �벑濡� �떎�뙣");
 		}
 	}
 	
@@ -62,11 +62,13 @@ public class BoardServiceImpl implements BoardService {
 	
 	private String getCategory(String cateStr) {
 			switch(cateStr) {
-			case "😳잡담" : return "A";
-			case "😁유머" : return "B"; 
-			case "📟정보" : return "C"; 
-			case "💛기타" : return "D"; 
+			case "잡담" : return "A";
+			case "유머" : return "B"; 
+			case "정보" : return "C"; 
+			case "기타" : return "D"; 
 		}
+			
+			System.out.println("cateStr : " + cateStr);
 		return null;
 	}
 

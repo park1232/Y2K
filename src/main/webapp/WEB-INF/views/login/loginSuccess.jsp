@@ -40,7 +40,7 @@ String userId = request.getParameter("userId");
 
  $('#move-main-btn').click(function(){
 	console.log("실행됨?");
-	window.open('/mainPage.ma?userNo='+${userNo},'Y2K World','width=1289, height=703, scrollbars=no, resizable=no, toolbars=no, menubar=no');
+	window.open('/mainPage.ma?userNo='+${empty param.userNo ? userNo : param.userNo},'Y2K World','width=1289, height=703, scrollbars=no, resizable=no, toolbars=no, menubar=no');
 /* 	window.open('/test.lo?userNo='+${userNo},'Y2K World','width=1289, height=703'); */
  	 closeForm(); 
 /* 	 , scrollbars=no, resizable=no, toolbars=no, menubar=no'  */

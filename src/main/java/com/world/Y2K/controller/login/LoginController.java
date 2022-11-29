@@ -1,8 +1,11 @@
 package com.world.Y2K.controller.login;
 
+import java.io.IOException;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,8 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.world.Y2K.exception.MemberException;
-import com.world.Y2K.model.dto.Member;
-import com.world.Y2K.model.dto.Mypage;
 import com.world.Y2K.model.vo.User;
 import com.world.Y2K.service.login.ChangePasswordService;
 import com.world.Y2K.service.login.CheckEmailService;
@@ -101,8 +102,14 @@ public class LoginController {
 	}
 	
 	@GetMapping("/main.lo")
-	public String moveLoginSuccesspage() {
-		return "login/loginSuccess";
+	public String moveLoginSuccesspage(Authentication authentication, ModelAndView mv) throws ServletException, IOException {
+		UserDetailsImpl userDetails =(UserDetailsImpl)authentication.getPrincipal();
+		mv.addObject("userNo", userDetails.getMember().getUserNo());
+		
+//		request.setAttribute("userNo", userDetails.getMember().getUserNo());	
+//		request.getRequestDispatcher("/login-success.lo").forward(request, response);
+		
+	return "login/loginSuccess";
 	}
 	
 	@GetMapping("/kakao.lo")

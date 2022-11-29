@@ -35,14 +35,14 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public Map<String,Object> insertReply(String content, String nickName, Long replyWriter) {
+	public Map<String,Object> insertReply(String content, String nickName, Long replyWriter, Long own) {
 		
 		HashMap<String, Object> map = new HashMap<String,Object>();
 		
 		map.put("content", content);
 		map.put("nickname", nickName);
 		map.put("userNo", replyWriter);
-		
+		map.put("own", own);
 		int result = mDAO.insertReply(sqlSession, map);
 //		System.out.println(result);
 //		

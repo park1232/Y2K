@@ -4,6 +4,7 @@ package com.world.Y2K.controller.main;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.world.Y2K.model.dto.MainRe;
 import com.world.Y2K.model.dto.Member;
-import com.world.Y2K.model.vo.Board;
-import com.world.Y2K.model.vo.Photo;
 import com.world.Y2K.model.vo.Reply;
-import com.world.Y2K.model.vo.Visit;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.main.MainService;
 import com.world.Y2K.service.mypage.OnloadEntityService;
@@ -42,7 +40,8 @@ public class MainController {
 	public ModelAndView mainPage(
 			ModelAndView mv, 
 			@RequestParam("userNo") Long userNo,
-			Authentication authentication
+			Authentication authentication,
+			HttpServletRequest request
 			) {
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 		System.out.println("123");
@@ -70,18 +69,21 @@ public class MainController {
 			
 			ArrayList<Reply> list = mService.replyList(userNo);
 	
-			int bList = mService.boardList(userNo);
-			
-			int pList = mService.photoList(userNo);
-			
-			int vList = mService.visitList(userNo);
-			
-			int dList = mService.dList(userNo);
-			mv.addObject("bList", bList);
+			/*
+			 * int bList = mService.boardList(userNo);
+			 * 
+			 * int pList = mService.photoList(userNo);
+			 * 
+			 * int vList = mService.visitList(userNo);
+			 * 
+			 * int dList = mService.dList(userNo);
+			 */
+			/* mv.addObject("bList", bList); */
+			request.setAttribute("userNo", userNo);
 			mv.addObject("list", list);
 			System.out.println("리플리스트"+ list);
 			mv.addObject("member", member);
-			mv.addObject("userNo", userNo);
+			
 			mv.setViewName("main/mainPage");
 			
 			return mv;
@@ -101,7 +103,7 @@ public class MainController {
 		System.out.println("Controller mainRe : "  + mainRe);
 		
 		
-		return mService.insertReply(mainRe.getContent(), mainRe.getNickName(), userDetails.getMember().getUserNo());
+		return mService.insertReply(mainRe.getContent(), mainRe.getNickName(), userDetails.getMember().getUserNo(), mainRe.getOwn());
 		
 		
 //		ArrayList<Reply> list = bService.selectReply(r.getRboardNo());

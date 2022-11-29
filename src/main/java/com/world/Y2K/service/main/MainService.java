@@ -10,7 +10,7 @@ public interface MainService {
 
 	ArrayList<Reply> replyList(Long userNo);
 	
-	Map<String,Object> insertReply(String content, String nickName, Long replyWriter);
+	Map<String,Object> insertReply(String content, String nickName, Long replyWriter, Long own);
 
 	int boardList(Long userNo);
 

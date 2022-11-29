@@ -80,7 +80,7 @@
 						<div class="main-wrap">
 							<div class="title-wrap">
 								<p class="title">
-									<div id="mainDiv" class="title title-wrap"><a href="#">마케팅이 좋은 사람들, 마케팅월드</a></div>
+									<div id="mainDiv" class="title title-wrap"><a href="#"></a></div>
 								</p>
 								<div class="link-wrap">
 									<a href="https://www.instagram.com/hyunjong_yoo/"
@@ -101,7 +101,7 @@
 									<div id="tab-1-content" class="tab-content-item show">
 										<!--게시물컨 그리드배열-->
 										<div class="tab-1-content-inner">
-
+												
 											<!--${dto.member.userNo} -->
 											<%-- ${dto.member} --%>
 											<%-- ${images} --%>
@@ -124,14 +124,14 @@
 							</div>
 						</div>
 						<div class="menu align-center expanded text-center SMN_effect-68">
-							<a href="${contextPath}/mainPage.ma" class="menu-item mi-1">홈</a>
+							<a href="${contextPath}/mainPage.ma?userNo=${userNo}" class="menu-item mi-1">홈</a>
 						</div>
-						<a href="${contextPath}/photo.ph"
+						<a href="${contextPath}/photo.ph?userNo=${userNo}"
 							class="menu-item mi-2 menu-checked">사진첩</a>
 						<div class="menu align-center expanded text-center SMN_effect-68">
-							<a href="${contextPath}/diary.di" class="menu-item mi-3">다이어리</a>
-							<a href="${contextPath}/visitBoard.vi" class="menu-item mi-4">방명록</a>
-							<a href="#" class="menu-item mi-5">마케팅</a>
+							<a href="${contextPath}/diary.di?userNo=${userNo}" class="menu-item mi-3">다이어리</a>
+							<a href="${contextPath}/visit.vi?userNo=${userNo}" class="menu-item mi-4">방명록</a>
+							<a href="${contextPath}/boardList.bo?userNo=${userNo}" class="menu-item mi-5">게시판</a>
 						</div>
 					</div>
 				</div>
@@ -171,13 +171,13 @@
 		let profilePath = "";
 		let sideContent = "";
 		let myUserNo = "";
-/* 		let sideContentDiv = $("#sideContentDiv").html(); */
+
 		
 		
 		
 		
-		if("${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}" != 64){
-			myUserNo = 64;
+		if("${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}" != "${userNo}"){
+			myUserNo = "${userNo}";
 		} else {
 			myUserNo = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}";
 		}
@@ -206,18 +206,6 @@
 				console.log(sideContent);
 			}
 		})
-		
-		
-		/* let myUserNo = "${my_rayout.myUserNo}";
-		let skinPath = "${my_rayout.skinPath}";
-		console.log("userNo : " + myUserNo);
-		console.log("skinPath : " + skinPath);
-		
-		console.log("${my_rayout}");
-		console.log("${my_rayout.myUserNo}");
-		console.log("${my_rayout.skinPath}");
-		console.log("${my_rayout.mainTitle}");
-		console.log("${my_rayout.sideContent}"); */
 		
 		
 		

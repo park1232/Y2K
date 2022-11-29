@@ -15,4 +15,6 @@ public class MainRe {
 	
 	private Long replyWriter;
 	
+	private Long own;
+	
 }

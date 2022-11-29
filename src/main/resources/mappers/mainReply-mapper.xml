@@ -3,52 +3,103 @@
 <mapper namespace="mainReplyMapper">
   
     <resultMap type="mainReply" id="mainReplyResultSet">
-		 <id column="REPLYNO" property="replyNo"/>
-		 <result column="REPLY_CONTENT" property="content" />
-		 <result column="REPLY_CREATEDATE" property="mCreateDate" />
-		 <result column="REPLY_MODIFYDATE" property="mModifyDate" />
-		 <result column="REPLY_WRITER" property="replyWriter" />
-		 <result column="REPLY_STATUS" property="mReplyStatus" />
+       <id column="REPLYNO" property="replyNo"/>
+       <result column="REPLY_CONTENT" property="content" />
+       <result column="REPLY_CREATEDATE" property="mCreateDate" />
+       <result column="REPLY_MODIFYDATE" property="mModifyDate" />
+       <result column="REPLY_WRITER" property="replyWriter" />
+       <result column="REPLY_STATUS" property="mReplyStatus" />
+       <result column="OWN" property="own"/>
 
-	 </resultMap>
- 	
- 	<resultMap type="Board" id="boardResultSet">
-		 <id column="BOARDNO" property="boardNo"/>
-		 <result column="BOARD_TITLE" property="boardTitle" />
-		 <result column="BOARD_CONTENT" property="boardContent" />
-		 <result column="NICKNAME" property="nickName" />
-		 <result column="BOARD_CATENAME" property="category" />
-		 <result column="CREATE_DATE" property="createDate" />
-		 <result column="MODIFY_DATE" property="modifyDate" />
-		 <result column="BOARD_COUNT" property="boardCount" />
-		 <result column="BOARD_STATUS" property="boardStatus" />
-		 <result column="BOARD_WRITER" property="boardWriter" />
-		 <result column="BOARD_CATEID" property="boardCateId" />
-	 </resultMap>
- 	
- 	 
-    	<insert id="insertReply">
-   		insert into MAINREPLY
-	 	values(MAINREPLY_SEQ.nextval, #{content}, sysdate, sysdate, #{userNo}, default)
-    	</insert>
+    </resultMap>
+    
+    <resultMap type="Board" id="boardResultSet">
+       <id column="BOARDNO" property="boardNo"/>
+       <result column="BOARD_TITLE" property="boardTitle" />
+       <result column="BOARD_CONTENT" property="boardContent" />
+       <result column="NICKNAME" property="nickName" />
+       <result column="BOARD_CATENAME" property="category" />
+       <result column="CREATE_DATE" property="createDate" />
+       <result column="MODIFY_DATE" property="modifyDate" />
+       <result column="BOARD_COUNT" property="boardCount" />
+       <result column="BOARD_STATUS" property="boardStatus" />
+       <result column="BOARD_WRITER" property="boardWriter" />
+       <result column="BOARD_CATEID" property="boardCateId" />
+    </resultMap>
+    
+       <resultMap type="Visit" id="visitResultSet">
+      <id column="VISITNO" property="visitNo"/>
+      <result column="VISIT_CONTENT" property="visitContent"/>
+      <result column="NICKNAME" property="nickName"/>
+      <result column="V_CREATEDATE" property="createDate"/>
+      <result column="V_MODIFYDATE" property="modifyDate"/>
+      <result column="VISIT_STATUS" property="visitStatus"/>
+      <result column="VISIT_WRITER" property="visitWriter"/> <!--userNo -->
+   </resultMap>
+       
+     
+       <insert id="insertReply">
+         insert into MAINREPLY
+       values(MAINREPLY_SEQ.nextval, #{content}, sysdate, sysdate, #{userNo}, default,#{own})
+       </insert>
 <!--    
    <update id="deleteReply">
-   		update reply
-   		set reply_Status = 'N'
-   		where REPLYNO = #{replyNo}
+         update reply
+         set reply_Status = 'N'
+         where REPLYNO = #{replyNo}
    </update>
    -->
    
    
-    <select id="selectReply" resultMap="mainReplyResultSet">
- 		select * 
-	 	from mainreply
+   <select id="selectReply" resultMap="mainReplyResultSet">
+       select * 
+       from mainreply
         join member m on(reply_writer = userNo)
-	 	where reply_status = 'Y'  
-	 	order by REPLYNO desc
+       where reply_status = 'Y' and own = #{userNo}  
+       order by REPLYNO desc
+   </select>
+
+      
+      
+      
+        <!--  
+    <select id="selectBoard" resultType="_int">
+      select count(*)
+      from board
+      where BOARD_WRITER= #{userNo} and BOARD_STATUS = 'Y'
+   </select>
+
+   <select id="selectPhoto" resultType="_int">
+      select count(*)
+      from photo
+      where userNo= #{userNo} and photostatus = 'Y'
    </select> 
    
-    
+    <select id="selectDiary" resultType="_int">
+      select count(*)
+      from visit
+      where userNo= #{userNo} and DIARY_STATUS = 'Y'
+   </select> 
+   
+    <select id="selectVisit" resultType="_int">
+      select count(*)
+      from visit
+      where userNo= #{userNo} and visitstatus = 'Y'
+   </select>  -->
+   
+   
+   <update id="deleteReply">
+      update MAINREPLY
+    set REPLY_STATUS = 'N'
+    where REPLYNO = #{replyNo}
+   </update>
+   
+   
+   
+   
+   
+   
+   
    
    
    

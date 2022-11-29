@@ -38,7 +38,7 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
                   <img class="profile-img" src="${contextPath}/resources/img/profile copy.jpg">
                   <div class="desc-wrap">
                     <p class="text-desc">
-                     안녕하세요. <br> 조다롱입니다. <br> 제 미니홈피에 오신것을 환영합니다. </p>
+                     <div id="sideContentDiv" class="desc-wrap text-desc"></div>
                     <a class="history" href="#">HISTORY</a>
                   </div>
                   <div class="info-wrap">
@@ -70,7 +70,7 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
             <div class="main-paper">
               <div class="main-wrap">
                 <div class="title-wrap">
-                  <p class="title"><a href="#">나의 미니홈피에 온걸 환영해 :D</a></p>
+                  <p class="title"><div id="mainDiv" class="title title-wrap"><a href="#"></a></div></p>
                   <div class="link-wrap">
                     <a href="https://www.instagram.com/hyunjong_yoo/" target="_blank"><span>일촌맺기</span></a>
                     <a href="https://blog.naver.com/hananharu" target="_blank"><span>팬되기</span></a>
@@ -139,25 +139,72 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
 		
 	</div>
    <div class = "menu align-center expanded text-center SMN_effect-68">
-           <a href="mainPage.html">   <div class="menu-item mi-1"  onclick="location.href='${contextPath}'">홈</div></a>
+           <a href="${contextPath}/mainPage.ma?userNo=${userNo}">   <div class="menu-item mi-1"  onclick="location.href='${contextPath}'">홈</div></a>
 <!--              <a href="photo.html" class="menu-item mi-2" onclick="openPopup()">사진첩</a>-->
 
-              <a href="photo.html" class="menu-item mi-2" >사진첩</a>
-              <a href="diary.html" class="menu-item mi-3">다이어리</a>
+              <a href="${contextPath}/photo.ph?userNo=${userNo}" class="menu-item mi-2" >사진첩</a>
+              <a href="${contextPath}/diary.di?userNo=${userNo}" class="menu-item mi-3">다이어리</a>
  </div>
-              <a class="menu-item mi-5 menu-checked" onclick="location.href='${contextPath}/boardList.bo'">게시판</a>
+             
+             
+                <a class="menu-item mi-4 menu-checked" onclick="location.href='${contextPath}/visit.vi?userNo=${userNo}'">방명록</a>
               <div class = "menu align-center expanded text-center SMN_effect-68">
-                <a class="menu-item mi-4" onclick="location.href='${contextPath}/visit.vi'">방명록</a>
-              </div>
-              <!-- <a href="#" class="menu-item mi-5 menu-checked">마케팅</a> -->
-<!--              <div class="menu-item mi-6">게시판</div>-->	
-<!--              <div class="menu-item mi-7">방명록</div>-->
+               <a class="menu-item mi-5 " onclick="location.href='${contextPath}/boardList.bo?userNo=${userNo}'">게시판</a>
+ </div>
             </div>
           </div>
         </section>
       </main> 
    </div>
      <script>
+     $(document).ready(function(){
+ 		let skinPath = "";
+ 		let mainTitle = "";
+ 		let profilePath = "";
+ 		let sideContent = "";
+ 		let myUserNo = "";
+
+ 		
+ 		
+ 		
+ 		
+ 		if("${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}" != "${userNo}"){
+ 			myUserNo = "${userNo}";
+ 		} else {
+ 			myUserNo = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}";
+ 		}
+ 		
+ 		let params={
+ 				userNo : myUserNo
+ 		}
+ 		
+ 		$.ajax({
+ 			type:"GET",
+ 			url:"/onload.my",
+ 			data : params,
+ 			success:function(res){
+ 				skinPath = res.skinPath;
+ 				mainTitle = res.mainTitle;
+ 				profilePath = res.profilePath;
+ 				sideContent = res.sideContent;
+ 				document.getElementById('sideContentDiv').innerHTML = sideContent;
+ 				document.getElementById('mainDiv').innerHTML = mainTitle;
+ 				
+ 				$(".bg").css({"background":"url("+skinPath+")"}); 
+ 				
+ 				console.log(skinPath);
+ 				console.log(mainTitle);
+ 				console.log(profilePath);
+ 				console.log(sideContent);
+ 			}
+ 		})
+ 		
+ 		
+ 		
+ 		
+ 	});
+     
+     
 
  			const ranimage = document.getElementsByClassName('ranimage');
             	console.log(ranimage); //console에서는 src 다 다르게 뜨는데 view에서 적용 x

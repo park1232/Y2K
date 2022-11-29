@@ -37,9 +37,9 @@ public class BoardController {
 	@Autowired
 	private BoardService bService;
 	
-	//게시판 메인
+	//寃뚯떆�뙋 硫붿씤
 	@RequestMapping("boardList.bo")
-	public String boardList(@RequestParam(value="page", required=false) Integer page, Model model) {
+	public String boardList(@RequestParam(value="page", required=false) Integer page, Model model, @RequestParam("userNo")Long userNo) {
 		
 		int currentPage = 1;
 		if(page != null) {
@@ -51,32 +51,32 @@ public class BoardController {
 		PageInfo pi = BoardPagination.getPageInfo(currentPage, boardListCount, 5);
 		
 		ArrayList<Board> list = bService.selectBoardList(pi);
-		
+		model.addAttribute("userNo", userNo);
 		if(list != null) {
 			model.addAttribute("pi", pi);
 			model.addAttribute("list", list);
 			
 			return "board/boardList";
 		} else {
-			throw new BoardException("게시글 조회 실패");
+			throw new BoardException("寃뚯떆湲� 議고쉶 �떎�뙣");
 		}
 		
 	}
 	
-	//게시글 작성 View
+	//寃뚯떆湲� �옉�꽦 View
 	@RequestMapping("boardWrite.bo")
 	public String boardWrite() {
 		return "/board/boardWrite";
 	}
 	
-	//게시글 작성
+	//寃뚯떆湲� �옉�꽦
 	@RequestMapping("insertBoard.bo")
 	public String insertBoard(@RequestParam("category") String cateStr ,@ModelAttribute Board b, HttpSession session, Authentication authentication) {		
 		return bService.insertBoard(cateStr, b,session,authentication);
 
 	}
 	
-	//게시글 상세
+	//寃뚯떆湲� �긽�꽭
 	@RequestMapping("selectBoard.bo")
 	public ModelAndView boardView(@RequestParam("bNo") Long bNo, @RequestParam("writer") String writer,
 									@RequestParam("page") int page, ModelAndView mv, Authentication authentication) {
@@ -95,11 +95,11 @@ public class BoardController {
 			mv.setViewName("board/boardView");
 			return mv;	
 		} else {
-			throw new BoardException("게시글 상세 조회 실패");
+			throw new BoardException("寃뚯떆湲� �긽�꽭 議고쉶 �떎�뙣");
 		}
 	}
 	
-	//게시글 수정
+	//寃뚯떆湲� �닔�젙
 	@RequestMapping("updateForm.bo")
 	public String updateForm(@RequestParam("boardNo") Long bNo, @RequestParam("page") int page, Model model) {
 		Board b = bService.selectBoard(bNo);
@@ -124,12 +124,12 @@ public class BoardController {
 			model.addAttribute("page", page);
 			return "redirect:selectBoard.bo";
 		} else {
-			throw new BoardException("게시글 수정 실패");
+			throw new BoardException("寃뚯떆湲� �닔�젙 �떎�뙣");
 		}
 
 	}
 	
-	//게시글 삭제
+	//寃뚯떆湲� �궘�젣
 	@RequestMapping("deleteForm.bo")
 	
 	public String deleteBoard(@RequestParam("boardNo") Long bNo) {
@@ -137,11 +137,11 @@ public class BoardController {
 		if(result > 0) {
 			return "redirect:boardList.bo";
 		} else {
-			throw new BoardException("게시글 삭제 실패");
+			throw new BoardException("寃뚯떆湲� �궘�젣 �떎�뙣");
 		}
 	}
 	
-	//조건식 검색
+	//議곌굔�떇 寃��깋
 	@RequestMapping("search.bo")
 	public String searchBoard(@RequestParam("searchCondition") String condition, Model model,
 								@RequestParam("searchValue") String value, @RequestParam(value="page", required=false) Integer page) {
@@ -171,7 +171,7 @@ public class BoardController {
 
 	}
 	
-	//댓글
+	//�뙎湲�
 	@RequestMapping("insertReply.bo")
 	public void insertReply(@ModelAttribute Reply r, HttpServletResponse response) {
 		
@@ -193,7 +193,7 @@ public class BoardController {
 	
 	}
 	
-	//댓글 삭제
+	//�뙎湲� �궘�젣
 	@RequestMapping("deleteReply.bo")
 	public String deleteReply(@RequestParam("replyNo") Long rNo, Model model, @RequestParam("boardNo") Long bNo) {
 		
@@ -204,11 +204,11 @@ public class BoardController {
 			model.addAttribute("list", list);
 			return "board/boardView";
 		} else {
-			throw new BoardException("게시글 삭제 실패");
+			throw new BoardException("寃뚯떆湲� �궘�젣 �떎�뙣");
 		}
 	}
 	
-	//게시글 추천
+	//寃뚯떆湲� 異붿쿇
 	@RequestMapping("likeCheck.bo")
 	@ResponseBody
 	public String likeCheck(@RequestParam("boardNo")Long bNo, HttpSession session, @ModelAttribute Like like, Authentication authentication) {

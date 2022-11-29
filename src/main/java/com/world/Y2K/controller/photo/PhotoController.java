@@ -39,16 +39,16 @@ public class PhotoController {
 	private PhotoService pService;
 	
 	@RequestMapping("/photo.ph")
-	public String photo(Model model, Authentication authentication, HttpSession session
-			,@RequestParam("userNo") Long userNo) {
+	public String photo(Model model, Authentication authentication, HttpSession session,
+			@RequestParam("userNo")Long userNo) {
 		
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 		//System.out.println("user : " + userDetails.getMember());
 		/* Member member = userDetails.getMember(); */
 		//Long userNo = (Long) session.getAttribute("loginUser");
-		
+//		Long userNo = Long.parseLong((String) request.getAttribute("userNo"));
+//		request.setAttribute("userNo", userNo);
 		List<Photo> images = pService.photoList();
-		
 		model.addAttribute("images", images);
 		model.addAttribute("dto", userDetails);
 		model.addAttribute("userNo", userNo);
@@ -73,7 +73,7 @@ public class PhotoController {
 		//p.setUserNo(userDetails.getMember().getUserNo());
 		
 		
-		//System.out.println("맴버 :"+ member);
+		//System.out.println("留대쾭 :"+ member);
 		
 		ArrayList<Reply> list =pService.selectReply(boardNo);
 		
@@ -105,7 +105,7 @@ public class PhotoController {
 		
 		
 		if(file.isEmpty()) {
-			throw new PhotoException("실패");
+			throw new PhotoException("�떎�뙣");
 		}
 		
 		

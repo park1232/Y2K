@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.world.Y2K.dao.mypage.MypageDAO;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
@@ -15,10 +16,11 @@ public class ContentChangeServiceImpl implements ContentChangeService{
 	private MypageDAO mypageDAO;
 	
 	@Override
-	public String contentChange(String inputContent, UserDetailsImpl userDetails) {
+	public String contentChange(String inputContent, UserDetailsImpl userDetails, Model model) {
 		HashMap<String, Object> map = setUpdateContentMap(inputContent, userDetails.getMember().getUserNo());
 		mypageDAO.updateContent(map);
-		return "login/loginSuccess";
+		model.addAttribute("userNo",userDetails.getMember().getUserNo());
+		return "redirect:/main.lo";
 	}
 
 	private HashMap<String, Object> setUpdateContentMap(String inputContent, Long userNo) {
