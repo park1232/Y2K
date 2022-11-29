@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" scope="application" />
 <!DOCTYPE html>
 <html lang="ko">
@@ -12,8 +13,9 @@
     <link rel="short icon" href="${contextPath}/resources/img/2014.ico">
     <link rel="stylesheet" href="${contextPath}/resources/css/reset.css" />
     <link rel="stylesheet" href="${contextPath}/resources/css/style.css" />
-    <link rel="stylesheet" href="${contextPath}/resources/css/diary2.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/diary3.css?after" />
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://kit.fontawesome.com/203ce9d742.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <div class="bg">
@@ -70,86 +72,72 @@
                     <a href="https://www.instagram.com/hyunjong_yoo/" target="_blank"><span>일촌맺기</span></a>
                     <a href="https://blog.naver.com/hananharu" target="_blank"><span>팬되기</span></a>
                     <p><a href="#">https://www.cyowrld.com/marketer_JJ</a></p>
-                    <script src="https://kit.fontawesome.com/203ce9d742.js" crossorigin="anonymous"></script>
                   </div>
                 </div>
                 <div class="main">
-                	<h1>2022.11.05</h1>
+                	<form action="${ contextPath }/insertDiary.di" method="POST">
+                	<h1>${ datepicker }</h1>
+                	<input type="hidden" id="diaryDate" name="diaryDate" value="${ datepicker }">
                 	<table>
                 		<tr>
-                			<td><i class="fa-solid fa-cloud"></i>&nbsp;흐림</td>
-                			<td><i class="fa-regular fa-face-laugh-beam"></i>&nbsp;기쁨</td>
-                			<td><i class="fa-solid fa-location-dot"></i>&nbsp;명동</td>
-                			<td><i class="fa-solid fa-earth-africa"></i>&nbsp;전체공개</td>
+                			<td>
+                				<div class="selectBox">
+								  <select id="weather" name="weather" class="select">
+								    <option disabled selected value="선택안함">날씨⭐</option>
+								    <option value="sunny">☀맑음</option>
+								    <option value="cloudy">☁흐림</option>
+								    <option value="rain">🌧비</option>
+								    <option value="snow">❄눈</option>
+								  </select>
+								  <span class="icoArrow"></span>
+								</div>
+                			</td>
+                			<td>
+                				<div class="selectBox">
+								  <select id="mood" name="mood" class="select">
+								    <option disabled selected value="선택안함">기분💕</option>
+								    <option value="joy">😄기쁨</option>
+								    <option value="sad">😭슬픔</option>
+								    <option value="mad">😡화남</option>
+								    <option value="tired">🥱피곤</option>
+								    <option value="happy">😆행복</option>
+								    <option value="bisy">😵바쁨</option>
+								  </select>
+								  <span class="icoArrow"><img src="https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png" alt=""></span>
+								</div>
+                			</td>
+                			<td>
+                				<div class="map" id="mapValue">${ mapValue }</div>
+                				<input type="hidden" id="location" name="location" value="${ mapValue }">
+                			</td>
+                			<td>
+                				<div class="selectBox">
+								  <select id="privacyBounds" name="privacyBounds" class="select">
+								    <option disabled selected value="선택안함">공개범위💌</option>
+								    <option value="public">전체공개</option>
+								    <option value="closed">비공개</option>
+								  </select>
+								  <span class="icoArrow"><img src="https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png" alt=""></span>
+								</div>
+                			</td>
                 		</tr>
                 	</table>
                 	
                 	<hr>
                 	
-                	<div class="diary">
-                		오늘은 카페에서 바스크 초코케이크 먹었다 너무 맛있음<br><br>
-                		대체 언제쯤 다 끝낼 수 있을까^^....<br><br>
-                		이제 쓸말이 없네..어쩌구 저쩌구<br><br>
-                		블라블라<br><br>
-                		아직도 멀음<br><br>
-                		그만쓰고 싶다<br><br>
-                		아아아아아<br><br>
-                		라라라랄라<br><br>
-                	</div>
+                	<textarea class="diary" name="diaryContent"></textarea>
+                	
                 	
                 	<hr class="hr2">
                 	
-                	<div class="comment">
-                		<div class="write">
-                			<textarea placeholder="댓글을 작성해주세요"></textarea>
-                			<button>등록하기</button>
-                		</div>
-                		<div class="comm">
-                			<table>
-                				<tr class="nickname">
-                					<td width="100px">닉네임</td>
-                					<td>22.11.06</td>
-                				</tr>
-                				<tr>
-                					<td colspan="2">댓글쓰기이이이</td>
-                				</tr>
-                				<tr class="nickname">
-                					<td width="100px">닉네임</td>
-                					<td>22.11.06</td>
-                				</tr>
-                				<tr>
-                					<td colspan="2">댓글쓰기이이이</td>
-                				</tr>
-                				<tr class="nickname">
-                					<td width="100px">닉네임</td>
-                					<td>22.11.06</td>
-                				</tr>
-                				<tr>
-                					<td colspan="2">댓글쓰기이이이</td>
-                				</tr>
-                				<tr class="nickname">
-                					<td width="100px">닉네임</td>
-                					<td>22.11.06</td>
-                				</tr>
-                				<tr>
-                					<td colspan="2">댓글쓰기이이이</td>
-                				</tr>
-                				<tr class="nickname">
-                					<td width="100px">닉네임</td>
-                					<td>22.11.06</td>
-                				</tr>
-                				<tr>
-                					<td colspan="2">댓글쓰기이이이</td>
-                				</tr>
-                			</table>
-                		
-                		
-                		</div>
+						<button id="diaryBtn" type="submit">등록하기</button>                	
+					</form>
                 </div>
               </div>
               <div class = "menu align-center expanded text-center SMN_effect-68">
 	              <a href="home.html" class="menu-item mi-1" >홈</a>
 	<!--              <a href="photo.html" class="menu-item mi-2" onclick="openPopup()">사진첩</a>-->
+	
 	              <a href="photo.html" class="menu-item mi-2">사진첩</a>
               </div>
               <a href="diary.html" class="menu-item mi-3 menu-checked">다이어리</a>
@@ -157,29 +145,44 @@
 	              <a href="visit.html" class="menu-item mi-4">방명록</a>
 	              <a href="#" class="menu-item mi-5">마케팅</a>
               </div>
+
 <!--              <div class="menu-item mi-6">게시판</div>-->
 <!--              <div class="menu-item mi-7">방명록</div>-->
             </div>
-          </div>
           </div>
         </section>
       </main>
       
     </div>
     <script>
-    //    function openPopup(){
-    //        window.open("profil.html", "new", "toolbar=no, menubar=no, scrollbars=no, resizable=no, width=1280, height=721, left=0, top=0" );
-    //    }
-        /* $('.dropdown-btn').on('click',function(){
-            $('.dropdown-content').show();
-            }); */  
-            $(".mi-5").on('click', function(){
-
-              alert('마케팅 사이트 업데이트 진행중.');
-
-            });      
-      </script>
+	    $(".map").click(function(){
+			var url = "map.di";
+			var name = "map popup"
+			var option = "width= 610, height= 560"
+			window.open(url, name, option);
+		});
+	    
+	    const weather = document.getElementById('weather').value;
+	    const mood = document.getElementById('mood').value;
+// 	    const location = document.getElementById('location');
+	    const privacyBounds = document.getElementById('privacyBounds').value;
+	    const diaryBtn = document.getElementById('diaryBtn');
+	    
+	    diaryBtn.addEventListener('click', function(){
+	    	if(weather == '선택안함'){
+	    		alert("날씨를 선택해주세요");
+	    	}
+// 	    	if(mood == '선택안함'){
+// 	    		alert("기분을 선택해주세요");
+// 	    	}
+// 	    	if(privacyBounds == '선택안함'){
+// 	    		alert("공개범위를 선택해주세요");
+// 	    	}
+	    });
+	    
+    </script>
   </body>
 
 
 </html>
+    

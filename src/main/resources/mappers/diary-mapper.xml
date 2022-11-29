@@ -2,8 +2,86 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="diaryMapper">
+	
+	<resultMap type="Diary" id="DiaryResultSet">
+		<id column="BOARDNO" property="boardNo"/>
+		<result column="MOOD" property="mood"/>
+		<result column="WEATHER" property="weather"/>
+		<result column="PRIVACY_BOUNDS" property="privacyBounds"/>
+		<result column="LOCATION" property="location"/>
+		<result column="DIARY_DATE" property="diaryDate"/>
+		<result column="DIARY_CONTENT" property="diaryContent"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="MODIFY_DATE" property="modifyDate"/>
+		<result column="DIARY_STATUS" property="diaryStatus"/>
+		<result column="DIARY_WRITER" property="diaryWriter"/>
+	</resultMap>
+	
+	<select id="selectDiaryList" resultMap="DiaryResultSet">
+		select * 
+		from diary
+		where diary_status = 'Y'
+		order by diary_date desc
+	</select>
+	
 	<insert id="insertDiary">
 		insert into diary
 		values(board_seq.nextval, #{mood}, #{weather}, #{privacyBounds}, #{location}, #{diaryDate}, #{diaryContent}, sysdate, sysdate, default, #{diaryWriter})
 	</insert>
+	
+	<select id="selectDiary" resultMap="DiaryResultSet">
+		select *
+		from diary
+		where diary_status = 'Y'
+			  and boardNo = #{bId}
+	</select>
+	
+	<update id="updateDiary">
+		update diary
+		set weather = #{weather},
+			mood = #{mood},
+			location = #{location},
+			privacy_bounds = #{privacyBounds},
+			diary_content = #{diaryContent},
+			modify_date = sysdate
+		where boardno = #{boardNo}
+	</update>
+	
+	<update id="deleteDiary">
+		update diary
+		set diary_status = 'N'
+		where boardno = #{boardNo}
+	</update>
+	
+	<resultMap type="Reply" id="ReplyReasultSet">
+		<id column="REPLYNO" property="replyNo"/>
+		<result column="REPLY_CONTENT" property="replyContent"/>
+		<result column="NICKNAME" property="nickName"/>
+		<result column="R_CREATEDATE" property="rCreateDate"/>
+		<result column="R_MODIFYDATE" property="rModifyDate"/>
+		<result column="REPLY_STATUS" property="replyStatus"/>
+		<result column="REPLY_WRITER" property="replyWriter"/>
+		<result column="REF_BOARDNO" property="rboardNo"/>
+	</resultMap>
+	
+	<insert id="insertReply">
+		insert into reply
+		values(reply_seq.nextval, #{replyContent}, sysdate, sysdate, default, #{replyWriter}, #{rboardNo})
+	</insert>
+	
+	<select id="selectReply" resultMap="ReplyReasultSet">
+		select *
+		from reply
+			 join member on(userno = reply_writer)
+		where ref_boardno = #{rboardNo}
+			  and reply_status = 'Y'
+		order by replyno desc
+	</select>
+	
+	<update id="deleteReply">
+		update reply
+		set reply_status = 'N'
+		where replyno = #{replyNo}
+	</update>
+	
 </mapper>

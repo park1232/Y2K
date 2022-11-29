@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" scope="application" />
 <!DOCTYPE html>
@@ -75,21 +75,20 @@
                   </div>
                 </div>
                 <div class="main">
-                	<form action="${ contextPath }/insertDiary.di" method="POST">
-					<c:set var="date" value="${fn:split(datepicker, '/')}"/>
-                	<h1>${ date[2] }.${ date[0] }.${ date[1] }</h1>
-                	<input type="hidden" id="diaryDate" name="diaryDate" value="${ datepicker }">
-                	
+                	<form action="${ contextPath }/updateDiary.di" method="POST">
+                	<h1>${ d.diaryDate }</h1>
+                	<input type="hidden" id="diaryDate" name="diaryDate" value="${ d.diaryDate }">
+                	<input type="hidden" id="boardNo" name="boardNo" value="${ d.boardNo }">
                 	<table>
                 		<tr>
                 			<td>
                 				<div class="selectBox">
 								  <select name="weather" class="select">
 								    <option disabled selected>날씨⭐</option>
-								    <option value="sunny">☀맑음</option>
-								    <option value="cloudy">☁흐림</option>
-								    <option value="rain">🌧비</option>
-								    <option value="snow">❄눈</option>
+								    <option value="sunny" <c:if test="${ d.weather == 'sunny' }">selected</c:if>>☀맑음</option>
+								    <option value="cloudy" <c:if test="${ d.weather == 'cloudy' }">selected</c:if>>☁흐림</option>
+								    <option value="rain" <c:if test="${ d.weather == 'rain' }">selected</c:if>>🌧비</option>
+								    <option value="snow" <c:if test="${ d.weather == 'snow' }">selected</c:if>>❄눈</option>
 								  </select>
 								  <span class="icoArrow"></span>
 								</div>
@@ -98,26 +97,26 @@
                 				<div class="selectBox">
 								  <select name="mood" class="select">
 								    <option disabled selected>기분💕</option>
-								    <option value="joy">😄기쁨</option>
-								    <option value="sad">😭슬픔</option>
-								    <option value="mad">😡화남</option>
-								    <option value="tired">🥱피곤</option>
-								    <option value="happy">😆행복</option>
-								    <option value="bisy">😵바쁨</option>
+								    <option value="joy" <c:if test="${ d.mood == 'joy' }">selected</c:if>>😄기쁨</option>
+								    <option value="sad" <c:if test="${ d.mood == 'sad' }">selected</c:if>>😭슬픔</option>
+								    <option value="mad" <c:if test="${ d.mood == 'mad' }">selected</c:if>>😡화남</option>
+								    <option value="tired" <c:if test="${ d.mood == 'tired' }">selected</c:if>>🥱피곤</option>
+								    <option value="happy" <c:if test="${ d.mood == 'happy' }">selected</c:if>>😆행복</option>
+								    <option value="bisy" <c:if test="${ d.mood == 'bisy' }">selected</c:if>>😵바쁨</option>
 								  </select>
 								  <span class="icoArrow"><img src="https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png" alt=""></span>
 								</div>
                 			</td>
                 			<td>
-                				<div class="map" id="mapValue">${ mapValue }</div>
-                				<input type="hidden" id="location" name="location" value="${ mapValue }">
+                				<div class="map" id="mapValue">${ d.location }</div>
+                				<input type="hidden" id="location" name="location">
                 			</td>
                 			<td>
                 				<div class="selectBox">
 								  <select name="privacyBounds" class="select">
 								    <option disabled selected>공개범위💌</option>
-								    <option value="public">전체공개</option>
-								    <option value="closed">비공개</option>
+								    <option value="public" <c:if test="${ d.privacyBounds == 'public' }">selected</c:if>>전체공개</option>
+								    <option value="closed" <c:if test="${ d.privacyBounds == 'closed' }">selected</c:if>>비공개</option>
 								  </select>
 								  <span class="icoArrow"><img src="https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png" alt=""></span>
 								</div>
@@ -127,12 +126,12 @@
                 	
                 	<hr>
                 	
-                	<textarea class="diary" name="diaryContent"></textarea>
+                	<textarea class="diary" name="diaryContent">${ d.diaryContent }</textarea>
                 	
                 	
                 	<hr class="hr2">
                 	
-						<button type="submit">등록하기</button>                	
+						<button id="editBtn" type="submit">수정하기</button>
 					</form>
                 </div>
               </div>
@@ -163,6 +162,10 @@
 			var option = "width= 610, height= 560"
 			window.open(url, name, option);
 		});
+	    
+// 	    document.getElementById('editBtn').addEventListener('click', function(){
+// 	    	$('#location').val() = $('#mapValue').innerText;
+// 	    });
     </script>
   </body>
 
