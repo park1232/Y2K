@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.world.Y2K.dao.payment.PaymentDAO;
+import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.PayPageInfo;
 import com.world.Y2K.model.vo.Product;
 import com.world.Y2K.model.vo.ProductPhoto;
@@ -74,5 +75,15 @@ public class PaymentImpl implements PaymentService{
 	@Override
 	public int getOrangeCount(HashMap<String, Long> map) {
 		return payDAO.getOrangeCount(sqlSession, map);
+	}
+	
+	@Override
+	public Member selectLoginUser(Long mNo) {
+		return payDAO.selectLoginUser(sqlSession, mNo);
+	}
+	
+	@Override
+	public int paymentRequest(Long mNo) {
+		return payDAO.paymentRequest(sqlSession, mNo);
 	}
 }

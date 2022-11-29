@@ -44,4 +44,6 @@ public interface FriendService {
 
 	int hideAccept(Long userNo);
 
+	int deleteFriend(Long friendUsing);
+
 }

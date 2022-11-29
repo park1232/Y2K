@@ -26,12 +26,12 @@
 </head>
 <body>
 <div class="main">
-	<form class="needs-validation" method="POST" id="detailForm">
+	<form class="needs-validation" method="POST" id="detailForm" enctype="multipart/form-data">
 			<div class="wrap">
 			    <div class="productImg">
 				    <c:if test="${ p.productNo eq photo.productNo }">
 				        <c:if test="${ fn:containsIgnoreCase(photo.productReNameName, 'jpg') or fn:containsIgnoreCase(photo.productReNameName, 'png') }">
-				        	<img src="/upload/${ photo.productReNameName }" style="width: 600px; height: 300px;" alt="My Image">
+				        	<img src="/upload/${ photo.productReNameName }" style="width: 600px; height: 300px;" alt="My Image" name="skin">
 				    	</c:if>
 					</c:if>
 			    </div>

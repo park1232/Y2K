@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.PayPageInfo;
 import com.world.Y2K.model.vo.Product;
 import com.world.Y2K.model.vo.ProductPhoto;
@@ -58,5 +59,13 @@ public class PaymentDAO {
 
 	public int getOrangeCount(SqlSessionTemplate sqlSession, HashMap<String, Long> map) {
 		return sqlSession.selectOne("paymentMapper.getOrangeCount", map);
+	}
+
+	public Member selectLoginUser(SqlSessionTemplate sqlSession, Long mNo) {
+		return sqlSession.selectOne("paymentMapper.selectLoginUser", mNo);
+	}
+
+	public int paymentRequest(SqlSessionTemplate sqlSession, Long mNo) {
+		return sqlSession.update("paymentMapper.paymentRequest", mNo);
 	}
 }

@@ -86,4 +86,8 @@ public class FriendDAO {
 	public int hideAccept(SqlSessionTemplate sqlSession, Long userNo) {
 		return sqlSession.update("friendMapper.hideAccept", userNo);
 	}
+
+	public int deleteFriend(SqlSessionTemplate sqlSession, Long friendUsing) {
+		return sqlSession.update("friendMapper.deleteFriend", friendUsing);
+	}
 }

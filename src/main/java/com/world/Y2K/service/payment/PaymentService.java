@@ -3,6 +3,7 @@ package com.world.Y2K.service.payment;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.PayPageInfo;
 import com.world.Y2K.model.vo.Product;
 import com.world.Y2K.model.vo.ProductPhoto;
@@ -30,5 +31,9 @@ public interface PaymentService {
 	int orderPurchaes(HashMap<String, Long> map);
 
 	int getOrangeCount(HashMap<String, Long> map);
+
+	Member selectLoginUser(Long mNo);
+
+	int paymentRequest(Long mNo);
 	
 }

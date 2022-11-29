@@ -21,27 +21,6 @@
    			join product using(PRODUCTNO)
    		where PRODUCTSTATUS = 'Y'
    </select>
-   
-   <resultMap type="ProductPhoto" id="productPhotoResultSet">
-   		<id column="PRODUCTPHOTONO" property="productPhotoNo"/>
-		<result column="PRODUCTPHOTONAME" property="productPhotoName"/>
-		<result column="PRODUCTRENAMENAME" property="productReNameName"/>
-		<result column="PRODUCTPHOTOPATH" property="productPhotoPath"/>		
-		<result column="PRODUCTPHOTOSTATUS" property="productPhotoStatus"/>
-		<result column="PRODUCTNO" property="productNo"/>
-
-   </resultMap>
-   
-   <resultMap type="Product" id="productResultSet">
-		<id column="PRODUCTNO" property="productNo"/>
-		<result column="PRODUCTNAME" property="productName"/>
-		<result column="PRICE" property="price"/>
-		<result column="PRODUCTCONTENT" property="productContent"/>		
-		<result column="USERNO" property="userNo"/>
-		<result column="PRODUCTCREATEDATE" property="productCreateDate"/>
-		<result column="PRODUCTMODIFYDATE" property="productModifyDate"/>
-		<result column="PRODUCTSTATUS" property="productStatus"/>
-	</resultMap>
 	
 	<insert id="insertBoard">
 		insert into product
@@ -88,4 +67,50 @@
 		from member
 		where userNo = #{mNo}
 	</select>
+	
+	<select id="selectLoginUser" resultMap="memberResultSet">
+		select *
+		from member
+		where userNo = #{mNo}
+	</select>
+	
+	<update id="paymentRequest">
+		update member
+		set ORANGE = ORANGE + 100
+		where USERNO = #{mNo}
+	</update>
+	
+	<resultMap type="ProductPhoto" id="productPhotoResultSet">
+   		<id column="PRODUCTPHOTONO" property="productPhotoNo"/>
+		<result column="PRODUCTPHOTONAME" property="productPhotoName"/>
+		<result column="PRODUCTRENAMENAME" property="productReNameName"/>
+		<result column="PRODUCTPHOTOPATH" property="productPhotoPath"/>		
+		<result column="PRODUCTPHOTOSTATUS" property="productPhotoStatus"/>
+		<result column="PRODUCTNO" property="productNo"/>
+   </resultMap>
+   
+   <resultMap type="Product" id="productResultSet">
+		<id column="PRODUCTNO" property="productNo"/>
+		<result column="PRODUCTNAME" property="productName"/>
+		<result column="PRICE" property="price"/>
+		<result column="PRODUCTCONTENT" property="productContent"/>		
+		<result column="USERNO" property="userNo"/>
+		<result column="PRODUCTCREATEDATE" property="productCreateDate"/>
+		<result column="PRODUCTMODIFYDATE" property="productModifyDate"/>
+		<result column="PRODUCTSTATUS" property="productStatus"/>
+	</resultMap>
+	
+	<resultMap type="Member" id="memberResultSet">
+	    <id column="USERNO" property="userNo"/>
+	    <result column="USERNAME" property="username"/>
+	    <result column="USERPWD" property="password"/>
+	    <result column="NICKNAME" property="nickName"/>
+        <result column="ENROLLDATE" property="enrollDate"/>
+	    <result column="MODIFYDATE" property="modifyDate"/>
+	    <result column="STATUS" property="status"/>
+	    <result column="ORANGE" property="orange"/>
+	    <result column="ROLE" property="role"/>
+	    <result column="PROVIDER" property="provider"/>
+	    <result column="PROVIDERID" property="providerId"/>
+   </resultMap>
 </mapper>
