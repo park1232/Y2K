@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="${contextPath}/resources/css/reset.css" />
     <link rel="stylesheet" href="${contextPath}/resources/css/style.css" />
     <link rel="stylesheet" href="${contextPath}/resources/css/visit.css" />
+
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://kit.fontawesome.com/7a738a6e1a.js" crossorigin="anonymous"></script>
     <!-- <style>
@@ -77,7 +78,7 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
                   </div>
                 </div>
                 <div class="main">
-                       <div class="visitor_card">
+       <div class="visitor_card">
           <div class="visitor_title">
               <span class="visitor_number">No. 121</span> &nbsp;
               <span class="visitor_name">${loginUser.nickName }</span> &nbsp;
@@ -86,75 +87,140 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
           </div>
           <div class="visitor_content">
               <br>
-              <form action="insertVisit.vi">
+              <form>
               <table>
+              	  <thead>
                   <tr>
-                      <td><div class="minimi-border"><img class="photo" src="${contextPath}/resources/img/minimi/0.gif" name="ranimage"></img></div></td>
+                      <td><div class="minimi-border"><img id="writeImage" src="${contextPath}/resources/img/duck.jpg"></img></div></td>
                       <td></td><td></td>
-                      <td><textarea id="writeboard" placeholder="방명록을 작성해주세요"></textarea></td>
+                      <td><textarea id="writeVisit" placeholder="방명록을 작성해주세요"></textarea></td>
                       <td></td>
-                      <td><button id="submitReply">등록</button></td>
+                      <td><button id="submitVisit" >등록</button></td>
                   </tr>
+                  </thead>
               </table>
               </form>
           </div>
       </div>
       <hr class="hr-2">
       
-<%--        	<div class="visitor_content">
+      <div class="visitLists">
+      <c:forEach items="${list}" var="v">
+       <div class="visitor_card">
+       	<input type="hidden" value="${v.visitNo}" name="visitNo">  
+          <div class="visitor_title">
+              <span class="visitor_number" id="span1">No. ${v.visitNo}</span> &nbsp;
+              <span class="visitor_name" id="span2">${v.nickName }</span> &nbsp;
+              <i id="homepage" class="fas fa-home visitor_homepage"></i>
+              <span id="visitor_date">${v.createDate}</span>
+          </div>
+          <div class="visitor_content">
               <br>
               <table>
+              	  <tbody>
                   <tr>
-                      <td><div class="minimi-border"><img class="photo" src="${contextPath}/resources/img/minimi/0.gif" name="ranimage"></img></div></td>
+                      <td><div class="minimi-border"><img src="${contextPath}/resources/img/minimi/0.gif" class="ranimage"></img></div></td>
                       <td></td><td></td>
-                      <td><textarea id="writeboard" placeholder="방명록을 작성해주세요"></textarea></td>
+                      <td><textarea id="visitContent" readonly>${v.visitContent}</textarea></td>
                       <td></td>
                       <td><div onclick="Toggle4()" id="btnh" class="btn"><i class="far fa-heart"></i></div></td>
                   </tr>
+                  </tbody>
+                  <tr><td><button id="deleteVisit">삭제하기</button></td></tr>
               </table>
-          </div>  --%>
-
-              </div>
-              <div class = "menu align-center expanded text-center SMN_effect-68">
-                <a href="mainPage.html">   <div class="menu-item mi-1"  onclick="location.href='${contextPath}'">홈</div></a>
+          </div>
+      </div>
+      <hr class="hr-2">
+	</c:forEach>
+	</div>
+	<br><br>
+                 
+    </div>         
+		
+	</div>
+   <div class = "menu align-center expanded text-center SMN_effect-68">
+           <a href="mainPage.html">   <div class="menu-item mi-1"  onclick="location.href='${contextPath}'">홈</div></a>
 <!--              <a href="photo.html" class="menu-item mi-2" onclick="openPopup()">사진첩</a>-->
+
               <a href="photo.html" class="menu-item mi-2" >사진첩</a>
               <a href="diary.html" class="menu-item mi-3">다이어리</a>
-              
-              <a class="menu-item mi-5" onclick="location.href='${contextPath}/boardList.bo'">게시판</a>
+ </div>
+              <a class="menu-item mi-5 menu-checked" onclick="location.href='${contextPath}/boardList.bo'">게시판</a>
+              <div class = "menu align-center expanded text-center SMN_effect-68">
+                <a class="menu-item mi-4" onclick="location.href='${contextPath}/visit.vi'">방명록</a>
               </div>
-              <a class="menu-item mi-4 menu-checked" onclick="location.href='${contextPath}/visit.vi'">방명록</a>
-              <!-- <a href="#" class="menu-item mi-5">마케팅</a> -->
-<!--              <div class="menu-item mi-6">게시판</div>-->
+              <!-- <a href="#" class="menu-item mi-5 menu-checked">마케팅</a> -->
+<!--              <div class="menu-item mi-6">게시판</div>-->	
 <!--              <div class="menu-item mi-7">방명록</div>-->
             </div>
           </div>
         </section>
-      </main>
-      
-    </div>
+      </main> 
+   </div>
      <script>
-    //    function openPopup(){
-    //        window.open("profil.html", "new", "toolbar=no, menubar=no, scrollbars=no, resizable=no, width=1280, height=721, left=0, top=0" );
-    //    }
-        /* $('.dropdown-btn').on('click',function(){
-            $('.dropdown-content').show();
-            }); */   
 
-        document.ranimage.src="${contextPath}/resources/img/minimi/" + Math.round(Math.random()*3+.4)+".gif";
-      </script>
+ 			const ranimage = document.getElementsByClassName('ranimage');
+            	console.log(ranimage); //console에서는 src 다 다르게 뜨는데 view에서 적용 x
+            for( var i of ranimage) { 
+            	console.log(i);
+        		ranimage.src="${contextPath}/resources/img/minimi/" + Math.round(Math.random()*3+.4)+".gif";     	
+            }
+
+     
+            var btnvar4 = document.getElementById('btnh');
+            function Toggle4(){
+              if(btnvar4.style.color=="red"){
+                btnvar4.style.color="grey";
+                btnvar4.innerHTML = '<i class="far fa-heart"></i>';
+              } else {
+                btnvar4.style.color = "red";
+                btnvar4.innerHTML = '<i class="fas fa-heart"></i>';
+              }
+            }
+            
+	    
       
-      <script>
-	      var btnvar4 = document.getElementById('btnh');
-	      function Toggle4(){
-	        if(btnvar4.style.color=="red"){
-	          btnvar4.style.color="grey";
-	          btnvar4.innerHTML = '<i class="far fa-heart"></i>';
-	        } else {
-	          btnvar4.style.color = "red";
-	          btnvar4.innerHTML = '<i class="fas fa-heart"></i>';
-	        }
-	      }
-    </script>
+      //방명록 등록
+     /*   document.getElementById('submitVisit').addEventListener('click',  */
+    	$("#submitVisit").click(function(){
+    	  console.log(document.getElementById('writeVisit').value);
+    	  console.log('${loginUser.userNo}');
+    	   $.ajax({
+    		  url:'${contextPath}/insertVisit.vi',
+    		  data:{visitContent:document.getElementById('writeVisit').value,
+    			  	visitWriter:'${loginUser.userNo}'},
+    		  success: (data) => {
+    			  console.log(data);
+//     			  const visitLists = document.getElementById('visitLists');
+//     			  visitLists.innerHTML = '';
+    			  
+//     			  for(const v of data) {
+    				  
+//     			  } +=4
+    		  },
+    		  error: (data)=>{
+    			  console.log(data);
+    		  }
+  
+    		  
+    	  })
+       });  
+      
+      
+      
+/*       $("document").ready(function(){
+    	 
+    	  
+    	  $.ajax({
+    		  url : "/selectVisit.vi",
+    		 success:(res) => {
+    			 document.getElementById("span1").innerHTML = res.content;
+    			 document.getElementById("span1").innerHTML = res.writer;
+    			 
+    			 
+    		 }
+    	  })
+      }) */
+      </script>
 </body>
 </html>

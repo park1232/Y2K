@@ -3,14 +3,20 @@ package com.world.Y2K.service.board;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.world.Y2K.dao.board.BoardDAO;
+import com.world.Y2K.exception.BoardException;
 import com.world.Y2K.model.vo.Board;
+import com.world.Y2K.model.vo.Like;
 import com.world.Y2K.model.vo.PageInfo;
 import com.world.Y2K.model.vo.Reply;
+import com.world.Y2K.service.login.auth.UserDetailsImpl;
 
 @Service("bService")
 public class BoardServiceImpl implements BoardService {
@@ -34,8 +40,34 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	@Override
-	public int insertBoard(Board b) {
-		return bDAO.insertBoard(sqlSession, b);
+	public String insertBoard(String cateStr, Board b, HttpSession session, Authentication authentication) {
+		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();	
+		
+		Long boardWriter = (userDetails.getMember()).getUserNo();
+		
+		String category = getCategory(cateStr);
+		
+		if(bDAO.insertBoard(sqlSession, getBoard(b, boardWriter, category))>0) {
+			return "redirect:boardList.bo";
+		}else {
+			throw new BoardException("게시글 등록 실패");
+		}
+	}
+	
+	private Board getBoard(Board b,Long boardWriter, String cateStr) {
+		b.setBoardWriter(boardWriter);
+		b.setBoardCateId(cateStr);
+		return b;
+	}
+	
+	private String getCategory(String cateStr) {
+			switch(cateStr) {
+			case "😳잡담" : return "A";
+			case "😁유머" : return "B"; 
+			case "📟정보" : return "C"; 
+			case "💛기타" : return "D"; 
+		}
+		return null;
 	}
 
 	@Override
@@ -80,8 +112,35 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public int insertReply(Reply r) {
-
 		return bDAO.insertReply(sqlSession, r);
+	}
+
+	@Override
+	public int deleteReply(Long rNo) {
+		return bDAO.deleteReply(sqlSession, rNo);
+	}
+
+	@Override
+	public int likeCheck(Like like) {
+		return bDAO.likeCheck(sqlSession, like);
+	}
+
+	@Override
+	public void likeInsert(Like like) {
+		bDAO.likeInsert(sqlSession, like);
+		
+	}
+
+	@Override
+	public void likeDelete(Like like) {
+		bDAO.likeDelete(sqlSession, like);
+		
+	}
+
+	@Override
+	public int likeCount(Long bNo) {
+		return bDAO.likeCount(sqlSession, bNo);
 	}
 	
 }
+

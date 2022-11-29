@@ -113,4 +113,31 @@
 		insert into reply 
 		values(REPLY_SEQ.nextval, #{replyContent}, sysdate, sysdate, default, #{replyWriter}, #{rboardNo})
 	</insert>
+	
+	<update id="deleteReply">
+		update Reply
+		set reply_status = 'N'
+		where replyNo = #{rNo}
+	</update>
+	
+	<select id="likeCheck" resultType="_int">
+		select count(*) from likes
+		where likeboardNo = #{likeBoardNo} and
+		likeuserNo = #{likeUserNo}
+	</select>
+	
+	<insert id="likeInsert" parameterType="Like">
+		insert into likes
+		values(#{likeBoardNo}, #{likeUserNo})
+	</insert>
+	
+	<delete id="likeDelete">
+		delete from likes
+		where likeboardNo = #{likeBoardNo} and likeUserNo = #{likeUserNo}
+	</delete>
+	
+	<select id="likeCount" resultType="_int">
+		select count(*) from likes
+		where likeboardNo = #{bNo}
+	</select>
 </mapper>
