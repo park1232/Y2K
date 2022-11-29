@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="visitMapper">
+	
+	<resultMap type="Visit" id="visitResultSet">
+		<id column="VISITNO" property="visitNo"/>
+		<result column="VISIT_CONTENT" property="visitContent"/>
+		<result column="NICKNAME" property="nickName"/>
+		<result column="V_CREATEDATE" property="createDate"/>
+		<result column="V_MODIFYDATE" property="modifyDate"/>
+		<result column="VISIT_STATUS" property="visitStatus"/>
+		<result column="VISIT_WRITER" property="visitWriter"/> <!--userNo -->
+	</resultMap>
+	
+	<select id="selectVisitList" resultMap="visitResultSet">
+		select * from visit
+			join member on(visit_writer = userno)
+			where visit_status = 'Y'
+			order by visitNo desc
+	</select>
+	
+	<insert id="insertVisit">
+		insert into visit values(visit_seq.nextval, #{visitContent}, sysdate, sysdate, default, #{visitWriter})
+	</insert>
+	
+</mapper>

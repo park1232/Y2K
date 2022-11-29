@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mypageMapper">
+  
+   <resultMap type="Mypage" id="mypageResultSet">
+      <result column="MY_USERNO" property="myUserNo"/>
+      <result column="SKINPATH" property="skinPath"/>
+      <result column="MAINTITLE" property="mainTitle"/>
+      <result column="PROFILEPATH" property="profilePath"/>
+      <result column="SIDECONTENT" property="sideContent"/>
+   </resultMap>
+
+   <select id="getMypageEntity" resultMap="mypageResultSet" parameterType="long">
+   	select MY_USERNO, SKINPATH, MAINTITLE, PROFILEPATH, SIDECONTENT
+   	from mypage
+   	where MY_USERNO = #{myUserNo}
+   </select>
+   
+   <insert id="insertDefaulEntity">
+   	insert into mypage
+   	values(#{userNo}, '../../../../../../../../../upload/defaultSkin.jpg','입력된 내용이 없습니다.','../../../../../../../../../upload/profile.jpg','아직 내용이없습니다')
+   </insert>
+   
+   <select id="checkFirst" parameterType="long" resultType="_int">
+   	select count(*)
+   	from mypage
+   	where MY_USERNO = #{myUserNo}
+   </select>
+   
+   <update id="updateSkinPath">
+   	update mypage
+   	set skinPath = #{skinPath}
+   	where my_userno = #{userNo}
+   </update>
+   
+    <update id="updateTitle">
+   	update mypage
+   	set maintitle = #{mainTitle}
+   	where my_userno = #{userNo}
+   </update>
+   
+   <update id="updateContent">
+   	update mypage
+   	set sidecontent = #{sideContent}
+   	where my_userno = #{userNo}
+   </update>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+</mapper>
