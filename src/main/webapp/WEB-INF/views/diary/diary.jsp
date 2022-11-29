@@ -90,7 +90,7 @@
                   </div>
                 </div>
                 <div class="main">
-               	 	<form action="${ contextPath }/diary3.di" method="POST">
+               	 	<form action="${ contextPath }/writeDairy.di" method="POST">
 						<div class="c">
 							<h2>날짜별보기</h2>
 						</div>

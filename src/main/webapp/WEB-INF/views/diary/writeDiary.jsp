@@ -83,7 +83,7 @@
                 			<td>
                 				<div class="selectBox">
 								  <select id="weather" name="weather" class="select">
-								    <option disabled selected>날씨⭐</option>
+								    <option disabled selected value="선택안함">날씨⭐</option>
 								    <option value="sunny">☀맑음</option>
 								    <option value="cloudy">☁흐림</option>
 								    <option value="rain">🌧비</option>
@@ -95,7 +95,7 @@
                 			<td>
                 				<div class="selectBox">
 								  <select id="mood" name="mood" class="select">
-								    <option disabled selected>기분💕</option>
+								    <option disabled selected value="선택안함">기분💕</option>
 								    <option value="joy">😄기쁨</option>
 								    <option value="sad">😭슬픔</option>
 								    <option value="mad">😡화남</option>
@@ -113,7 +113,7 @@
                 			<td>
                 				<div class="selectBox">
 								  <select id="privacyBounds" name="privacyBounds" class="select">
-								    <option disabled selected>공개범위💌</option>
+								    <option disabled selected value="선택안함">공개범위💌</option>
 								    <option value="public">전체공개</option>
 								    <option value="closed">비공개</option>
 								  </select>
@@ -162,15 +162,23 @@
 			window.open(url, name, option);
 		});
 	    
-// 	    const weather = document.getElementbyId('weather');
-// 	    const mood = document.getElementById('mood');
+	    const weather = document.getElementById('weather').value;
+	    const mood = document.getElementById('mood').value;
 // 	    const location = document.getElementById('location');
-// 	    const privacyBounds = document.getElementById('privacyBounds');
-// 	    const diaryBtn = document.getElementById('diaryBtn');
+	    const privacyBounds = document.getElementById('privacyBounds').value;
+	    const diaryBtn = document.getElementById('diaryBtn');
 	    
-// 	    diaryBtn.addEventListener('click', function(){
-// 	    	return false;
-// 	    });
+	    diaryBtn.addEventListener('click', function(){
+	    	if(weather == '선택안함'){
+	    		alert("날씨를 선택해주세요");
+	    	}
+// 	    	if(mood == '선택안함'){
+// 	    		alert("기분을 선택해주세요");
+// 	    	}
+// 	    	if(privacyBounds == '선택안함'){
+// 	    		alert("공개범위를 선택해주세요");
+// 	    	}
+	    });
 	    
     </script>
   </body>

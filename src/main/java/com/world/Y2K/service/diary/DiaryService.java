@@ -21,4 +21,6 @@ public interface DiaryService {
 
 	int updateDiary(Diary d);
 
+	int deleteReply(Long replyNo);
+
 }

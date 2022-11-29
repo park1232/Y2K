@@ -109,7 +109,7 @@
                 			</td>
                 			<td>
                 				<div class="map" id="mapValue">${ d.location }</div>
-                				<input type="hidden" id="location" name="location" value="${ d.location }">
+                				<input type="hidden" id="location" name="location">
                 			</td>
                 			<td>
                 				<div class="selectBox">
@@ -131,7 +131,7 @@
                 	
                 	<hr class="hr2">
                 	
-						<button type="submit">수정하기</button>
+						<button id="editBtn" type="submit">수정하기</button>
 					</form>
                 </div>
               </div>
@@ -162,6 +162,10 @@
 			var option = "width= 610, height= 560"
 			window.open(url, name, option);
 		});
+	    
+// 	    document.getElementById('editBtn').addEventListener('click', function(){
+// 	    	$('#location').val() = $('#mapValue').innerText;
+// 	    });
     </script>
   </body>
 

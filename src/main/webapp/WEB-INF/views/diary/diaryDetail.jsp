@@ -129,11 +129,12 @@
 	                					<c:forEach items="${ list }" var="r">
 			                				<tr class="replyNickName">
 			                					<td width="100px">${ r.nickName }</td>
+			                					<td><input type="hidden" value="${ r.replyNo }" name="replyNo"></td>
 <%-- 			                					<td>${ r.rModifyDate }</td> --%>
 			                				</tr>
 			                				<tr class="replyContent">
 			                					<td colspan="2">${ r.replyContent }</td>
-			                					<td><button class="deleteReply" type="button">x</button></td>
+			                					<td><button id="deleteReply" type="button">x</button></td>
 			                				</tr>
 		                				</c:forEach>
 	                				</tbody>
@@ -216,13 +217,11 @@
 	    	});
 	       	
 	       	
-// 	       	const deleteReplys = document.getElementsByClassName('deleteReply');
-// 	       	for(const deleteReply of deleteReplys){
-// 	       		deleteReply.
-// 	       	}
+	       	document.getElementById('deleteReply').addEventListener('click', function(){
+	       		form.action = '${contextPath}/deleteReply.di';
+	       		form.submit();
+	       	});
 	       	
-	       	
-       	
     	}
     </script>
   </body>

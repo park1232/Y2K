@@ -39,4 +39,8 @@ public class DiaryDAO {
 		return sqlSession.update("diaryMapper.updateDiary", d);
 	}
 
+	public int deleteReply(SqlSessionTemplate sqlSession, Long replyNo) {
+		return sqlSession.update("diaryMapper.deleteReply", replyNo);
+	}
+
 }

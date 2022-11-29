@@ -81,7 +81,7 @@ public class DiaryController {
 		}
 	}
 	
-	@RequestMapping("/diary3.di")
+	@RequestMapping("/writeDairy.di")
 	public String diaryWrite(@RequestParam("datepicker") String datepicker, @RequestParam("mapValue") String mapValue, Model model) {
 		model.addAttribute("datepicker", datepicker);
 		model.addAttribute("mapValue", mapValue);
@@ -152,6 +152,16 @@ public class DiaryController {
 		}
 	}
 	
+	@RequestMapping("deleteReply.di")
+	public String deleteReply(@RequestParam("replyNo") Long replyNo, @RequestParam("boardNo") Long boardNo) {
+		int result = dService.deleteReply(replyNo);
+		
+		if(result > 0) {
+			return "redirect:selectDiary.di?bId=" + boardNo;
+		}else {
+			throw new DiaryException("댓글 삭제 실패");
+		}
+	}
 	
 	
 }

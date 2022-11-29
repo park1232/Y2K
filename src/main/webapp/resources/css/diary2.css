@@ -141,7 +141,7 @@ hr{
 	font-size: 18px;
 	width: 600px;
 }
-.deleteReply{width: 18px; align-items: center; height: 18px;}
+#deleteReply{width: 18px; align-items: center; height: 18px;}
 .side1 { top: 200px; left: 405px; }
 .side2 { top: 240px; left: 405px; }
 .side3 { top: 500px; left: 405px; }

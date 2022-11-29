@@ -86,8 +86,6 @@
     		</tr>
     	</table>
     	<input type="hidden" id="placeName" name="placeName" value="">
-<input type="hidden" id="latitude" name="latitude" value="">
-<input type="hidden" id="longitude" name="longitude" value="">
     	
     	
 </div>
@@ -342,8 +340,7 @@ function removeAllChildNods(el) {
 	
 	$("#choiceBtn").click(function(){
 		opener.document.getElementById('mapValue').innerText = $('#choice').val();
-		document.getElementById('location').vlaue = $('#choice').val();
-		console.log(document.getElementById('location').vlaue);
+		opener.document.getElementById('location').value = $('#choice').val();
 		window.close();
 	});
 	

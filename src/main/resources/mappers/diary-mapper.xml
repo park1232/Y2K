@@ -21,7 +21,7 @@
 		select * 
 		from diary
 		where diary_status = 'Y'
-		order by boardno desc
+		order by diary_date desc
 	</select>
 	
 	<insert id="insertDiary">
@@ -35,6 +35,23 @@
 		where diary_status = 'Y'
 			  and boardNo = #{bId}
 	</select>
+	
+	<update id="updateDiary">
+		update diary
+		set weather = #{weather},
+			mood = #{mood},
+			location = #{location},
+			privacy_bounds = #{privacyBounds},
+			diary_content = #{diaryContent},
+			modify_date = sysdate
+		where boardno = #{boardNo}
+	</update>
+	
+	<update id="deleteDiary">
+		update diary
+		set diary_status = 'N'
+		where boardno = #{boardNo}
+	</update>
 	
 	<resultMap type="Reply" id="ReplyReasultSet">
 		<id column="REPLYNO" property="replyNo"/>
@@ -61,20 +78,10 @@
 		order by replyno desc
 	</select>
 	
-	<update id="updateDiary">
-		update diary
-		set weather = #{weather},
-			mood = #{mood},
-			location = #{location},
-			privacy_bounds = #{privacyBounds},
-			diary_content = #{diaryContent},
-			modify_date = sysdate
-		where boardno = #{boardNo}
+	<update id="deleteReply">
+		update reply
+		set reply_status = 'N'
+		where replyno = #{replyNo}
 	</update>
 	
-	<update id="deleteDiary">
-		update diary
-		set diary_status = 'N'
-		where boardno = #{boardNo}
-	</update>
 </mapper>
