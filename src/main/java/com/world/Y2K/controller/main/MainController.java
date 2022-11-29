@@ -50,7 +50,7 @@ public class MainController {
 		//System.out.println("controller°ª"+userNo);
 		
 		System.out.println(onloadEntityService);
-		
+		System.out.println("---");
 			Member member = userDetails.getMember();
 		//	Mypage mypage = null;
 			//mypage = onloadEntityService.getOnloadEntity(member.getUserNo());
