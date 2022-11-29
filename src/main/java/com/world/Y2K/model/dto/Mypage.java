@@ -1,8 +1,12 @@
 package com.world.Y2K.model.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+
+
+@Getter
+@Setter
 public class Mypage {
 
 	private Long userNo;
@@ -10,4 +14,6 @@ public class Mypage {
 	private String mainTitle;
 	private String ProfilePath;
 	private String sideContent;
+	
+	
 }

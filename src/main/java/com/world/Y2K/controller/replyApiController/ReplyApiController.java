@@ -46,12 +46,15 @@ public class ReplyApiController {
 			response.setContentType("application/json; charset=UTF-8");
 			UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 			
-			System.out.println(userDetails);
-			
-			System.out.println(model);
-			
-			System.out.println(replyNo);
+			/*
+			 * System.out.println(userDetails);
+			 * 
+			 * System.out.println(model);
+			 * 
+			 * System.out.println(replyNo);
+			 */
 			//System.out.println(userDetails.getMember().getUserNo());
+			
 			replyService.deleteReply(userDetails.getMember().getUserNo(), replyNo);
 			
 			//return new ResponseEntity<>(HttpStatus.OK);

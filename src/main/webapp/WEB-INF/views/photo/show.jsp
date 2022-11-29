@@ -200,8 +200,6 @@
 				//console.log(nickName.value);
 				button.addEventListener('click', ()=>{
 					console.log(input);
-					event.preventDefault();
-				
 					
 				$.ajax({
 					type:"post",
@@ -213,12 +211,12 @@
 					success:(data)=>{
 						
 						console.log("성공");
-						$(`#storyCommentItem-${ replyNo}`).remove();
-						 window.location.reload();
+						$('#storyCommentItem-${ replyNo}').remove();
+						 
 					}
 				})
-					
-					
+				window.location.reload();
+				
 					
 				}
 				

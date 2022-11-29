@@ -49,7 +49,7 @@
 									<a class="history" href="#">HISTORY</a>
 								</div>
 								<div class="info-wrap">
-									<a class="info-name" href="#">조현재</a>
+									<a class="info-name" href="${contextPath}/mainPage.ma?userNo=${dto.member.userNo}" >${dto.member.nickName}</a> 
 									<p class="text-email">nowing0108@kakao.com</p>
 								</div>
 								<div class="profile-dropdown">
@@ -74,7 +74,7 @@
 					</div>
 				</div>
 			</section>
-
+			
 			<section class="main-section">
 				<div class="main-dot">
 					<div class="main-paper">
@@ -125,14 +125,14 @@
 							</div>
 						</div>
 						<div class="menu align-center expanded text-center SMN_effect-68">
-							<a href="${contextPath}/mainPage.ma" class="menu-item mi-1">홈</a>
+							<a href="${contextPath}/mainPage.ma?userNo=${userNo}" class="menu-item mi-1">홈</a>
 						</div>
-						<a href="${contextPath}/photo.ph"
+						<a href="${contextPath}/photo.ph?userNo=${userNo}"
 							class="menu-item mi-2 menu-checked">사진첩</a>
 						<div class="menu align-center expanded text-center SMN_effect-68">
-							<a href="${contextPath}/diary.di" class="menu-item mi-3">다이어리</a>
-							<a href="${contextPath}/visitBoard.vi" class="menu-item mi-4">방명록</a>
-							<a href="#" class="menu-item mi-5">마케팅</a>
+							<a href="${contextPath}/diary.di?userNo=${userNo}" class="menu-item mi-3">다이어리</a>
+							<a href="${contextPath}/visitBoard.vi?userNo=${userNo}" class="menu-item mi-4">방명록</a>
+							<a href="${contextPath}/boardList.bo?userNo=${userNo}" class="menu-item mi-5">게시판</a>
 						</div>
 					</div>
 				</div>
@@ -172,6 +172,8 @@
 		
 		$(".bg").css({"background":"url('${skinPath}')"}); 
 	});
+	
+	
 </script>
 
 </html>

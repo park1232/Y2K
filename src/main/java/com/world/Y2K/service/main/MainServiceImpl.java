@@ -51,5 +51,35 @@ public class MainServiceImpl implements MainService{
 		
 		return map;
 	}
+
+	@Override
+	public int boardList(Long userNo) {
+		
+		return mDAO.bListCount(sqlSession, userNo);
+	}
+
+	@Override
+	public int photoList(Long userNo) {
+		
+		return mDAO.pListCount(sqlSession, userNo);
+	}
+
+	@Override
+	public int visitList(Long userNo) {
+		
+		return mDAO.vListCount(sqlSession, userNo);
+	}
+
+	@Override
+	public int dList(Long userNo) {
+		
+		return mDAO.diaryListCount(sqlSession, userNo);
+	}
+
+	@Override
+	public void deleteReply(Long userNo, Long replyNo) {
+		
+		mDAO.deleteReply(sqlSession, replyNo);
+	}
 	
 }

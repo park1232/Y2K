@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.world.Y2K.model.dto.MainRe;
 import com.world.Y2K.model.dto.Member;
-import com.world.Y2K.model.dto.Mypage;
+import com.world.Y2K.model.vo.Board;
+import com.world.Y2K.model.vo.Photo;
 import com.world.Y2K.model.vo.Reply;
+import com.world.Y2K.model.vo.Visit;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.main.MainService;
 import com.world.Y2K.service.mypage.OnloadEntityService;
@@ -46,33 +49,43 @@ public class MainController {
 		
 		//System.out.println("controller값"+userNo);
 		
+		System.out.println(onloadEntityService);
+		
 			Member member = userDetails.getMember();
-			Mypage mypage = null;
-			if(userNo != member.getUserNo()) {
-				mypage = onloadEntityService.getOnloadEntity(userNo);
-				mv.addObject("visit_rayout", mypage);
-				mv.addObject("my_rayout", "null");
-			}  else {
-				mypage = onloadEntityService.getOnloadEntity(member.getUserNo());
-				mv.addObject("my_rayout", mypage);
-				mv.addObject("visit_rayout", "null");
-			}
-			
+		//	Mypage mypage = null;
+			//mypage = onloadEntityService.getOnloadEntity(member.getUserNo());
+		//	System.out.println(mypage);
+		//	if(userNo != member.getUserNo()) {
+			//	mypage = onloadEntityService.getOnloadEntity(userNo);
+			//	mv.addObject("visit_rayout", mypage);
+			//	mv.addObject("my_rayout", "null");
+			//}  else {
+//				mypage = onloadEntityService.getOnloadEntity(member.getUserNo());
+//				mv.addObject("my_rayout", mypage);
+//				mv.addObject("visit_rayout", "null");
+//			}
+//			
 			
 			
 			
 			ArrayList<Reply> list = mService.replyList(userNo);
+	
+			int bList = mService.boardList(userNo);
+			
+			int pList = mService.photoList(userNo);
+			
+			int vList = mService.visitList(userNo);
+			
+			int dList = mService.dList(userNo);
+			mv.addObject("bList", bList);
 			mv.addObject("list", list);
 			System.out.println("리플리스트"+ list);
 			mv.addObject("member", member);
+			mv.addObject("userNo", userNo);
 			mv.setViewName("main/mainPage");
 			
 			return mv;
 
-		
-
-	
-			
 	}
 		
 	@ResponseBody	
@@ -110,7 +123,21 @@ public class MainController {
 	
 	
 	
-	
+	@ResponseBody	
+	@RequestMapping("/deleteReply.ma")
+	public void deleteReply(@RequestParam("replyNo") Long replyNo,
+			HttpServletResponse response, Model model,
+			Authentication authentication){
+		
+		response.setContentType("application/json; charset=UTF-8");
+		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+		
+		System.out.println(replyNo);
+		
+		mService.deleteReply(userDetails.getMember().getUserNo(), replyNo);
+		
+		
+	}
 	
 	
 	
