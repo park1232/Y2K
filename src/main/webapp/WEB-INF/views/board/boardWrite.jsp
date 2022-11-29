@@ -87,10 +87,10 @@
             
                 <td width="50px">
                   <select name="category" id="category">
-                    <option>😳잡담</option>
-                    <option>😁유머</option>
-                    <option>📟정보</option>
-                    <option>💛기타</option>
+                    <option>잡담</option>
+                    <option>유머</option>
+                    <option>정보</option>
+                    <option>기타</option>
                   </select>
                 </td>
                 

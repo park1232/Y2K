@@ -25,4 +25,5 @@ public class MainReply {
 	private Long replyWriter;
 	private String nickName;
 	private String mReplyStatus;
+	private Long own;
 }

@@ -16,7 +16,7 @@ import com.world.Y2K.model.vo.Reply;
 public class PhotoDAO {
 
 	public void insertImage(SqlSessionTemplate sqlSession, Photo p) {
-		
+		System.out.println(p);
 		sqlSession.insert("photoMapper.insertPhoto", p);
 	}
 

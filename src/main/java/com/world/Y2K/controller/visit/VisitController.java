@@ -29,7 +29,7 @@ public class VisitController {
 	private VisitService vService;
 	
 	@RequestMapping("visit.vi")
-	public String visitBoard(@RequestParam(value="page", required=false) Integer page, Model model) {
+	public String visitBoard(@RequestParam(value="page", required=false) Integer page, Model model, @RequestParam("userNo")Long userNo) {
 		
 		int currentPage = 1;
 		if(page != null) {
@@ -41,14 +41,14 @@ public class VisitController {
 		ArrayList<Visit> list = vService.selectVisitList();
 		
 		System.out.println(list);
-		
+		model.addAttribute("userNo", userNo);
 		if(list != null) {
 			model.addAttribute("pi", pi);
 			model.addAttribute("list", list);
 			
 			return "visit/visitBoard";
 		} else {
-			throw new BoardException("방명록 조회 실패");
+			throw new BoardException("諛⑸챸濡� 議고쉶 �떎�뙣");
 		}
 	}
 	

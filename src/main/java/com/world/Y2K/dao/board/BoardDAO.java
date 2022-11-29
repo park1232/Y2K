@@ -28,6 +28,7 @@ public class BoardDAO {
 	
 	
 	public int insertBoard(SqlSessionTemplate sqlSession, Board b) {
+		System.out.println("boardDAO : " + b);
 		return sqlSession.insert("boardMapper.insertBoard", b);
 	}
 	
@@ -64,8 +65,11 @@ public class BoardDAO {
 	}
 	
 	public ArrayList<Reply> selectReply(SqlSessionTemplate sqlSession, Long bNo) {
-		
-		return (ArrayList)sqlSession.selectList("boardMapper.selectReply", bNo);
+		System.out.println("selectReply : " + bNo);
+		ArrayList<Reply> list = new ArrayList<Reply>();
+		list = (ArrayList)sqlSession.selectList("boardMapper.selectReply", bNo);
+		System.out.println("list : " + list);
+		return list;
 	}
 
 	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {

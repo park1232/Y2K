@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.world.Y2K.dao.mypage.MypageDAO;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
@@ -15,11 +16,11 @@ public class TitleChangeServiceImpl implements TitleChangeService{
 	private MypageDAO mypageDAO;
 	
 	@Override
-	public String titleChange(String inputTitle, UserDetailsImpl userDetails) {
-		
+	public String titleChange(String inputTitle, UserDetailsImpl userDetails, Model model) {
+		model.addAttribute("userNo",userDetails.getMember().getUserNo());
 		HashMap<String, Object> map = setUpdateTitleMap(inputTitle, userDetails.getMember().getUserNo());
 		mypageDAO.updateTitle(map);
-		return "login/loginSuccess";
+		return "redirect:/main.lo";
 	}
 
 	private HashMap<String, Object> setUpdateTitleMap(String inputTitle, Long userNo) {
