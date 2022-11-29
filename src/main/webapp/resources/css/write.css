@@ -66,7 +66,7 @@ hr.hrB {
 
 /** 게시글 쓰기 */
 
-#boardContent {width: 580px; height: 500px; resize:none; border: 3px solid #facf64; border-radius: 7px;}
+#boardContent {width: 540px; height: 450px; resize:none; border: 3px solid #facf64; border-radius: 7px; margin: 20px;}
 #boardContent:hover{border-color: rgb(255, 183, 0);}
 #category{background-color: #facf64; border-radius: 7px;}
 #boardTitle{border-style: none;}

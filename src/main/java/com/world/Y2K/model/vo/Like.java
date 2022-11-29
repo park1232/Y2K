@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class Like {
-
+	
 	private Long likeBoardNo;
 	private Long likeUserNo;
+	
 }

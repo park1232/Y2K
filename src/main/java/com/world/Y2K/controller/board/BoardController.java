@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,8 +22,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.world.Y2K.exception.BoardException;
-import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.Board;
+import com.world.Y2K.model.vo.Like;
 import com.world.Y2K.model.vo.PageInfo;
 import com.world.Y2K.model.vo.Reply;
 import com.world.Y2K.pagination.BoardPagination;
@@ -70,53 +71,32 @@ public class BoardController {
 	
 	//게시글 작성
 	@RequestMapping("insertBoard.bo")
-	public String insertBoard(@RequestParam("category") String cateStr ,@ModelAttribute Board b, HttpSession session, Authentication authentication) {
-		
-		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
-		
-		Long boardWriter = (userDetails.getMember()).getUserNo();
+	public String insertBoard(@RequestParam("category") String cateStr ,@ModelAttribute Board b, HttpSession session, Authentication authentication) {		
+		return bService.insertBoard(cateStr, b,session,authentication);
 
-		String category = null;
-		switch(cateStr) {
-			case "😳잡담" : category = "A"; break;
-			case "😁유머" : category = "B"; break;
-			case "📟정보" : category = "C"; break;
-			case "💛기타" : category = "D"; break;
-		}
-
-		b.setBoardWriter(boardWriter);
-		b.setBoardCateId(category);
-		
-		int result = bService.insertBoard(b);
-		
-		System.out.println(b);
-		
-		if(result > 0) {
-			return "redirect:boardList.bo";
-		} else {
-			throw new BoardException("게시글 등록 실패");
-		}
 	}
 	
 	//게시글 상세
 	@RequestMapping("selectBoard.bo")
 	public ModelAndView boardView(@RequestParam("bNo") Long bNo, @RequestParam("writer") String writer,
-									@RequestParam("page") int page, HttpSession session, ModelAndView mv) {
+									@RequestParam("page") int page, ModelAndView mv, Authentication authentication) {
 		
 		Board b = bService.selectBoard(bNo);
 		ArrayList<Reply> list = bService.selectReply(bNo);
-		System.out.println(list);
+
+		int likeCount = bService.likeCount(bNo);
 		
 		if(b != null) {
 			mv.addObject("b", b);
 			mv.addObject("list", list);
 			mv.addObject("page", page);
+//			mv.addObject("like", bService.likeCheck(like));
+			mv.addObject("likeCount", likeCount);
 			mv.setViewName("board/boardView");
 			return mv;	
 		} else {
 			throw new BoardException("게시글 상세 조회 실패");
 		}
-
 	}
 	
 	//게시글 수정
@@ -197,6 +177,7 @@ public class BoardController {
 		
 		int result = bService.insertReply(r);
 		ArrayList<Reply> list = bService.selectReply(r.getRboardNo());
+		System.out.println(list);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		GsonBuilder gb = new GsonBuilder();
@@ -208,11 +189,51 @@ public class BoardController {
 		} catch (JsonIOException | IOException e) {
 			e.printStackTrace();
 		}
-		
-		
+	
+	
 	}
 	
+	//댓글 삭제
+	@RequestMapping("deleteReply.bo")
+	public String deleteReply(@RequestParam("replyNo") Long rNo, Model model, @RequestParam("boardNo") Long bNo) {
+		
+		ArrayList<Reply> list = bService.selectReply(bNo);
+
+		int result = bService.deleteReply(rNo);
+		if(result > 0) {
+			model.addAttribute("list", list);
+			return "board/boardView";
+		} else {
+			throw new BoardException("게시글 삭제 실패");
+		}
+	}
 	
+	//게시글 추천
+	@RequestMapping("likeCheck.bo")
+	@ResponseBody
+	public String likeCheck(@RequestParam("boardNo")Long bNo, HttpSession session, @ModelAttribute Like like, Authentication authentication) {
+
+		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+		Long currentUser = (userDetails.getMember()).getUserNo();
+
+		like.setLikeBoardNo(bNo);
+		like.setLikeUserNo(currentUser);
+
+		
+		int likeCheck = bService.likeCheck(like);
+		
+		
+		if(likeCheck == 0) {
+			bService.likeInsert(like);
+		} else if(likeCheck == 1) {
+			bService.likeDelete(like);
+		}
+		
+		int likeCount = bService.likeCount(bNo);
+	
+		return likeCount+"";
+	
+	}
 	
 
 }

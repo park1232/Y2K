@@ -79,6 +79,8 @@
         <form id="detailForm">
         <input type="hidden" value="${b.boardNo}" name="boardNo">
 		<input type="hidden" value="${page}" name="page">
+
+
         <table>
         <thead>
             <tr id="titlebar" style="text-align: center;">
@@ -100,7 +102,8 @@
         
             <p id="spring">${b.boardContent}</p>
                 <br><br>
-            <div id="good"><i class="fas fa-hand-holding-heart"></i></div>
+            <div id="good"><span hidden="hidden">${b.boardNo}</span><i  id="likeButton" class="fas fa-hand-holding-heart"></i></div>
+            <br><div id="likeCountDiv"><span id="likeCount">${likeCount}</span></div>
              <br><br>
              <span class="sns">
                 <span class="facebook">
@@ -112,12 +115,16 @@
                 <span class="band">
                 <a href="#n" onclick="fn_sendFB('band');return false;" id="band" target="_self" title="네이버밴드 새창열림"><img src="../resources/img/icon-line.png" width="30px"></a>
                 </span>
+                <span class="linkcopy">
+                <a href="#n" onclick="fn_sendFB('linkcopy');return false;" id="likecopy" target="_self" title="링크 복사"><img src="../resources/img/icon-link.png" width="30px"></a>
+                </span>
+                <span class="button gray medium"><a href="#" onclick="clip(); return false;">URL주소복사</a></span>
              </span>
             <div class="scrollbar">
               <a href="#up"><i class="fa-solid fa-circle-up"></i></a><br><br>
             <!-- <i class="fa-solid fa-circle-down"></i><br><br> -->
             <!-- <a href="#down"><i class="fa-solid fa-circle-down"></i></a><br><br> -->
-            <a href="#reply"><i class="far fa-comment-dots"></i></a>
+<!--             <a href="#reply"><i class="far fa-comment-dots"></i></a> -->
             </div>
         	<br>
         	<%-- <c:if test="${loginUser.id eq b.boardWriter}"> --%>
@@ -130,9 +137,9 @@
 			<br>   
         </div>
 
-         <hr>
-         
-         <div id="replyDiv">
+         <hr>    
+         <div id="replyDiv">   	
+
             <table>
             	<thead>
                 <tr>
@@ -144,25 +151,25 @@
                     </th>
                 </tr>
                 </thead>
-                			<tr>
-								<th width="80px">작성자</th>
-								<th>작성내용</th>
-								<th>작성일자</th>
-							</tr>
                 <tbody id="replyList">
+                			<tr>
+								<th width="100px">작성자</th>
+								<th>작성내용</th>
+								<th>삭제</th>
+							</tr>
                 <c:forEach items="${list}" var="r">
+                         		<input type="hidden" value="${r.replyNo}" name="replyNo">  	
                             <tr>
                                 <td width="80px">${r.nickName}</td>
                                 <td>${r.replyContent }</td>
-                              <%--   <td>${r.rCreateDate }</td> --%>
+                            <td>&nbsp;&nbsp;<button type="button" id="deleteReply" style="color: red; cursor: pointer;"><i class="fas fa-trash-alt"></i></button></td> 
                             </tr>
                 </c:forEach>
                 </tbody>
             </table>
-       
             <div><hr class="hrB" id="down"></div>
         </div>
-        </form>
+		</form>    
      </div>
 			
 	</div>
@@ -204,32 +211,69 @@
 						form.action = '${contextPath}/deleteForm.bo';
 						form.submit();
 					 }else{
-					   console.log("취소되었습니다");
+					   console.log("게시글 삭제 취소");
 					 }
 
 			});
+			
+			
+/* 			$("#deleteReply").click(function(){
+				if(confirm("댓글을 삭제하시겠습니까?")){
+					ajax({
+						url: '${contextPath}/deleteReply.bo',
+						data: {boardNo:${b.boardNo}, replyNo:${r.replyNo}},
+						success: (data) => {
+							console.log(data);
+						},
+						error: (data)=> {
+							console.log(data);
+						}
+					});
+				}
+			}) */
+			
+		document.getElementById('deleteReply').addEventListener('click', ()=> {
+				if(confirm("댓글을 삭제하시겠습니까?")){
+					form.action = '${contextPath}/deleteReply.bo';
+					form.submit();
+				}else {
+					console.log("댓글 삭제 취소")
+				}
+			}); 
+			
+			/* document.getElementById('likeButton').addEventListener('click', ()=> {
+				form.action = '${contextPath}/likeCheck.bo';
+				form.submit();
+			}); */
+
+			
      	}
      	
      	
      
-     	
-     
             //share function
-
+ 			
             function shareFacebook() {
-              var sendUrl = "https://";    
+              var sendUrl = "http://www.google.com"
               window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl, "Y2K World", "height=480px, width=600px");
             }
             
             function shareTwitter() {
-              var sendText = "Y2K World의 게시글을 공유합니다 :)" 
-              var sendUrl = "http://www.google.com"
+              var sendText = "Y2K World의 게시글을 공유합니다 :)";
+              const boardNo = '${b.boardNo}';
+              const writer = '${b.nickName}';
+              const page = '${page}';
+             
+              
+              var sendUrl = "http://localhost:8080/selectBoard.bo?bNo=" + ${b.boardNo} + "%26writer=" + "${b.nickName}" +"%26page=" + ${page};
+              console.log(sendUrl);
+
               window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl, "Y2K World", "height=480px, width=600px");
             }
 
             function shareBand() {
-              var sendText = "Y2K World의 게시글을 공유합니다 :)" 
-              var sendUrl = "http://www.google.com";  
+              var sendText = "Y2K World의 게시글을 공유합니다 :) " + "http://localhost:8080/selectBoard.bo?bNo=" + ${b.boardNo} + "%26writer=" + "${b.nickName}" +"%26page=" + ${page};
+              var sendUrl = "http://localhost:8080/selectBoard.bo?bNo=" + ${b.boardNo} + "%26writer=" + "${b.nickName}" +"%26page=" + ${page};
               window.open("http://www.band.us/plugin/share?body=" + sendText + "&url=" + sendUrl, "Y2K World", "height=450px, width=350px");  
             }
 
@@ -249,6 +293,10 @@
             $("#band").click(function(){
                 shareBand();
             });
+            
+            $("#linkcopy").click(function(){
+            	
+            })
 
           });
             
@@ -261,7 +309,6 @@
         		   data:{replyContent: document.getElementById('replyContent').value,
         			   rboardNo:${b.boardNo}, replyWriter:'${b.boardWriter}'},
         		success: (data) => {
-        			console.log(data);
         			const tbody = document.querySelector('tbody');
         			tbody.innerHTML = '';
         			
@@ -272,12 +319,12 @@
 						writerTd.innerText = r.nickName;
 						const contentTd = document.createElement('td');
 						contentTd.innerText = r.replyContent;
-						const dateTd = document.createElement('td');
-						dateTd.innerText = r.rModifyDate;
+						const deleteReply = document.createElement('td');
+						deleteReply.innerText = '';
 						
 						tr.append(writerTd);
 						tr.append(contentTd);
-						tr.append(dateTd);
+						tr.append(deleteReply);
 						
 						tbody.append(tr);
         			}
@@ -292,6 +339,23 @@
         		   
         	   });
            });
+           
+         	  document.getElementById('likeButton').addEventListener('click', ()=> {
+				$.ajax({
+					url: '${contextPath}/likeCheck.bo',
+					data:{boardNo:${b.boardNo}},
+					success:(data) => {
+						const likeCountDiv = document.getElementById('likeCountDiv');
+						likeCountDiv.innerHTML = '';
+						likeCountDiv.innerHTML += (data);
+						
+						
+					}
+				});
+			});
+			
+           
+           
           
       </script>
 </body>

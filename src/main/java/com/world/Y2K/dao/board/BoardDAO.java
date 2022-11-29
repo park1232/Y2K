@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.world.Y2K.model.vo.Board;
+import com.world.Y2K.model.vo.Like;
 import com.world.Y2K.model.vo.PageInfo;
 import com.world.Y2K.model.vo.Reply;
 
@@ -70,6 +71,32 @@ public class BoardDAO {
 	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
 		
 		return sqlSession.insert("boardMapper.insertReply", r);
+	}
+
+	public int deleteReply(SqlSessionTemplate sqlSession, Long rNo) {
+		
+		return sqlSession.update("boardMapper.deleteReply", rNo);
+	}
+
+	public int likeCheck(SqlSessionTemplate sqlSession, Like like) {
+		
+		return sqlSession.selectOne("boardMapper.likeCheck", like);
+	}
+
+	public void likeInsert(SqlSessionTemplate sqlSession, Like like) {
+		
+		sqlSession.insert("boardMapper.likeInsert", like);
+	}
+
+	public void likeDelete(SqlSessionTemplate sqlSession, Like like) {
+		
+		sqlSession.delete("boardMapper.likeDelete", like);
+		
+	}
+
+	public int likeCount(SqlSessionTemplate sqlSession, Long bNo) {
+
+		return sqlSession.selectOne("boardMapper.likeCount", bNo);
 	}
 
 }

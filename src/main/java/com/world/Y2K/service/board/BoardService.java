@@ -3,7 +3,12 @@ package com.world.Y2K.service.board;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.security.core.Authentication;
+
 import com.world.Y2K.model.vo.Board;
+import com.world.Y2K.model.vo.Like;
 import com.world.Y2K.model.vo.PageInfo;
 import com.world.Y2K.model.vo.Reply;
 
@@ -14,7 +19,7 @@ public interface BoardService {
 
 	ArrayList<Board> selectBoardList(PageInfo pi);
 	
-	int insertBoard(Board b);
+	String insertBoard(String cateStr, Board b, HttpSession session, Authentication authentication);
 	
 	Board selectBoard(Long bNo);
 
@@ -29,6 +34,18 @@ public interface BoardService {
 	int deletBoard(Long bNo);
 
 	int insertReply(Reply r);
+
+	int deleteReply(Long rNo);
+
+	int likeCheck(Like like);
+
+	void likeInsert(Like like);
+
+	void likeDelete(Like like);
+
+	int likeCount(Long bNo);
+
+//	Object getLike(Long bNo);
 
 
 }

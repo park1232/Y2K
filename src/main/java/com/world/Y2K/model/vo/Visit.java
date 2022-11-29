@@ -8,6 +8,7 @@ import lombok.Data;
 public class Visit {
 	private int visitNo;
 	private String visitContent;
+	private String nickName;
 	private Date createDate;
 	private Date modifyDate;
 	private String visitStatus;

@@ -142,9 +142,10 @@ hr.hrB {
 
 	#submitReply{border:1px solid black; width:60px; border-radius:15px; background:white; height:50px;}
 	#submitReply:hover{background:black; color:white; cursor:pointer;}
-	ul {
+ul {
 	text-align:center;
 }
+*{cursor: url(../img/cursor.cur), auto}
 ul li {
 	display:inline;
 	vertical-align:middle;
@@ -200,6 +201,8 @@ vertical-align:middle;
 .link-icon.kakao { background-image: url(resources/img/icon-kakao.png); background-repeat: no-repeat; text-decoration: none;}
 .link-icon.line { background-image: url(resources/img/icon-line.png); background-repeat: no-repeat; text-decoration: none;}
 .fa-share-alt-square{font-size:35px; color:lightgray;}
+#likeCount{color: #fc3f48; font-weight: bold;}
+#likeCountDiv{text-align: center; font-size: 17px;}
 body{cursor: url(resources/img/cursor.cur), auto}
 .container {
 padding-top: 1em;
@@ -224,7 +227,7 @@ color: #FFF;
 border-radius: 5px;
 transition: all 0.2s ;
 }
-.fa-circle-up{font-size:25px; color:#FFAA40; }
+.fa-circle-up{font-size:25px; color:#ff0080; }
 .fa-circle-down{font-size:25px; color:#FFAA40; }
 .fa-comment-dots{font-size:25px; color:#FFAA40; }
 
@@ -262,11 +265,14 @@ transition: all 0.2s ;
 #writeStyle{text-align: right;}
 .menu-item{cursor:pointer;}
 #searchBoardButton{background:#62b0ff; border:none; width:30px; height: 25px; cursor:pointer;}
+
 /** 버튼 반짝이*/
 .side1 { top: 200px; left	: 400px; }
 .side2 { top: 240px; left: 400px; }
 .side3 { top: 500px; left: 400px; }
 .side4 { top: 540px; left: 400px; }
+#deleteReply{ border:none; background: none;}
+#replyList tr th{color: #f2d38c;}
 
 .menu a {
   color: rgba(255, 255, 255, 0.8);
