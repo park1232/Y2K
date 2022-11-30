@@ -35,7 +35,7 @@
                   <img class="profile-img" src="${contextPath}/resources/img/profile.jpg" alt="profile"/>
                   <div class="desc-wrap">
                     <p class="text-desc">
-                     안녕하세요. <br> 퍼포먼스 마케터 <br>유현종입니다. <br> 제 미니홈피에 오신것을 환영합니다. </p>
+                     <div id="sideContentDiv" class="desc-wrap text-desc"></div>
                     <a class="history" href="#">HISTORY</a>
                   </div>
                   <div class="info-wrap">
@@ -67,7 +67,7 @@
             <div class="main-paper">
               <div class="main-wrap">
                 <div class="title-wrap">
-                  <p class="title"><a href="#">마케팅이 좋은 사람들, 마케팅월드</a></p>
+                  <p class="title"><div id="mainDiv" class="title title-wrap"><a href="#"></a></div></p>
                   <div class="link-wrap">
                     <a href="https://www.instagram.com/hyunjong_yoo/" target="_blank"><span>일촌맺기</span></a>
                     <a href="https://blog.naver.com/hananharu" target="_blank"><span>팬되기</span></a>
@@ -77,6 +77,7 @@
                 <div class="main">
                 	<form action="${ contextPath }/insertDiary.di?userNo=${userNo}" method="POST">
                 	<h1>${ datepicker }</h1>
+                	${userNo }
                 	<input type="hidden" id="diaryDate" name="diaryDate" value="${ datepicker }">
                 	<table>
                 		<tr>
@@ -135,15 +136,15 @@
                 </div>
               </div>
               <div class = "menu align-center expanded text-center SMN_effect-68">
-	              <a href="home.html" class="menu-item mi-1" >홈</a>
+	              <a href="${contextPath}/mainPage.ma?userNo=${userNo}" class="menu-item mi-1">홈</a>
 	<!--              <a href="photo.html" class="menu-item mi-2" onclick="openPopup()">사진첩</a>-->
 	
-	              <a href="photo.html" class="menu-item mi-2">사진첩</a>
+	              <a href="${contextPath}/photo.ph?userNo=${userNo}" class="menu-item mi-2">사진첩</a>
               </div>
-              <a href="diary.html" class="menu-item mi-3 menu-checked">다이어리</a>
+              <a href="${contextPath}/diary.di?userNo=${userNo}"  class="menu-item mi-3 menu-checked">다이어리</a>
               <div class = "menu align-center expanded text-center SMN_effect-68">
-	              <a href="visit.html" class="menu-item mi-4">방명록</a>
-	              <a href="#" class="menu-item mi-5">마케팅</a>
+	              <a href="${contextPath}/visit.vi?userNo=${userNo}" class="menu-item mi-4">방명록</a>
+	             <a href="${contextPath}/boardList.bo?userNo=${userNo}" class="menu-item mi-5">게시판</a>
               </div>
 
 <!--              <div class="menu-item mi-6">게시판</div>-->
@@ -155,6 +156,53 @@
       
     </div>
     <script>
+    window.onload = () => {
+		
+		
+		let skinPath = "";
+		let mainTitle = "";
+		let profilePath = "";
+		let sideContent = "";
+		let myUserNo = "";
+
+		
+		
+		
+		
+		if("${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}" != "${userNo}"){
+			myUserNo = "${userNo}";
+		} else {
+			myUserNo = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}";
+		}
+		console.log("writeList : " + myUserNo);
+		let params={
+				userNo : myUserNo
+		}
+		
+		$.ajax({
+			type:"GET",
+			url:"/onload.my",
+			data : params,
+			success:function(res){
+				skinPath = res.skinPath;
+				mainTitle = res.mainTitle;
+				profilePath = res.profilePath;
+				sideContent = res.sideContent;
+				document.getElementById('sideContentDiv').innerHTML = sideContent;
+				document.getElementById('mainDiv').innerHTML = mainTitle;
+				
+				$(".bg").css({"background":"url("+skinPath+")"}); 
+				
+				console.log(skinPath);
+				console.log(mainTitle);
+				console.log(profilePath);
+				console.log(sideContent);
+			}
+		})
+    }
+    
+    
+    
 	    $(".map").click(function(){
 			var url = "map.di";
 			var name = "map popup"

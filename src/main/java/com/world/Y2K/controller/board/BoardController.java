@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,8 +42,8 @@ public class BoardController {
 	
 	//寃뚯떆�뙋 硫붿씤
 	@RequestMapping("boardList.bo")
-	public String boardList(@RequestParam(value="page", required=false) Integer page, Model model, @RequestParam("userNo")Long userNo) {
-		System.out.println("boardList 실행됨 : "+ userNo);
+	public String boardList(@RequestParam(value="page", required=false) Integer page, Model model,@RequestParam("userNo")Long userNo) {
+		System.out.println("boardList 실행됨 : "+userNo);
 		int currentPage = 1;
 		if(page != null) {
 			currentPage = page;
@@ -53,8 +54,9 @@ public class BoardController {
 		PageInfo pi = BoardPagination.getPageInfo(currentPage, boardListCount, 5);
 		
 		ArrayList<Board> list = bService.selectBoardList(pi);
-		model.addAttribute("userNo", userNo);
+//		model.addAttribute("userNo", userNo);
 		if(list != null) {
+			model.addAttribute("userNo", userNo);
 			model.addAttribute("pi", pi);
 			model.addAttribute("list", list);
 			
@@ -76,8 +78,6 @@ public class BoardController {
 	//寃뚯떆湲� �옉�꽦
 	@RequestMapping(value="insertBoard.bo",method=RequestMethod.POST)
 	public String insertBoard(Model model,@RequestParam("category") String cateStr ,@ModelAttribute Board b, HttpSession session, Authentication authentication, @RequestParam(value="userNo", required=false)Long userNo) {		
-		System.out.println("요청들어옴?");
-		System.out.println("123123123123");
 		return bService.insertBoard(cateStr, b,session,authentication, userNo,model);
 
 	}
@@ -108,15 +108,16 @@ public class BoardController {
 	
 	//寃뚯떆湲� �닔�젙
 	@RequestMapping("updateForm.bo")
-	public String updateForm(@RequestParam("boardNo") Long bNo, @RequestParam("page") int page, Model model) {
+	public String updateForm( @RequestParam("userNo") Long userNo,@RequestParam("boardNo") Long bNo, @RequestParam("page") int page, Model model) {
 		Board b = bService.selectBoard(bNo);
+		model.addAttribute("userNo", userNo);
 		model.addAttribute("b", b);
 		model.addAttribute("page", page);
 		return "board/boardEdit";
 	}
 	
 	@RequestMapping("updateBoard.bo")
-	public String updateBoard(@ModelAttribute Board b,@RequestParam("page") int page, Model model, HttpSession session, Authentication authentication) {
+	public String updateBoard(@RequestParam("userNo") Long userNo,@ModelAttribute Board b,@RequestParam("page") int page, Model model, HttpSession session, Authentication authentication) {
 		
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 		
@@ -126,10 +127,11 @@ public class BoardController {
 		int result = bService.updateBoard(b);
 		
 		if(result > 0) {
+			model.addAttribute("userNo", userNo);
 			model.addAttribute("bNo", b.getBoardNo());
 			model.addAttribute("writer", boardWriter);
 			model.addAttribute("page", page);
-			return "redirect:selectBoard.bo";
+			return "board/boardList";
 		} else {
 			throw new BoardException("寃뚯떆湲� �닔�젙 �떎�뙣");
 		}
@@ -138,11 +140,14 @@ public class BoardController {
 	
 	//寃뚯떆湲� �궘�젣
 	@RequestMapping("deleteForm.bo")
-	
 	public String deleteBoard(@RequestParam("boardNo") Long bNo) {
 		int result = bService.deletBoard(bNo);
+		System.out.println("deleteBoard : " + result);
+
 		if(result > 0) {
-			return "redirect:boardList.bo";
+			System.out.println("여기가 실행된요?");
+			String url = "board/boardList";
+			return url;
 		} else {
 			throw new BoardException("寃뚯떆湲� �궘�젣 �떎�뙣");
 		}

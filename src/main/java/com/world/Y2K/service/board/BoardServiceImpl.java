@@ -49,7 +49,7 @@ public class BoardServiceImpl implements BoardService {
 		String category = getCategory(cateStr);
 		
 		if(bDAO.insertBoard(sqlSession, getBoard(b, boardWriter, category))>0) {
-			return "redirect:/boardList.bo";
+			return "board/boardList";
 		}else {
 			throw new BoardException("寃뚯떆湲� �벑濡� �떎�뙣");
 		}

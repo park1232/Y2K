@@ -136,15 +136,15 @@
                 </div>
               </div>
               <div class = "menu align-center expanded text-center SMN_effect-68">
-	              <a href="home.html" class="menu-item mi-1" >홈</a>
+	              <a href="${contextPath}/mainPage.ma?userNo=${userNo}" class="menu-item mi-1" >홈</a>
 	<!--              <a href="photo.html" class="menu-item mi-2" onclick="openPopup()">사진첩</a>-->
 	
-	              <a href="photo.html" class="menu-item mi-2">사진첩</a>
+	              <a href="${contextPath}/photo.ph?userNo=${userNo}" class="menu-item mi-2">사진첩</a>
               </div>
-              <a href="diary.html" class="menu-item mi-3 menu-checked">다이어리</a>
+              <a href="${contextPath}/diary.di?userNo=${userNo}" class="menu-item mi-3 menu-checked">다이어리</a>
               <div class = "menu align-center expanded text-center SMN_effect-68">
-	              <a href="visit.html" class="menu-item mi-4">방명록</a>
-	              <a href="#" class="menu-item mi-5">마케팅</a>
+	              <a href="${contextPath}/visit.vi?userNo=${userNo}" class="menu-item mi-4">방명록</a>
+	              <a href="${contextPath}/boardList.bo?userNo=${userNo}" class="menu-item mi-5">게시판</a>
               </div>
 
 <!--              <div class="menu-item mi-6">게시판</div>-->

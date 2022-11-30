@@ -17,7 +17,7 @@ public class OnloadEntityServiceImpl implements OnloadEntityService{
 	
 	@Override
 	public HashMap<String, Object> getOnloadEntity(Long userNo) {
-
+		System.out.println("onload : " + userNo);
 		 Mypage mypage = mypageDAO.getOnloadEntity(userNo);
 		
 		return setMap(mypage);

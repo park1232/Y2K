@@ -331,6 +331,7 @@
 		} else {
 			myUserNo = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}";
 		}
+		console.log("myUserNo : " + myUserNo);
 		
 		let params={
 				userNo : myUserNo
