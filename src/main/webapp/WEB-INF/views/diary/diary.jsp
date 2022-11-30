@@ -47,7 +47,7 @@
                   <p class="todayis">
                     TODAY IS .. <i>♥</i><span> 행복</span>
                   </p>
-                  <img class="profile-img" src="${contextPath}/resources/img/profile.jpg" alt="profile"/>
+                  <img class="profile-img" src="${contextPath}/resources/img/profile.jpg" alt="profile" id="profileImage"/>
                   <div class="desc-wrap">
                     <p class="text-desc">
                      <div id="sideContentDiv" class="desc-wrap text-desc"></div>
@@ -63,9 +63,13 @@
                       <div class="triangle-down"></div>
                     </div>
                     <div class="dropdown-content">
-                      <a href="https://bit.ly/3IUmQTC" target="_blank">Instagram</a>
+                    	<c:forEach var="skinList" items="${ list }">
+                    		<a href="https://bit.ly/3IUmQTC" target="_blank">Instagram</a>
+                    	</c:forEach>
+                    
+                     <!--  <a href="https://bit.ly/3IUmQTC" target="_blank">Instagram</a>
                       <a href="https://bit.ly/3IWxs4u" target="_blank">FaceBook</a>
-                      <a href="https://bit.ly/3IOwM0W" target="_blank">Blog</a>
+                      <a href="https://bit.ly/3IOwM0W" target="_blank">Blog</a> -->
                     </div>
                   </div>
                 </div>
@@ -83,11 +87,11 @@
               <div class="main-wrap">
                 <div class="title-wrap">
                   <p class="title"><div id="mainDiv" class="title title-wrap"><a href="#"></a></div></p>
-                  <div class="link-wrap">
-                    <a href="https://www.instagram.com/hyunjong_yoo/" target="_blank"><span>일촌맺기</span></a>
-                    <a href="https://blog.naver.com/hananharu" target="_blank"><span>팬되기</span></a>
-                    <p><a href="#">https://www.cyowrld.com/marketer_JJ</a></p>
-                  </div>
+            <div class="link-wrap">
+                    <a href="${contextPath}/mypage.my"><span>Mypage&nbsp&nbsp</span></a><br>
+                    <a href="${contextPath}/friendList.fr"><span>Friend&nbsp&nbsp</span></a>
+                 <!--    <p><a href="#">https://www.cyowrld.com/marketer_JJ</a></p> -->
+ </div>
                 </div>
                 <div class="main">
                	 	<form action="${ contextPath }/writeDairy.di?userNo=${userNo}" method="POST">
@@ -210,7 +214,7 @@
 					document.getElementById('mainDiv').innerHTML = mainTitle;
 					
 					$(".bg").css({"background":"url("+skinPath+")"}); 
-					
+					jQuery('#profileImage').attr("src", profilePath);
 					console.log(skinPath);
 					console.log(mainTitle);
 					console.log(profilePath);

@@ -28,6 +28,7 @@ import com.world.Y2K.service.login.EditNicknameService;
 import com.world.Y2K.service.login.MailAuthService;
 import com.world.Y2K.service.login.RegisterService;
 import com.world.Y2K.service.login.SearchIdFromEmailService;
+import com.world.Y2K.service.login.SetFriendListService;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.login.oauth.KakaoLoginService;
 import com.world.Y2K.service.login.oauth.NaverLoginService;
@@ -75,6 +76,9 @@ public class LoginController {
 	@Autowired
 	private OnloadEntityService onloadEntityService;
 	
+	@Autowired
+	private SetFriendListService setFriendListService;
+	
 	@GetMapping("/loginpage.lo")
 	public String moveLoginView() {
 		return "login/loginPage";
@@ -98,6 +102,7 @@ public class LoginController {
 	
 	@PostMapping("/login-success.lo")
 	public String loginSuccessHandler(HttpServletRequest request,Authentication authentication) {
+//		setFriendListService.setFreindList(request.getSession(), authentication);
 		return "login/loginSuccess";
 	}
 	
