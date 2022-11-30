@@ -33,14 +33,14 @@ public class MainDAO {
 
 	public int vListCount(SqlSessionTemplate sqlSession, Long userNo) {
 		// TODO Auto-generated method stub
-		//return sqlSession.selectOne("mainReplyMapper.selectVisit", userNo);
-		return 0;
+		return sqlSession.selectOne("mainReplyMapper.selectVisit", userNo);
+	
 	}
 
 	public int diaryListCount(SqlSessionTemplate sqlSession, Long userNo) {
 		// TODO Auto-generated method stub
-		//return sqlSession.selectOne("mainReplyMapper.selectDiary", userNo);
-		return 0;
+			return sqlSession.selectOne("mainReplyMapper.selectDiary", userNo);
+		
 	}
 
 	public void deleteReply(SqlSessionTemplate sqlSession, Long replyNo) {

@@ -32,9 +32,9 @@ public class ReplyApiController {
 			BindingResult bindingResult, 
 			Authentication authentication){
 			UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
-			System.out.println(replyDto);
+			//System.out.println(replyDto);
 			//System.out.println("controller : " +replyDto.getNickName());
-			return replyService.insertReply(replyDto.getContent(), replyDto.getBoardNo(), replyDto.getNickName(),userDetails.getMember().getUserNo());
+			return replyService.insertReply(replyDto.getContent(), replyDto.getBoardNo(), replyDto.getNickName(), replyDto.getOwn(),userDetails.getMember().getUserNo());
 
 	}
 	
@@ -54,8 +54,11 @@ public class ReplyApiController {
 			 * System.out.println(replyNo);
 			 */
 			//System.out.println(userDetails.getMember().getUserNo());
+				
+			//System.out.println(replyNo);
+		
 			
-			replyService.deleteReply(userDetails.getMember().getUserNo(), replyNo);
+			replyService.deleteReply(replyNo);
 			
 			//return new ResponseEntity<>(HttpStatus.OK);
 	}

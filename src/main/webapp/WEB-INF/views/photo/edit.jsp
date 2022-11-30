@@ -39,6 +39,7 @@
                         <input type="hidden" name="renameName" id="renameName" value="${photo.renameName }" >
                         <input type="hidden" name="photoName" id="photoName" value="${photo.photoName }" >
                         <input type="hidden" name="boardNo" id="boardNo" value="${photo.boardNo }" >
+                        <input type="hidden" name="userNo" id="userNo" value="${photo.userNo }" >
                     </div>
                  
                  

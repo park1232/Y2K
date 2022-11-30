@@ -19,9 +19,10 @@ window.onload=()=>{
 				upd.addEventListener('click', ()=>{
 					
 					form.action = 'edit.ph';
+					this.window.close();
 					form.submit();
 					
-					window.close();
+					
 				});
 			}
 			
@@ -30,12 +31,14 @@ window.onload=()=>{
 			if(deleteModal != null){
 				document.getElementById('deleteModal').addEventListener('click', ()=>{
 					console.log(document.getElementById('deleteModal'));
-					
+					 
+				
 					form.action = 'delete.ph';
-
+					form.target = "photo.ph";
+    				this.window.close();
 					form.submit();
+				 	parent.window.reload();
 				 	
-				 	window.close();
 				});
 				
 			

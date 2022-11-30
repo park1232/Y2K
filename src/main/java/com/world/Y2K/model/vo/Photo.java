@@ -26,6 +26,6 @@ public class Photo {
 	private String photoStatus;
 	private String photoComent;
 	private Long userNo;
-	
+	private Long own;
 	
 }

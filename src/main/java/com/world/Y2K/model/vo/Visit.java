@@ -12,6 +12,6 @@ public class Visit {
 	private Date createDate;
 	private Date modifyDate;
 	private String visitStatus;
-	private int visitWriter;	//유저 고유번호
-	
+	private int visitWriter;	
+	private Long own;
 }
