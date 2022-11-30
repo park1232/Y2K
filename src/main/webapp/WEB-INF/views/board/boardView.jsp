@@ -131,7 +131,7 @@
 			<div id="ViewForm">
 				<button  type="button" id="updateForm">수정하기</button>				
 				<button  type="button" id="deleteForm">삭제하기</button>					
-				<button  type="button" id="boardListBack" onclick="location.href='${contextPath}/boardList.bo'">목록으로</button>	
+				<button  type="button" id="boardListBack" onclick="location.href='${contextPath}/boardList.bo?userNo=${userNo}'">목록으로</button>	
 			</div>				
 			<%-- </c:if> --%>
 			<br>   
@@ -201,14 +201,14 @@
 			
 			if(upd != null) {
 				upd.addEventListener('click', ()=> {
-					form.action = '${contextPath}/updateForm.bo';
+					form.action = '${contextPath}/updateForm.bo?userNo=${userNo}';
 					form.submit();
 				});
 			}
 			
 			document.getElementById('deleteForm').addEventListener('click', ()=> {
 				 if (confirm("게시글을 삭제하시겠습니까?")){ 
-						form.action = '${contextPath}/deleteForm.bo';
+						form.action = '${contextPath}/deleteForm.bo?userNo=${userNo}';
 						form.submit();
 					 }else{
 					   console.log("게시글 삭제 취소");
@@ -234,7 +234,7 @@
 			
 		document.getElementById('deleteReply').addEventListener('click', ()=> {
 				if(confirm("댓글을 삭제하시겠습니까?")){
-					form.action = '${contextPath}/deleteReply.bo';
+					form.action = '${contextPath}/deleteReply.bo?userNo=${userNo}';
 					form.submit();
 				}else {
 					console.log("댓글 삭제 취소")
@@ -305,7 +305,7 @@
            
            document.getElementById('replySubmit').addEventListener('click', ()=>{
         	   $.ajax({
-        		   url:'${contextPath}/insertReply.bo',
+        		   url:'${contextPath}/insertReply.bo?userNo=${userNo}',
         		   data:{replyContent: document.getElementById('replyContent').value,
         			   rboardNo:${b.boardNo}, replyWriter:'${b.boardWriter}'},
         		success: (data) => {
@@ -342,7 +342,7 @@
            
          	  document.getElementById('likeButton').addEventListener('click', ()=> {
 				$.ajax({
-					url: '${contextPath}/likeCheck.bo',
+					url: '${contextPath}/likeCheck.bo?userNo=${userNo}',
 					data:{boardNo:${b.boardNo}},
 					success:(data) => {
 						const likeCountDiv = document.getElementById('likeCountDiv');

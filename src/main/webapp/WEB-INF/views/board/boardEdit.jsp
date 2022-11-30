@@ -79,7 +79,7 @@
 	<div class="main">
 	 <div><hr class="hrB"></div>
         <br>
-        <form action="${contextPath}/updateBoard.bo" method="post">
+        <form action="${contextPath}/updateBoard.bo?userNo=${userNo}" method="post">
         <div id="writeDiv">
         <input type="hidden" value="${b.boardNo}" name="boardNo">
 		<input type="hidden" value="${page }" name="page">

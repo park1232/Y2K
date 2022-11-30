@@ -76,15 +76,16 @@
                     <p><a href="#">https://www.cyowrld.com/marketer_JJ</a></p>
                   </div>
                 </div>
+                 <input type="hidden" name="userNo" value="${userNo}"/>
 	<div class="main">
 	 <div><hr class="hrB"></div>
         <br>
-        <form action="${contextPath}/insertBoard.bo" method="post">
+        <form action="${contextPath}/insertBoard.bo?userNo=${userNo}" method="post">
         <div id="writeDiv">
         <table>
           <thead>
             <tr style="text-align: center;">
-            
+           
                 <td width="50px">
                   <select name="category" id="category">
                     <option>잡담</option>

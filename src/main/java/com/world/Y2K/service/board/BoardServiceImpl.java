@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.world.Y2K.dao.board.BoardDAO;
 import com.world.Y2K.exception.BoardException;
@@ -40,15 +41,15 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	@Override
-	public String insertBoard(String cateStr, Board b, HttpSession session, Authentication authentication) {
+	public String insertBoard(String cateStr, Board b, HttpSession session, Authentication authentication, Long userNo, Model model) {
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();	
-		
+		model.addAttribute("userNo", userNo);
 		Long boardWriter = (userDetails.getMember()).getUserNo();
-		
+		System.out.println("insertBoard : " + userNo);
 		String category = getCategory(cateStr);
 		
 		if(bDAO.insertBoard(sqlSession, getBoard(b, boardWriter, category))>0) {
-			return "redirect:boardList.bo";
+			return "redirect:/boardList.bo";
 		}else {
 			throw new BoardException("寃뚯떆湲� �벑濡� �떎�뙣");
 		}

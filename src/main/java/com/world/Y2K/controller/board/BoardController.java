@@ -12,7 +12,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -40,7 +42,7 @@ public class BoardController {
 	//寃뚯떆�뙋 硫붿씤
 	@RequestMapping("boardList.bo")
 	public String boardList(@RequestParam(value="page", required=false) Integer page, Model model, @RequestParam("userNo")Long userNo) {
-		
+		System.out.println("boardList 실행됨 : "+ userNo);
 		int currentPage = 1;
 		if(page != null) {
 			currentPage = page;
@@ -65,21 +67,25 @@ public class BoardController {
 	
 	//寃뚯떆湲� �옉�꽦 View
 	@RequestMapping("boardWrite.bo")
-	public String boardWrite() {
-		return "/board/boardWrite";
+	public String boardWrite(Model model ,@RequestParam("userNo") Long userNo) {
+//		System.out.println("boardWrite : " + userNo);
+		model.addAttribute("userNo", userNo);
+		return "board/boardWrite";
 	}
 	
 	//寃뚯떆湲� �옉�꽦
-	@RequestMapping("insertBoard.bo")
-	public String insertBoard(@RequestParam("category") String cateStr ,@ModelAttribute Board b, HttpSession session, Authentication authentication) {		
-		return bService.insertBoard(cateStr, b,session,authentication);
+	@RequestMapping(value="insertBoard.bo",method=RequestMethod.POST)
+	public String insertBoard(Model model,@RequestParam("category") String cateStr ,@ModelAttribute Board b, HttpSession session, Authentication authentication, @RequestParam(value="userNo", required=false)Long userNo) {		
+		System.out.println("요청들어옴?");
+		System.out.println("123123123123");
+		return bService.insertBoard(cateStr, b,session,authentication, userNo,model);
 
 	}
 	
 	//寃뚯떆湲� �긽�꽭
 	@RequestMapping("selectBoard.bo")
 	public ModelAndView boardView(@RequestParam("bNo") Long bNo, @RequestParam("writer") String writer,
-									@RequestParam("page") int page, ModelAndView mv, Authentication authentication) {
+									@RequestParam("page") int page, ModelAndView mv, Authentication authentication, @RequestParam("userNo") Long userNo) {
 		
 		Board b = bService.selectBoard(bNo);
 		ArrayList<Reply> list = bService.selectReply(bNo);
@@ -87,6 +93,7 @@ public class BoardController {
 		int likeCount = bService.likeCount(bNo);
 		
 		if(b != null) {
+			mv.addObject("userNo", userNo);
 			mv.addObject("b", b);
 			mv.addObject("list", list);
 			mv.addObject("page", page);
