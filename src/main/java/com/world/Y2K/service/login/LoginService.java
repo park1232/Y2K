@@ -75,9 +75,9 @@ public class LoginService extends UsernamePasswordAuthenticationFilter{
 			session.setAttribute("loginUser", userDetails.getMember());
 			Mypage mypage = Mypage.builder()
 					.myUserNo(20L)
-					.skinPath("../../resources/mypage/defaultSkin.jpg")
+					.skinPath("../../../../../../../../../upload/defaultSkin.jpg")
 					.mainTitle("입력된 내용이 없습니다.")
-					.profilePath("../../resources/mypage/profile.jpg")
+					.profilePath("../../../../../../../../../upload/defaultProfile.jpg")
 					.sideContent("아직 내용이없습니다")
 					.build();
 					
