@@ -15,6 +15,7 @@
 		 <result column="BOARD_STATUS" property="boardStatus" />
 		 <result column="BOARD_WRITER" property="boardWriter" />
 		 <result column="BOARD_CATEID" property="boardCateId" />
+		 <result column="OWN" property="own"/>
 	 </resultMap>
 	 
 	 <resultMap type="Reply" id="replyResultSet">
@@ -32,15 +33,15 @@
 		select count(*) from board where board_status = 'Y'
 	</select>
 	
-	<select id="selectBoardList" resultMap="boardResultSet">
+	<select id="selectBoardList" resultMap="boardResultSet" parameterType="long">
 		select * from board
 		join member on(board_writer = userno)
-		where board_status = 'Y'
-		order by boardNo desc
+		where board_status = 'Y' and own = #{own}
+		order by boardNo desc 
 	</select>
 	
 	<insert id="insertBoard">
-		insert into board values(BOARD_SEQ.nextval, #{boardTitle}, #{boardContent}, sysdate, sysdate, default, default, #{boardWriter}, #{boardCateId})
+		insert into board values(BOARD_SEQ.nextval, #{boardTitle}, #{boardContent}, sysdate, sysdate, default, default, #{boardWriter}, #{boardCateId}, #{own})
 	</insert>
 	
 	<update id="boardCount">
@@ -60,7 +61,7 @@
 	<select id="getSearchListCount" parameterType="map" resultType="_int">
 		select count(*) from board b
 						join member on(board_writer = userno)
-		where board_status = 'Y'
+		where board_status = 'Y' and own = #{own}
 		<if test="condition == 'writer'">
 			and nickname like '%' || #{value} || '%'
 		</if>
@@ -75,7 +76,7 @@
 	<select id="selectSearchList" parameterType="hashmap" resultMap="boardResultSet">
 		select * from board
 					join member on(board_writer = userno)
-		where board_status = 'Y'
+		where board_status = 'Y' and own = #{own}
 		<choose>
 			<when test="condition == 'writer'">
 				and nickname like '%' || #{value} || '%'

@@ -19,11 +19,11 @@ public class BoardDAO {
 		return sqlSession.selectOne("boardMapper.getBoardListCount");
 	}
 
-	public ArrayList<Board> selectBoardList(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<Board> selectBoardList(SqlSessionTemplate sqlSession, PageInfo pi, Long own) {
 		int offset = (pi.getCurrentPage() - 1)*pi.getBoardLimit();
 		RowBounds row = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardList", null, row);
+		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardList", own, row);
 	}
 	
 	
@@ -37,17 +37,17 @@ public class BoardDAO {
 		return sqlSession.update("boardMapper.boardCount", bNo);
 	}
 
-	public Board selectBoard(SqlSessionTemplate sqlSession, Long bNo) {
+	public Board selectBoard(SqlSessionTemplate sqlSession,Long bNo) {
 		return sqlSession.selectOne("boardMapper.selectBoard", bNo);
 	}
 	
 
-	public int getSearchListCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+	public int getSearchListCount(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
 
 		return sqlSession.selectOne("boardMapper.getSearchListCount", map);
 	}
 
-	public ArrayList<Board> getSearchListCount(SqlSessionTemplate sqlSession, HashMap<String, String> map,
+	public ArrayList<Board> getSearchList(SqlSessionTemplate sqlSession, HashMap<String, Object> map,
 			PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1)*pi.getBoardLimit();
 		RowBounds row = new RowBounds(offset, pi.getBoardLimit());

@@ -11,17 +11,22 @@
 		<result column="V_MODIFYDATE" property="modifyDate"/>
 		<result column="VISIT_STATUS" property="visitStatus"/>
 		<result column="VISIT_WRITER" property="visitWriter"/> <!--userNo -->
+		<result column="OWN" property="own"/>
 	</resultMap>
 	
-	<select id="selectVisitList" resultMap="visitResultSet">
+	<select id="selectVisitList" resultMap="visitResultSet" parameterType="long">
 		select * from visit
 			join member on(visit_writer = userno)
-			where visit_status = 'Y'
+			where visit_status = 'Y' and own = #{own}
 			order by visitNo desc
 	</select>
 	
 	<insert id="insertVisit">
-		insert into visit values(visit_seq.nextval, #{visitContent}, sysdate, sysdate, default, #{visitWriter})
+		insert into visit values(visit_seq.nextval, #{visitContent}, sysdate, sysdate, default, #{visitWriter}, #{own})
 	</insert>
+	
+	<update id="deleteVisit">
+		update visit set visit_status = 'N' where visitNo = #{visitNo}
+	</update>
 	
 </mapper>

@@ -18,7 +18,7 @@ public interface BoardService {
 
 	int getBoardListCount();
 
-	ArrayList<Board> selectBoardList(PageInfo pi);
+	ArrayList<Board> selectBoardList(PageInfo pi, Long userNo);
 	
 	String insertBoard(String cateStr, Board b, HttpSession session, Authentication authentication,Long userNo,Model model);
 	
@@ -26,9 +26,9 @@ public interface BoardService {
 
 	ArrayList<Reply> selectReply(Long bNo);
 
-	int getSearchListCount(HashMap<String, String> map);
+	int getSearchListCount(HashMap<String, Object> map);
 
-	ArrayList<Board> selectSearchList(HashMap<String, String> map, PageInfo pi);
+	ArrayList<Board> selectSearchList(HashMap<String, Object> map, PageInfo pi);
 
 	int updateBoard(Board b);
 

@@ -6,12 +6,13 @@ import lombok.Data;
 
 @Data
 public class Visit {
-	private int visitNo;
+	private Long visitNo;
 	private String visitContent;
 	private String nickName;
 	private Date createDate;
 	private Date modifyDate;
 	private String visitStatus;
-	private int visitWriter;	
+	private int visitWriter;	//유저 고유번호
 	private Long own;
+
 }

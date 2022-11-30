@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" scope="application" />
 <!DOCTYPE html>
 <html>
@@ -77,6 +78,7 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
                     <p><a href="#">https://www.cyowrld.com/marketer_JJ</a></p>
                   </div>
                 </div>
+             <!--  <form method="post"> -->
                 <div class="main">
        <div class="visitor_card">
           <div class="visitor_title">
@@ -87,31 +89,30 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
           </div>
           <div class="visitor_content">
               <br>
-              <form>
               <table>
               	  <thead>
                   <tr>
-                      <td><div class="minimi-border"><img id="writeImage" src="${contextPath}/resources/img/duck.jpg"></img></div></td>
+                      <td><div class="minimi-border"><img src="${contextPath}/resources/img/minimi/0.gif" class="ranimage"></img></div></td>
                       <td></td><td></td>
                       <td><textarea id="writeVisit" placeholder="방명록을 작성해주세요"></textarea></td>
                       <td></td>
-                      <td><button id="submitVisit" >등록</button></td>
+                      <td><button id="submitVisit" type='button'>등록</button></td>
                   </tr>
                   </thead>
               </table>
-              </form>
+
           </div>
       </div>
       <hr class="hr-2">
-      
+
       <div class="visitLists">
       <c:forEach items="${list}" var="v">
        <div class="visitor_card">
-       	<input type="hidden" value="${v.visitNo}" name="visitNo">  
+       	  
           <div class="visitor_title">
               <span class="visitor_number" id="span1">No. ${v.visitNo}</span> &nbsp;
               <span class="visitor_name" id="span2">${v.nickName }</span> &nbsp;
-              <i id="homepage" class="fas fa-home visitor_homepage"></i>
+              <a href="${v.path }" target="_blank"><i id="homepage" class="fas fa-home visitor_homepage"></i></a>
               <span id="visitor_date">${v.createDate}</span>
           </div>
           <div class="visitor_content">
@@ -122,20 +123,30 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
                       <td><div class="minimi-border"><img src="${contextPath}/resources/img/minimi/0.gif" class="ranimage"></img></div></td>
                       <td></td><td></td>
                       <td><textarea id="visitContent" readonly>${v.visitContent}</textarea></td>
-                      <td></td>
-                      <td><div onclick="Toggle4()" id="btnh" class="btn"><i class="far fa-heart"></i></div></td>
+	                      <td></td>
+	                      <td><div onclick="Toggle4()" id="btnh" class="btn1"><i class="far fa-heart"></i></div></td>
                   </tr>
+                  <tr><td>
+                  <div  <c:if test="${ loginUser.userNo ne userNo }">style="display:none;"</c:if>>
+                  <form action='delete-visit.vi?userNo=${userNo}'>
+                  <div><button class="deleteVisit" id="deleteBtn">삭제하기</button></div>
+                  
+                  <input type="hidden" value="${v.visitNo}" name="visitNo" id="visithidden">
+                  </form>
+                 	</div>
+                  </td></tr>
                   </tbody>
-                  <tr><td><button id="deleteVisit">삭제하기</button></td></tr>
               </table>
           </div>
       </div>
       <hr class="hr-2">
 	</c:forEach>
 	</div>
+	<input type="hidden" name="realVisitDelete"> 
 	<br><br>
                  
     </div>         
+<!-- 	</form> -->
 		
 	</div>
    <div class = "menu align-center expanded text-center SMN_effect-68">
@@ -157,13 +168,13 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
       </main> 
    </div>
      <script>
-     $(document).ready(function(){
+/*      $(document).ready(function(){
  		let skinPath = "";
  		let mainTitle = "";
  		let profilePath = "";
  		let sideContent = "";
  		let myUserNo = "";
-
+		let hiddenUserNo = "";
  		
  		
  		
@@ -202,28 +213,32 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
  		
  		
  		
- 	});
+ 	}); */
      
      
 
  			const ranimage = document.getElementsByClassName('ranimage');
-            	console.log(ranimage); //console에서는 src 다 다르게 뜨는데 view에서 적용 x
             for( var i of ranimage) { 
-            	console.log(i);
-        		ranimage.src="${contextPath}/resources/img/minimi/" + Math.round(Math.random()*3+.4)+".gif";     	
+ 
+        		i.src="${contextPath}/resources/img/minimi/" + Math.round(Math.random()*7+.8)+".gif";     	
             }
 
      
-            var btnvar4 = document.getElementById('btnh');
+            var btnvar4 = document.getElementsByClassName('btn1');
+            
             function Toggle4(){
-              if(btnvar4.style.color=="red"){
-                btnvar4.style.color="grey";
-                btnvar4.innerHTML = '<i class="far fa-heart"></i>';
+            	
+            for(var i of btnvar4) {
+              if(i.style.color=="red"){
+                i.style.color="grey";
+                i.innerHTML = '<i class="far fa-heart"></i>';
               } else {
-                btnvar4.style.color = "red";
-                btnvar4.innerHTML = '<i class="fas fa-heart"></i>';
+                i.style.color = "red";
+                i.innerHTML = '<i class="fas fa-heart"></i>';
               }
             }
+            }
+            
             
 	    
       
@@ -233,27 +248,33 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
     	  console.log(document.getElementById('writeVisit').value);
     	  console.log('${loginUser.userNo}');
     	   $.ajax({
-    		  url:'${contextPath}/insertVisit.vi',
+    		  url:'${contextPath}/insertVisit.vi?userNo='+"${userNo}",
     		  data:{visitContent:document.getElementById('writeVisit').value,
-    			  	visitWriter:'${loginUser.userNo}'},
-    		  success: (data) => {
-    			  console.log(data);
+    			  	visitWriter:'${loginUser.userNo}',
+    			  	userNo : '${userNo}'},
+    		  success: (res) => {
+    			  console.log("통신성공");
+    			  console.log(res);
+    			  
 //     			  const visitLists = document.getElementById('visitLists');
 //     			  visitLists.innerHTML = '';
-    			  
+    			   /* location.href='http://localhost:8080/visit.vi?userNo='+"${userNo}"; */
 //     			  for(const v of data) {
-    				  
+    				 
 //     			  } +=4
     		  },
     		  error: (data)=>{
     			  console.log(data);
     		  }
-  
-    		  
     	  })
+     	  renew(); 
        });  
       
-      
+     
+     const renew = () => {
+    	console.log("renew 실행됨");
+    	 window.location.reload();
+     }      
       
 /*       $("document").ready(function(){
     	 
@@ -268,6 +289,43 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
     		 }
     	  })
       }) */
+      
+
+    	  
+      
+      
+      
+      /* const deleteVisit = document.getElementsByClassName('deleteVisit');
+      for(var i of deleteVisit) {
+    	  i.addEventListener('click', function(){
+    		  const realVisitDelete = this.parentNode.querySelector('input').value;
+    		  console.log(realVisitDelete);
+    		  document.getElementsByName('realVisitDelete')[0].value = realVisitDelete;
+    		  form.action = '${contextPath}/deleteVisit.vi?userNo="${userNo}"';
+    		  form.submit();
+    	  });
+    	  
+      } */
+      
+      
+     /*  $('#deleteBtn').click(function(){
+    	  let params={
+    			  visitNo : $("#visithidden").val()
+    	  }
+    	  $.ajax({
+    		  type:"GET",
+    		  url:"/delete-visit.vi",
+    		  data:params,
+    		  success:function(res){
+    			  console.log("삭제성공");
+    			  renew();
+    		  }
+    	  })
+      }); */
+   
+      
       </script>
+      
+      
 </body>
 </html>
