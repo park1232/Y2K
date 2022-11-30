@@ -47,7 +47,7 @@
                   <p class="todayis">
                     TODAY IS .. <i>♥</i><span> 행복</span>
                   </p>
-                  <img class="profile-img" src="${contextPath}/resources/img/profile.jpg" alt="profile"/>
+                  <img class="profile-img" src="${contextPath}/resources/img/profile.jpg" alt="profile" id="profileImage"/>
                   <div class="desc-wrap">
                     <p class="text-desc">
                      <div id="sideContentDiv" class="desc-wrap text-desc"></div>
@@ -59,13 +59,17 @@
                   </div>
                   <div class="profile-dropdown">
                     <div class="dropdown-btn">
-                      <div class="dropdown-title">Related SNS Link</div>
+                      <div class="dropdown-title">친구로 파도타기</div>
                       <div class="triangle-down"></div>
                     </div>
-                    <div class="dropdown-content">
-                      <a href="https://bit.ly/3IUmQTC" target="_blank">Instagram</a>
+                    <div class="dropdown-content" <c:if test="${ loginUser.userNo ne userNo }">style="display:none;"</c:if>>
+                    	<c:forEach var="friendList" items="${sessionScope.friendPathList}">
+                    		<a href="${friendList.friendPath}"  target="_blank">${friendList.friendNickname }</a>
+                    	</c:forEach>
+                    
+                     <!--  <a href="https://bit.ly/3IUmQTC" target="_blank">Instagram</a>
                       <a href="https://bit.ly/3IWxs4u" target="_blank">FaceBook</a>
-                      <a href="https://bit.ly/3IOwM0W" target="_blank">Blog</a>
+                      <a href="https://bit.ly/3IOwM0W" target="_blank">Blog</a> -->
                     </div>
                   </div>
                 </div>
@@ -83,11 +87,11 @@
               <div class="main-wrap">
                 <div class="title-wrap">
                   <p class="title"><div id="mainDiv" class="title title-wrap"><a href="#"></a></div></p>
-                  <div class="link-wrap">
-                    <a href="https://www.instagram.com/hyunjong_yoo/" target="_blank"><span>일촌맺기</span></a>
-                    <a href="https://blog.naver.com/hananharu" target="_blank"><span>팬되기</span></a>
-                    <p><a href="#">https://www.cyowrld.com/marketer_JJ</a></p>
-                  </div>
+            <div class="link-wrap">
+                    <a href="${contextPath}/mypage.my"><span>Mypage&nbsp&nbsp</span></a><br>
+                    <a href="${contextPath}/friendList.fr"><span>Friend&nbsp&nbsp</span></a>
+                 <!--    <p><a href="#">https://www.cyowrld.com/marketer_JJ</a></p> -->
+ </div>
                 </div>
                 <div class="main">
                	 	<form action="${ contextPath }/writeDairy.di?userNo=${userNo}" method="POST">
@@ -109,23 +113,26 @@
 							<img src="${ contextPath }/resources/img/map.png" id="mapImg">
 						</div>
 						
-						<div class="write">
-							<input type="text" id="mapValue" name="mapValue" readonly>
-							<button type="submit" id="writeBtn">글쓰기</button>
-						</div>
+						
+							<div class="write" <c:if test="${ loginUser.userNo ne userNo }">style="display:none;"</c:if>>
+								<input type="text" id="mapValue" name="mapValue" readonly>
+								<button type="submit" id="writeBtn">글쓰기</button>
+							</div>
+						
 					</form>
 					
 				        <div class="diary">
-				        
-				        	
 				        	<c:forEach items="${ list }" var="d">
 					        	<c:set var="date" value="${d.diaryDate}"/>
-									<div class="diary_contents">
+									<div class="diary_contents" <c:if test="${ d.privacyBounds eq 'closed'&&loginUser.userNo ne userNo }">style="display:none;"</c:if>>
 						            	<table>
 							            		<tr>
 							            			<td width="100px;">${ fn:split(date, '.')[1] }.${ fn:split(date, '.')[2] }</td>
 							            			<td style="border-right: none;">${ d.diaryContent }</td>
-							            			<td style="border-left: none;">${ d.boardNo }</td>
+							            			<td style="border-left: none;">
+								            			${ d.boardNo }
+								            			<input type="hidden" class="privacy" value="${ d.privacyBounds }">
+							            			</td>
 							            		</tr>
 						            	</table>
 									</div>
@@ -163,7 +170,6 @@
     	
     	window.onload = () =>{
     		const diaryLists = document.getElementsByClassName('diary_contents');
-//     		console.log(diaryLists);
 			for(const diaryList of diaryLists){
 				const tds = diaryList.querySelectorAll('td');
 				for(const td of tds){
@@ -208,7 +214,7 @@
 					document.getElementById('mainDiv').innerHTML = mainTitle;
 					
 					$(".bg").css({"background":"url("+skinPath+")"}); 
-					
+					jQuery('#profileImage').attr("src", profilePath);
 					console.log(skinPath);
 					console.log(mainTitle);
 					console.log(profilePath);
@@ -231,7 +237,6 @@
     	$("#datepicker").on("change",function(){
     	        writeBtn.disabled = false;
     	});
-    	
     	
     </script>
   </body>

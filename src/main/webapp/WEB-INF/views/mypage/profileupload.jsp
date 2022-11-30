@@ -29,17 +29,15 @@
              </div>
              <!--사진업로드 로고 end-->
              
-             <form  name="popupClose();" class="upload-form" action="/image" method="post" 
+             <form  name="popupClose();" class="upload-form" action="/input-profile.my" method="post" 
              			target="photo.ph" enctype="multipart/form-data">
                     <input  type="file" name="file"  accept=".jpg, .jpeg" onchange="imageChoose(this)" />
                     <div class="upload-img">
                         <img src="../resources/img/duck.jpg" alt="" id="imageUploadPreview" />
                     </div>
-             		<input type="hidden" id="userNo" name="userNo" value="${userNo}">    
-             	  
+                 
                  <!--사진설명 + 업로드버튼-->
                  <div class="upload-form-detail">
-                       <input type="text" placeholder="사진설명" name="photoComent" >  <!-- key=value로 날라감 -->
                      <button type="submit" class="cta blue"  id="upload" disabled='disabled'  onclick="window.close();">업로드</button>
                  </div>
                  <!--사진설명end-->

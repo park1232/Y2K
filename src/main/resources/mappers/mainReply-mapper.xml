@@ -25,6 +25,7 @@
        <result column="BOARD_STATUS" property="boardStatus" />
        <result column="BOARD_WRITER" property="boardWriter" />
        <result column="BOARD_CATEID" property="boardCateId" />
+       <result column="OWN" property="own" />
     </resultMap>
     
        <resultMap type="Visit" id="visitResultSet">
@@ -35,9 +36,39 @@
       <result column="V_MODIFYDATE" property="modifyDate"/>
       <result column="VISIT_STATUS" property="visitStatus"/>
       <result column="VISIT_WRITER" property="visitWriter"/> <!--userNo -->
+      <result column="OWN" property="own" />
    </resultMap>
        
-     
+     <resultMap type="Photo" id="photoResultSet">
+      <id column="BOARDNO" property="boardNo"/>
+      <result column="PHOTONAME" property="photoName"/>
+      <result column="RENAMENAME" property="renameName"/>
+      <result column="PHOTOPATH" property="photoPath"/>
+      <result column="PHOTOSTATUS" property="photoStatus"/>
+      <result column="PHOTOCOMENT" property="photoComent"/>
+      <result column="USERNO" property="userNo"/>
+      <result column="OWN" property="own"/>
+      
+   </resultMap>
+   
+   <resultMap type="Diary" id="DiaryResultSet">
+		<id column="BOARDNO" property="boardNo"/>
+		<result column="MOOD" property="mood"/>
+		<result column="WEATHER" property="weather"/>
+		<result column="PRIVACY_BOUNDS" property="privacyBounds"/>
+		<result column="LOCATION" property="location"/>
+		<result column="DIARY_DATE" property="diaryDate"/>
+		<result column="DIARY_CONTENT" property="diaryContent"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="MODIFY_DATE" property="modifyDate"/>
+		<result column="DIARY_STATUS" property="diaryStatus"/>
+		<result column="DIARY_WRITER" property="diaryWriter"/>
+		<result column="OWN" property="own"/>
+	</resultMap>
+   
+   
+   
+   
        <insert id="insertReply">
          insert into MAINREPLY
        values(MAINREPLY_SEQ.nextval, #{content}, sysdate, sysdate, #{userNo}, default,#{own})
@@ -62,30 +93,31 @@
       
       
       
-        <!--  
+        
     <select id="selectBoard" resultType="_int">
       select count(*)
       from board
       where BOARD_WRITER= #{userNo} and BOARD_STATUS = 'Y'
    </select>
+   
 
    <select id="selectPhoto" resultType="_int">
       select count(*)
       from photo
-      where userNo= #{userNo} and photostatus = 'Y'
+      where userNo= #{userNo} and PHOTOSTATUS = 'Y'
    </select> 
    
-    <select id="selectDiary" resultType="_int">
+   <select id="selectDiary" resultType="_int">
       select count(*)
-      from visit
-      where userNo= #{userNo} and DIARY_STATUS = 'Y'
+      from diary
+      where own= #{userNo} and DIARY_STATUS ='Y'
    </select> 
-   
+     
     <select id="selectVisit" resultType="_int">
       select count(*)
       from visit
-      where userNo= #{userNo} and visitstatus = 'Y'
-   </select>  -->
+      where own=#{userNo}  and VISIT_STATUS = 'Y'
+   </select> 
    
    
    <update id="deleteReply">

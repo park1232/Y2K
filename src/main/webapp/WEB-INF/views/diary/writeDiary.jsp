@@ -32,7 +32,7 @@
                   <p class="todayis">
                     TODAY IS .. <i>♥</i><span> 행복</span>
                   </p>
-                  <img class="profile-img" src="${contextPath}/resources/img/profile.jpg" alt="profile"/>
+                  <img class="profile-img" src="${contextPath}/resources/img/profile.jpg" alt="profile" id="profileImage"/>
                   <div class="desc-wrap">
                     <p class="text-desc">
                      <div id="sideContentDiv" class="desc-wrap text-desc"></div>
@@ -44,14 +44,13 @@
                   </div>
                   <div class="profile-dropdown">
                     <div class="dropdown-btn">
-                      <div class="dropdown-title">Related SNS Link</div>
+                      <div class="dropdown-title">친구로 파도타기</div>
                       <div class="triangle-down"></div>
                     </div>
-                    <div class="dropdown-content">
-                      <a href="https://bit.ly/3IUmQTC" target="_blank">Instagram</a>
-                      <a href="https://bit.ly/3IWxs4u" target="_blank">FaceBook</a>
-                      <a href="https://bit.ly/3IOwM0W" target="_blank">Blog</a>
-                    </div>
+                     <div class="dropdown-content" <c:if test="${ loginUser.userNo ne userNo }">style="display:none;"</c:if>>
+                    	<c:forEach var="friendList" items="${sessionScope.friendPathList}">
+                    		<a href="${friendList.friendPath}"  target="_blank">${friendList.friendNickname }</a>
+                    	</c:forEach>
                   </div>
                 </div>
                 <div class="side side1"></div>
@@ -69,15 +68,13 @@
                 <div class="title-wrap">
                   <p class="title"><div id="mainDiv" class="title title-wrap"><a href="#"></a></div></p>
                   <div class="link-wrap">
-                    <a href="https://www.instagram.com/hyunjong_yoo/" target="_blank"><span>일촌맺기</span></a>
-                    <a href="https://blog.naver.com/hananharu" target="_blank"><span>팬되기</span></a>
-                    <p><a href="#">https://www.cyowrld.com/marketer_JJ</a></p>
+                     <a href="${contextPath}/mypage.my"><span>Mypage&nbsp&nbsp</span></a><br>
+                    <a href="${contextPath}/friendList.fr"><span>Friend&nbsp&nbsp</span></a>
                   </div>
                 </div>
                 <div class="main">
-                	<form action="${ contextPath }/insertDiary.di?userNo=${userNo}" method="POST">
+                	<form action="${ contextPath }/insertDiary.di?userNo=${userNo}" method="POST" id="insertForm">
                 	<h1>${ datepicker }</h1>
-                	${userNo }
                 	<input type="hidden" id="diaryDate" name="diaryDate" value="${ datepicker }">
                 	<table>
                 		<tr>
@@ -156,6 +153,13 @@
       
     </div>
     <script>
+    $(".map").click(function(){
+		var url = "map.di";
+		var name = "map popup"
+		var option = "width= 610, height= 560"
+		window.open(url, name, option);
+	});
+    
     window.onload = () => {
 		
 		
@@ -192,7 +196,7 @@
 				document.getElementById('mainDiv').innerHTML = mainTitle;
 				
 				$(".bg").css({"background":"url("+skinPath+")"}); 
-				
+				jQuery('#profileImage').attr("src", profilePath);
 				console.log(skinPath);
 				console.log(mainTitle);
 				console.log(profilePath);
@@ -201,18 +205,9 @@
 		})
     }
     
-    
-    
-	    $(".map").click(function(){
-			var url = "map.di";
-			var name = "map popup"
-			var option = "width= 610, height= 560"
-			window.open(url, name, option);
-		});
-	    
 	    const weather = document.getElementById('weather');
 	    const mood = document.getElementById('mood');
-	    const location = document.getElementById('location');
+	    const locations = document.getElementById('location');
 	    const privacyBounds = document.getElementById('privacyBounds');
 	    const diaryBtn = document.getElementById('diaryBtn');
 	    console.log(weather);
@@ -220,18 +215,30 @@
 	    diaryBtn.addEventListener('click', function(){
 	    	if(weather.options[weather.selectedIndex].value === 'no'){
 	    		alert("날씨를 선택해주세요");
+	    		diaryBtn.disabled = true;
 	    	}else if(mood.options[mood.selectedIndex].value === 'no'){
 	    		alert("기분을 선택해주세요");
+	    		diaryBtn.disabled = true;
 	    	}else if(privacyBounds.options[privacyBounds.selectedIndex].value === 'no'){
 	    		alert("공개범위를 선택해주세요");
-	    	}else if(location.value == ''){
+	    		diaryBtn.disabled = true;
+	    	}else if(locations.value == ''){
 	    		alert("지역을 선택해주세요");
+	    		diaryBtn.disabled = true;
 	    	}
 	    });
 	    
+	    $("#weather").on("change",function(){
+	        diaryBtn.disabled = false;
+		});
+	    $("#mood").on("change",function(){
+	        diaryBtn.disabled = false;
+		});
+	    $("#privacyBounds").on("change",function(){
+	        diaryBtn.disabled = false;
+		});
     </script>
   </body>
-
 
 </html>
     

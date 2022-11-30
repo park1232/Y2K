@@ -25,13 +25,13 @@ public class DiaryServiceImpl implements DiaryService{
 	}
 
 	@Override
-	public ArrayList<Diary> selectDiaryList() {
-		return dDAO.selectDiaryList(sqlSession);
+	public ArrayList<Diary> selectDiaryList(Long userNo) {
+		return dDAO.selectDiaryList(sqlSession, userNo);
 	}
 
 	@Override
 	public Diary selectDiary(Long bId) {
-		return dDAO.selectDiaryList(sqlSession, bId);
+		return dDAO.selectDiary(sqlSession, bId);
 	}
 
 	@Override

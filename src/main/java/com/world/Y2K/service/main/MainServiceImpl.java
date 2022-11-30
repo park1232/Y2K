@@ -79,7 +79,11 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public void deleteReply(Long userNo, Long replyNo) {
 		
+		
+	
+			
 		mDAO.deleteReply(sqlSession, replyNo);
+	
 	}
 	
 }

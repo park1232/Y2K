@@ -48,7 +48,7 @@ public class PhotoController {
 		//Long userNo = (Long) session.getAttribute("loginUser");
 //		Long userNo = Long.parseLong((String) request.getAttribute("userNo"));
 //		request.setAttribute("userNo", userNo);
-		List<Photo> images = pService.photoList();
+		List<Photo> images = pService.photoList(userNo);
 		model.addAttribute("images", images);
 		model.addAttribute("dto", userDetails);
 		model.addAttribute("userNo", userNo);
@@ -67,19 +67,10 @@ public class PhotoController {
 		
 		Member member = userDetails.getMember();
 		
-		//System.out.println("===="+boardNo);
-		
 		Photo p = pService.selectImg(boardNo);
 		//p.setUserNo(userDetails.getMember().getUserNo());
-		
-		
-		//System.out.println("留대쾭 :"+ member);
-		
+	
 		ArrayList<Reply> list =pService.selectReply(boardNo);
-		
-		//System.out.println("--"+p);
-		
-		
 		
 		mv.addObject("photo", p);
 		mv.addObject("member", member);
@@ -90,19 +81,18 @@ public class PhotoController {
 	}
 	
 	@RequestMapping("/upload.ph")
-	public String upload() {
-
+	public String upload(@RequestParam("userNo") Long userNo, Model model) {
+		model.addAttribute("userNo", userNo);
 		return "photo/upload";
 	}
 	
 	@RequestMapping("/image")
 	public String imageUpload(@ModelAttribute Photo p,
 			@RequestParam(value="file", required=false) MultipartFile file,
+			@RequestParam("userNo") Long userNo,
 			HttpServletRequest request, Model model,Authentication authentication) {
 		
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
-		
-		
 		
 		if(file.isEmpty()) {
 			throw new PhotoException("�떎�뙣");
@@ -110,20 +100,25 @@ public class PhotoController {
 		
 		
 		photoImageStore.insertImage(p, file, userDetails);
+		model.addAttribute("userNo", userNo);
 		
+//		return "photo/photo.ph?userNo=" + userNo;
 		return "redirect:/photo.ph";
 	}
 	
 	
 	@RequestMapping("/delete.ph")
 	public String deleteImage(
-			@RequestParam("boardNo") Long boardNo
+			@RequestParam("boardNo") Long boardNo,
+			Model model,
+			@RequestParam("userNo")Long userNo
 			) {
 		
-		System.out.println("result");
+		//System.out.println("result");
 		
 		pService.deletetImg(boardNo);
-	
+		model.addAttribute("userNo", userNo);
+		
 			return "redirect:/photo.ph";
 			
 		}
@@ -134,13 +129,14 @@ public class PhotoController {
 	@RequestMapping("/edit.ph")
 	public String editFrom(
 			@RequestParam("boardNo") Long boardNo,
+			@RequestParam("userNo") Long userNo,
 			Model model
 			) {
 
 		Photo photo = pService.selectImg(boardNo);
 		
 		model.addAttribute("photo", photo);
-		
+		model.addAttribute("userNo", userNo);
 		return "/photo/edit";
 	}
 	
@@ -152,10 +148,11 @@ public class PhotoController {
 			Model model,
 			@RequestParam("renameName") String renameName,
 			@RequestParam("photoName") String photoName,
-			@RequestParam("boardNo") Long boardNo
+			@RequestParam("boardNo") Long boardNo,
+			@RequestParam("userNo") Long userNo
 			
 			) {
-			
+			model.addAttribute("userNo", userNo);
 			if(file.getOriginalFilename().equals("") && p.getRenameName()==renameName ) {
 				
 				p.setPhotoComent(photoComent);

@@ -24,4 +24,8 @@ public class Reply {
 	private Long replyWriter;
 	private Long rboardNo;
 
+	private Long own;
+
+
+
 }

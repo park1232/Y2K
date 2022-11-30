@@ -14,5 +14,5 @@ public class Visit {
 	private String visitStatus;
 	private int visitWriter;	//유저 고유번호
 	private Long own;
-	
+
 }

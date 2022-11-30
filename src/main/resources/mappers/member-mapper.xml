@@ -64,5 +64,23 @@
    		where userNo = #{userNo}
    </update>
    
+      
+   <select id="getFriendList" resultMap="memberResultSet">
+   	select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid, m.email
+    	from member m
+        	join friends on (friends.userNo3 = m.userNo)
+    	where userNo2 = #{userNo} and friends.friendstatus = 'Y'
+   </select>
+   
+   
+   	<resultMap type="Friends" id="friendsResultMap">
+		<id column="FRIENDNO" property="friendNo"/>
+		<result column="FRIENDSTATUS" property="friendStatus"/>
+		<result column="USERNO2" property="userNo2"/>
+		<result column="USERNO3" property="userNo3"/>		
+	</resultMap>
+	
+   
+   
    
 </mapper>

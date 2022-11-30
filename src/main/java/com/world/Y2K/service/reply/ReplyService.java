@@ -4,8 +4,8 @@ import java.util.Map;
 
 public interface ReplyService {
 
-	Map<String, Object> insertReply(String content, Long boardNo, String nickName,Long userNo);
+	Map<String, Object> insertReply(String content, Long boardNo, String nickName, Long own,Long userNo);
 
-	void deleteReply(Long userNo, Long replyNo);
+	void deleteReply(Long replyNo);
 
 }

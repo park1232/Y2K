@@ -12,8 +12,6 @@ public class ReplyDAO {
 
 	public int insertReply(SqlSessionTemplate sqlSession, HashMap<String,Object> map) {
 		
-		
-		
 		return sqlSession.insert("replyMapper.insertReply", map);
 	}
 
