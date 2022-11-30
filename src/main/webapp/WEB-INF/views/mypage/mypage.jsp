@@ -218,7 +218,7 @@ ol.large-numbers li:hover:before {
                     <input type="submit" id="title_submit">
                 </form>
             </div>
-          <li id="background-click">배경색 변경</li>
+          <li id="background-click">배경스킨 변경</li>
             <div id="background-rayout">
                 <form action="/background-change.my">
                     <select name="skinName" id="background-select">

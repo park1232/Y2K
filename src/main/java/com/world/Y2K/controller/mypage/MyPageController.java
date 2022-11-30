@@ -60,7 +60,6 @@ public class MyPageController {
 	@ResponseBody
 	@GetMapping("/onload.my")
 	public HashMap<String, Object> getOnloadEntity(Long userNo){
-		System.out.println("userNo : " + userNo);
 	
 		return onloadEntityService.getOnloadEntity(userNo);
 	}

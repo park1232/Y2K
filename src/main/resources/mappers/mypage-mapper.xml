@@ -50,9 +50,7 @@
    	set sidecontent = #{sideContent}
    	where my_userno = #{userNo}
    </update>
-   
-   
-   
+
    
    
    
