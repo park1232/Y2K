@@ -1,5 +1,6 @@
 package com.world.Y2K.dao.login;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -49,6 +50,10 @@ public class LoginDAO {
 	public int deleteMember(Long userNo) {
 		return sqlSession.update("memberMapper.deleteMember", userNo);
 		
+	}
+	
+	public ArrayList<Member> getFriendsList(Long userNo){
+		return (ArrayList)sqlSession.selectList("memberMapper.getFriendList", userNo);
 	}
 	
 
