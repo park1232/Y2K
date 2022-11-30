@@ -112,7 +112,7 @@
 	                	
 	                	<table id="info">
 	                		<tr>
-		                		<td><button type="button" id="selectDiary" onclick="location.href='${contextPath}/diary.di'">목록가기</button></td>
+		                		<td><button type="button" id="selectDiary" onclick="location.href='${contextPath}/diary.di?userNo=${userNo}'">목록가기</button></td>
 		                		<td><button type="button" id="updateDiary">수정하기</button></td>
 		                		<td><button type="button" id="deleteDiary">삭제하기</button></td>
 		                	</tr>
