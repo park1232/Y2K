@@ -15,18 +15,20 @@
 		<result column="MODIFY_DATE" property="modifyDate"/>
 		<result column="DIARY_STATUS" property="diaryStatus"/>
 		<result column="DIARY_WRITER" property="diaryWriter"/>
+		<result column="OWN" property="own"/>
 	</resultMap>
 	
-	<select id="selectDiaryList" resultMap="DiaryResultSet">
+	<select id="selectDiaryList" resultMap="DiaryResultSet" parameterType="long">
 		select * 
 		from diary
 		where diary_status = 'Y'
-		order by diary_date desc
+			  and own = #{own}
+		order by diary_date desc, modify_date desc
 	</select>
 	
 	<insert id="insertDiary">
 		insert into diary
-		values(board_seq.nextval, #{mood}, #{weather}, #{privacyBounds}, #{location}, #{diaryDate}, #{diaryContent}, sysdate, sysdate, default, #{diaryWriter})
+		values(board_seq.nextval, #{mood}, #{weather}, #{privacyBounds}, #{location}, #{diaryDate}, #{diaryContent}, sysdate, sysdate, default, #{diaryWriter}, #{own})
 	</insert>
 	
 	<select id="selectDiary" resultMap="DiaryResultSet">

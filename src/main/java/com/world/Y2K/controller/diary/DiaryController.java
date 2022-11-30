@@ -44,14 +44,15 @@ public class DiaryController {
 //		HttpSession session = request.getSession();
 //		session.setAttribute("loginUser", member);
 		
-		ArrayList<Diary> list = dService.selectDiaryList();
+		ArrayList<Diary> list = dService.selectDiaryList(userNo);
 		model.addAttribute("userNo", userNo);
+		
 		if(list != null) {
 			model.addAttribute("list", list);
 			
 			return "diary/diary";
 		}else {
-			throw new DiaryException("占쎈뼄占쎌뵠占쎈선�뵳�덌옙 鈺곌퀬�돳 占쎈뼄占쎈솭");
+			throw new DiaryException("Failed to look up diary");
 		}
 	}
 	
@@ -61,7 +62,7 @@ public class DiaryController {
 	}
 	
 	@RequestMapping("/selectDiary.di")
-	public ModelAndView selectDiary(@RequestParam("bId") Long bId, HttpSession session, ModelAndView mv) {
+	public ModelAndView selectDiary(@RequestParam("bId") Long bId, HttpSession session, ModelAndView mv, @RequestParam("userNo")Long userNo) {
 		Member member = (Member)session.getAttribute("loginUser");
 		
 		Long login = null;
@@ -74,16 +75,17 @@ public class DiaryController {
 		
 		if(d != null) {
 			mv.addObject("d", d);
+			mv.addObject("userNo", userNo);
 			mv.addObject("list", list);
 			mv.setViewName("diary/diaryDetail");
 			return mv;
 		}else {
-			throw new DiaryException("占쎈뼄占쎌뵠占쎈선�뵳�덌옙 占쎄맒占쎄쉭癰귣떯由� 占쎈뼄占쎈솭");
+			throw new DiaryException("Failed to view diary detail");
 		}
 	}
 	
 	@RequestMapping("/writeDairy.di")
-	public String diaryWrite(@RequestParam("datepicker") String datepicker, @RequestParam("mapValue") String mapValue, Model model,@RequestParam("userNo")Long userNo) {
+	public String diaryWrite(@RequestParam("datepicker") String datepicker, @RequestParam("mapValue") String mapValue, Model model, @RequestParam("userNo")Long userNo) {
 		model.addAttribute("userNo", userNo);
 		model.addAttribute("datepicker", datepicker);
 		model.addAttribute("mapValue", mapValue);
@@ -98,43 +100,46 @@ public class DiaryController {
 		System.out.println(member);
 		Long diaryWriter = member.getUserNo();
 		d.setDiaryWriter(diaryWriter);
+		d.setOwn(userNo);
 		int result = dService.insertDiary(d);
-		System.out.println("실행됨?");
 		if(result > 0) {
 			return "redirect:/diary.di";
 		}else {
-			throw new DiaryException("占쎈뼄占쎌뵠占쎈선�뵳�덌옙 占쎌삂占쎄쉐 占쎈뼄占쎈솭");
+			throw new DiaryException("Failed to write diary");
 		}
 	}
 	
 	@RequestMapping("/updateForm.di")
-	public String updateForm(@RequestParam("boardNo") Long boardNo, Model model) {
+	public String updateForm(@RequestParam("boardNo") Long boardNo, Model model, @RequestParam("userNo")Long userNo) {
 		Diary d = dService.selectDiary(boardNo);
+		model.addAttribute("userNo", userNo);
 		model.addAttribute("d", d);
 		return "diary/editDiary";
 	}
 	
 	@RequestMapping("updateDiary.di")
-	public String updateDiary(@ModelAttribute Diary d, Model model, HttpSession session) {
+	public String updateDiary(@ModelAttribute Diary d, Model model, HttpSession session, @RequestParam("userNo")Long userNo) {
 		int result = dService.updateDiary(d);
 		
 		if(result > 0) {
 			model.addAttribute("bId", d.getBoardNo());
+			model.addAttribute("userNo", userNo);
 			model.addAttribute("diaryWriter", ((Member)session.getAttribute("loginUser")).getUserNo());
 			return "redirect:selectDiary.di";
 		}else {
-			throw new DiaryException("占쎈뼄占쎌뵠占쎈선�뵳�덌옙 占쎈땾占쎌젟 占쎈뼄占쎈솭");
+			throw new DiaryException("Failed to modify diary");
 		}
 	}
 	
 	@RequestMapping("/deleteDiary.di")
-	public String deleteDiary(@RequestParam("boardNo") Long boardNo) {
+	public String deleteDiary(@RequestParam("boardNo") Long boardNo, @RequestParam("userNo")Long userNo, Model model) {
 		int result = dService.deleteDiary(boardNo);
 		
 		if(result > 0) {
+			model.addAttribute("userNo", userNo);
 			return "redirect:diary.di";
 		}else {
-			throw new DiaryException("占쎈뼄占쎌뵠占쎈선�뵳�덌옙 占쎄텣占쎌젫 占쎈뼄占쎈솭");
+			throw new DiaryException("Failed to delete diary");
 		}
 	}
 	
@@ -161,15 +166,14 @@ public class DiaryController {
 	}
 	
 	@RequestMapping("deleteReply.di")
-	public String deleteReply(@RequestParam("replyNo") Long replyNo, @RequestParam("boardNo") Long boardNo) {
+	public String deleteReply(@RequestParam("realDeleteRepNo") Long replyNo, @RequestParam("boardNo") Long boardNo, @RequestParam("userNo")Long userNo, Model model) {
 		int result = dService.deleteReply(replyNo);
 		
 		if(result > 0) {
+			model.addAttribute("userNo", userNo);
 			return "redirect:selectDiary.di?bId=" + boardNo;
 		}else {
-			throw new DiaryException("占쎈솊疫뀐옙 占쎄텣占쎌젫 占쎈뼄占쎈솭");
+			throw new DiaryException("Failed to delete reply");
 		}
 	}
-	
-	
 }

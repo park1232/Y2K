@@ -109,23 +109,26 @@
 							<img src="${ contextPath }/resources/img/map.png" id="mapImg">
 						</div>
 						
-						<div class="write">
-							<input type="text" id="mapValue" name="mapValue" readonly>
-							<button type="submit" id="writeBtn">글쓰기</button>
-						</div>
+						
+							<div class="write" <c:if test="${ loginUser.userNo ne userNo }">style="display:none;"</c:if>>
+								<input type="text" id="mapValue" name="mapValue" readonly>
+								<button type="submit" id="writeBtn">글쓰기</button>
+							</div>
+						
 					</form>
 					
 				        <div class="diary">
-				        
-				        	
 				        	<c:forEach items="${ list }" var="d">
 					        	<c:set var="date" value="${d.diaryDate}"/>
-									<div class="diary_contents">
+									<div class="diary_contents" <c:if test="${ d.privacyBounds eq 'closed'&&loginUser.userNo ne userNo }">style="display:none;"</c:if>>
 						            	<table>
 							            		<tr>
 							            			<td width="100px;">${ fn:split(date, '.')[1] }.${ fn:split(date, '.')[2] }</td>
 							            			<td style="border-right: none;">${ d.diaryContent }</td>
-							            			<td style="border-left: none;">${ d.boardNo }</td>
+							            			<td style="border-left: none;">
+								            			${ d.boardNo }
+								            			<input type="hidden" class="privacy" value="${ d.privacyBounds }">
+							            			</td>
 							            		</tr>
 						            	</table>
 									</div>
@@ -163,7 +166,6 @@
     	
     	window.onload = () =>{
     		const diaryLists = document.getElementsByClassName('diary_contents');
-//     		console.log(diaryLists);
 			for(const diaryList of diaryLists){
 				const tds = diaryList.querySelectorAll('td');
 				for(const td of tds){
@@ -231,7 +233,6 @@
     	$("#datepicker").on("change",function(){
     	        writeBtn.disabled = false;
     	});
-    	
     	
     </script>
   </body>

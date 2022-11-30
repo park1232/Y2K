@@ -25,4 +25,5 @@ public class Diary {
 	private Date modifyDate;
 	private String diaryStatus;
 	private Long diaryWriter;
+	private Long own;
 }
