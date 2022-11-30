@@ -127,8 +127,9 @@
 									<img class="img-miniroom"
 										src="${contextPath}/resources/img/mini_room.gif"
 										alt="mini-room">
+									
 								</div>
-
+								
 								<div class="mini-room-wrap">
 									<img class="img-miniroom"
 										src="${contextPath}/resources/img/mini_room2.gif"
@@ -139,7 +140,7 @@
 									<img class="img-miniroom"
 										src="${contextPath }/resources/img/mini_room3.gif"
 										alt="mini-room" />
-								</div>
+								</div> 
 
 
 								<h2 class="friends-say">일촌평</h2>
@@ -198,55 +199,17 @@
 
 	<script>
      	
-  /*   	let countAll = 0;
+ 
+
     	
-    	function getRoomList(){
-    		//채팅 방 목록 가져오기
-    		
-    		$.ajax({
-    			url:"chatRoomList.ch",
-    			data:{
-    				nickname:"${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.nickName}"
-    			},
-    			dataType:"json",
-    			//async: false를 줌으로써 비동기를 동기로 처리한다
-    			async:false,
-    			success: function(data){
-    				//로그인한 친구들 목록
-    				let loginList = "";
-    				//로그인 유저
-    				$.ajax({
-    					url: "chatSession.ch",
-    					data:{
-    					},
-    					async:false,
-    					dataType: "json",
-    					success: function(data){
-    						for(let i =0; i<data.length; i++){
-    							loginList += data[i];
-    						}
-    					}
-    				});
-    			
-    				$chatWrap = $("#chatList");
-    				$chatWrap.
-    				
-    				
-    				
-    			}
-    		})
-    	} */
-    	
-    	
-     
-    	 
     	 
     		 let commentInput = $("#storyCommentInput");
     		let commentList = $("#storyCommentList");
     	 	let replyWriter = $("#replyWriter");
     	 	
-    	
-    	 
+    	 	
+    	 	window.onload=()=>{
+    	    	 
     	 let contentt = "";
    		let nickNamee = "";
    		let boardNoo = "";
@@ -331,32 +294,8 @@
  		 }
  		  
  		  
- 		  
- 		  
- 		  
- 		  
- 		  
- 		  
- 		  
- 		  
- 		  
- 
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
- 		window.onload=()=>{
+
+ 		
      
      //사진 로테이션
      let slideIndex = 0;
@@ -374,7 +313,7 @@
 		     slides[slideIndex-1].style.display = "block";  
 		     setTimeout(showSlides, 8000);
 		     
-     }
+     } 
        
      
      let skinPath = "";
@@ -420,6 +359,24 @@
   	  
      
      
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
      
      }
      
