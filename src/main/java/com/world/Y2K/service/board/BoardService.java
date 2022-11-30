@@ -6,6 +6,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.ui.Model;
 
 import com.world.Y2K.model.vo.Board;
 import com.world.Y2K.model.vo.Like;
@@ -19,7 +20,7 @@ public interface BoardService {
 
 	ArrayList<Board> selectBoardList(PageInfo pi);
 	
-	String insertBoard(String cateStr, Board b, HttpSession session, Authentication authentication);
+	String insertBoard(String cateStr, Board b, HttpSession session, Authentication authentication,Long userNo,Model model);
 	
 	Board selectBoard(Long bNo);
 
