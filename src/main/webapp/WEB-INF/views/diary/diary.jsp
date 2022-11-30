@@ -59,12 +59,12 @@
                   </div>
                   <div class="profile-dropdown">
                     <div class="dropdown-btn">
-                      <div class="dropdown-title">Related SNS Link</div>
+                      <div class="dropdown-title">친구로 파도타기</div>
                       <div class="triangle-down"></div>
                     </div>
-                    <div class="dropdown-content">
-                    	<c:forEach var="skinList" items="${ list }">
-                    		<a href="https://bit.ly/3IUmQTC" target="_blank">Instagram</a>
+                    <div class="dropdown-content" <c:if test="${ loginUser.userNo ne userNo }">style="display:none;"</c:if>>
+                    	<c:forEach var="friendList" items="${sessionScope.friendPathList}">
+                    		<a href="${friendList.friendPath}"  target="_blank">${friendList.friendNickname }</a>
                     	</c:forEach>
                     
                      <!--  <a href="https://bit.ly/3IUmQTC" target="_blank">Instagram</a>

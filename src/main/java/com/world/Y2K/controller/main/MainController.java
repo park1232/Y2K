@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.world.Y2K.model.dto.MainRe;
 import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.Reply;
+import com.world.Y2K.service.login.SetFriendListService;
 import com.world.Y2K.service.login.auth.UserDetailsImpl;
 import com.world.Y2K.service.main.MainService;
 import com.world.Y2K.service.mypage.OnloadEntityService;
@@ -37,6 +38,9 @@ public class MainController {
 	@Autowired
 	private OnloadEntityService onloadEntityService;
 	
+	@Autowired
+	private SetFriendListService setFriendListService;
+	
 	@RequestMapping("/mainPage.ma")
 	public ModelAndView mainPage(
 			ModelAndView mv, 
@@ -50,8 +54,9 @@ public class MainController {
 		
 		if(userDetails.getMember().getUserNo() != userNo) {
 			session.setAttribute("userNo", userNo);
+			setFriendListService.setFreindList(session, userNo);
 		}
-		
+		setFriendListService.setFreindList(session, userDetails.getMember().getUserNo());
 		session.setAttribute("userNo", userDetails.getMember().getUserNo());
 		Member member = userDetails.getMember();
 		
