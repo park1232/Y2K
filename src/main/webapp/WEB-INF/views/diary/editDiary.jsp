@@ -75,7 +75,7 @@
                   </div>
                 </div>
                 <div class="main">
-                	<form action="${ contextPath }/updateDiary.di" method="POST">
+                	<form action="${ contextPath }/updateDiary.di?userNo=${ userNo }" method="POST">
                 	<h1>${ d.diaryDate }</h1>
                 	<input type="hidden" id="diaryDate" name="diaryDate" value="${ d.diaryDate }">
                 	<input type="hidden" id="boardNo" name="boardNo" value="${ d.boardNo }">
@@ -147,8 +147,6 @@
 	              <a href="${contextPath}/boardList.bo?userNo=${userNo}" class="menu-item mi-5">게시판</a>
               </div>
 
-<!--              <div class="menu-item mi-6">게시판</div>-->
-<!--              <div class="menu-item mi-7">방명록</div>-->
             </div>
           </div>
         </section>
@@ -163,9 +161,46 @@
 			window.open(url, name, option);
 		});
 	    
-// 	    document.getElementById('editBtn').addEventListener('click', function(){
-// 	    	$('#location').val() = $('#mapValue').innerText;
-// 	    });
+window.onload = () =>{
+    		
+    		let skinPath = "";
+    		let mainTitle = "";
+    		let profilePath = "";
+    		let sideContent = "";
+    		let myUserNo = "";
+    		
+    		if("${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}" != "${userNo}"){
+    			myUserNo = "${userNo}";
+    		} else {
+    			myUserNo = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}";
+    		}
+    		console.log("boardList : " + myUserNo);
+    		let params={
+    				userNo : myUserNo
+    		}
+    		
+    		$.ajax({
+    			type:"GET",
+    			url:"/onload.my",
+    			data : params,
+    			success:function(res){
+    				skinPath = res.skinPath;
+    				mainTitle = res.mainTitle;
+    				profilePath = res.profilePath;
+    				sideContent = res.sideContent;
+    				document.getElementById('sideContentDiv').innerHTML = sideContent;
+    				document.getElementById('mainDiv').innerHTML = mainTitle;
+    				
+    				$(".bg").css({"background":"url("+skinPath+")"}); 
+    				
+    				console.log(skinPath);
+    				console.log(mainTitle);
+    				console.log(profilePath);
+    				console.log(sideContent);
+    			}
+    		});
+}
+	    
     </script>
   </body>
 

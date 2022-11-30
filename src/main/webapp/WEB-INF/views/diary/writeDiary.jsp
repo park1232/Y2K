@@ -75,9 +75,8 @@
                   </div>
                 </div>
                 <div class="main">
-                	<form action="${ contextPath }/insertDiary.di?userNo=${userNo}" method="POST">
+                	<form action="${ contextPath }/insertDiary.di?userNo=${userNo}" method="POST" id="insertForm">
                 	<h1>${ datepicker }</h1>
-                	${userNo }
                 	<input type="hidden" id="diaryDate" name="diaryDate" value="${ datepicker }">
                 	<table>
                 		<tr>
@@ -156,6 +155,13 @@
       
     </div>
     <script>
+    $(".map").click(function(){
+		var url = "map.di";
+		var name = "map popup"
+		var option = "width= 610, height= 560"
+		window.open(url, name, option);
+	});
+    
     window.onload = () => {
 		
 		
@@ -201,18 +207,9 @@
 		})
     }
     
-    
-    
-	    $(".map").click(function(){
-			var url = "map.di";
-			var name = "map popup"
-			var option = "width= 610, height= 560"
-			window.open(url, name, option);
-		});
-	    
 	    const weather = document.getElementById('weather');
 	    const mood = document.getElementById('mood');
-	    const location = document.getElementById('location');
+	    const locations = document.getElementById('location');
 	    const privacyBounds = document.getElementById('privacyBounds');
 	    const diaryBtn = document.getElementById('diaryBtn');
 	    console.log(weather);
@@ -220,18 +217,30 @@
 	    diaryBtn.addEventListener('click', function(){
 	    	if(weather.options[weather.selectedIndex].value === 'no'){
 	    		alert("날씨를 선택해주세요");
+	    		diaryBtn.disabled = true;
 	    	}else if(mood.options[mood.selectedIndex].value === 'no'){
 	    		alert("기분을 선택해주세요");
+	    		diaryBtn.disabled = true;
 	    	}else if(privacyBounds.options[privacyBounds.selectedIndex].value === 'no'){
 	    		alert("공개범위를 선택해주세요");
-	    	}else if(location.value == ''){
+	    		diaryBtn.disabled = true;
+	    	}else if(locations.value == ''){
 	    		alert("지역을 선택해주세요");
+	    		diaryBtn.disabled = true;
 	    	}
 	    });
 	    
+	    $("#weather").on("change",function(){
+	        diaryBtn.disabled = false;
+		});
+	    $("#mood").on("change",function(){
+	        diaryBtn.disabled = false;
+		});
+	    $("#privacyBounds").on("change",function(){
+	        diaryBtn.disabled = false;
+		});
     </script>
   </body>
-
 
 </html>
     

@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
 
-/*달력*/
+/*�떖�젰*/
 .main{overflow-x:hidden;}
 h1 {
 	margin-top: 10px;
@@ -34,7 +34,7 @@ hr{
 	width: 583px;
 	
 }
-/*다이어리*/
+/*�떎�씠�뼱由�*/
 .diary{
 	width: 103%;
 	height: 230px;
@@ -106,7 +106,7 @@ hr{
 	margin-left: 20px;
 	font-size: 12px;
 }
-.comment button{
+.write button{
 	background: white;
 	border: 1px solid gray;
 	border-radius: 4px;
@@ -141,7 +141,7 @@ hr{
 	font-size: 18px;
 	width: 600px;
 }
-#deleteReply{width: 18px; align-items: center; height: 18px;}
+.deleteReply{width: 18px; align-items: center; height: 18px; border: none; background: white; cursor: pointer;}
 .side1 { top: 200px; left: 405px; }
 .side2 { top: 240px; left: 405px; }
 .side3 { top: 500px; left: 405px; }

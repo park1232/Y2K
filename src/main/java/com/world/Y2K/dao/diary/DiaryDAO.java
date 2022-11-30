@@ -15,11 +15,11 @@ public class DiaryDAO {
 		return sqlSession.insert("diaryMapper.insertDiary", d);
 	}
 
-	public ArrayList<Diary> selectDiaryList(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("diaryMapper.selectDiaryList");
+	public ArrayList<Diary> selectDiaryList(SqlSessionTemplate sqlSession, Long own) {
+		return (ArrayList)sqlSession.selectList("diaryMapper.selectDiaryList", own);
 	}
 
-	public Diary selectDiaryList(SqlSessionTemplate sqlSession, Long bId) {
+	public Diary selectDiary(SqlSessionTemplate sqlSession, Long bId) {
 		return sqlSession.selectOne("diaryMapper.selectDiary", bId);
 	}
 
