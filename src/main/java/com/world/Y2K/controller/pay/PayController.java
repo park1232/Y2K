@@ -264,10 +264,9 @@ public class PayController {
 	}
 	
 	@RequestMapping("paymentRequest.pa")
-	public String paymentRequest(Authentication authentication, Model model, @RequestParam("mNo") Long mNo, @RequestParam("name") String name, @RequestParam("amount") String amount) throws PaymentException {
+	public String paymentRequest(Authentication authentication, Model model, @RequestParam("name") String name, @RequestParam("paid_amount") String paid_amount, @RequestParam("merchant_uid") String merchant_uid, @RequestParam("mNo") Long mNo) throws PaymentException {
+		
 		System.out.println(mNo);
-		System.out.println(name);
-		System.out.println(amount);
 		
 		System.out.println("------------------------");
 		int result = pService.paymentRequest(mNo);
