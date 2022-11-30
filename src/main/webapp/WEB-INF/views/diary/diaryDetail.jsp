@@ -30,7 +30,7 @@
                   <p class="todayis">
                     TODAY IS .. <i>♥</i><span> 행복</span>
                   </p>
-                  <img class="profile-img" src="${contextPath}/resources/img/profile.jpg" alt="profile"/>
+                  <img class="profile-img" src="${contextPath}/resources/img/profile.jpg" alt="profile" id="profileImage"/>
                   <div class="desc-wrap">
                     <p class="text-desc">
                     <div id="sideContentDiv" class="desc-wrap text-desc"></div>
@@ -67,9 +67,8 @@
                 <div class="title-wrap">
                   <p class="title"><div id="mainDiv" class="title title-wrap"><a href="#"></a></div></p>
                   <div class="link-wrap">
-                    <a href="https://www.instagram.com/hyunjong_yoo/" target="_blank"><span>일촌맺기</span></a>
-                    <a href="https://blog.naver.com/hananharu" target="_blank"><span>팬되기</span></a>
-                    <p><a href="#">https://www.cyowrld.com/marketer_JJ</a></p>
+                     <a href="${contextPath}/mypage.my"><span>Mypage&nbsp&nbsp</span></a><br>
+                    <a href="${contextPath}/friendList.fr"><span>Friend&nbsp&nbsp</span></a>
                     <script src="https://kit.fontawesome.com/203ce9d742.js" crossorigin="anonymous"></script>
                   </div>
                 </div>
@@ -112,12 +111,11 @@
 	                	
 	                	<table id="info">
 	                		<tr>
-		                		<td><button type="button" id="selectDiary" onclick="location.href='${contextPath}/diary.di?userNo=${userNo}'">목록가기</button></td>
-		                		<td><button type="button" id="updateDiary">수정하기</button></td>
-		                		<td><button type="button" id="deleteDiary">삭제하기</button></td>
+		                		<td><button type="button" id="selectDiary" onclick="location.href='${contextPath}/diary.di?userNo=${userNo}'" <c:if test="${ loginUser.userNo ne userNo }">style="margin-right:500px;"</c:if>>목록가기</button></td>
+		                		<td><button type="button" id="updateDiary" <c:if test="${ loginUser.userNo ne userNo }">style="display:none;"</c:if>>수정하기</button></td>
+		                		<td><button type="button" id="deleteDiary" <c:if test="${ loginUser.userNo ne userNo }">style="display:none;"</c:if>>삭제하기</button></td>
 		                	</tr>
 	                	</table>
-	                	
 	                	<div class="comment">
 	                		<div class="write">
 	                			<textarea id="replyContent" placeholder="댓글을 작성해주세요"></textarea>
@@ -129,32 +127,33 @@
 	                					<c:forEach items="${ list }" var="r">
 			                				<tr class="replyNickName">
 			                					<td width="100px">${ r.nickName }</td>
-			                					<td><input type="hidden" value="${ r.replyNo }" name="replyNo"></td>
 <%-- 			                					<td>${ r.rModifyDate }</td> --%>
 			                				</tr>
 			                				<tr class="replyContent">
 			                					<td colspan="2">${ r.replyContent }</td>
-			                					<td><button id="deleteReply" type="button">x</button></td>
+			                					<td>
+			                						<input type="hidden" value="${ r.replyNo }" name="replyNo">
+			                						<button class="deleteReply" type="button" <c:if test="${ r.nickName ne loginUser.nickName }">style="display:none;"</c:if>>x</button>
+			                					</td>
 			                				</tr>
 		                				</c:forEach>
 	                				</tbody>
 	                			</table>
 	                		</div>
+	                		<input type="hidden" name="realDeleteRepNo">
 	                	</div>
 	              </div>
               </form>
               <div class = "menu align-center expanded text-center SMN_effect-68">
-	              <a href="home.html" class="menu-item mi-1" >홈</a>
+	              <a href="${contextPath}/mainPage.ma?userNo=${userNo}" class="menu-item mi-1">홈</a>
 	<!--              <a href="photo.html" class="menu-item mi-2" onclick="openPopup()">사진첩</a>-->
-	              <a href="photo.html" class="menu-item mi-2">사진첩</a>
+	              <a href="${contextPath}/photo.ph?userNo=${userNo}" class="menu-item mi-2">사진첩</a>
               </div>
-              <a href="diary.html" class="menu-item mi-3 menu-checked">다이어리</a>
+              <a href="${contextPath}/diary.di?userNo=${userNo}"  class="menu-item mi-3 menu-checked">다이어리</a>
               <div class = "menu align-center expanded text-center SMN_effect-68">
-	              <a href="visit.html" class="menu-item mi-4">방명록</a>
-	              <a href="#" class="menu-item mi-5">마케팅</a>
+	              <a href="${contextPath}/visit.vi?userNo=${userNo}" class="menu-item mi-4">방명록</a>
+	              <a href="${contextPath}/boardList.bo?userNo=${userNo}" class="menu-item mi-5">게시판</a>
               </div>
-<!--              <div class="menu-item mi-6">게시판</div>-->
-<!--              <div class="menu-item mi-7">방명록</div>-->
             </div>
           </div>
           </div>
@@ -170,10 +169,6 @@
     		let profilePath = "";
     		let sideContent = "";
     		let myUserNo = "";
-
-    		
-    		
-    		
     		
     		if("${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}" != "${userNo}"){
     			myUserNo = "${userNo}";
@@ -198,7 +193,7 @@
     				document.getElementById('mainDiv').innerHTML = mainTitle;
     				
     				$(".bg").css({"background":"url("+skinPath+")"}); 
-    				
+    				jQuery('#profileImage').attr("src", profilePath);
     				console.log(skinPath);
     				console.log(mainTitle);
     				console.log(profilePath);
@@ -206,29 +201,9 @@
     			}
     		})
     		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
 	    	document.getElementById('replySubmit').addEventListener('click', ()=>{
 	    		$.ajax({
-	    			url: '${contextPath}/insertReply.di',
+	    			url: '${contextPath}/insertReply.di?userNo=${userNo}',
 	    			data: {replyContent: document.getElementById('replyContent').value,
 	    				   rboardNo:${d.boardNo}, replyWriter: '${loginUser.userNo}'},
 	    			success: (data)=>{
@@ -244,8 +219,11 @@
 	    					
 	    					const writerTd = document.createElement('td');
 	    					writerTd.innerText = r.nickName;
+	    					writerTd.style.fontSize = '11px';
 	    					const contentTd = document.createElement('td');
 	    					contentTd.innerText = r.replyContent;
+	    					contentTd.style.fontSize = '18px';
+	    					contentTd.style.color = 'black';
 	    					
 	    					tr1.append(writerTd);
 	    					tr2.append(contentTd);
@@ -259,6 +237,7 @@
 	    				console.log(data);
 	    			}
 	    		});
+	    		window.location.reload();
 	    	});
 	    	
 	    	const upd = document.getElementById('updateDiary');
@@ -266,23 +245,28 @@
 	       	
 	    	if(upd != null){
 	    		upd.addEventListener('click', ()=>{
-	    			form.action = '${contextPath}/updateForm.di';
+	    			form.action = '${contextPath}/updateForm.di?userNo=${userNo}';
 	    			form.submit();
 	    		});
 	    	}
     		
 	       	document.getElementById('deleteDiary').addEventListener('click', ()=>{
 	    		if(confirm('정말로 삭제하시겠습니까?')){
-	    			form.action = '${contextPath}/deleteDiary.di';
+	    			form.action = '${contextPath}/deleteDiary.di?userNo=${userNo}';
 	    			form.submit();
 	    		}
 	    	});
 	       	
 	       	
-	       	document.getElementById('deleteReply').addEventListener('click', function(){
-	       		form.action = '${contextPath}/deleteReply.di';
-	       		form.submit();
-	       	});
+	       	const deleteReplys = document.getElementsByClassName('deleteReply');
+	       	for(const deleteReply of deleteReplys){
+	       		deleteReply.addEventListener('click', function(){
+	       			const realDeleteRepNo = this.parentNode.querySelector('input').value;
+	       			document.getElementsByName('realDeleteRepNo')[0].value = realDeleteRepNo;
+	       			form.action = '${contextPath}/deleteReply.di?userNo=${userNo}';
+	 	       		form.submit();
+	       		});
+	       	}
 	       	
     	}
     </script>

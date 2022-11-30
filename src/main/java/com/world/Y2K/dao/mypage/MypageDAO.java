@@ -1,6 +1,5 @@
 package com.world.Y2K.dao.mypage;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -39,6 +38,11 @@ public class MypageDAO {
 
 	public void updateContent(HashMap<String, Object> map) {
 		sqlSession.update("mypageMapper.updateContent", map);
+		
+	}
+
+	public void updateProfilePath(HashMap<String, Object> map) {
+		sqlSession.update("mypageMapper.updateProfilePath", map);
 		
 	}
 

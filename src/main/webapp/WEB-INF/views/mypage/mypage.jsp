@@ -87,6 +87,19 @@ ol.large-numbers li:hover:before {
     background-color: #EBE3AA;
 }
 
+#content_inputbox{
+    height: 30px;
+    border-radius: 10px;
+    border:1px solid wheat;
+}
+
+#content_submit{
+    height:40px;
+    border-radius: 10px;
+    border:1px solid wheat;
+    background-color: #EBE3AA;
+}
+
 #background-select{
     height:40px;
     width: 100px;
@@ -130,6 +143,10 @@ ol.large-numbers li:hover:before {
     /* transition: width 1s ease 0.5s, margin-top 1s ease-out 0.5s; */
 }
 #background-rayout{
+    display: none;
+}
+
+#content-rayout{
     display: none;
 }
 #update-rayout{
@@ -182,7 +199,7 @@ ol.large-numbers li:hover:before {
         <ol class="large-numbers">
           <li id="profile-click">프로필 사진 변경</li>
             <div id="profile-rayout">
-                프로필 사진 선택
+                <a href="${contextPath}/profile-upload.my">프로필 사진 선택</a>
             </div>
             
           <li id="title-click">타이틀 제목 변경</li>
@@ -201,7 +218,7 @@ ol.large-numbers li:hover:before {
                     <input type="submit" id="title_submit">
                 </form>
             </div>
-          <li id="background-click">배경색 변경</li>
+          <li id="background-click">배경스킨 변경</li>
             <div id="background-rayout">
                 <form action="/background-change.my">
                     <select name="skinName" id="background-select">
@@ -216,8 +233,8 @@ ol.large-numbers li:hover:before {
             </div>
           <li id="update-click">닉네임 수정</li>
           <div id="update-rayout">  
-        <form>
-            <input type="text" id="update_inputbox">
+        <form action="edit-nickname.lo" method="post">
+            <input type="text" name="nickname" id="update_inputbox">
             <input type="submit" id="update_submit" value="변경">
         </form>
         </div>

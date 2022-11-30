@@ -9,7 +9,7 @@ public interface DiaryService {
 
 	int insertDiary(Diary d);
 
-	ArrayList<Diary> selectDiaryList();
+	ArrayList<Diary> selectDiaryList(Long userNo);
 
 	Diary selectDiary(Long bId);
 
