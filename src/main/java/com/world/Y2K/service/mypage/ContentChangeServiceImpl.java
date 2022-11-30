@@ -19,7 +19,7 @@ public class ContentChangeServiceImpl implements ContentChangeService{
 	public String contentChange(String inputContent, UserDetailsImpl userDetails, Model model) {
 		HashMap<String, Object> map = setUpdateContentMap(inputContent, userDetails.getMember().getUserNo());
 		mypageDAO.updateContent(map);
-		model.addAttribute("userNo",userDetails.getMember().getUserNo());
+		model.addAttribute("userCode",userDetails.getMember().getUserNo());
 		return "redirect:/main.lo";
 	}
 

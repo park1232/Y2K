@@ -104,7 +104,7 @@ public class LoginController {
 	@GetMapping("/main.lo")
 	public String moveLoginSuccesspage(Authentication authentication, ModelAndView mv) throws ServletException, IOException {
 		UserDetailsImpl userDetails =(UserDetailsImpl)authentication.getPrincipal();
-		mv.addObject("userNo", userDetails.getMember().getUserNo());
+		mv.addObject("userCode", userDetails.getMember().getUserNo());
 		
 //		request.setAttribute("userNo", userDetails.getMember().getUserNo());	
 //		request.getRequestDispatcher("/login-success.lo").forward(request, response);

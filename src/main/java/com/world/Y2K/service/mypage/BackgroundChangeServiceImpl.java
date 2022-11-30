@@ -22,7 +22,7 @@ public class BackgroundChangeServiceImpl implements BackgroundChangeService {
 		HashMap<String, Object> map = setUpdateSkinPathMap(changeSkinPath, userDetails.getMember().getUserNo());
 		mypageDAO.updateSkinPath(map);
 		
-		model.addAttribute("userNo",userDetails.getMember().getUserNo());
+		model.addAttribute("userCode",userDetails.getMember().getUserNo());
 		System.out.println(userDetails.getMember().getUserNo());
 		return "redirect:/main.lo";
 	}

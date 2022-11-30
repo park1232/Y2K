@@ -175,16 +175,7 @@
     </div>
 	<script>
     	window.onload = () => {
-    		const tbody = document.querySelector('tbody');
-    		const tds = tbody.querySelectorAll('td');
-    		for(const td of tds) {
-    			td.addEventListener("click", function(){
-    				const trTds = this.parentElement.querySelectorAll('td'); //세로 한줄 td
-    				const boardNo = trTds[0].innerText;
-    				const writer = trTds[2].innerText;
-    				location.href='${contextPath}/selectBoard.bo?bNo=' + boardNo + '&writer=' + writer + '&page=' + ${pi.currentPage} +'&userNo=' +${userNo};
-    			});
-    		}
+    		
     		
     		let skinPath = "";
     		let mainTitle = "";
@@ -201,7 +192,7 @@
     		} else {
     			myUserNo = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}";
     		}
-    		
+    		console.log("boardList : " + myUserNo);
     		let params={
     				userNo : myUserNo
     		}
@@ -226,6 +217,23 @@
     				console.log(sideContent);
     			}
     		})
+    		
+    		
+    		
+    		
+    		
+    		
+    		const tbody = document.querySelector('tbody');
+    		const tds = tbody.querySelectorAll('td');
+    		for(const td of tds) {
+    			td.addEventListener("click", function(){
+    				const trTds = this.parentElement.querySelectorAll('td'); //세로 한줄 td
+    				const boardNo = trTds[0].innerText;
+    				const writer = trTds[2].innerText;
+    				location.href='${contextPath}/selectBoard.bo?bNo=' + boardNo + '&writer=' + writer + '&page=' + ${pi.currentPage} +'&userNo=' +${userNo};
+    			});
+    		}
+    	
     		
     	}
 		const searchBoard = () => {

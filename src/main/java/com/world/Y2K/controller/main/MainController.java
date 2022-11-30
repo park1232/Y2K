@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -44,26 +45,18 @@ public class MainController {
 			HttpServletRequest request
 			) {
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
-		System.out.println("123");
+
+		HttpSession session = request.getSession();
 		
-		//System.out.println("controller°ª"+userNo);
+		if(userDetails.getMember().getUserNo() != userNo) {
+			session.setAttribute("userNo", userNo);
+		}
 		
-		System.out.println(onloadEntityService);
-		System.out.println("---");
-			Member member = userDetails.getMember();
-		//	Mypage mypage = null;
-			//mypage = onloadEntityService.getOnloadEntity(member.getUserNo());
-		//	System.out.println(mypage);
-		//	if(userNo != member.getUserNo()) {
-			//	mypage = onloadEntityService.getOnloadEntity(userNo);
-			//	mv.addObject("visit_rayout", mypage);
-			//	mv.addObject("my_rayout", "null");
-			//}  else {
-//				mypage = onloadEntityService.getOnloadEntity(member.getUserNo());
-//				mv.addObject("my_rayout", mypage);
-//				mv.addObject("visit_rayout", "null");
-//			}
-//			
+		session.setAttribute("userNo", userDetails.getMember().getUserNo());
+		Member member = userDetails.getMember();
+		
+			
+			
 			
 			
 			
