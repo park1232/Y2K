@@ -18,7 +18,7 @@
    
    <insert id="insertDefaulEntity">
    	insert into mypage
-   	values(#{userNo}, '../../../../../../../../../upload/defaultSkin.jpg','입력된 내용이 없습니다.','../../../../../../../../../upload/profile.jpg','아직 내용이없습니다')
+   	values(#{userNo}, '../../../../../../../../../upload/defaultSkin.jpg','입력된 내용이 없습니다.','../../../../../../../../../upload/defaultProfile.jpg','아직 내용이없습니다')
    </insert>
    
    <select id="checkFirst" parameterType="long" resultType="_int">
@@ -31,6 +31,12 @@
    	update mypage
    	set skinPath = #{skinPath}
    	where my_userno = #{userNo}
+   </update>
+   
+   <update id="updateProfilePath">
+   	update mypage
+   	set profilePath = #{profilePath}
+   	where my_userNo = #{userNo}
    </update>
    
     <update id="updateTitle">
