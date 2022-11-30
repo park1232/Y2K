@@ -90,7 +90,7 @@
                   </div>
                 </div>
                 <div class="main">
-               	 	<form action="${ contextPath }/writeDairy.di" method="POST">
+               	 	<form action="${ contextPath }/writeDairy.di?userNo=${userNo}" method="POST">
 						<div class="c">
 							<h2>날짜별보기</h2>
 						</div>
@@ -170,7 +170,7 @@
 					td.addEventListener('click', function(){
 						const trTds = this.parentElement.querySelectorAll('td');
 						const boardNo = trTds[2].innerText;
-						location.href='${contextPath}/selectDiary.di?bId=' + boardNo;
+						location.href='${contextPath}/selectDiary.di?bId=' + boardNo +'&userNo=' + ${userNo};
 					});
 				}
 			}
