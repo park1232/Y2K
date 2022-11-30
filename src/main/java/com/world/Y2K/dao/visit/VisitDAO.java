@@ -12,13 +12,19 @@ import com.world.Y2K.model.vo.Visit;
 public class VisitDAO {
 	
 	
-	public ArrayList<Visit> selectVisitList(SqlSessionTemplate sqlSession) {
-		
-		return (ArrayList)sqlSession.selectList("visitMapper.selectVisitList");
+	public ArrayList<Visit> selectVisitList(SqlSessionTemplate sqlSession, Long own) {
+		System.out.println("dao own : " + own);
+		return (ArrayList)sqlSession.selectList("visitMapper.selectVisitList", own);
+	
 	}
 	
 	public int insertVisit(SqlSessionTemplate sqlSession, Visit v) {
 		
 		return sqlSession.insert("visitMapper.insertVisit", v);
+	}
+
+	public int deleteVisit(SqlSessionTemplate sqlSession, Long visitNo) {
+		System.out.println("dao단 : " + visitNo);
+		return sqlSession.update("visitMapper.deleteVisit", visitNo);
 	}
 }

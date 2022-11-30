@@ -77,6 +77,7 @@
 	  <img id="cyimg" src="${contextPath}/resources/img/cyimg.png"/><br>
 	  <div id="boardMain" onclick="location.href='${contextPath}/boardList.bo?userNo=${userNo}'">Y2K WORLD</div>
         <div id="writeStyle"><i class="fas fa-edit" onclick="location.href='${contextPath}/boardWrite.bo?userNo=${userNo}'"></i></div>
+        <input hidden="hidden" value="${userNo}" name="userNo">
         <br>
     <table>
         <thead>
@@ -106,6 +107,7 @@
         <li>
         <c:url var="back" value="${loc}">
         	<c:param name="page" value="${pi.currentPage - 1}"></c:param>
+        	<c:param name="userNo" value="${userNo}"/>
         </c:url>
         <a class="way" href="${back}">◀</a>
         </li>    
@@ -119,6 +121,7 @@
 					<c:if test="${ pi.currentPage ne p }">
 						<c:url var="goNum" value="${ loc }">
 							<c:param name="page" value="${ p }"/>
+							<c:param name="userNo" value="${userNo}"/>
 						</c:url>
 	            		<li class="page-item"><a class="page-link" href="${goNum}">${ p }</a></li>
 					</c:if>
@@ -128,6 +131,7 @@
         <li>
         <c:url var="next" value="${loc}">
         	<c:param name="page" value="${pi.currentPage + 1}"></c:param>
+        	<c:param name="userNo" value="${userNo}"/>
         </c:url>
         <a class="way" href="${next}">▶</a>
         </li>  
@@ -230,7 +234,7 @@
     				const trTds = this.parentElement.querySelectorAll('td'); //세로 한줄 td
     				const boardNo = trTds[0].innerText;
     				const writer = trTds[2].innerText;
-    				location.href='${contextPath}/selectBoard.bo?bNo=' + boardNo + '&writer=' + writer + '&page=' + ${pi.currentPage} +'&userNo=' +${userNo};
+    				location.href='${contextPath}/selectBoard.bo?bNo=' + boardNo + '&writer=' + writer + '&page=' + ${pi.currentPage};
     			});
     		}
     	

@@ -18,4 +18,5 @@ public class Board {
 	private String boardStatus;
 	private Long boardWriter;
 	private String boardCateId;
+	private Long own;
 }

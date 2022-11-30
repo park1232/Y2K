@@ -53,7 +53,7 @@ public class BoardController {
 		
 		PageInfo pi = BoardPagination.getPageInfo(currentPage, boardListCount, 5);
 		
-		ArrayList<Board> list = bService.selectBoardList(pi);
+		ArrayList<Board> list = bService.selectBoardList(pi, userNo);
 //		model.addAttribute("userNo", userNo);
 		if(list != null) {
 			model.addAttribute("userNo", userNo);
@@ -85,7 +85,8 @@ public class BoardController {
 	//寃뚯떆湲� �긽�꽭
 	@RequestMapping("selectBoard.bo")
 	public ModelAndView boardView(@RequestParam("bNo") Long bNo, @RequestParam("writer") String writer,
-									@RequestParam("page") int page, ModelAndView mv, Authentication authentication, @RequestParam("userNo") Long userNo) {
+									@RequestParam("page") int page, ModelAndView mv, Authentication authentication) {
+
 		
 		Board b = bService.selectBoard(bNo);
 		ArrayList<Reply> list = bService.selectReply(bNo);
@@ -93,7 +94,7 @@ public class BoardController {
 		int likeCount = bService.likeCount(bNo);
 		
 		if(b != null) {
-			mv.addObject("userNo", userNo);
+//			mv.addObject("userNo", userNo);
 			mv.addObject("b", b);
 			mv.addObject("list", list);
 			mv.addObject("page", page);
@@ -108,9 +109,13 @@ public class BoardController {
 	
 	//寃뚯떆湲� �닔�젙
 	@RequestMapping("updateForm.bo")
-	public String updateForm( @RequestParam("userNo") Long userNo,@RequestParam("boardNo") Long bNo, @RequestParam("page") int page, Model model) {
+	public String updateForm( @RequestParam("boardNo") Long bNo, @RequestParam("page") int page, Model model) {
+//		HashMap<String, Object> map = new HashMap<>();
+//		map.put("bNo", bNo);
+//		map.put("own", userNo);
+		
 		Board b = bService.selectBoard(bNo);
-		model.addAttribute("userNo", userNo);
+//		model.addAttribute("userNo", userNo);
 		model.addAttribute("b", b);
 		model.addAttribute("page", page);
 		return "board/boardEdit";
@@ -131,7 +136,7 @@ public class BoardController {
 			model.addAttribute("bNo", b.getBoardNo());
 			model.addAttribute("writer", boardWriter);
 			model.addAttribute("page", page);
-			return "board/boardList";
+			return "redirect:/boardList.bo";
 		} else {
 			throw new BoardException("寃뚯떆湲� �닔�젙 �떎�뙣");
 		}
@@ -140,13 +145,14 @@ public class BoardController {
 	
 	//寃뚯떆湲� �궘�젣
 	@RequestMapping("deleteForm.bo")
-	public String deleteBoard(@RequestParam("boardNo") Long bNo) {
+	public String deleteBoard(@RequestParam("boardNo") Long bNo, Model model,@RequestParam(value="userNo", required=false)Long userNo) {
 		int result = bService.deletBoard(bNo);
 		System.out.println("deleteBoard : " + result);
 
 		if(result > 0) {
 			System.out.println("여기가 실행된요?");
-			String url = "board/boardList";
+			model.addAttribute("userNo", userNo);
+			String url = "redirect:/boardList.bo";
 			return url;
 		} else {
 			throw new BoardException("寃뚯떆湲� �궘�젣 �떎�뙣");
@@ -156,9 +162,9 @@ public class BoardController {
 	//議곌굔�떇 寃��깋
 	@RequestMapping("search.bo")
 	public String searchBoard(@RequestParam("searchCondition") String condition, Model model,
-								@RequestParam("searchValue") String value, @RequestParam(value="page", required=false) Integer page) {
+								@RequestParam("searchValue") String value, @RequestParam(value="page", required=false) Integer page,@RequestParam("userNo") Long userNo) {
 		
-		HashMap<String, String> map = new HashMap<String, String>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("condition", condition);
 		map.put("value", value);
 		
@@ -171,7 +177,8 @@ public class BoardController {
 		
 		System.out.println(map);
 		PageInfo pi = BoardPagination.getPageInfo(currentPage, searchListCount, 5);
-		
+		map.put(condition, value);
+		map.put("userNo", userNo);
 		ArrayList<Board> list = bService.selectSearchList(map, pi);
 		
 		model.addAttribute("list", list);
@@ -209,7 +216,7 @@ public class BoardController {
 	@RequestMapping("deleteReply.bo")
 	public String deleteReply(@RequestParam("replyNo") Long rNo, Model model, @RequestParam("boardNo") Long bNo) {
 		
-		ArrayList<Reply> list = bService.selectReply(bNo);
+		ArrayList<Reply> list = bService.selectReply(bNo); 
 
 		int result = bService.deleteReply(rNo);
 		if(result > 0) {
@@ -247,5 +254,4 @@ public class BoardController {
 	
 	}
 	
-
 }

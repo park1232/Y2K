@@ -34,9 +34,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public ArrayList<Board> selectBoardList(PageInfo pi) {
+	public ArrayList<Board> selectBoardList(PageInfo pi, Long userNo) {
 		
-		return bDAO.selectBoardList(sqlSession, pi);
+		return bDAO.selectBoardList(sqlSession, pi, userNo);
 	}
 	
 	
@@ -47,9 +47,9 @@ public class BoardServiceImpl implements BoardService {
 		Long boardWriter = (userDetails.getMember()).getUserNo();
 		System.out.println("insertBoard : " + userNo);
 		String category = getCategory(cateStr);
-		
+		b.setOwn(userNo);
 		if(bDAO.insertBoard(sqlSession, getBoard(b, boardWriter, category))>0) {
-			return "board/boardList";
+			return "redirect:/boardList.bo";
 		}else {
 			throw new BoardException("寃뚯떆湲� �벑濡� �떎�뙣");
 		}
@@ -85,15 +85,14 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int getSearchListCount(HashMap<String, String> map) {
+	public int getSearchListCount(HashMap<String, Object> map) {
 
 		return bDAO.getSearchListCount(sqlSession, map);
 	}
 
 	@Override
-	public ArrayList<Board> selectSearchList(HashMap<String, String> map, PageInfo pi) {
-		
-		return bDAO.getSearchListCount(sqlSession, map, pi);
+	public ArrayList<Board> selectSearchList(HashMap<String, Object> map, PageInfo pi) {
+		return bDAO.getSearchList(sqlSession, map, pi);
 	}
 
 	@Override
@@ -144,6 +143,8 @@ public class BoardServiceImpl implements BoardService {
 	public int likeCount(Long bNo) {
 		return bDAO.likeCount(sqlSession, bNo);
 	}
+
+
 	
 }
 
