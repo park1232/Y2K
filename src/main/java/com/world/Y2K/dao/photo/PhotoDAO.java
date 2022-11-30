@@ -20,9 +20,9 @@ public class PhotoDAO {
 		sqlSession.insert("photoMapper.insertPhoto", p);
 	}
 
-	public List<Photo> photoList(SqlSessionTemplate sqlSession) {
+	public List<Photo> photoList(SqlSessionTemplate sqlSession, Long userNo) {
 		
-		return sqlSession.selectList("photoMapper.selectPhotoList");
+		return sqlSession.selectList("photoMapper.selectPhotoList", userNo);
 	}
 
 	public Photo selectImg(SqlSessionTemplate sqlSession, Long boardNo) {

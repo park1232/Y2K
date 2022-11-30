@@ -23,7 +23,7 @@ public class ReplyServiceImpl implements ReplyService{
 	private ReplyDAO rDAO;
 
 	@Override
-	public Map<String, Object> insertReply(String content, Long boardNo, String nickName, Long userNo) {
+	public Map<String, Object> insertReply(String content, Long boardNo, String nickName,Long own , Long userNo) {
 
 		
 		
@@ -32,6 +32,7 @@ public class ReplyServiceImpl implements ReplyService{
 		map.put("content", content);
 		map.put("nickname", nickName);
 		map.put("boardNo", boardNo);
+		map.put("own", own);
 		map.put("userNo", userNo);
 		rDAO.insertReply(sqlSession, map);
 		
@@ -40,9 +41,9 @@ public class ReplyServiceImpl implements ReplyService{
 	}
 
 	@Override
-	public void deleteReply(Long userNo, Long replyNo) {
+	public void deleteReply(Long replyNo) {
 
-
+				
 				
 				rDAO.deleteReply(sqlSession, replyNo);
 		

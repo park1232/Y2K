@@ -10,6 +10,8 @@
       <result column="PHOTOSTATUS" property="photoStatus"/>
       <result column="PHOTOCOMENT" property="photoComent"/>
       <result column="USERNO" property="userNo"/>
+      <result column="OWN" property="own"/>
+     
    </resultMap>
 
     <resultMap type="Reply" id="replyResultSet">
@@ -21,11 +23,12 @@
 		 <result column="REPLY_STATUS" property="replyStatus" />
 		 <result column="REPLY_WRITER" property="replyWriter" />
 		 <result column="REF_BOARDNO" property="rboardNo" />
+		 <result column="OWN" property="own" />
 	 </resultMap>
    
    	<insert id="insertReply">
    		insert into reply
-	 	values(REPLY_SEQ.nextval, #{content}, sysdate, sysdate, default, #{userNo},#{boardNo})
+	 	values(REPLY_SEQ.nextval, #{content}, sysdate, sysdate, default, #{userNo},#{boardNo}, #{own})
    	</insert>
    
    <update id="deleteReply">
@@ -38,7 +41,7 @@
  		 select * 
 	 	from reply r
         join member m on(reply_writer = userNo)
-	 	where REF_BOARDNO = #{boardNo} and reply_status = 'Y'
+	 	where REF_BOARDNO = #{boardNo} and reply_status = 'Y' and own = #{userNo}
 	 	order by REPLYNO desc
    </select>
    

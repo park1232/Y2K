@@ -109,12 +109,12 @@
 									<div class="menu-table">
 										<table>
 											<tr>
-												<td>사진첩<a href="#">0/999</a></td>
-												<td class="new-post">다이어리<a href="#">10/777</a></td>
+												<td>사진첩<a href="${contextPath}/photo.ph?userNo=${userNo}">${pList }</a></td>
+												<td>다이어리<a href="${contextPath}/diary.di?userNo=${userNo}" >${dList}</a></td>
 											</tr>
 											<tr>
-												<td class="new-post">방명록<a href="#">153/11195</a></td>
-												<td>게시판 ${bList }<a href="#">9/20</a></td>
+												<td>방명록<a href="${contextPath}/visit.vi?userNo=${userNo}" >${vList}</a></td>
+												<td>게시판 <a href="${contextPath}/boardList.bo?userNo=${userNo}" >${bList}</a></td>
 											</tr>
 											<tr>
 												<td></td>
@@ -157,9 +157,9 @@
 									value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}"> --%>
 								<input type="hidden" id="login"
 									value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}"
-									name="userNo">
+									name="loginUser">
 
-
+								
 								<c:forEach items="${ list }" var="r">
 									<div class="friends-say-list" id="storyCommentList-${ r.replyNo}">
 										<input type="hidden" id="replyNo" value="${r.replyNo}">
@@ -179,7 +179,7 @@
 								</c:forEach>
 							</div>
 						</div>
-
+						<input type="hidden" value="${userNo}" name="userNo"/>
 						<a href="${contextPath}/mainPage.ma?userNo=${userNo}"
 							class="menu-item mi-1 menu-checked">홈</a>
 						<div class="menu align-center expanded text-center SMN_effect-68">
@@ -222,7 +222,7 @@
 	     				replyWriter : $("#replyWriter").val(),	
 	     				own : "${userNo}"
 	     		}
-	    		console.log(data);
+	    		//console.log(data);
     		 $.ajax({
     			type: "POST",
     	 		url:"/insertReply.ma",
@@ -233,28 +233,29 @@
     	 			boardNoo = data.boardNo;
     	 			
     	 			
-    	 			console.log(contentt);
-    	 			console.log("성공");
+    	 			//console.log(contentt);
+    	 			//console.log("성공");
     	 			
     	 			const newComment =document.createElement('p');
     	 			newComment.innerHTML = '<p>'+contentt + '('+$("#nickName").val() + ')</p>';
     	 			
     	 			commentList.prepend(newComment);
+    	 			window.location.reload();
     	 		}
     	 		
     	 		
     	 		});
     	 
 	    		commentInput.val(""); 
-	    		
-				
+	    		form.submit();
+	    		window.location.reload();
      		});
     	
     	
     	
-    	 let userNo =$("#login").val();
+    	 let loginUser =$("#login").val();
     	 let replyWr = $("#replyWriter").val();
-    	 //console.log(replyWr);
+    	// console.log(replyWr);
     	 //console.log(userNo);
  		 let ps = document.querySelectorAll('.friends-say-list');
  		  //console.log(ps);
@@ -267,20 +268,24 @@
  			 
  			 button.addEventListener('click', ()=>{
  				 //console.log(replyNo);
-				if(userNo !=replyWr){
+ 				
+				if(loginUser !=replyWr){
 					alert("안댐");
-					return false;
+					
 				}else{
  			 	$.ajax({
  			 		type:"post",
  			 		url:"/deleteReply.ma",
  			 		data: {
- 			 			replyNo : replyNo
+ 			 			replyNo : replyNo,
+ 			 			
+ 			 				
  			 		},
+ 			 	
  			 		success:(data)=>{
  			 			
  			 			console.log("성공");
- 			 			
+ 			 			console.log(data);
  			 			$('storyCommentList-${ r.replyNo}').remove();
  			 		}
  			 		
@@ -304,7 +309,7 @@
      function showSlides(){
 	       let i;
 	       let slides = document.getElementsByClassName("mini-room-wrap");
-		console.log(slides);
+		//console.log(slides);
 		     for(i = 0; i<slides.length; i++){
 		        slides[i].style.display = "none";
 		     }  
@@ -351,10 +356,10 @@
 				
 				$(".bg").css({"background":"url("+skinPath+")"}); 
 				
-				console.log(skinPath);
+			/* 	console.log(skinPath);
 				console.log(mainTitle);
 				console.log(profilePath);
-				console.log(sideContent);
+				console.log(sideContent); */
 			}
 		})
   	  

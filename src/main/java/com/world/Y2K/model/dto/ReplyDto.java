@@ -18,4 +18,5 @@ public class ReplyDto {
 	
 	private Long boardNo;
 	
+	private Long own;
 }

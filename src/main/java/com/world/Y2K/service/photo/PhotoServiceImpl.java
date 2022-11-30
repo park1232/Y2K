@@ -32,13 +32,16 @@ public class PhotoServiceImpl extends PhotoStore implements PhotoService {
 	
 	
 	@Override
-	public List<Photo> photoList() {
-		return pDAO.photoList(sqlSession);
+	public List<Photo> photoList(Long userNo) {
+		return pDAO.photoList(sqlSession, userNo);
 	}
 
 
 	@Override
 	public Photo selectImg(Long boardNo) {
+		
+		
+		
 		return pDAO.selectImg(sqlSession, boardNo);
 	}
 

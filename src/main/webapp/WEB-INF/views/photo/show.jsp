@@ -28,11 +28,15 @@
 		<section class="container">
 			<form method="POST" id="detailForm" target="self" onsubmit="return false;">
 				<!--전체 리스트 시작-->
+				<input type="hidden" value="${userNo}" name=userNo id="userNo">
+				<input type="hidden" id="loginUser"
+												value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}">
 				<article class="story-list" id="storyList">
-
-					<button type="button" class="modi" onclick="popup('.modal-info')">
+					
+					<button type="button" class="modi" onclick="popup('.modal-info')" <c:if test="${loginUser.userNo ne photo.own}"> style="display:none"</c:if>>
 						<i class="fas fa-cog"></i>
 					</button>
+
 					<!--전체 리스트 아이템-->
 					<div class="story-list__item">
 						
@@ -43,7 +47,7 @@
 						<input type="hidden" value=' ${ member.nickName }' name="nickName">
 
 						<div class="sl__item__contents">
-
+							
 							<div class="modal-info" onclick="modalInfo()">
 								<div class="modal">
 									<button type="button" id="updateForm">수정</button>
@@ -51,6 +55,7 @@
 									<button type="button" onclick="closePopup('.modal-info')">닫기</button>
 								</div>
 							</div>
+							
 							<div class="sl__item__contents__content" name="photoComent">
 								<p>${photo.photoComent}</p>
 
@@ -63,17 +68,19 @@
 						 						
 										 		<div class="sl__item__contents__comment" id="storyCommentItem-${ r.replyNo}"  >
 															 <input type="hidden" id="replyNo" value="${r.replyNo}"> 
-															 
+															
+															  <input type="hidden" id="replyWriter" value="${r.replyWriter}"> 
+															 <input type="hidden" id="replyOwn" value="${r.own}"> 	
 															
 														 	<p>
 																		<b>${r.nickName} :		</b> ${r.replyContent}
 																		
 															</p> 
-															
+																
 														 	<button id="delRe">
 																	
 																	<i class="fas fa-times"></i>
-																	
+															
 															</button> 
 															
 													</div>
@@ -121,8 +128,8 @@
 		let data = {
 				content : $("#storyCommentInput-1").val(),
 				nickName : $("#nickName").val(),
-				boardNo : $("#boardNo").val()
-				
+				boardNo : $("#boardNo").val(),
+				own: "${userNo}"
 		}
 		$.ajax({
 			type:"POST",
@@ -153,7 +160,7 @@
 				newComment.innerHTML = '<div class="sl__item__contents__comment" id="storyCommentItem-1"><p><b>' + $("#nickName").val() + ' :</b>' + contentt + '</p><button id="delRe"><i class="fas fa-times"></i></button></div>';
 
 					commentList.prepend(newComment);
-					
+					window.location.reload();
 				}
 					
 
@@ -189,18 +196,28 @@
 		*/
 			
 			let divs= document.querySelectorAll('.sl__item__contents__comment');
-			console.log(divs);
+			//console.log(divs);
+			
+			let loginUser = ${loginUser.userNo};
 			for(const div of divs){
 				const input = div.querySelector('input').value;
 				const button = div.querySelector('button');
-			
+				
 				//console.log(input);
 				//console.log(button);
+				let rWriter = $('#replyWriter').val();
+				//let rOwn = document.getElementById('replyOwn').value;
 				
+				console.log(rWriter);
+				console.log(loginUser);
+				
+					
 				//console.log(nickName.value);
 				button.addEventListener('click', ()=>{
-					console.log(input);
+				if(rWriter != loginUser){
+					alert('안댐');
 					
+				}else{
 				$.ajax({
 					type:"post",
 					url:"/api/reply/delete",
@@ -217,12 +234,12 @@
 				})
 				window.location.reload();
 				
-					
+				}	
 				}
-				
+			
 			)}
 			
-			
+
 		
 	/* 	if(principalId == comment.user.id){
 			item += `	<button onclick="deleteComment(${comment.id})">

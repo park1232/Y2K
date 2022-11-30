@@ -92,10 +92,12 @@
 								</div>
 							</div>
 							<div class="main">
+								
+								<input type="hidden" value="${userNo}" name=userNo id="userNo">
 								<div class="tab_content" id="tab-content">
-									<%-- <c:if test="${ dto.member.userNo eq image.userNo }"> --%>
+									  <c:if test="${ loginUser.userNo == userNo }">  
 									<button id="photo_upload" onclick="up();">사진올리기</button>
-									<%-- </c:if> --%>
+									 </c:if>  
 									<br>
 									<br>
 									<div id="tab-1-content" class="tab-content-item show">

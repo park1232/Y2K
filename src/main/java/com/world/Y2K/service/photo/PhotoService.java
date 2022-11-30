@@ -12,7 +12,7 @@ import com.world.Y2K.model.vo.Reply;
 
 public interface PhotoService{
 	
-	List<Photo> photoList();
+	List<Photo> photoList(Long userNo);
 
 //	void insertImage(Photo p, MultipartFile file, HttpServletRequest request);
 

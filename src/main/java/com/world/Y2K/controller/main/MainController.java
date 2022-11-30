@@ -62,19 +62,22 @@ public class MainController {
 			
 			ArrayList<Reply> list = mService.replyList(userNo);
 	
-			/*
-			 * int bList = mService.boardList(userNo);
-			 * 
-			 * int pList = mService.photoList(userNo);
-			 * 
-			 * int vList = mService.visitList(userNo);
-			 * 
-			 * int dList = mService.dList(userNo);
-			 */
+			
+				int bList = mService.boardList(userNo);
+			 
+			 	int pList = mService.photoList(userNo);
+			  
+			  int vList = mService.visitList(userNo);
+			 
+			 int dList = mService.dList(userNo);
+			
 			/* mv.addObject("bList", bList); */
 			request.setAttribute("userNo", userNo);
 			mv.addObject("list", list);
-			System.out.println("리플리스트"+ list);
+			mv.addObject("bList", bList);
+			mv.addObject("pList", pList);
+			mv.addObject("dList", dList);
+			mv.addObject("vList", vList);
 			mv.addObject("member", member);
 			
 			mv.setViewName("main/mainPage");
@@ -93,7 +96,7 @@ public class MainController {
 		
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 		
-		System.out.println("Controller mainRe : "  + mainRe);
+	//	System.out.println("Controller mainRe : "  + mainRe);
 		
 		
 		return mService.insertReply(mainRe.getContent(), mainRe.getNickName(), userDetails.getMember().getUserNo(), mainRe.getOwn());
@@ -127,11 +130,10 @@ public class MainController {
 		response.setContentType("application/json; charset=UTF-8");
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 		
-		System.out.println(replyNo);
+		//System.out.println(replyNo);
 		
-		mService.deleteReply(userDetails.getMember().getUserNo(), replyNo);
-		
-		
+			mService.deleteReply(userDetails.getMember().getUserNo(), replyNo);
+
 	}
 	
 	

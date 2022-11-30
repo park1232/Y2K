@@ -23,5 +23,6 @@ public class Reply {
 	private String replyStatus;
 	private Long replyWriter;
 	private Long rboardNo;
+	private Long own;
 
 }

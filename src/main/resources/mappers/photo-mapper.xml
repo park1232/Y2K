@@ -10,6 +10,8 @@
       <result column="PHOTOSTATUS" property="photoStatus"/>
       <result column="PHOTOCOMENT" property="photoComent"/>
       <result column="USERNO" property="userNo"/>
+      <result column="OWN" property="own"/>
+      
    </resultMap>
 
    <resultMap type="Reply" id="replyResultSet">
@@ -39,13 +41,13 @@
 	 
    <insert id="insertPhoto">
 		INSERT INTO photo
-		VALUES(BOARD_SEQ.nextval, #{photoName}, #{renameName}, #{photoPath}, default, #{photoComent}, #{userNo})
+		VALUES(BOARD_SEQ.nextval, #{photoName}, #{renameName}, #{photoPath}, default, #{photoComent}, #{userNo}, #{userNo})
 	</insert>
    
    <select id="selectPhotoList" resultMap="photoResultSet">
    		select *
    		from photo
-   		where photoStatus = 'Y'
+   		where photoStatus = 'Y' and own=#{userNo}
    		order by boardNo desc
    </select>
    
