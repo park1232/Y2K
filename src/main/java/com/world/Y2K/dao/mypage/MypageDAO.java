@@ -18,8 +18,8 @@ public class MypageDAO {
 		return sqlSession.selectOne("mypageMapper.getMypageEntity", myUserNo);
 	}
 	
-	public int insertDefault(Long userNo) {
-		return sqlSession.insert("mypageMapper.insertDefaulEntity", userNo);
+	public int insertDefault(HashMap<String, Object> map) {
+		return sqlSession.insert("mypageMapper.insertDefaulEntity", map);
 	}
 	
 	public int checkFirst(Long myUserNo) {
@@ -43,6 +43,11 @@ public class MypageDAO {
 
 	public void updateProfilePath(HashMap<String, Object> map) {
 		sqlSession.update("mypageMapper.updateProfilePath", map);
+		
+	}
+
+	public void updateOwnerNickname(HashMap<String, Object> map) {
+		sqlSession.update("mypageMapper.updateOwnerNickname", map);
 		
 	}
 

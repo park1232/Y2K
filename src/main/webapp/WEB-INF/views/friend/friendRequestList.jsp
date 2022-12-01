@@ -165,7 +165,7 @@
 <div>
 </div>
 </body>
-<br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <footer class="sticky-footer bg-white" style="height: 5px;">
         <div class="main-footer d-flex p-2 px-3 bg-white border-top">
               <a href="#">Y2K</a>
@@ -178,6 +178,8 @@
 			const userNo = this.value; 
 			window.open("${ contextPath }/friendAccept.fr?userNo=" + userNo, "friendAdd", "width=460, height=570, scrollbars=no, resizable=no, toolbars=no, menubar=no")
 		 });
-	} 
+	}
+	
+	window.setTimeout('window.location.reload()', 5000);
 </script>
 </html>

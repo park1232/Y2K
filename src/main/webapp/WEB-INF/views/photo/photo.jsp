@@ -31,37 +31,35 @@
 					<div class="pf-back">
 						<div class="profile-wrap">
 							<div class="visitor-counter">
-								<p class="today">999</p>
-								<p class="today-count">1213042</p>
+
 							</div>
 							<div class="profile">
 								<p class="todayis">
-									TODAY IS .. <i>♥</i><span> 행복</span>
+
 								</p>
 								<img class="profile-img"
-									src="${contextPath}/resources/img/profile.jpg" alt="profile" />
+									src="${contextPath}/resources/img/profile.jpg" alt="profile" id="profileImage"  />
 								<div class="desc-wrap">
 									<p class="text-desc">
 										<div id="sideContentDiv" class="desc-wrap text-desc"></div>
 									</p>
-									
-									<a class="history" href="#">HISTORY</a>
 								</div>
-								<div class="info-wrap">
-									<a class="info-name" href="#">조현재</a>
-									<p class="text-email">nowing0108@kakao.com</p>
+								<div class="info-wrap" id="ownerNickname">
+									<a class="info-name" href="#"></a>
+									<!--      <p class="text-email">guswhd956@naver.com</p> -->
 								</div>
 								<div class="profile-dropdown">
 									<div class="dropdown-btn">
-										<div class="dropdown-title">친구와 채팅</div>
+										<div class="dropdown-title">친구로 파도타기</div>
 										<div class="triangle-down"></div>
 									</div>
-									
-									<div class="dropdown-content">
-										<a href="${contextPath}/chat/chat.html">김지인</a> <a
-											href="${contextPath}/chat/chat.html">박규민</a> <a
-											href="${contextPath}/chat/chat.html">조소연</a> <a
-											href="${contextPath}/chat/chat.html">김민주</a>
+									<div class="dropdown-content"
+										<c:if test="${ loginUser.userNo ne userNo }">style="display:none;"</c:if>>
+										<c:forEach var="friendList"
+											items="${sessionScope.friendPathList}">
+											<a href="${friendList.friendPath}" target="_blank">${friendList.friendNickname }</a>
+										</c:forEach>
+
 									</div>
 								</div>
 							</div>
@@ -83,12 +81,9 @@
 									<div id="mainDiv" class="title title-wrap"><a href="#"></a></div>
 								</p>
 								<div class="link-wrap">
-									<a href="https://www.instagram.com/hyunjong_yoo/"
-										target="_blank"><span>일촌맺기</span></a> <a
-										href="https://blog.naver.com/hananharu" target="_blank"><span>팬되기</span></a>
-									<p>
-										<a href="#">https://www.cyowrld.com/marketer_JJ</a>
-									</p>
+									<a href="${contextPath}/mypage.my"><span>Mypage&nbsp&nbsp</span></a><br>
+									<a href="${contextPath}/friendList.fr"><span>Friend&nbsp&nbsp</span></a>
+									<!--    <p><a href="#">https://www.cyowrld.com/marketer_JJ</a></p> -->
 								</div>
 							</div>
 							<div class="main">
@@ -172,11 +167,7 @@
 		let mainTitle = "";
 		let profilePath = "";
 		let sideContent = "";
-		let myUserNo = "";
-
-		
-		
-		
+		let myUserNo = "";			
 		
 		if("${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}" != "${userNo}"){
 			myUserNo = "${userNo}";
@@ -199,9 +190,9 @@
 				sideContent = res.sideContent;
 				document.getElementById('sideContentDiv').innerHTML = sideContent;
 				document.getElementById('mainDiv').innerHTML = mainTitle;
-				
+				document.getElementById('ownerNickname').innerHTML = res.ownerNickname;
 				$(".bg").css({"background":"url("+skinPath+")"}); 
-				
+				jQuery('#profileImage').attr("src", profilePath);
 				console.log(skinPath);
 				console.log(mainTitle);
 				console.log(profilePath);

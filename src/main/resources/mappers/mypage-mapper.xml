@@ -8,17 +8,18 @@
       <result column="MAINTITLE" property="mainTitle"/>
       <result column="PROFILEPATH" property="profilePath"/>
       <result column="SIDECONTENT" property="sideContent"/>
+      <result column="OWNERNICKNAME" property="ownerNickname"/>
    </resultMap>
 
    <select id="getMypageEntity" resultMap="mypageResultSet" parameterType="long">
-   	select MY_USERNO, SKINPATH, MAINTITLE, PROFILEPATH, SIDECONTENT
+   	select MY_USERNO, SKINPATH, MAINTITLE, PROFILEPATH, SIDECONTENT, OWNERNICKNAME
    	from mypage
    	where MY_USERNO = #{myUserNo}
    </select>
    
    <insert id="insertDefaulEntity">
    	insert into mypage
-   	values(#{userNo}, '../../../../../../../../../upload/defaultSkin.jpg','입력된 내용이 없습니다.','../../../../../../../../../upload/defaultProfile.jpg','아직 내용이없습니다')
+   	values(#{userNo}, '../../../../../../../../../upload/defaultSkin.jpg','입력된 내용이 없습니다.','../../../../../../../../../upload/defaultProfile.jpg','아직 내용이없습니다',#{nickName})
    </insert>
    
    <select id="checkFirst" parameterType="long" resultType="_int">
@@ -50,6 +51,13 @@
    	set sidecontent = #{sideContent}
    	where my_userno = #{userNo}
    </update>
+   
+   <update id="updateOwnerNickname">
+   	update mypage
+   	set ownerNickname = #{nickname}
+   	where my_userno = #{userNo}
+   </update>
+   
 
    
    

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.world.Y2K.model.dto.Member;
+import com.world.Y2K.model.entity.FriendAddEntity;
 import com.world.Y2K.model.vo.FriendAdd;
 import com.world.Y2K.model.vo.FriendPageInfo;
-import com.world.Y2K.model.vo.Friends;
 
 public interface FriendService {
 
@@ -14,7 +14,7 @@ public interface FriendService {
 
 	ArrayList<Member> selectFriendList(FriendPageInfo pi, Long userNo);
 
-	ArrayList<Member> selectMember(Long userNo);
+	ArrayList<FriendAddEntity> selectMember(Long userNo);
 
 	int checkNickName(String nickName);
 
@@ -38,12 +38,12 @@ public interface FriendService {
 
 	int checkFriendAddSelf(FriendAdd fa);
 
-	FriendAdd selectFriendAddList(Long userNo);
+	ArrayList<FriendAdd> selectFriendAddList(HashMap<String, Object> map);
 
 	int accpetFriendResult(Long loginuserNo);
 
-	int hideAccept(Long userNo);
+	int hideAccept(String loginuserNickName);
 
-	int deleteFriend(Long friendUsing);
+	int deleteFriend(HashMap<String, Long> map);
 
 }

@@ -3,13 +3,11 @@
 <mapper namespace="skinMapper">
   
    <resultMap type="Skin" id="skinResultSet">
-     
       
       <result column="SKINNAME" property="skinName"/>
       <result column="SKINSTATUS" property="skinStatus"/>
       <result column="SKINUSERNO" property="skinUserNo"/>
       <result column="SKINKOREANAME" property="skinKoreaName"/>
-      
   
    </resultMap>
    

@@ -5,9 +5,9 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.world.Y2K.dao.login.LoginDAO;
 import com.world.Y2K.dao.mypage.MypageDAO;
 import com.world.Y2K.model.dto.Mypage;
-import com.world.Y2K.service.login.auth.UserDetailsImpl;
 
 @Service
 public class OnloadEntityServiceImpl implements OnloadEntityService{
@@ -15,9 +15,13 @@ public class OnloadEntityServiceImpl implements OnloadEntityService{
 	@Autowired
 	private MypageDAO mypageDAO;
 	
+	@Autowired
+	private LoginDAO loginDAO;
+	
 	@Override
 	public HashMap<String, Object> getOnloadEntity(Long userNo) {
 		System.out.println("onload : " + userNo);
+		String nickName = loginDAO.findNickname(userNo);
 		 Mypage mypage = mypageDAO.getOnloadEntity(userNo);
 		
 		return setMap(mypage);
@@ -32,7 +36,7 @@ public class OnloadEntityServiceImpl implements OnloadEntityService{
 		map.put("mainTitle", mypage.getMainTitle());
 		map.put("profilePath", mypage.getProfilePath());
 		map.put("sideContent", mypage.getSideContent());
-		
+		map.put("ownerNickname", mypage.getOwnerNickname());
 		return map;
 	}
 

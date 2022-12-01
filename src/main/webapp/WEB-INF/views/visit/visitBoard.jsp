@@ -219,13 +219,11 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
  	}); */
      
      
-
  			const ranimage = document.getElementsByClassName('ranimage');
             for( var i of ranimage) { 
  
         		i.src="${contextPath}/resources/img/minimi/" + Math.round(Math.random()*7+.8)+".gif";     	
             }
-
      
             var btnvar4 = document.getElementsByClassName('btn1');
             
@@ -293,7 +291,6 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
     	  })
       }) */
       
-
     	  
       
       

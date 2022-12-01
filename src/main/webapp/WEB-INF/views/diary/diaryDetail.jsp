@@ -23,8 +23,7 @@
             <div class="pf-back">
               <div class="profile-wrap">
                 <div class="visitor-counter">
-                  <p class="today">999</p>
-                  <p class="today-count">1213042</p>
+
                 </div>
                 <div class="profile">
                   <p class="todayis">
@@ -36,9 +35,9 @@
                     <div id="sideContentDiv" class="desc-wrap text-desc"></div>
                     <a class="history" href="#">HISTORY</a>
                   </div>
-                  <div class="info-wrap">
-                    <a class="info-name" href="#">유현종</a>
-                    <p class="text-email">guswhd956@naver.com</p>
+             <div class="info-wrap" id="ownerNickname">
+                    <a class="info-name" href="#"></a>
+               <!--      <p class="text-email">guswhd956@naver.com</p> -->
                   </div>
                   <div class="profile-dropdown">
                     <div class="dropdown-btn">
@@ -190,7 +189,7 @@
     				sideContent = res.sideContent;
     				document.getElementById('sideContentDiv').innerHTML = sideContent;
     				document.getElementById('mainDiv').innerHTML = mainTitle;
-    				
+    				document.getElementById('ownerNickname').innerHTML = res.ownerNickname;
     				$(".bg").css({"background":"url("+skinPath+")"}); 
     				jQuery('#profileImage').attr("src", profilePath);
     				console.log(skinPath);

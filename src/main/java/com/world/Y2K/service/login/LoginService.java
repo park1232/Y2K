@@ -79,6 +79,7 @@ public class LoginService extends UsernamePasswordAuthenticationFilter{
 					.mainTitle("입력된 내용이 없습니다.")
 					.profilePath("../../../../../../../../../upload/defaultProfile.jpg")
 					.sideContent("아직 내용이없습니다")
+					.ownerNickname(userDetails.getMember().getNickName())
 					.build();
 					
 					

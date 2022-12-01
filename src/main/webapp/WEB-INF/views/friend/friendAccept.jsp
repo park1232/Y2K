@@ -12,7 +12,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link rel="stylesheet" href="${contextPath}/resources/css/friendAdd.css" />
 <style>
-
 </style>
 
 </head>
@@ -26,21 +25,22 @@
 		<div id="area">
 		<hr>
 		<c:forEach items="${ mList }" var="m">
+		<c:forEach items="${ fList }" var="f">
 		   <div class="send">
-		      보낸이 : ${ m.nickName }<a href="#"></a> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${ fList.createDate }
+		      보낸이 : ${ m.nickName }<a href="#"></a> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${ f.createDate }
 		     <hr>
 		   </div>
 		   <br>
 		   <div style="width:150px; height:150px; float:left;">
-		      <img src="${contextPath}/resources/img/profil1.jpg" style="height: 150px;">
+		      <img src="${m.path }" style="height: 150px;">
 		   </div>
 		   <div style="width:190px; height:150px; float:left; text-align:center;">
 		      <br><a href="#">${ m.nickName }</a>님이 <p>${loginUserNickName}님에게</p> <strong>일촌맺기</strong>를 희망합니다.
 		   </div>
 		   <br><br><br><br><br><br><br><hr>
-		   <input type="hidden" value='${ m.userNo }' name="userNo">
+		   <input type="hidden" value='${ m.userNo }' name="userNo" id="userNo">
 		   <div>
-		      <input type="text" Placeholder="${ fList.friendContent }" style="width:430px; height:100px;" readonly>
+		      <input type="text" Placeholder="${ f.friendContent }" style="width:430px; height:100px;" readonly>
 		   </div>
 		   <br>
 		   <div class="textarea" style="text-align:center;">
@@ -48,9 +48,10 @@
 		   </div>
 		   <div class="buttonGroup">
 		   <br> 
-		   <button type="submit" class="button" id="accept">수락하기</button>
-		   <button type="submit" class="button" onClick='window.close()'>취소</button>
+		   <button type="button" class="button" id="accept">수락하기</button>
+		   <button type="button" class="button" onClick='window.close()'>취소</button>
 		   </div>
+		 </c:forEach>
 		 </c:forEach>
 		</div>
 	</form>
@@ -58,19 +59,35 @@
 </div>
    
 <script>
-	window.onload = () =>{
-		
-		const acceptForm = document.getElementById('acceptForm');
+		/* const acceptForm = document.getElementById('acceptForm');
 	    document.getElementById("accept").addEventListener('click', ()=>{
+	    	console.log(acceptForm);
 	    	acceptForm.action = '${contextPath}/acceptFriend.fr';
 	    	acceptForm.submit();
+	    	
 		});
 	    
+	    console.log('${result}');
 	    const result = '${result}';
-	    if(result != ''){
-	    	self.close();
-	    }
-	}
+	    if(result === 1){
+	    	window.close();
+	    } */
+	    
+	    $("#accept").click(function(){
+	    	let params={
+	    			userNo : $("#userNo").val(),		
+	    	}
+	    	 
+	    	 $.ajax({
+	    		 type:"POST",
+	    		 url:"/acceptFriend.fr",
+	    		 data:params,
+	    		 success:function(res){
+	    			 console.log("통신성공");
+	    			 window.close();
+	    		 }
+	    	 });
+	    }); 
 </script>
 </body>
 </html>

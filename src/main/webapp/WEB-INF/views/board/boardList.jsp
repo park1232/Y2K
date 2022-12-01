@@ -186,7 +186,6 @@
     		let profilePath = "";
     		let sideContent = "";
     		let myUserNo = "";
-
     		
     		
     		
@@ -250,7 +249,6 @@
 		}
 		
 		
-
 	
 		
 		

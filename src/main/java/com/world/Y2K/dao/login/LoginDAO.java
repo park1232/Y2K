@@ -55,6 +55,10 @@ public class LoginDAO {
 	public ArrayList<Member> getFriendsList(Long userNo){
 		return (ArrayList)sqlSession.selectList("memberMapper.getFriendList", userNo);
 	}
+
+	public String findNickname(Long userNo) {
+		return sqlSession.selectOne("memberMapper.findNickname", userNo);
+	}
 	
 
 }

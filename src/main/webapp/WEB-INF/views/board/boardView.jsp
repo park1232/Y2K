@@ -196,13 +196,11 @@
      		
      	window.onload = () => {
      		
-
     		let skinPath = "";
     		let mainTitle = "";
     		let profilePath = "";
     		let sideContent = "";
     		let myUserNo = "";
-
     		
     		
     		
@@ -265,7 +263,6 @@
 					 }else{
 					   console.log("게시글 삭제 취소");
 					 }
-
 			});
 			
 			
@@ -317,7 +314,6 @@
 				form.action = '${contextPath}/likeCheck.bo';
 				form.submit();
 			}); */
-
 			
      	
      	
@@ -339,33 +335,25 @@
               
               var sendUrl = "http://localhost:8080/selectBoard.bo?bNo=" + ${b.boardNo} + "%26writer=" + "${b.nickName}" +"%26page=" + ${page} + "%26userNo" + ${userNo};
               console.log(sendUrl);
-
               window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl, "Y2K World", "height=480px, width=600px");
             }
-
             function shareBand() {
               var sendText = "Y2K World의 게시글을 공유합니다 :) " + "http://localhost:8080/selectBoard.bo?bNo=" + ${b.boardNo} + "%26writer=" + "${b.nickName}" +"%26page=" + ${page} + "%26userNo" + ${userNo};
               var sendUrl = "http://localhost:8080/selectBoard.bo?bNo=" + ${b.boardNo} + "%26writer=" + "${b.nickName}" +"%26page=" + ${page};
               window.open("http://www.band.us/plugin/share?body=" + sendText + "&url=" + sendUrl, "Y2K World", "height=450px, width=350px");  
             }
-
-
             //button click action
-
             $(document).ready(function() {
  
             $("#facebook").click(function() {
                 shareFacebook();
             });
-
             $("#twitter").click(function() {
                 shareTwitter();
             });
-
             $("#band").click(function(){
                 shareBand();
             });
-
 
           });
             

@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.PayPageInfo;
+import com.world.Y2K.model.vo.Payment;
 import com.world.Y2K.model.vo.Product;
 import com.world.Y2K.model.vo.ProductPhoto;
 
@@ -35,5 +36,13 @@ public interface PaymentService {
 	Member selectLoginUser(Long mNo);
 
 	int paymentRequest(Long mNo);
+
+	int paymentInsert(Payment paymentInsertObject);
+
+	int paymentRequest2(Long mNo);
+
+	int paymentRequest3(Long mNo);
+
+	int mainSkinUpdate(HashMap<String, Object> map2);
 	
 }

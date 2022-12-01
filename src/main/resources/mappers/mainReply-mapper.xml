@@ -118,21 +118,68 @@
       from visit
       where own=#{userNo}  and VISIT_STATUS = 'Y'
    </select> 
-   
-   
+      
    <update id="deleteReply">
       update MAINREPLY
     set REPLY_STATUS = 'N'
     where REPLYNO = #{replyNo}
    </update>
    
+   <resultMap type="Member" id="memberResultSet">
+      <id column="USERNO" property="userNo"/>
+      <result column="USERNAME" property="username"/>
+      <result column="USERPWD" property="password"/>
+      <result column="NICKNAME" property="nickName"/>
+      <result column="ENROLLDATE" property="enrollDate"/>
+      <result column="MODIFYDATE" property="modifyDate"/>
+      <result column="STATUS" property="status"/>
+      <result column="ORANGE" property="orange"/>
+      <result column="ROLE" property="role"/>
+      <result column="PROVIDER" property="provider"/>
+      <result column="PROVIDERID" property="providerId"/>
+      <result column="EMAIL" property="email"/>
+   </resultMap>
+   <select id="owner" resultMap="memberResultSet">
+   select *
+   from member
+   where userNo = #{userNo}
+   </select>
    
+   <select id="photoList" resultType="map">
+   <![CDATA[
+   	select *
+   	from photo
+   	where rownum<=1
+    order by boardno desc
+    ]]>
+   </select>
    
+    <select id="boardList" resultType="map">
+    <![CDATA[
+   	select *
+   	from board
+   	where rownum<=1
+    order by boardno desc
+    ]]>
+   </select>
    
+    <select id="diaryList" resultType="map">
+     <![CDATA[
+   		select *
+   	from diary
+   	where rownum<=1
+    order by boardno desc
+     ]]>
+   </select>
    
-   
-   
-   
+    <select id="visitList" resultType="map">
+     <![CDATA[
+   		select *
+   	from visit
+   	where rownum<=1
+    order by visitno desc
+     ]]>
+   </select>
    
    
 </mapper>
