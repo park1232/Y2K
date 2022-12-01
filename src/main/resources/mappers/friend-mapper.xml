@@ -1,147 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="friendMapper">
-	<select id="getFriendListCount" resultType="_int">
-		select count(*)
-		from friends
-		where FRIENDSTATUS = 'Y'
-	</select>
+   <select id="getFriendListCount" resultType="_int">
+      select count(*)
+      from friends
+      where FRIENDSTATUS = 'Y'
+   </select>
 
-	<select id="selectFriendList" resultMap="memberResultSet">
-		select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid, m.email
-    	from member m
-        	join friends on (friends.userNo3 = m.userNo)
-    	where userNo2 = #{userNo} and friends.friendstatus = 'Y'
-    	UNION
-    	select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid, m.email
-    	from member m
-        	join friends on (friends.userNo2 = m.userNo)
-    	where userNo3 = #{userNo} and friends.friendstatus = 'Y'
-	</select>
-	
-	<select id="selectMember" resultMap="memberResultSet">
-		select *
-		from member
-		where userNo = #{userNo}
-	</select>
-	
-	<select id="checkNickName" resultType="_int">
-		select count(*)
-		from member 
-		where NICKNAME = #{nickName}
-	</select>
-	
-	<insert id="friendAdd2">
-		insert into friendAdd
-        values(y2k_friendadd_seq.nextval, #{friendContent}, sysdate, #{userNo}, default, #{nickName})
-	</insert>
-	
-	<select id="searchAddUser" resultMap="memberResultSet">
-		select *
-		from member
-		where userNo = #{userNo}
-	</select>
-	
-	<select id="searchRequestUser" resultMap="memberResultSet">
-		select *
-		from member
-		where nickName = #{nickName}
-	</select>
-	
-	<insert id="friendAdd">
-		insert into friends
-		values(Y2K_FRIENDS_SEQ.nextval, default, #{addUser2}, #{requestUser2})
-	</insert>
-	
-	<select id="checkFriendList" resultType="_int">
-		select count(*)
-		from friends
-		where userNo2 = #{addUser2} and userNo3 = #{requestUser2} and FRIENDSTATUS = 'Y'
-        UNION
-        select count(*)
-		from friends
-		where userNo2 = #{requestUser2} and userNo3 = #{addUser2} and FRIENDSTATUS = 'Y'
-	</select>
-	
-	<select id="selectFriendAcceptList" resultMap="memberResultSet">
-		select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid
-    	from member m
-        	join friends on (friends.userNo3 = m.userNo)
-    	where userNo2 = #{userNo} and friends.friendstatus = 'N'
-    	order by friends.friendNo desc
-	</select>
-	
-	<select id="checkFriendAdd" resultType="_int">
-		select count(*)
-		from friendAdd
-		where userNo = #{userNo} and friendStatus = 'Y' and nickName = #{nickName}
-	</select>
-	
-	<select id="requestList" resultMap="memberResultSet">
-		select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid, m.email
-        from friendAdd f
-            join member m on (f.userNo = m.userNo)
-        where f.nickName = #{nickName} and f.friendStatus = 'Y'
-	</select>
-	
-	<select id="checkFriendAddSelf" resultType="_int">
-		select count(*)
-		from friends
-		where userNo3 = #{userNo}
-	</select>
-	
-	<select id="selectFriendAddList" resultMap="friendAddResultMap">
-		select *
-		from friendAdd
-		where userNo = #{userNo}
-	</select>
-	
-	<update id="acceptFriendResult">
-		update friends
-		set friendStatus = 'Y'
-		where userNo3 = #{loginuserNo}  
-	</update>
-	
-	<update id="hideAccept">
-		update friendAdd
-		set friendStatus = 'N'
-		where userNo = #{userNo}
-	</update>
-	
-	<update id="deleteFriend">
-		update friends
-		set friendStatus = 'N'
-		where userNo2 = #{friendUsing}
-	</update>
-	
-	<resultMap type="FriendAdd" id="friendAddResultMap">
-		<id column="FRIENDADDNO" property="friendAddNo"/>
-		<result column="FRIENDCONTENT" property="friendContent"/>
-		<result column="CREATEDATE" property="createDate"/>
-		<result column="USERNO" property="userNo"/>		
-		<result column="FRIENDSTATUS" property="friendStatus"/>		
-		<result column="NICKNAME" property="nickName"/>		
-	</resultMap>
-	
-	<resultMap type="Friends" id="friendsResultMap">
-		<id column="FRIENDNO" property="friendNo"/>
-		<result column="FRIENDSTATUS" property="friendStatus"/>
-		<result column="USERNO2" property="userNo2"/>
-		<result column="USERNO3" property="userNo3"/>		
-	</resultMap>
-	
-	<resultMap type="Member" id="memberResultSet">
-	    <id column="USERNO" property="userNo"/>
-	    <result column="USERNAME" property="username"/>
-	    <result column="USERPWD" property="password"/>
-	    <result column="NICKNAME" property="nickName"/>
+   <select id="selectFriendList" resultMap="memberResultSet">
+      select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid, m.email
+       from member m
+           join friends on (friends.userNo3 = m.userNo)
+       where userNo2 = #{userNo} and friends.friendstatus = 'Y'
+       UNION
+       select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid, m.email
+       from member m
+           join friends on (friends.userNo2 = m.userNo)
+       where userNo3 = #{userNo} and friends.friendstatus = 'Y'
+   </select>
+   
+   <select id="selectMember" resultMap="memberResultSet">
+      select *
+      from member
+      where userNo = #{userNo}
+   </select>
+   
+   <select id="checkNickName" resultType="_int">
+      select count(*)
+      from member 
+      where NICKNAME = #{nickName}
+   </select>
+   
+   <insert id="friendAdd2">
+      insert into friendAdd
+      values(y2k_friendadd_seq.nextval, #{friendContent}, sysdate, #{userNo}, default, #{nickName})
+   </insert>
+   
+   <select id="searchAddUser" resultMap="memberResultSet">
+      select *
+      from member
+      where userNo = #{userNo}
+   </select>
+   
+   <select id="searchRequestUser" resultMap="memberResultSet">
+      select *
+      from member
+      where nickName = #{nickName}
+   </select>
+   
+   <insert id="friendAdd">
+      insert into friends
+      values(Y2K_FRIENDS_SEQ.nextval, default, #{addUser2}, #{requestUser2})
+   </insert>
+   
+   <select id="checkFriendList" resultType="_int">
+      select count(*)
+      from friends
+      where userNo2 = #{addUser2} and userNo3 = #{requestUser2} and FRIENDSTATUS = 'Y'
+      UNION
+      select count(*)
+      from friends
+      where userNo2 = #{requestUser2} and userNo3 = #{addUser2} and FRIENDSTATUS = 'Y'
+   </select>
+   
+   <select id="selectFriendAcceptList" resultMap="memberResultSet">
+      select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid
+       from member m
+           join friends on (friends.userNo3 = m.userNo)
+       where userNo2 = #{userNo} and friends.friendstatus = 'N'
+       order by friends.friendNo desc
+   </select>
+   
+   <select id="checkFriendAdd" resultType="_int">
+      select count(*)
+      from friendAdd
+      where userNo = #{userNo} and friendStatus = 'Y' and nickName = #{nickName}
+   </select>
+   
+   <select id="requestList" resultMap="memberResultSet">
+      select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid, m.email
+      from friendAdd f
+      	join member m on (f.userNo = m.userNo)
+      where f.nickName = #{nickName} and f.friendStatus = 'Y'
+   </select>
+   
+   <select id="checkFriendAddSelf" resultType="_int">
+      select count(*)
+      from friends
+      where userNo3 = #{userNo}
+   </select>
+   
+   <select id="selectFriendAddList" resultMap="friendAddResultMap">
+      select *
+      from friendAdd
+      where userNo = #{userNo} and nickName = #{loginUserNickName}
+   </select>
+   
+   <update id="acceptFriendResult">
+      update friends
+      set friendStatus = 'Y'
+      where userNo3 = #{loginuserNo}  
+   </update>
+   
+   <update id="hideAccept">
+      DELETE FROM friendAdd
+      where nickName = #{loginuserNickName}
+   </update>
+   
+   <update id="deleteFriend">
+      delete from friends
+      where (userNo3 = #{friendUsing} and userNo2 = #{userNo}) or (userNo2 = #{friendUsing} and userNo3 = #{userNo})
+   </update>
+   
+   <resultMap type="FriendAdd" id="friendAddResultMap">
+      <id column="FRIENDADDNO" property="friendAddNo"/>
+      <result column="FRIENDCONTENT" property="friendContent"/>
+      <result column="CREATEDATE" property="createDate"/>
+      <result column="USERNO" property="userNo"/>      
+      <result column="FRIENDSTATUS" property="friendStatus"/>      
+      <result column="NICKNAME" property="nickName"/>      
+   </resultMap>
+   
+   <resultMap type="Friends" id="friendsResultMap">
+      <id column="FRIENDNO" property="friendNo"/>
+      <result column="FRIENDSTATUS" property="friendStatus"/>
+      <result column="USERNO2" property="userNo2"/>
+      <result column="USERNO3" property="userNo3"/>      
+   </resultMap>
+   
+   <resultMap type="Member" id="memberResultSet">
+       <id column="USERNO" property="userNo"/>
+       <result column="USERNAME" property="username"/>
+       <result column="USERPWD" property="password"/>
+       <result column="NICKNAME" property="nickName"/>
         <result column="ENROLLDATE" property="enrollDate"/>
-	    <result column="MODIFYDATE" property="modifyDate"/>
-	    <result column="STATUS" property="status"/>
-	    <result column="ORANGE" property="orange"/>
-	    <result column="ROLE" property="role"/>
-	    <result column="PROVIDER" property="provider"/>
-	    <result column="PROVIDERID" property="providerId"/>
+       <result column="MODIFYDATE" property="modifyDate"/>
+       <result column="STATUS" property="status"/>
+       <result column="ORANGE" property="orange"/>
+       <result column="ROLE" property="role"/>
+       <result column="PROVIDER" property="provider"/>
+       <result column="PROVIDERID" property="providerId"/>
    </resultMap>
 
 </mapper>

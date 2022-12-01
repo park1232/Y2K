@@ -80,6 +80,29 @@
 		where USERNO = #{mNo}
 	</update>
 	
+	<update id="paymentRequest2">
+		update member
+		set ORANGE = ORANGE + 300
+		where USERNO = #{mNo}
+	</update>
+	
+	<update id="paymentRequest3">
+		update member
+		set ORANGE = ORANGE + 500
+		where USERNO = #{mNo}
+	</update>
+	
+	<insert id="paymentInsert">
+		insert into payment
+		values(#{paymentNo}, sysdate, default, #{userNo}, #{paymentPrice}, #{paymentName})
+	</insert>
+	
+	<update id="mainSkinUpdate">
+		update skin
+		set skinStatus = 'Y'
+		where skinName = #{productPhotoName} and skinUserNo = #{mNo}
+	</update>
+	
 	<resultMap type="ProductPhoto" id="productPhotoResultSet">
    		<id column="PRODUCTPHOTONO" property="productPhotoNo"/>
 		<result column="PRODUCTPHOTONAME" property="productPhotoName"/>
@@ -112,5 +135,12 @@
 	    <result column="ROLE" property="role"/>
 	    <result column="PROVIDER" property="provider"/>
 	    <result column="PROVIDERID" property="providerId"/>
+   </resultMap>
+   
+   <resultMap type="Skin" id="skinResultSet">
+      <result column="SKINNAME" property="skinName"/>
+      <result column="SKINSTATUS" property="skinStatus"/>
+      <result column="SKINUSERNO" property="skinUserNo"/>
+      <result column="SKINKOREANAME" property="skinKoreaName"/>
    </resultMap>
 </mapper>

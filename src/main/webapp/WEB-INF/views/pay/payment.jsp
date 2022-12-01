@@ -83,7 +83,7 @@
           <div class="card-body">
             <h3 class="card-title pricing-card-title">30,000원<small class="text-muted fw-light"></small></h3>
             <img src="${contextPath}/resources/img/payment3.jpg" style="height: 300px; width: 380px;">
-            <button type="button" class="w-100 btn btn-lg btn-outline-primary" id="iamportPayment2">구매하기!</button>
+            <button type="button" class="w-100 btn btn-lg btn-outline-primary" onclick="iamportPayment2()">구매하기!</button>
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@
           	<div class="card-body">
 	            <h3 class="card-title pricing-card-title">50,000원<small class="text-muted fw-light"></small></h3>
 	            <img src="${contextPath}/resources/img/payment2.jpg" style="height: 300px; width: 380px;">
-	            <button type="button" class="w-100 btn btn-lg btn-outline-primary" id="iamportPayment3">구매하기!</button>
+	            <button type="button" class="w-100 btn btn-lg btn-outline-primary" onclick="iamportPayment3()">구매하기!</button>
           	</div>
         </div>
       </div>
@@ -108,7 +108,6 @@
               <a href="https://github.com/likelion-backendschool/DAMDA_project" rel="nofollow" target="_blank">Y2K</a>
         </footer>
 </footer>
-${ loginUser.userNo }
 </body>
 <script>
 	function iamportPayment1(){
@@ -141,10 +140,12 @@ ${ loginUser.userNo }
                     success: (data)=>{
                     	console.log(data);
                     	alert("결제를 성공하였습니다.");
+                    	window.location.reload();
                     },
                     error: (data)=>{
 						console.log(data);
 						alert("결제를 실패하였습니다.");
+						window.location.reload();
 					}
                 });
                 //성공시 이동할 페이지
@@ -153,6 +154,96 @@ ${ loginUser.userNo }
             }
       });
    };
+   
+   function iamportPayment2(){
+       var IMP = window.IMP; // 생략가능
+       IMP.init('imp78311764'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+       var msg;
+       
+       IMP.request_pay({
+       	pg : 'kakaopay.TC0ONETIME',
+	        pay_method : 'card',
+	        merchant_uid : '${ merchant_uid }',
+	        name : '낑깡',
+	        amount : '30,000',
+	        buyer_email : '${ loginUser.email }',
+	        buyer_name : '${ loginUser.username }',
+	        buyer_tel : '01041045081',
+           //m_redirect_url : 'http://www.naver.com'
+       }, function(rsp) {
+           if ( rsp.success ) {
+           	console.log("ddd");
+               //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+               $.ajax({
+                   url: '${contextPath}/paymentRequest2.pa',
+                   data: {
+                   	merchant_uid : '${ merchant_uid }',
+                       paid_amount : 30000,
+                       mNo : ${loginUser.userNo},
+                       name : "낑깡",
+                   },
+                   success: (data)=>{
+                   	console.log(data);
+                   	alert("결제를 성공하였습니다.");
+                	window.location.reload();
+                   },
+                   error: (data)=>{
+					console.log(data);
+					alert("결제를 실패하였습니다.");
+					window.location.reload();
+					}
+               });
+               //성공시 이동할 페이지
+           } else {
+           	alert("결제를 실패하였습니다.");
+           }
+     });
+  };
+  
+  function iamportPayment3(){
+      var IMP = window.IMP; // 생략가능
+      IMP.init('imp78311764'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+      var msg;
+      
+      IMP.request_pay({
+      	pg : 'kakaopay.TC0ONETIME',
+	        pay_method : 'card',
+	        merchant_uid : '${ merchant_uid }',
+	        name : '낑깡',
+	        amount : '50,000',
+	        buyer_email : '${ loginUser.email }',
+	        buyer_name : '${ loginUser.username }',
+	        buyer_tel : '01041045081',
+          //m_redirect_url : 'http://www.naver.com'
+      }, function(rsp) {
+          if ( rsp.success ) {
+          	console.log("ddd");
+              //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+              $.ajax({
+                  url: '${contextPath}/paymentRequest3.pa',
+                  data: {
+                  	merchant_uid : '${ merchant_uid }',
+                      paid_amount : 50000,
+                      mNo : ${loginUser.userNo},
+                      name : "낑깡",
+                  },
+                  success: (data)=>{
+                  	console.log(data);
+                  	alert("결제를 성공하였습니다.");
+                	window.location.reload();
+                  },
+                  error: (data)=>{
+					console.log(data);
+					alert("결제를 실패하였습니다.");
+					window.location.reload();
+					}
+              });
+              //성공시 이동할 페이지
+          } else {
+          	alert("결제를 실패하였습니다.");
+          }
+    	});
+ 	};
 </script>
 </html>
     

@@ -93,8 +93,8 @@ public class FriendImpl implements FriendService{
 	}
 	
 	@Override
-	public FriendAdd selectFriendAddList(Long userNo) {
-		return friendDAO.selectFriendAddList(sqlSession, userNo);
+	public ArrayList<FriendAdd> selectFriendAddList(HashMap<String, Object> map) {
+		return friendDAO.selectFriendAddList(sqlSession, map);
 	}
 	
 	@Override
@@ -103,12 +103,12 @@ public class FriendImpl implements FriendService{
 	}
 	
 	@Override
-	public int hideAccept(Long userNo) {
-		return friendDAO.hideAccept(sqlSession, userNo);
+	public int hideAccept(String loginuserNickName) {
+		return friendDAO.hideAccept(sqlSession, loginuserNickName);
 	}
 	
 	@Override
-	public int deleteFriend(Long friendUsing) {
-		return friendDAO.deleteFriend(sqlSession, friendUsing);
+	public int deleteFriend(HashMap<String, Long> map) {
+		return friendDAO.deleteFriend(sqlSession, map);
 	}
 }

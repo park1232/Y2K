@@ -75,19 +75,19 @@ public class FriendDAO {
 		return sqlSession.selectOne("friendMapper.checkFriendAddSelf", fa);
 	}
 
-	public FriendAdd selectFriendAddList(SqlSessionTemplate sqlSession, Long userNo) {
-		return sqlSession.selectOne("friendMapper.selectFriendAddList", userNo);
+	public ArrayList<FriendAdd> selectFriendAddList(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return (ArrayList)sqlSession.selectList("friendMapper.selectFriendAddList", map);
 	}
 
 	public int acceptFriendResult(SqlSessionTemplate sqlSession, Long loginuserNo) {
 		return sqlSession.update("friendMapper.acceptFriendResult", loginuserNo);
 	}
 
-	public int hideAccept(SqlSessionTemplate sqlSession, Long userNo) {
-		return sqlSession.update("friendMapper.hideAccept", userNo);
+	public int hideAccept(SqlSessionTemplate sqlSession, String loginuserNickName) {
+		return sqlSession.delete("friendMapper.hideAccept", loginuserNickName);
 	}
 
-	public int deleteFriend(SqlSessionTemplate sqlSession, Long friendUsing) {
-		return sqlSession.update("friendMapper.deleteFriend", friendUsing);
+	public int deleteFriend(SqlSessionTemplate sqlSession, HashMap<String, Long> map) {
+		return sqlSession.delete("friendMapper.deleteFriend", map);
 	}
 }
