@@ -36,30 +36,32 @@
 							</div>
 							<div class="profile">
 								<p class="todayis">
-									TODAY IS .. <i>♥</i><span> 행복</span>
+	<!-- 								TODAY IS .. <i>♥</i><span> 행복</span> -->
 								</p>
 								<img class="profile-img"
-									src="${contextPath}/resources/img/profile.jpg" alt="profile" />
+									src="${contextPath}/resources/img/profile.jpg" alt="profile"  id="profileImage" />
 								<div class="desc-wrap">
 									<p class="text-desc">
-										<div id="sideContentDiv" class="desc-wrap text-desc"></div>
+									<div id="sideContentDiv" class="desc-wrap text-desc"></div>
 									</p>
-									<a class="history" href="#">HISTORY</a>
+									<!-- <a class="history" href="#">HISTORY</a> -->
 								</div>
-								<div class="info-wrap">
-									<a class="info-name" href="${contextPath}/mainPage.ma?userNo=${member.userNo}" > ${owner.nickName}</a>
-									<p class="text-email">nowing0108@kakao.com</p>
+								<div class="info-wrap" id="ownerNickname">
+									<a class="info-name" href="#"></a>
+									<!--      <p class="text-email">guswhd956@naver.com</p> -->
 								</div>
 								<div class="profile-dropdown">
 									<div class="dropdown-btn">
-										<div class="dropdown-title">친구와 채팅</div>
+										<div class="dropdown-title">친구로 파도타기</div>
 										<div class="triangle-down"></div>
 									</div>
-									<div class="dropdown-content" id="chatList">
-										<a href="${contextPath}/chat/chat.html">김지인</a> <a
-											href="${contextPath}/chat/chat.html">박규민</a> <a
-											href="${contextPath}/chat/chat.html">조소연</a> <a
-											href="${contextPath}/chat/chat.html">김민주</a>
+									<div class="dropdown-content"
+										<c:if test="${ loginUser.userNo ne userNo }">style="display:none;"</c:if>>
+										<c:forEach var="friendList"
+											items="${sessionScope.friendPathList}">
+											<a href="${friendList.friendPath}" target="_blank">${friendList.friendNickname }</a>
+										</c:forEach>
+
 									</div>
 								</div>
 							</div>
@@ -77,15 +79,14 @@
 						<div class="main-wrap">
 							<div class="title-wrap">
 								<p class="title">
-									<div id="mainDiv" class="title title-wrap"><a href="#"></a></div>
+								<div id="mainDiv" class="title title-wrap">
+									<a href="#"></a>
+								</div>
 								</p>
 								<div class="link-wrap">
-									<a href="https://www.instagram.com/hyunjong_yoo/"
-										target="_blank"><span>일촌맺기</span></a> <a
-										href="https://blog.naver.com/hananharu" target="_blank"><span>팬되기</span></a>
-									<p>
-										<a href="#">https://www.cyowrld.com/marketer_JJ</a>
-									</p>
+									<a href="${contextPath}/mypage.my"><span>Mypage&nbsp&nbsp</span></a><br>
+									<a href="${contextPath}/friendList.fr"><span>Friend&nbsp&nbsp</span></a>
+									<!--    <p><a href="#">https://www.cyowrld.com/marketer_JJ</a></p> -->
 								</div>
 							</div>
 							<div class="main">
@@ -94,50 +95,54 @@
 										<h2>최근 게시물</h2>
 										<c:forEach items="${dList}" var="d">
 											<c:if test="${d.DIARY_CONTENT==null}">
-											<p class="text-video">게시글이 없습니다.</p>
+												<p class="text-video">게시글이 없습니다.</p>
 											</c:if>
 											<c:if test="${d!=null}">
-											<p class="text-video">${d.DIARY_CONTENT}</p>
+												<p class="text-video">${d.DIARY_CONTENT}</p>
 											</c:if>
 										</c:forEach>
 										<c:forEach items="${bList}" var="b">
 											<c:if test="${b==null}">
-											<p class="text-video">게시글이 없습니다.</p>
+												<p class="text-video">게시글이 없습니다.</p>
 											</c:if>
 											<c:if test="${b!=null}">
-											<p class="text-board">${b.BOARD_CONTENT}</p>
+												<p class="text-board">${b.BOARD_CONTENT}</p>
 											</c:if>
-										</c:forEach>	
-										
+										</c:forEach>
+
 										<c:forEach items="${vList}" var="v">
 											<c:if test="${v=null}">
-											<p class="text-video">게시글이 없습니다.</p>
+												<p class="text-video">게시글이 없습니다.</p>
 											</c:if>
 											<c:if test="${v!=null}">
-											<p class="text-board">${v.VISIT_CONTENT}</p>
+												<p class="text-board">${v.VISIT_CONTENT}</p>
 											</c:if>
 										</c:forEach>
 										<c:forEach items="${pList}" var="p">
 											<c:if test="${p==null}">
-											<p class="text-photo">게시글이 없습니다.</p>
+												<p class="text-photo">게시글이 없습니다.</p>
 											</c:if>
 											<c:if test="${p!=null}">
-											<p class="text-photo">${p.PHOTOCOMENT}</p>
+												<p class="text-photo">${p.PHOTOCOMENT}</p>
 											</c:if>
-										</c:forEach>	
-											
+										</c:forEach>
+
 
 
 									</div>
 									<div class="menu-table">
 										<table>
 											<tr>
-												<td>사진첩<a href="${contextPath}/photo.ph?userNo=${userNo}">${pCount }</a></td>
-												<td>다이어리<a href="${contextPath}/diary.di?userNo=${userNo}" >${dCount}</a></td>
+												<td>사진첩<a
+													href="${contextPath}/photo.ph?userNo=${userNo}">${pCount }</a></td>
+												<td>다이어리<a
+													href="${contextPath}/diary.di?userNo=${userNo}">${dCount}</a></td>
 											</tr>
 											<tr>
-												<td>방명록<a href="${contextPath}/visit.vi?userNo=${userNo}" >${vCount}</a></td>
-												<td>게시판 <a href="${contextPath}/boardList.bo?userNo=${userNo}" >${bCount}</a></td>
+												<td>방명록<a
+													href="${contextPath}/visit.vi?userNo=${userNo}">${vCount}</a></td>
+												<td>게시판 <a
+													href="${contextPath}/boardList.bo?userNo=${userNo}">${bCount}</a></td>
 											</tr>
 											<tr>
 												<td></td>
@@ -150,9 +155,9 @@
 									<img class="img-miniroom"
 										src="${contextPath}/resources/img/mini_room.gif"
 										alt="mini-room">
-									
+
 								</div>
-								
+
 								<div class="mini-room-wrap">
 									<img class="img-miniroom"
 										src="${contextPath}/resources/img/mini_room2.gif"
@@ -163,7 +168,7 @@
 									<img class="img-miniroom"
 										src="${contextPath }/resources/img/mini_room3.gif"
 										alt="mini-room" />
-								</div> 
+								</div>
 
 
 								<h2 class="friends-say">일촌평</h2>
@@ -182,14 +187,16 @@
 									value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}"
 									name="loginUser">
 
-								
+
 								<c:forEach items="${ list }" var="r">
-									<div class="friends-say-list" id="storyCommentList-${ r.replyNo}">
+									<div class="friends-say-list"
+										id="storyCommentList-${ r.replyNo}">
 										<input type="hidden" id="replyNo" value="${r.replyNo}">
 										<p>${r.content}:
 											<span>${r.nickName}</span>
-											<button id="delRe" <c:if test="${ r.nickName ne loginUser.nickName }">style="display:none;"</c:if>>>
-												<i class="fas fa-times"></i>
+											<button id="delRe"
+												<c:if test="${ r.nickName ne loginUser.nickName }">style="display:none;"</c:if>>
+												> <i class="fas fa-times"></i>
 											</button>
 											<input type="hidden" id="replyWriter"
 												value="${r.replyWriter}">
@@ -202,14 +209,18 @@
 								</c:forEach>
 							</div>
 						</div>
-						<input type="hidden" value="${userNo}" name="userNo"/>
-						<a href="${contextPath}/mainPage.ma?userNo=${userNo}"
+						<input type="hidden" value="${userNo}" name="userNo" /> <a
+							href="${contextPath}/mainPage.ma?userNo=${userNo}"
 							class="menu-item mi-1 menu-checked">홈</a>
 						<div class="menu align-center expanded text-center SMN_effect-68">
-							<a href="${contextPath}/photo.ph?userNo=${userNo}" class="menu-item mi-2">사진첩</a>
-							<a href="${contextPath}/diary.di?userNo=${userNo}" class="menu-item mi-3">다이어리</a>
-							<a href="${contextPath}/visit.vi?userNo=${userNo}" class="menu-item mi-4">방명록</a>
-							<a href="${contextPath}/boardList.bo?userNo=${userNo}" class="menu-item mi-5">게시판</a>
+							<a href="${contextPath}/photo.ph?userNo=${userNo}"
+								class="menu-item mi-2">사진첩</a> <a
+								href="${contextPath}/diary.di?userNo=${userNo}"
+								class="menu-item mi-3">다이어리</a> <a
+								href="${contextPath}/visit.vi?userNo=${userNo}"
+								class="menu-item mi-4">방명록</a> <a
+								href="${contextPath}/boardList.bo?userNo=${userNo}"
+								class="menu-item mi-5">게시판</a>
 						</div>
 
 
@@ -344,22 +355,18 @@
      } 
        
      
-     let skinPath = "";
+
+		let skinPath = "";
 		let mainTitle = "";
 		let profilePath = "";
 		let sideContent = "";
-		let myUserNo = "";
-
-		
-		
-		
+		let myUserNo = "";			
 		
 		if("${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}" != "${userNo}"){
 			myUserNo = "${userNo}";
 		} else {
 			myUserNo = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo}";
 		}
-		console.log("myUserNo : " + myUserNo);
 		
 		let params={
 				userNo : myUserNo
@@ -376,13 +383,13 @@
 				sideContent = res.sideContent;
 				document.getElementById('sideContentDiv').innerHTML = sideContent;
 				document.getElementById('mainDiv').innerHTML = mainTitle;
-				
+				document.getElementById('ownerNickname').innerHTML = res.ownerNickname;
 				$(".bg").css({"background":"url("+skinPath+")"}); 
-				
-			/* 	console.log(skinPath);
+				jQuery('#profileImage').attr("src", profilePath);
+				console.log(skinPath);
 				console.log(mainTitle);
 				console.log(profilePath);
-				console.log(sideContent); */
+				console.log(sideContent);
 			}
 		})
   	  
