@@ -85,8 +85,6 @@
 	<script>
 	window.onload = () => {
 		
-		
-		
 	    document.getElementById("nickName").addEventListener('change', function(){
 			const nickNameResult = document.getElementById('nickNameCheckResult');
 			if(this.value.trim() == '') {
@@ -129,8 +127,6 @@
      	}
   
 	});  */
-     
-    
     
      $("#FriendAdd3").click(function(){
     	let params={
@@ -149,8 +145,6 @@
     		 }
     	 });
     }); 
-	
-	
 	
 </script>
 </body>
