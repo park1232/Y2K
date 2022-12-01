@@ -31,8 +31,8 @@
 					<div class="pf-back">
 						<div class="profile-wrap">
 							<div class="visitor-counter">
-								<p class="today">999</p>
-								<p class="today-count">1213042</p>
+<!-- 								<p class="today">999</p>
+								<p class="today-count">1213042</p> -->
 							</div>
 							<div class="profile">
 								<p class="todayis">
