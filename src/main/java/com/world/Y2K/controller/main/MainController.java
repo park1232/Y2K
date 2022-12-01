@@ -37,9 +37,6 @@ public class MainController {
 	private MainService mService;
 	
 	@Autowired
-	private OnloadEntityService onloadEntityService;
-	
-	@Autowired
 	private SetFriendListService setFriendListService;
 	
 	@RequestMapping("/mainPage.ma")
@@ -61,8 +58,8 @@ public class MainController {
 		session.setAttribute("userNo", userDetails.getMember().getUserNo());
 		Member member = userDetails.getMember();
 		
-			//페이지 주인
-			Member owner = mService.owner(userNo);
+//			//페이지 주인
+//			Member owner = mService.owner(userNo);
 		
 			
 			//댓글 뿌리기
@@ -104,7 +101,7 @@ public class MainController {
 			mv.addObject("dCount", dCount);
 			
 			mv.addObject("member", member);
-			mv.addObject("owner", owner);
+//			mv.addObject("owner", owner);
 			mv.setViewName("main/mainPage");
 			
 			return mv;

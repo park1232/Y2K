@@ -9,6 +9,6 @@ public class Skin {
 	private String skinStatus;
 	private Long skinUserNo;
 	private String skinKoreaName;
-	
+
 	
 }

@@ -108,7 +108,7 @@ public class KakaoLoginService extends SocialLoginServiceTemplate{
 		
 		if(mypageDAO.checkFirst(member2.getUserNo()) == 0 ){
 			skinDAO.insertDefault(member2.getUserNo());
-			mypageDAO.insertDefault(member2.getUserNo());
+//			mypageDAO.insertDefault(member2.getUserNo());
 		}
 		
 		
