@@ -30,6 +30,7 @@ public class VisitServiceImpl implements VisitService {
 									  .path("/mainPage.ma?userNo="+v.getVisitWriter())
 									  .createDate(v.getCreateDate())
 									  .visitContent(v.getVisitContent())
+									  .visitWriter((long) v.getVisitWriter())
 									  .build();
 			visitList.add(visitEntity);
 		}

@@ -30,7 +30,7 @@
 	 </resultMap>
 	 
 	<select id="getBoardListCount" resultType="_int">
-		select count(*) from board where board_status = 'Y'
+		select count(*) from board where board_status = 'Y' and own = #{own}
 	</select>
 	
 	<select id="selectBoardList" resultMap="boardResultSet" parameterType="long">

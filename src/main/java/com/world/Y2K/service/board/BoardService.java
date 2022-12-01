@@ -16,7 +16,7 @@ import com.world.Y2K.model.vo.Reply;
 
 public interface BoardService {
 
-	int getBoardListCount();
+	int getBoardListCount(Long userNo);
 
 	ArrayList<Board> selectBoardList(PageInfo pi, Long userNo);
 	

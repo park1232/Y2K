@@ -259,6 +259,7 @@
 						form.action = '${contextPath}/deleteForm.bo';
 						console.log(${userNo});
 						form.submit();
+
 					 }else{
 					   console.log("게시글 삭제 취소");
 					 }
@@ -287,6 +288,7 @@
 			             replyNo : $(this).next().val(),
 			             boardNo : ${b.boardNo}
 			       }
+
 			        $.ajax({
 			           url:"${contextPath}/deleteReply.bo?userNo=${userNo}",
 			           data:params,
@@ -301,10 +303,12 @@
 					form.action = '${contextPath}/deleteReply.bo?userNo=${userNo}';
 					form.submit();
 					
+
 					
 				}else {
 					console.log("댓글 삭제 취소")
 				} */
+
 			
 			/* document.getElementById('likeButton').addEventListener('click', ()=> {
 				form.action = '${contextPath}/likeCheck.bo';
@@ -350,6 +354,7 @@
             $("#band").click(function(){
                 shareBand();
             });
+
           });
             
            

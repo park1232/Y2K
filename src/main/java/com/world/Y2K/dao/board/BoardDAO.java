@@ -15,8 +15,8 @@ import com.world.Y2K.model.vo.Reply;
 @Repository("bDAO")
 public class BoardDAO {
 
-	public int getBoardListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("boardMapper.getBoardListCount");
+	public int getBoardListCount(SqlSessionTemplate sqlSession, Long own) {
+		return sqlSession.selectOne("boardMapper.getBoardListCount", own);
 	}
 
 	public ArrayList<Board> selectBoardList(SqlSessionTemplate sqlSession, PageInfo pi, Long own) {

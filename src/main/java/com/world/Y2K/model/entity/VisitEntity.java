@@ -14,5 +14,6 @@ public class VisitEntity {
 	private String path;
 	private Date createDate;
 	private String visitContent;
+	private Long visitWriter;
 
 }

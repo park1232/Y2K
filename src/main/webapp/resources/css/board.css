@@ -179,7 +179,7 @@ ul li a:hover, ul li a:focus {
 ul li .way{background-color: #facf64; width: 40px;}
 
 
-body{cursor: url(../img/cursor.cur), auto}
+*{cursor: url(../img/cursor.cur), auto}
 ul {
 text-align:center;
 }
@@ -271,7 +271,7 @@ transition: all 0.2s ;
 .side2 { top: 240px; left: 400px; }
 .side3 { top: 500px; left: 400px; }
 .side4 { top: 540px; left: 400px; }
-#deleteReply{ border:none; background: none;}
+.deleteReply{ border:none; background: none;}
 #replyList tr th{color: #f2d38c;}
 
 .menu a {
