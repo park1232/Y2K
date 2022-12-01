@@ -42,6 +42,7 @@ public class MyPageController {
 	
 	@Autowired
 	private ProfileUploadService profileUploadService;
+	
 	@Autowired
 	private TitleChangeService titleChangeService;
 	
@@ -60,7 +61,6 @@ public class MyPageController {
 	@ResponseBody
 	@GetMapping("/onload.my")
 	public HashMap<String, Object> getOnloadEntity(Long userNo){
-	
 		return onloadEntityService.getOnloadEntity(userNo);
 	}
 	

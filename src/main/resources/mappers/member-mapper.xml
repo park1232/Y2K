@@ -80,6 +80,12 @@
 		<result column="USERNO3" property="userNo3"/>		
 	</resultMap>
 	
+	<select id="findNickname" resultType="string" parameterType="long">
+   	select nickname
+   	from member
+   	where status='Y' and userno=#{userNo}
+   </select>
+	
    
    
    

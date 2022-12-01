@@ -1,5 +1,7 @@
 package com.world.Y2K.service.login;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,13 +38,21 @@ public class RegisterServiceImpl implements RegisterService {
 		
 		if(mypageDAO.checkFirst(member.getUserNo()) == 0 ){
 			skinDAO.insertDefault(member.getUserNo());
-			return mypageDAO.insertDefault(member.getUserNo());
+			HashMap<String, Object> setMyskinMap = setMyskin(member.getUserNo(), member.getNickName());
+			return mypageDAO.insertDefault(setMyskinMap);
 		}
 		return 0;
 		
 		
 	}
 	
+	private HashMap<String, Object> setMyskin(Long userNo, String nickName) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("userNo", userNo);
+		map.put("nickName", nickName);
+		return map;
+	}
+
 	private Member setMember(User user) {
 		return Member.builder()
 				.username(user.getUsername())

@@ -12,5 +12,5 @@ public class Mypage {
 	private String mainTitle;
 	private String profilePath;
 	private String sideContent;
-
+	private String ownerNickname;
 }
