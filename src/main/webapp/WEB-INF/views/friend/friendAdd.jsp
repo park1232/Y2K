@@ -37,7 +37,7 @@
 						<input type="hidden" value='${ m.userNo }' name="userNo"
 							id="userNo">
 						<div style="width: 150px; height: 150px; float: left;">
-							<img src="${contextPath}/resources/img/profil1.jpg"
+							<img src="${m.path }"
 								style="height: 150px;">
 						</div>
 

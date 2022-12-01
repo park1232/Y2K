@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.world.Y2K.exception.FriendException;
 import com.world.Y2K.model.dto.Member;
+import com.world.Y2K.model.entity.FriendAddEntity;
 import com.world.Y2K.model.vo.FriendAdd;
 import com.world.Y2K.model.vo.FriendPageInfo;
 import com.world.Y2K.pagination.FriendPagination;
@@ -58,7 +59,7 @@ public class FriendController {
 		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
 		Long userNo = userdetails.getMember().getUserNo();
 		
-		ArrayList<Member> mList = fService.selectMember(userNo);
+		ArrayList<FriendAddEntity> mList = fService.selectMember(userNo);
 
 		LocalDate now = LocalDate.now();	
 		
@@ -192,7 +193,7 @@ public class FriendController {
 		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
 		String loginUserNickName = userdetails.getMember().getNickName();
 		System.out.println(loginUserNickName);
-		ArrayList<Member> mList = fService.selectMember(userNo);
+		ArrayList<FriendAddEntity> mList = fService.selectMember(userNo);
 		System.out.println(mList);
 		
 		HashMap<String, Object> map = new HashMap<>();

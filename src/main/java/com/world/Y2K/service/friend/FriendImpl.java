@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.world.Y2K.dao.friend.FriendDAO;
+import com.world.Y2K.dao.mypage.MypageDAO;
 import com.world.Y2K.model.dto.Member;
+import com.world.Y2K.model.entity.FriendAddEntity;
 import com.world.Y2K.model.vo.FriendAdd;
 import com.world.Y2K.model.vo.FriendPageInfo;
-import com.world.Y2K.model.vo.Friends;
 
 @Service("friendService")
 public class FriendImpl implements FriendService{
@@ -21,6 +22,9 @@ public class FriendImpl implements FriendService{
 	
 	@Autowired
 	private FriendDAO friendDAO;
+	
+	@Autowired
+	private MypageDAO mypageDAO;
 	
 	@Override
 	public int getFriendListCount() {
@@ -33,8 +37,20 @@ public class FriendImpl implements FriendService{
 	}
 	
 	@Override
-	public ArrayList<Member> selectMember(Long userNo) {
-		return friendDAO.selectMember(sqlSession, userNo);
+	public ArrayList<FriendAddEntity> selectMember(Long userNo) {
+		ArrayList<Member> memberList = friendDAO.selectMember(sqlSession, userNo);
+		ArrayList<FriendAddEntity> friendList = new ArrayList<FriendAddEntity>();
+		
+		for(Member m : memberList) {
+			FriendAddEntity friendAddEntity = FriendAddEntity.builder()
+										.userNo(m.getUserNo())
+										.nickName(m.getNickName())
+										.path(mypageDAO.getOnloadEntity(m.getUserNo()).getProfilePath())
+										.build();
+			friendList.add(friendAddEntity);
+		}
+		
+		return friendList;
 	}
 	
 	@Override
