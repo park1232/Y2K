@@ -160,7 +160,7 @@ td {
 										<option value="content">내용</option>
 									</select> <input id="searchValue" type="search"
 										placeholder="검색어를 입력해 주세요">
-									<button id="searchBoardButton" onclick="searchBoard();">
+									<button type="button" id="searchBoardButton" onclick="searchBoard();">
 										<i class="fas fa-search"></i>
 									</button>
 								</div>
@@ -264,7 +264,7 @@ td {
 				 const searchCondition = document.getElementById("searchCondition").value;
 				 const searchValue = document.getElementById("searchValue").value;
 				 
-				 location.href='${contextPath}/search.bo?searchCondition=' + searchCondition + "&searchValue=" + searchValue;
+				 location.href='${contextPath}/search.bo?searchCondition=' + searchCondition + "&searchValue=" + searchValue + '&userNo=' + ${userNo};
 				
 		}
 		

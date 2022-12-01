@@ -106,16 +106,16 @@
 												<p class="text-video">게시글이 없습니다.</p>
 											</c:if>
 											<c:if test="${b!=null}">
-												<p class="text-board">${b.BOARD_CONTENT}</p>
+												<p class="text-board">${b.BOARD_TITLE}</p>
 											</c:if>
 										</c:forEach>
 
 										<c:forEach items="${vList}" var="v">
-											<c:if test="${v=null}">
+											<c:if test="${v==null}">
 												<p class="text-video">게시글이 없습니다.</p>
 											</c:if>
 											<c:if test="${v!=null}">
-												<p class="text-board">${v.VISIT_CONTENT}</p>
+												<p class="text-gallery">${v.VISIT_CONTENT}</p>
 											</c:if>
 										</c:forEach>
 										<c:forEach items="${pList}" var="p">
@@ -196,7 +196,7 @@
 											<span>${r.nickName}</span>
 											<button id="delRe"
 												<c:if test="${ r.nickName ne loginUser.nickName }">style="display:none;"</c:if>>
-												> <i class="fas fa-times"></i>
+												 <i class="fas fa-times"></i>
 											</button>
 											<input type="hidden" id="replyWriter"
 												value="${r.replyWriter}">

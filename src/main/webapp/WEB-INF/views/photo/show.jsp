@@ -77,7 +77,7 @@
 																		
 															</p> 
 																
-														 	<button id="delRe" <c:if test="${ r.nickName ne loginUser.nickName }">style="display:none;"</c:if>>>
+														 	<button id="delRe" <c:if test="${ r.nickName ne loginUser.nickName }">style="display:none;"</c:if>>
 																	
 																	<i class="fas fa-times"></i>
 															

@@ -18,27 +18,27 @@
    
    <insert id="insertDefault2" parameterType="long">
    		insert into skin
-   		values('green','N',#{userNo},'초록색')
+   		values('green','N',#{userNo},'그라데이션')
    </insert>
    
    <insert id="insertDefault3" parameterType="long">
    		insert into skin
-   		values('red','N',#{userNo},'빨간색')
+   		values('red','N',#{userNo},'핑크바다')
    </insert>
    
    <insert id="insertDefault4" parameterType="long">
    		insert into skin
-   		values('blue','N',#{userNo},'파란색')
+   		values('blue','N',#{userNo},'따뜻한 크리스마스')
    </insert>
    
    <insert id="insertDefault5" parameterType="long">
    		insert into skin
-   		values('purple','N',#{userNo},'보라색')
+   		values('purple','N',#{userNo},'걸어다니는 쿠키')
    </insert>
    
    <insert id="insertDefault6" parameterType="long">
    		insert into skin
-   		values('pink','N',#{userNo},'분홍색')
+   		values('pink','N',#{userNo},'크리스마스 트리')
    </insert>
    
    <insert id="insertDefault7" parameterType="long">

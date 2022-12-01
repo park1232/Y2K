@@ -293,7 +293,7 @@ h2 {
   }
 
 .text-video::before {
-  content: "다이어리";
+  content: "Diary";
   border-radius: 5px;
   color: white;
   background-color: #99d2db;
@@ -302,7 +302,7 @@ h2 {
   vertical-align: top;
 }
 .text-board::before {
-  content: "占쎈뼄占쎌뵠占쎈선�뵳占�";
+  content: "Board";
   border-radius: 5px;
   color: white;
   background-color: bisque;
@@ -312,7 +312,7 @@ h2 {
   margin-right: 4px;
 }
 .text-gallery::before {
-  content: "獄쎻뫖梨멩에占�";
+  content: "Visit";
   border-radius: 5px;
   color: white;
   background-color: green;
@@ -322,7 +322,7 @@ h2 {
   margin-right: 4px;
 }
 .text-photo::before {
-  content: "筌띾뜆占쏙옙�샒";
+  content: "Photo";
   border-radius: 5px;
   color: white;
   background-color: pink;

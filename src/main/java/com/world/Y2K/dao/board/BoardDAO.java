@@ -49,6 +49,7 @@ public class BoardDAO {
 
 	public ArrayList<Board> getSearchList(SqlSessionTemplate sqlSession, HashMap<String, Object> map,
 			PageInfo pi) {
+		System.out.println("map : " + map);
 		int offset = (pi.getCurrentPage() - 1)*pi.getBoardLimit();
 		RowBounds row = new RowBounds(offset, pi.getBoardLimit());
 		

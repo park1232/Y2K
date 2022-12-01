@@ -92,6 +92,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public ArrayList<Board> selectSearchList(HashMap<String, Object> map, PageInfo pi) {
+		System.out.println("dao : " + map);
 		return bDAO.getSearchList(sqlSession, map, pi);
 	}
 

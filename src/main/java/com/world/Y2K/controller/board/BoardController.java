@@ -12,8 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -162,11 +160,13 @@ public class BoardController {
 	@RequestMapping("search.bo")
 	public String searchBoard(@RequestParam("searchCondition") String condition, Model model,
 								@RequestParam("searchValue") String value, @RequestParam(value="page", required=false) Integer page,@RequestParam("userNo") Long userNo) {
-		
+//		model.addAttribute("userNo", userNo);
+		System.out.println("search.bo요청 들어옴?");
+		System.out.println("userNo : " + userNo);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("condition", condition);
 		map.put("value", value);
-		
+		map.put("own", userNo);
 		int currentPage = 1;
 		if(page != null) {
 			currentPage = page;
@@ -191,8 +191,10 @@ public class BoardController {
 	
 	//�뙎湲�
 	@RequestMapping("insertReply.bo")
-	public void insertReply(@ModelAttribute Reply r, HttpServletResponse response) {
+	public void insertReply(@ModelAttribute Reply r, HttpServletResponse response, Authentication authentication) {
+		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 		
+		r.setReplyWriter(userDetails.getMember().getUserNo());
 		int result = bService.insertReply(r);
 		ArrayList<Reply> list = bService.selectReply(r.getRboardNo());
 		System.out.println(list);
