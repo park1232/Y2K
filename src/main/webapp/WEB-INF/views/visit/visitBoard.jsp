@@ -96,7 +96,7 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
                       <td></td><td></td>
                       <td><textarea id="writeVisit" placeholder="방명록을 작성해주세요"></textarea></td>
                       <td></td>
-                      <td><button id="submitVisit" type='button'>등록</button></td>
+                      <td><button id="submitVisit" type='button' <c:if test="${ loginUser.userNo eq userNo }">style="display:none;"</c:if>>등록</button></td>
                   </tr>
                   </thead>
               </table>
@@ -124,19 +124,22 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
                       <td></td><td></td>
                       <td><textarea id="visitContent" readonly>${v.visitContent}</textarea></td>
 	                      <td></td>
-	                      <td><div onclick="Toggle4()" id="btnh" class="btn1"><i class="far fa-heart"></i></div></td>
+
                   </tr>
                   <tr><td>
-                  <div  <c:if test="${ loginUser.userNo ne userNo }">style="display:none;"</c:if>>
+                  <div>
                   <form action='delete-visit.vi?userNo=${userNo}'>
-                  <div><button class="deleteVisit" id="deleteBtn">삭제하기</button></div>
-                  
+                  <div id="deleteButton">
+                  	<button class="deleteVisit" id="deleteBtn" <c:if test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.member.userNo ne v.visitWriter}">style="display:none;"</c:if>>삭제하기</button>
+                  </div>
                   <input type="hidden" value="${v.visitNo}" name="visitNo" id="visithidden">
                   </form>
                  	</div>
                   </td></tr>
                   </tbody>
               </table>
+					
+					
           </div>
       </div>
       <hr class="hr-2">
@@ -159,7 +162,7 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
              
              
                 <a class="menu-item mi-4 menu-checked" onclick="location.href='${contextPath}/visit.vi?userNo=${userNo}'">방명록</a>
-              <div class = "menu align-center expanded text-center SMN_effect-68">
+      <div class = "menu align-center expanded text-center SMN_effect-68">
                <a class="menu-item mi-5 " onclick="location.href='${contextPath}/boardList.bo?userNo=${userNo}'">게시판</a>
  </div>
             </div>

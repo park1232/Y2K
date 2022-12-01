@@ -115,10 +115,6 @@
                 <span class="band">
                 <a href="#n" onclick="fn_sendFB('band');return false;" id="band" target="_self" title="네이버밴드 새창열림"><img src="../resources/img/icon-line.png" width="30px"></a>
                 </span>
-                <span class="linkcopy">
-                <a href="#n" onclick="fn_sendFB('linkcopy');return false;" id="likecopy" target="_self" title="링크 복사"><img src="../resources/img/icon-link.png" width="30px"></a>
-                </span>
-                <span class="button gray medium"><a href="#" onclick="clip(); return false;">URL주소복사</a></span>
              </span>
             <div class="scrollbar">
               <a href="#up"><i class="fa-solid fa-circle-up"></i></a><br><br>
@@ -129,8 +125,8 @@
         	<br>
         	<%-- <c:if test="${loginUser.id eq b.boardWriter}"> --%>
 			<div id="ViewForm">
-				<button  type="button" id="updateForm">수정하기</button>				
-				<button  type="button" id="deleteForm">삭제하기</button>					
+				<button  type="button" id="updateForm" <c:if test="${ loginUser.userNo ne b.boardWriter }">style="display:none;"</c:if>>수정하기</button>				
+				<button  type="button" id="deleteForm" <c:if test="${ loginUser.userNo ne b.boardWriter }">style="display:none;"</c:if>>삭제하기</button>					
 				<button  type="button" id="boardListBack" onclick="location.href='${contextPath}/boardList.bo?userNo=${userNo}'">목록으로</button>	
 			</div>				
 			<%-- </c:if> --%>
@@ -152,19 +148,22 @@
                 </tr>
                 </thead>
                 <tbody id="replyList">
-                			<tr>
-								<th width="100px">작성자</th>
-								<th>작성내용</th>
-								<th>삭제</th>
-							</tr>
-                <c:forEach items="${list}" var="r">
-                         		<input type="hidden" value="${r.replyNo}" name="replyNo">  	
-                            <tr>
-                                <td width="80px">${r.nickName}</td>
-                                <td>${r.replyContent }</td>
-                            <td>&nbsp;&nbsp;<button type="button" id="deleteReply" style="color: red; cursor: pointer;"><i class="fas fa-trash-alt"></i></button></td> 
-                            </tr>
-                </c:forEach>
+              		<tr>
+						<th width="100px">작성자</th>
+						<th>작성내용</th>
+						<th>삭제</th>
+					</tr>
+                	<c:forEach items="${list}" var="r">
+                        <tr>
+                        	<td width="80px">${r.nickName}</td>
+                        	<td>${r.replyContent }</td>
+                            <td>
+                            	&nbsp;&nbsp;
+                            	<button type="button" class="deleteReply" style="color: red; cursor: pointer;" <c:if test="${ loginUser.nickName ne r.nickName }">style="display:none;"</c:if> ><i class="fas fa-trash-alt"></i></button> 
+                            	<input type="hidden" value="${r.replyNo}" name="replyNo" class="replyNo">
+                            </td>
+                        </tr>
+                	</c:forEach>
                 </tbody>
             </table>
             <div><hr class="hrB" id="down"></div>
@@ -237,7 +236,8 @@
     				console.log(profilePath);
     				console.log(sideContent);
     			}
-    		})
+    		});
+     	}
     		
      		
      		
@@ -261,6 +261,7 @@
 						form.action = '${contextPath}/deleteForm.bo';
 						console.log(${userNo});
 						form.submit();
+
 					 }else{
 					   console.log("게시글 삭제 취소");
 					 }
@@ -283,15 +284,34 @@
 				}
 			}) */
 			
-		document.getElementById('deleteReply').addEventListener('click', ()=> {
+/* 		document.getElementById('deleteReply').addEventListener('click', ()=> {
+			 */
+			$(".deleteReply").click(function(){
+			       let params={
+			             replyNo : $(this).next().val(),
+			             boardNo : ${b.boardNo}
+			       }
+
+			        $.ajax({
+			           url:"${contextPath}/deleteReply.bo?userNo=${userNo}",
+			           data:params,
+			           success:function(res){
+			              console.log("통신성공");
+			              window.location.reload();
+			           }
+			        });
+			  }); 
+		/* 
 				if(confirm("댓글을 삭제하시겠습니까?")){
 					form.action = '${contextPath}/deleteReply.bo?userNo=${userNo}';
 					form.submit();
 					
+
+					
 				}else {
 					console.log("댓글 삭제 취소")
-				}
-			}); 
+				} */
+
 			
 			/* document.getElementById('likeButton').addEventListener('click', ()=> {
 				form.action = '${contextPath}/likeCheck.bo';
@@ -299,14 +319,14 @@
 			}); */
 
 			
-     	}
+     	
      	
      	
      
             //share function
  			
             function shareFacebook() {
-              var sendUrl = "http://www.google.com"
+              var sendUrl = "http://www.google.com";
               window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl, "Y2K World", "height=480px, width=600px");
             }
             
@@ -317,14 +337,14 @@
               const page = '${page}';
              
               
-              var sendUrl = "http://localhost:8080/selectBoard.bo?bNo=" + ${b.boardNo} + "%26writer=" + "${b.nickName}" +"%26page=" + ${page};
+              var sendUrl = "http://localhost:8080/selectBoard.bo?bNo=" + ${b.boardNo} + "%26writer=" + "${b.nickName}" +"%26page=" + ${page} + "%26userNo" + ${userNo};
               console.log(sendUrl);
 
               window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl, "Y2K World", "height=480px, width=600px");
             }
 
             function shareBand() {
-              var sendText = "Y2K World의 게시글을 공유합니다 :) " + "http://localhost:8080/selectBoard.bo?bNo=" + ${b.boardNo} + "%26writer=" + "${b.nickName}" +"%26page=" + ${page};
+              var sendText = "Y2K World의 게시글을 공유합니다 :) " + "http://localhost:8080/selectBoard.bo?bNo=" + ${b.boardNo} + "%26writer=" + "${b.nickName}" +"%26page=" + ${page} + "%26userNo" + ${userNo};
               var sendUrl = "http://localhost:8080/selectBoard.bo?bNo=" + ${b.boardNo} + "%26writer=" + "${b.nickName}" +"%26page=" + ${page};
               window.open("http://www.band.us/plugin/share?body=" + sendText + "&url=" + sendUrl, "Y2K World", "height=450px, width=350px");  
             }
@@ -345,10 +365,7 @@
             $("#band").click(function(){
                 shareBand();
             });
-            
-            $("#linkcopy").click(function(){
-            	
-            })
+
 
           });
             
@@ -382,7 +399,7 @@
         			}
         			
         			document.getElementById('replyContent').value = '';
-        		
+		             window.location.reload();
         			},
         			error: (data) => {
         				console.log(data);
@@ -405,7 +422,7 @@
 					}
 				});
 			});
-			
+     	
            
            
           

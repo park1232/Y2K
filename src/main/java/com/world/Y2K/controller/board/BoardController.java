@@ -48,7 +48,7 @@ public class BoardController {
 		if(page != null) {
 			currentPage = page;
 		}
-		int boardListCount = bService.getBoardListCount();
+		int boardListCount = bService.getBoardListCount(userNo);
 		System.out.println(boardListCount);
 		
 		PageInfo pi = BoardPagination.getPageInfo(currentPage, boardListCount, 5);
@@ -85,16 +85,15 @@ public class BoardController {
 	//寃뚯떆湲� �긽�꽭
 	@RequestMapping("selectBoard.bo")
 	public ModelAndView boardView(@RequestParam("bNo") Long bNo, @RequestParam("writer") String writer,
-									@RequestParam("page") int page, ModelAndView mv, Authentication authentication) {
+									@RequestParam("page") int page, ModelAndView mv, Authentication authentication, @RequestParam("userNo") Long userNo) {
 
-		
 		Board b = bService.selectBoard(bNo);
 		ArrayList<Reply> list = bService.selectReply(bNo);
-
 		int likeCount = bService.likeCount(bNo);
 		
 		if(b != null) {
-//			mv.addObject("userNo", userNo);
+			
+			mv.addObject("userNo", userNo);
 			mv.addObject("b", b);
 			mv.addObject("list", list);
 			mv.addObject("page", page);
@@ -215,11 +214,10 @@ public class BoardController {
 	//�뙎湲� �궘�젣
 	@RequestMapping("deleteReply.bo")
 	public String deleteReply(@RequestParam("replyNo") Long rNo, Model model, @RequestParam("boardNo") Long bNo) {
-		
-		ArrayList<Reply> list = bService.selectReply(bNo); 
 
 		int result = bService.deleteReply(rNo);
 		if(result > 0) {
+			ArrayList<Reply> list = bService.selectReply(bNo); 
 			model.addAttribute("list", list);
 			return "board/boardView";
 		} else {

@@ -29,8 +29,8 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO bDAO;
 
 	@Override
-	public int getBoardListCount() {
-		return bDAO.getBoardListCount(sqlSession);
+	public int getBoardListCount(Long userNo) {
+		return bDAO.getBoardListCount(sqlSession, userNo);
 	}
 
 	@Override

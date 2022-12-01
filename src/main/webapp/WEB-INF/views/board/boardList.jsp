@@ -76,7 +76,7 @@
 	
 	  <img id="cyimg" src="${contextPath}/resources/img/cyimg.png"/><br>
 	  <div id="boardMain" onclick="location.href='${contextPath}/boardList.bo?userNo=${userNo}'">Y2K WORLD</div>
-        <div id="writeStyle"><i class="fas fa-edit" onclick="location.href='${contextPath}/boardWrite.bo?userNo=${userNo}'"></i></div>
+        <div id="writeStyle" <c:if test="${ loginUser.userNo eq userNo }">style="display:none;"</c:if>><i class="fas fa-edit" onclick="location.href='${contextPath}/boardWrite.bo?userNo=${userNo}'"></i></div>
         <input hidden="hidden" value="${userNo}" name="userNo">
         <br>
     <table>
@@ -234,7 +234,7 @@
     				const trTds = this.parentElement.querySelectorAll('td'); //세로 한줄 td
     				const boardNo = trTds[0].innerText;
     				const writer = trTds[2].innerText;
-    				location.href='${contextPath}/selectBoard.bo?bNo=' + boardNo + '&writer=' + writer + '&page=' + ${pi.currentPage};
+    				location.href='${contextPath}/selectBoard.bo?bNo=' + boardNo + '&writer=' + writer + '&page=' + ${pi.currentPage} + '&userNo=' + ${userNo};
     			});
     		}
     	
