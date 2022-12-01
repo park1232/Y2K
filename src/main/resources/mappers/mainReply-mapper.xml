@@ -97,7 +97,7 @@
     <select id="selectBoard" resultType="_int">
       select count(*)
       from board
-      where BOARD_WRITER= #{userNo} and BOARD_STATUS = 'Y'
+      where own= #{userNo} and BOARD_STATUS = 'Y'
    </select>
    
 
@@ -149,7 +149,7 @@
    <![CDATA[
    	select *
    	from photo
-   	where rownum<=1
+   	where rownum<=1 and own=#{userNo}
     order by boardno desc
     ]]>
    </select>
@@ -158,7 +158,7 @@
     <![CDATA[
    	select *
    	from board
-   	where rownum<=1
+   	where rownum<=1 and own=#{userNo}
     order by boardno desc
     ]]>
    </select>
@@ -167,7 +167,7 @@
      <![CDATA[
    		select *
    	from diary
-   	where rownum<=1
+   	where rownum<=1 and own=#{userNo}
     order by boardno desc
      ]]>
    </select>
@@ -176,8 +176,8 @@
      <![CDATA[
    		select *
    	from visit
-   	where rownum<=1
-    order by visitno desc
+   	where rownum<=1 and own=#{userNo}
+    order by visitno desc 
      ]]>
    </select>
    

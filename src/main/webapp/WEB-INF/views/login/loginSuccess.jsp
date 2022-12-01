@@ -17,9 +17,10 @@ String userId = request.getParameter("userId");
 </head>
 <body>
 
-<div class="button_container">
+<div class="button_container" >
+
         <p class="description">Move Y2K World</p>
-        <button class="btn" id="move-main-btn"><span>Y2K World</span></button>
+        <button class="btn" id="move-main-btn" ><span>Y2K World</span></button>
         <br>
         <br>
         <br>
@@ -42,7 +43,7 @@ String userId = request.getParameter("userId");
 	console.log("실행됨?");
 	window.open('/mainPage.ma?userNo='+${empty param.userNo ? userNo : param.userNo},'Y2K World','width=1289, height=703, scrollbars=no, resizable=no, toolbars=no, menubar=no');
 /* 	window.open('/test.lo?userNo='+${userNo},'Y2K World','width=1289, height=703'); */
- 	 closeForm(); 
+ 	/*  closeForm();  */
 /* 	 , scrollbars=no, resizable=no, toolbars=no, menubar=no'  */
   
 }); 
@@ -50,7 +51,7 @@ String userId = request.getParameter("userId");
 $('#move-purchaes-btn').click(function(){
 	
 	window.open('/purchaes.pa','Y2K Purchaes Page','width=1289, height=703, scrollbars=no, resizable=no, toolbars=no, menubar=no');
-	 closeForm();
+/* 	 closeForm(); */
 	});
 	
 	

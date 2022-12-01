@@ -28,7 +28,7 @@ public class ProfileUploadServiceImpl implements ProfileUploadService{
 	@Override
 	public String profileUpload(Model model,MultipartFile file, ProfilePhoto p, UserDetailsImpl userDetails) {
 		if(file.isEmpty()) {
-			throw new PhotoException("ÆÄÀÏÀÌ ºñ¾ù½À´Ï´Ù.");
+			throw new PhotoException("Ã†Ã„Ã€ÃÃ€ÃŒ ÂºÃ±Â¾Ã¹Â½Ã€Â´ÃÂ´Ã™.");
 		}
 		Photo photo = setPhoto(p);
 		

@@ -28,7 +28,7 @@
    
    	<insert id="insertReply">
    		insert into reply
-	 	values(REPLY_SEQ.nextval, #{content}, sysdate, sysdate, default, #{userNo},#{boardNo}, #{own})
+	 	values(REPLY_SEQ.nextval, #{content}, sysdate, sysdate, default, #{userNo},#{boardNo})
    	</insert>
    
    <update id="deleteReply">

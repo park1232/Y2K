@@ -107,7 +107,7 @@
                 			</td>
                 			<td>
                 				<div class="map" id="mapValue">${ d.location }</div>
-                				<input type="hidden" id="location" name="location">
+                				<input type="hidden" id="location" name="location" value="${ d.location }">
                 			</td>
                 			<td>
                 				<div class="selectBox">
