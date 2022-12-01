@@ -32,7 +32,7 @@
 		   </div>
 		   <br>
 		   <div style="width:150px; height:150px; float:left;">
-		      <img src="${contextPath}/resources/img/profil1.jpg" style="height: 150px;">
+		      <img src="${m.path }" style="height: 150px;">
 		   </div>
 		   <div style="width:190px; height:150px; float:left; text-align:center;">
 		      <br><a href="#">${ m.nickName }</a>님이 <p>${loginUserNickName}님에게</p> <strong>일촌맺기</strong>를 희망합니다.
