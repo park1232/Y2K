@@ -190,7 +190,7 @@
     				sideContent = res.sideContent;
     				document.getElementById('sideContentDiv').innerHTML = sideContent;
     				document.getElementById('mainDiv').innerHTML = mainTitle;
-    				
+    				document.getElementById('ownerNickname').innerHTML = res.ownerNickname;
     				$(".bg").css({"background":"url("+skinPath+")"}); 
     				jQuery('#profileImage').attr("src", profilePath);
     				console.log(skinPath);
