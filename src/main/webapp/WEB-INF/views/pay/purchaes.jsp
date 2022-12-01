@@ -61,9 +61,8 @@
 		          <!-- 이미지 foreach문 -->
 		          	<c:forEach items="${ photoList }" var="photo">
 						<c:if test="${ p.productNo eq photo.productNo }">
-			          		<c:if test="${ fn:containsIgnoreCase(photo.productReNameName, 'jpg') or fn:containsIgnoreCase(photo.productReNameName, 'png') }">
 			            		<img src="/upload/${ photo.productReNameName }" style="height: 300px;">
-			            	</c:if>
+			            		<input type="hidden" value='${ photo.productPhotoName }' name="productPhotoName">
 						</c:if>
 					</c:forEach>
 		            <div class="card-body">
@@ -192,10 +191,13 @@
 	const datas = document.getElementsByClassName('btn btn-warning');
 	for(const data of datas) {
 		 data.addEventListener('click', function(){		
-			const productNo = this.value; 
-			window.open("${ contextPath }/selectPurchaes.pa?productNo=" + productNo, "detail", "width=630, height=530, scrollbars=no, resizable=no, toolbars=no, menubar=no")
+			const productNo = this.value;  
+			const url = '${ contextPath }/selectPurchaes.pa?productNo=' + productNo + '&productPhotoName=' + "${photo.productPhotoName}";
+			window.open(url , "detail", "width=630, height=530, scrollbars=no, resizable=no, toolbars=no, menubar=no");
 		 });
 	} 
+	
+	window.setTimeout('window.location.reload()', 5000);
 </script>
 </body>
 </html>

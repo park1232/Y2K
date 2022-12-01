@@ -178,6 +178,8 @@
 			const userNo = this.value; 
 			window.open("${ contextPath }/friendAccept.fr?userNo=" + userNo, "friendAdd", "width=460, height=570, scrollbars=no, resizable=no, toolbars=no, menubar=no")
 		 });
-	} 
+	}
+	
+	window.setTimeout('window.location.reload()', 5000);
 </script>
 </html>

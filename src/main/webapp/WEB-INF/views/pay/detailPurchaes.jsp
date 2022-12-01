@@ -29,13 +29,12 @@
 	<form class="needs-validation" method="POST" id="detailForm" enctype="multipart/form-data">
 			<div class="wrap">
 			    <div class="productImg">
-				    <c:if test="${ p.productNo eq photo.productNo }">
-				        <c:if test="${ fn:containsIgnoreCase(photo.productReNameName, 'jpg') or fn:containsIgnoreCase(photo.productReNameName, 'png') }">
+				    <c:if test="${ p.productNo eq photo.productNo }">	        
 				        	<img src="/upload/${ photo.productReNameName }" style="width: 600px; height: 300px;" alt="My Image" name="skin">
-				    	</c:if>
+				    		<input type="hidden" value='${ photo.productPhotoName }' name="productPhotoName">
 					</c:if>
 			    </div>
-			    <input type="hidden" value='${ p.productNo }' name="productNo">
+			    <input type="hidden" value='${ p.productNo }' name="productNo" id="productNo">
 			    <input type="hidden" value='${ p.price }' name="price">
 			    <hr>
 			    <h3>${ p.productName } &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -70,27 +69,42 @@
 		    if(result != ''){
 		    	self.close();
 		    }
-		    
-        	const deleteForm = document.getElementById('detailForm');
-        	document.getElementById("delete").addEventListener('click', ()=>{
-				deleteForm.action = '${contextPath}/deletePurchaes.pa';
-				deleteForm.submit();
-        	});
-        	
-        	const result1 = '${result1}';
-        	console.log('${result1}');
-        	const result2 = '${result2}';
-        	console.log('${result2}');
-		    if(result1 != '' && result2 != ''){
-		    	self.close();
-		    }
-		    
+		   
 		    const updateForm = document.getElementById('detailForm');
 		    document.getElementById("update").addEventListener('click', ()=>{
 				updateForm.action = '${contextPath}/updatePurchaes.pa';
 				updateForm.submit();
 			});		
-        } 
+        }
+        
+        /* const deleteForm = document.getElementById('detailForm');
+    	document.getElementById("delete").addEventListener('click', ()=>{
+			deleteForm.action = '${contextPath}/deletePurchaes.pa';
+			deleteForm.submit();
+    	});
+    	
+    	const result1 = '${result1}';
+    	console.log('${result1}');
+    	const result2 = '${result2}';
+    	console.log('${result2}');
+	    if(result1 != '' && result2 != ''){
+	    	self.close();
+	    } */
+	    
+	    $("#delete").click(function(){
+	    	let params={
+	    			productNo : $("#productNo").val(),			
+	    	} 
+	    	 $.ajax({
+	    		 type:"POST",
+	    		 url:"/deletePurchaes.pa",
+	    		 data:params,
+	    		 success:function(res){
+	    			 console.log("통신성공");
+	    			 window.close();
+	    		 }
+	    	 });
+	    });
     </script>
 </body>
 </html>

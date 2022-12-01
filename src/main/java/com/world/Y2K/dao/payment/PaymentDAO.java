@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.PayPageInfo;
+import com.world.Y2K.model.vo.Payment;
 import com.world.Y2K.model.vo.Product;
 import com.world.Y2K.model.vo.ProductPhoto;
 
@@ -67,5 +68,26 @@ public class PaymentDAO {
 
 	public int paymentRequest(SqlSessionTemplate sqlSession, Long mNo) {
 		return sqlSession.update("paymentMapper.paymentRequest", mNo);
+	}
+
+	public int paymentInsert(SqlSessionTemplate sqlSession, Long mNo) {
+		return sqlSession.insert("paymentMapper.paymentInsert", mNo);
+	}
+
+	public int paymentInsert(SqlSessionTemplate sqlSession, Payment paymentInsertObject) {
+		return sqlSession.insert("paymentMapper.paymentInsert", paymentInsertObject);
+		
+	}
+
+	public int paymentRequest2(SqlSessionTemplate sqlSession, Long mNo) {
+		return sqlSession.insert("paymentMapper.paymentRequest2", mNo);
+	}
+
+	public int paymentRequest3(SqlSessionTemplate sqlSession, Long mNo) {
+		return sqlSession.insert("paymentMapper.paymentRequest3", mNo);
+	}
+
+	public int mainSkinUpdate(SqlSessionTemplate sqlSession, HashMap<String, Object> map2) {
+		return sqlSession.update("paymentMapper.mainSkinUpdate", map2);
 	}
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.world.Y2K.dao.payment.PaymentDAO;
 import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.PayPageInfo;
+import com.world.Y2K.model.vo.Payment;
 import com.world.Y2K.model.vo.Product;
 import com.world.Y2K.model.vo.ProductPhoto;
 
@@ -85,5 +86,25 @@ public class PaymentImpl implements PaymentService{
 	@Override
 	public int paymentRequest(Long mNo) {
 		return payDAO.paymentRequest(sqlSession, mNo);
+	}
+	
+	@Override
+	public int paymentInsert(Payment paymentInsertObject) {
+		return payDAO.paymentInsert(sqlSession, paymentInsertObject);
+	}
+	
+	@Override
+	public int paymentRequest2(Long mNo) {
+		return payDAO.paymentRequest2(sqlSession, mNo);
+	}
+	
+	@Override
+	public int paymentRequest3(Long mNo) {
+		return payDAO.paymentRequest3(sqlSession, mNo);
+	}
+	
+	@Override
+	public int mainSkinUpdate(HashMap<String, Object> map2) {
+		return payDAO.mainSkinUpdate(sqlSession, map2);
 	}
 }
