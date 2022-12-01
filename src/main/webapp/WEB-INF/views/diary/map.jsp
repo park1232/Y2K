@@ -343,7 +343,12 @@ function removeAllChildNods(el) {
 		opener.document.getElementById('location').value = $('#choice').val();
 		window.close();
 	});
-	
+	$('#choiceBtn').click(function(){
+		if($(this).value != ''){
+			opener.document.getElementById('diaryBtn').disabled = false;
+			window.close();
+		}
+	});
 </script>
 </body>
 </html>
