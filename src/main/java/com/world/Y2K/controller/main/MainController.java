@@ -2,6 +2,7 @@ package com.world.Y2K.controller.main;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,22 +56,35 @@ public class MainController {
 		session.setAttribute("userNo", userDetails.getMember().getUserNo());
 		Member member = userDetails.getMember();
 		
+			//페이지 주인
+			Member owner = mService.owner(userNo);
+		
 			
-			
-			
-			
-			
+			//댓글 뿌리기
 			ArrayList<Reply> list = mService.replyList(userNo);
 	
 			
-				int bList = mService.boardList(userNo);
-			 
-			 	int pList = mService.photoList(userNo);
-			  
-			  int vList = mService.visitList(userNo);
-			 
-			 int dList = mService.dList(userNo);
 			
+			//게시물 갯수
+				int bCount = mService.boardCount(userNo);
+			 
+			 	int pCount = mService.photoCount(userNo);
+			  
+			  int vCount = mService.visitCount(userNo);
+			 
+			 int dCount = mService.dCount(userNo);
+			
+			 
+			 
+			 
+			// 최근게시물
+			 
+			 ArrayList<HashMap<String, Object>> bList = mService.boardList(userNo);
+			 ArrayList<HashMap<String, Object>> pList = mService.photoList(userNo);
+			 ArrayList<HashMap<String, Object>> dList = mService.diaryList(userNo);
+			 ArrayList<HashMap<String, Object>> vList = mService.visitList(userNo);
+			 
+
 			/* mv.addObject("bList", bList); */
 			request.setAttribute("userNo", userNo);
 			mv.addObject("list", list);
@@ -78,8 +92,14 @@ public class MainController {
 			mv.addObject("pList", pList);
 			mv.addObject("dList", dList);
 			mv.addObject("vList", vList);
-			mv.addObject("member", member);
+
+			mv.addObject("bCount", bCount);
+			mv.addObject("pCount", pCount);
+			mv.addObject("vCount", vCount);
+			mv.addObject("dCount", dCount);
 			
+			mv.addObject("member", member);
+			mv.addObject("owner", owner);
 			mv.setViewName("main/mainPage");
 			
 			return mv;

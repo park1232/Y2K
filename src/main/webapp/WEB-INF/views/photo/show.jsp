@@ -77,7 +77,7 @@
 																		
 															</p> 
 																
-														 	<button id="delRe">
+														 	<button id="delRe" <c:if test="${ r.nickName ne loginUser.nickName }">style="display:none;"</c:if>>>
 																	
 																	<i class="fas fa-times"></i>
 															
@@ -157,7 +157,7 @@
 // 							    <button><i class="fas fa-times"></i></button>
 // 							  </div>
 // 					`; 
-				newComment.innerHTML = '<div class="sl__item__contents__comment" id="storyCommentItem-1"><p><b>' + $("#nickName").val() + ' :</b>' + contentt + '</p><button id="delRe"><i class="fas fa-times"></i></button></div>';
+				newComment.innerHTML = '<div class="sl__item__contents__comment" id="storyCommentItem-1"><p><b>' + $("#nickName").val() + ' :</b>' + contentt + '</p><button id="delRe" <c:if test="${ r.nickName ne loginUser.nickName }">style="display:none;"</c:if>>><i class="fas fa-times"></i></button></div>';
 
 					commentList.prepend(newComment);
 					window.location.reload();

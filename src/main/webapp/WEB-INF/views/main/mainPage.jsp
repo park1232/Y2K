@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }"
 	scope="application" />
 <!DOCTYPE html>
@@ -46,7 +47,7 @@
 									<a class="history" href="#">HISTORY</a>
 								</div>
 								<div class="info-wrap">
-									<a class="info-name" href="${contextPath}/mainPage.ma?userNo=${member.userNo}" >${member.nickName}</a>
+									<a class="info-name" href="${contextPath}/mainPage.ma?userNo=${member.userNo}" > ${owner.nickName}</a>
 									<p class="text-email">nowing0108@kakao.com</p>
 								</div>
 								<div class="profile-dropdown">
@@ -91,30 +92,52 @@
 								<div class="post-wrap">
 									<div class="recent">
 										<h2>최근 게시물</h2>
-										<p class="text-video">게시글이 없습니다.</p>
-										<p class="text-board">
-											<a src="#">게시글이 없습니다.</a>
-										</p>
-										<p class="text-gallery">
-											<a src="#">게시글이 없습니다.</a>
-										</p>
-										<p class="text-photo">
-											<a src="#">게시글이 없습니다.</a>
-										</p>
-										<!--                      <p class="text-photo"><a src="#">게시글이 없습니다.</a></p>-->
-
+										<c:forEach items="${dList}" var="d">
+											<c:if test="${d.DIARY_CONTENT==null}">
+											<p class="text-video">게시글이 없습니다.</p>
+											</c:if>
+											<c:if test="${d!=null}">
+											<p class="text-video">${d.DIARY_CONTENT}</p>
+											</c:if>
+										</c:forEach>
+										<c:forEach items="${bList}" var="b">
+											<c:if test="${b==null}">
+											<p class="text-video">게시글이 없습니다.</p>
+											</c:if>
+											<c:if test="${b!=null}">
+											<p class="text-board">${b.BOARD_CONTENT}</p>
+											</c:if>
+										</c:forEach>	
+										
+										<c:forEach items="${vList}" var="v">
+											<c:if test="${v=null}">
+											<p class="text-video">게시글이 없습니다.</p>
+											</c:if>
+											<c:if test="${v!=null}">
+											<p class="text-board">${v.VISIT_CONTENT}</p>
+											</c:if>
+										</c:forEach>
+										<c:forEach items="${pList}" var="p">
+											<c:if test="${p==null}">
+											<p class="text-photo">게시글이 없습니다.</p>
+											</c:if>
+											<c:if test="${p!=null}">
+											<p class="text-photo">${p.PHOTOCOMENT}</p>
+											</c:if>
+										</c:forEach>	
+											
 
 
 									</div>
 									<div class="menu-table">
 										<table>
 											<tr>
-												<td>사진첩<a href="${contextPath}/photo.ph?userNo=${userNo}">${pList }</a></td>
-												<td>다이어리<a href="${contextPath}/diary.di?userNo=${userNo}" >${dList}</a></td>
+												<td>사진첩<a href="${contextPath}/photo.ph?userNo=${userNo}">${pCount }</a></td>
+												<td>다이어리<a href="${contextPath}/diary.di?userNo=${userNo}" >${dCount}</a></td>
 											</tr>
 											<tr>
-												<td>방명록<a href="${contextPath}/visit.vi?userNo=${userNo}" >${vList}</a></td>
-												<td>게시판 <a href="${contextPath}/boardList.bo?userNo=${userNo}" >${bList}</a></td>
+												<td>방명록<a href="${contextPath}/visit.vi?userNo=${userNo}" >${vCount}</a></td>
+												<td>게시판 <a href="${contextPath}/boardList.bo?userNo=${userNo}" >${bCount}</a></td>
 											</tr>
 											<tr>
 												<td></td>
@@ -165,7 +188,7 @@
 										<input type="hidden" id="replyNo" value="${r.replyNo}">
 										<p>${r.content}:
 											<span>${r.nickName}</span>
-											<button id="delRe">
+											<button id="delRe" <c:if test="${ r.nickName ne loginUser.nickName }">style="display:none;"</c:if>>>
 												<i class="fas fa-times"></i>
 											</button>
 											<input type="hidden" id="replyWriter"

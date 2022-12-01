@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.world.Y2K.model.dto.Member;
 import com.world.Y2K.model.vo.Reply;
 
 @Repository("mDAO")
@@ -46,6 +47,40 @@ public class MainDAO {
 	public void deleteReply(SqlSessionTemplate sqlSession, Long replyNo) {
 		
 		sqlSession.update("mainReplyMapper.deleteReply", replyNo);
+	}
+
+
+	public Member owner(SqlSessionTemplate sqlSession, Long userNo) {
+		
+		return sqlSession.selectOne("mainReplyMapper.owner", userNo);
+	}
+
+	public ArrayList<HashMap<String, Object>> photoList(SqlSessionTemplate sqlSession, Long userNo) {
+		
+		ArrayList<HashMap<String, Object>> pList =(ArrayList)sqlSession.selectList("mainReplyMapper.photoList", userNo);
+		
+		return pList;
+	}
+
+	public ArrayList<HashMap<String, Object>> boardList(SqlSessionTemplate sqlSession, Long userNo) {
+		
+		ArrayList<HashMap<String, Object>> bList =(ArrayList)sqlSession.selectList("mainReplyMapper.boardList", userNo);
+		
+		return bList;
+	}
+
+	public ArrayList<HashMap<String, Object>> diaryList(SqlSessionTemplate sqlSession, Long userNo) {
+		
+		ArrayList<HashMap<String, Object>> dList =(ArrayList)sqlSession.selectList("mainReplyMapper.diaryList", userNo);
+		
+		return dList;
+	}
+
+	public ArrayList<HashMap<String, Object>> visitList(SqlSessionTemplate sqlSession, Long userNo) {
+		
+		ArrayList<HashMap<String, Object>> vList =(ArrayList)sqlSession.selectList("mainReplyMapper.visitList", userNo);
+		
+		return vList;
 	}
 
 	
