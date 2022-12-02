@@ -84,6 +84,12 @@
 	    		 data:params,
 	    		 success:function(res){
 	    			 console.log("통신성공");
+	    			 alert("친구 수락 성공!");
+	    			 window.close();
+	    		 },
+	    		 error:function(res){
+	    			 console.log(res);
+	    			 alert("친구 수락 실패!");
 	    			 window.close();
 	    		 }
 	    	 });

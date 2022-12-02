@@ -41,8 +41,9 @@
   <div class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container">
       <a href="${contextPath}/purchaes.pa" class="navbar-brand d-flex align-items-center">
-        
-        <strong>스킨</strong>
+        <strong>스킨</strong>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;낑깡 개수 : ${ conutOrange }    
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -82,14 +83,6 @@
 	      </div>
 	    </div>
 	  </div>
-	 <div class="search">
-		  <select>
-	     	<option>제목</option>
-	        <option>설명</option>
-	     </select>
-	     <input type="text" placeholder="검색어 입력">
-	     <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
-	</div>
 	
 		<br>
 	
