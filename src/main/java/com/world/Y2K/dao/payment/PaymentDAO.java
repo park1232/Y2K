@@ -90,4 +90,8 @@ public class PaymentDAO {
 	public int mainSkinUpdate(SqlSessionTemplate sqlSession, HashMap<String, Object> map2) {
 		return sqlSession.update("paymentMapper.mainSkinUpdate", map2);
 	}
+
+	public int checkSkinHistory(SqlSessionTemplate sqlSession, HashMap<String, Object> map2) {
+		return sqlSession.selectOne("paymentMapper.checkSkinHistory", map2);
+	}
 }

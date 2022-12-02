@@ -111,8 +111,6 @@
 			}
 		}); 
 	}    
-	
-
 /*      document.getElementById("FriendAdd3").addEventListener('click', ()=>{
     
     	 const friendAddForm = ;
@@ -127,7 +125,6 @@
      	}
   
 	});  */
-    
      $("#FriendAdd3").click(function(){
     	let params={
     			userNo : $("#userNo").val(),
@@ -140,7 +137,13 @@
     		 url:"/friendAdd2.fr",
     		 data:params,
     		 success:function(res){
-    			 console.log("통신성공");
+    			 console.log(res);
+    			 alert("친구 요청 성공!");
+    			 window.close();
+    		 },
+    		 error:function(res){
+    			 console.log(res);
+    			 alert("친구 요청 실패!");
     			 window.close();
     		 }
     	 });

@@ -70,14 +70,7 @@
 	</c:forEach>
   </tbody>
 </table>
-<div class="search">
-	 <select>
-     	<option>ID</option>
-        <option>닉네임</option>
-     </select>
-     <input type="text" placeholder="검색어 입력">
-     <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
-</div>
+
 <br>
 	<div class="pagingArea">
         <ul class="pagination justify-content-center">

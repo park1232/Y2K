@@ -44,5 +44,7 @@ public interface PaymentService {
 	int paymentRequest3(Long mNo);
 
 	int mainSkinUpdate(HashMap<String, Object> map2);
+
+	int checkSkinHistory(HashMap<String, Object> map2);
 	
 }

@@ -103,6 +103,12 @@
 		where skinName = #{productPhotoName} and skinUserNo = #{mNo}
 	</update>
 	
+	<select id="checkSkinHistory" resultType="_int">
+		select count(skinStatus)
+		from skin
+		where skinName = #{productPhotoName} and skinUserNo = #{mNo} 
+	</select>
+	
 	<resultMap type="ProductPhoto" id="productPhotoResultSet">
    		<id column="PRODUCTPHOTONO" property="productPhotoNo"/>
 		<result column="PRODUCTPHOTONAME" property="productPhotoName"/>

@@ -43,6 +43,7 @@ public class PayController {
 		UserDetailsImpl userdetails = (UserDetailsImpl)authentication.getPrincipal();
 		String userRole = userdetails.getMember().getRole();
 		Long userNo = userdetails.getMember().getUserNo();
+		Long mNo = userdetails.getMember().getUserNo();
 		int payCurrentPage = 1;
 		
 		if(page != null) {
@@ -54,15 +55,21 @@ public class PayController {
 		ArrayList<Product> pList = pService.selectProductList(pi);
 		ArrayList<ProductPhoto> photoList = pService.selectPhotoList();
 		
+		HashMap<String, Long> map = new HashMap<String, Long>();
+		map.put("mNo", mNo);
+		
+		int conutOrange = pService.getOrangeCount(map);
+		
 		if(pList != null) {
 			model.addAttribute("pi", pi);
 			model.addAttribute("pList", pList);
 			model.addAttribute("photoList", photoList);
 			model.addAttribute("userRole", userRole);
 			model.addAttribute("userNo", userNo);
+			model.addAttribute("conutOrange", conutOrange);
 			return "pay/purchaes";
 		} else {
-			throw new PaymentException("구매 게시글 조회 실패");
+			throw new PaymentException("Failed to purchase publishing comments");
 		}
 
 	}
@@ -134,10 +141,10 @@ public class PayController {
 				model.addAttribute("photoName", pp.getProductPhotoName());
 				return "redirect:purchaes.pa";
 			} else {
-				throw new PaymentException("구매 게시글 작성이 실패하였습니다.");
+				throw new PaymentException("The purchase posts failed");
 			}
 		} else {
-			throw new PaymentException("관리자만 게시글을 작성할 수 있습니다.");
+			throw new PaymentException("Only administrators can create posts");
 		}	
 	}
 	
@@ -159,7 +166,7 @@ public class PayController {
 			model.addAttribute("productPhotoName", productPhotoName);
 			return "pay/detailPurchaes";
 		} else {
-			throw new PaymentException("구매게시글 상세 조회 실패");
+			throw new PaymentException("Failed to purchase details");
 		}
 	}	
 	
@@ -180,7 +187,7 @@ public class PayController {
 			model.addAttribute("result2", result2);
 			return "pay/detailPurchaes";	// submit으로 값 전달 후 팝업창 닫고 부모 게시판 갱신 찾기
 		} else {
-			throw new PaymentException("구매게시글 삭제 실패");
+			throw new PaymentException("Delete failed to purchase");
 		}
 	}
 	
@@ -237,20 +244,26 @@ public class PayController {
 		map2.put("productPhotoName", productPhotoName);
 		map2.put("mNo", mNo);
 		
+		int checkSkinHistory = pService.checkSkinHistory(map2);
+		
 		if(conutOrange < price) {
-			throw new PaymentException("낑깡이 부족합니다.");
+			throw new PaymentException("don't have enough Orange");
 		} else {
-			int result = pService.orderPurchaes(map);
-			int mainSkinUpdate = pService.mainSkinUpdate(map2);
-			System.out.println(mainSkinUpdate);
-			if(result > 0 && mainSkinUpdate > 0) {
-//				MultipartFile upload  = skin;
-//				String[] returnArr = saveSkinFile(upload, request);
-//				model.addAttribute("mNo", mNo);
-				model.addAttribute("result", result);
-				return "pay/detailPurchaes"; // submit으로 값 전달 후 팝업창 닫고 부모 게시판 갱신 찾기
+			if(checkSkinHistory == 0) {
+				int result = pService.orderPurchaes(map);
+				int mainSkinUpdate = pService.mainSkinUpdate(map2);
+				System.out.println(mainSkinUpdate);
+				if(result > 0 && mainSkinUpdate > 0) {
+//					MultipartFile upload  = skin;
+//					String[] returnArr = saveSkinFile(upload, request);
+//					model.addAttribute("mNo", mNo);
+					model.addAttribute("result", result);
+					return "pay/detailPurchaes"; // submit으로 값 전달 후 팝업창 닫고 부모 게시판 갱신 찾기
+				} else {
+					throw new PaymentException("Failed to purchase product");
+				}
 			} else {
-				throw new PaymentException("상품 구매 실패");
+				throw new PaymentException("you already have this skin");
 			}
 		}	
 	}
@@ -271,7 +284,7 @@ public class PayController {
 			model.addAttribute("loginUser", loginUser);
 			return "pay/payment";
 		} else {
-			throw new PaymentException("결제창 조회 실패");
+			throw new PaymentException("Payment window lookup failed");
 		}
 	}
 	
@@ -293,7 +306,7 @@ public class PayController {
 		if(result > 0 && paymentInsert > 0) {
 			return "pay/payment";
 		} else {
-			throw new PaymentException("결제 실패");
+			throw new PaymentException("Payment failed");
 		}
 	}
 	
@@ -315,7 +328,7 @@ public class PayController {
 		if(result > 0 && paymentInsert > 0) {
 			return "pay/payment";
 		} else {
-			throw new PaymentException("결제 실패");
+			throw new PaymentException("Payment failed");
 		}
 	}
 	
@@ -332,7 +345,7 @@ public class PayController {
 		if(result > 0 && paymentInsert > 0) {
 			return "pay/payment";
 		} else {
-			throw new PaymentException("결제 실패");
+			throw new PaymentException("Payment failed");
 		}
 	}
 }
