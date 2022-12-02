@@ -244,15 +244,18 @@ public class PayController {
 		map2.put("productPhotoName", productPhotoName);
 		map2.put("mNo", mNo);
 		
-		int checkSkinHistory = pService.checkSkinHistory(map2);
+		System.out.println(productPhotoName);
+		System.out.println(mNo);
 		
+		int checkSkinHistory = pService.checkSkinHistory(map2);
+		System.out.println("checkSkinHistory : " + checkSkinHistory);
 		if(conutOrange < price) {
 			throw new PaymentException("don't have enough Orange");
 		} else {
 			if(checkSkinHistory == 0) {
-				int result = pService.orderPurchaes(map);
 				int mainSkinUpdate = pService.mainSkinUpdate(map2);
-				System.out.println(mainSkinUpdate);
+				int result = pService.orderPurchaes(map);
+				System.out.println("mainSkinUpdate" + mainSkinUpdate);
 				if(result > 0 && mainSkinUpdate > 0) {
 //					MultipartFile upload  = skin;
 //					String[] returnArr = saveSkinFile(upload, request);
