@@ -40,7 +40,6 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
 								<div class="desc-wrap">
 									<p class="text-desc">
 									<div id="sideContentDiv" class="desc-wrap text-desc"></div>
-									<a class="history" href="#">HISTORY</a>
 								</div>
 								<div class="info-wrap" id="ownerNickname">
 									<a class="info-name" href="#"></a>
@@ -383,10 +382,10 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
     		  form.submit();
     	  });
     	  
-      } */
+      }  */
       
       
-     /*  $('#deleteBtn').click(function(){
+      $('#deleteBtn').click(function(){
     	  let params={
     			  visitNo : $("#visithidden").val()
     	  }
@@ -399,7 +398,7 @@ body{font-family: 'Gamja Flower', cursive;cursor: url(${contextPath}/img/cursor.
     			  renew();
     		  }
     	  })
-      }); */
+      }); 
    
       
       </script>
