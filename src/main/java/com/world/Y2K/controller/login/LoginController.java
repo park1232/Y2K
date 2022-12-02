@@ -106,8 +106,6 @@ public class LoginController {
 		UserDetailsImpl userDetails =(UserDetailsImpl)authentication.getPrincipal();
 		mv.addObject("userNo", userDetails.getMember().getUserNo());
 		
-//		request.setAttribute("userNo", userDetails.getMember().getUserNo());	
-//		request.getRequestDispatcher("/login-success.lo").forward(request, response);
 		
 	return "login/loginSuccess";
 	}
