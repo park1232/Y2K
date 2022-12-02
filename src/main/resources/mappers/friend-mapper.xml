@@ -67,7 +67,7 @@
       select m.userno, m.username, m.userpwd, m.nickname, m.enrolldate, m.modifydate, m.status, m.orange, m.role, m.provider, m.providerid
        from member m
            join friends on (friends.userNo3 = m.userNo)
-       where userNo2 = #{userNo} and friends.friendstatus = 'N'
+       where uSserNo2 = #{userNo} and friends.friendstatus = 'N'
        order by friends.friendNo desc
    </select>
    
