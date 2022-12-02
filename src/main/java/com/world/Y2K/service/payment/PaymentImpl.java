@@ -107,4 +107,9 @@ public class PaymentImpl implements PaymentService{
 	public int mainSkinUpdate(HashMap<String, Object> map2) {
 		return payDAO.mainSkinUpdate(sqlSession, map2);
 	}
+	
+	@Override
+	public int checkSkinHistory(HashMap<String, Object> map2) {
+		return payDAO.checkSkinHistory(sqlSession, map2);
+	}
 }

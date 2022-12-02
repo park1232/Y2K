@@ -50,7 +50,7 @@ public class FriendController {
 			model.addAttribute("userNo", userNo);
 			return "friend/friendList";
 		} else {
-			throw new FriendException("친구 목록 조회 실패");
+			throw new FriendException("Failed to query friend list");
 		}
 	}
 	
@@ -69,7 +69,7 @@ public class FriendController {
 			
 			return "friend/friendAdd";
 		} else {
-			throw new FriendException("친구 추가 페이지 조회 실패");
+			throw new FriendException("Failed to look up Add Friend page");
 		}
 	}
 	
@@ -126,13 +126,13 @@ public class FriendController {
 						System.out.println(result);
 						return "friend/friendAdd"; // 최종 db에 삽입 결과 확인
 					} else {
-						throw new FriendException("친구 신청 실패"); 
+						throw new FriendException("Friend request failed"); 
 					}
 			} else {
-				throw new FriendException("이미 등록된 친구입니다.");
+				throw new FriendException("It's already registered friends");
 			}	
 		} else {
-			throw new FriendException("이미 요청한 사람입니다.");
+			throw new FriendException("It's a person who requested");
 		}		
 	}
 	
@@ -157,7 +157,7 @@ public class FriendController {
 			model.addAttribute("requestList", requestList);
 			return "friend/friendRequestList";
 		} else {
-			throw new FriendException("친구 요청 목록 조회 실패");
+			throw new FriendException("Failed to look up friend request list");
 		}
 	}
 	
@@ -209,7 +209,7 @@ public class FriendController {
 			model.addAttribute("mList", mList);
 			return "friend/friendAccept";
 		} else {
-			throw new FriendException("친구 추가 페이지 조회 실패");
+			throw new FriendException("Failed to look up Add Friend page");
 		}
 	}
 	
@@ -230,7 +230,7 @@ public class FriendController {
 			System.out.println(result);
 			return "friend/friendAccept"; // submit으로 값 전달 후 팝업창 닫고 부모 게시판 갱신 찾기
 		} else {
-			throw new FriendException("친구 추가 실패");
+			throw new FriendException("Additional failure");
 		}
 	}
 	
@@ -262,7 +262,7 @@ public class FriendController {
 			model.addAttribute("userNo", userNo);
 			return "friend/friendList";
 		} else {
-			throw new FriendException("친구 삭제 실패");
+			throw new FriendException("Failed to delete friends");
 		}
 	}
 }
