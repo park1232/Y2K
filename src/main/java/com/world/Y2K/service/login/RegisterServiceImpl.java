@@ -45,6 +45,8 @@ public class RegisterServiceImpl implements RegisterService {
 		
 		
 	}
+
+	
 	
 	private HashMap<String, Object> setMyskin(Long userNo, String nickName) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -67,6 +69,5 @@ public class RegisterServiceImpl implements RegisterService {
 				.build();
 	}
 
-	
 	
 }

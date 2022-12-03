@@ -104,10 +104,8 @@ public class LoginController {
 	@GetMapping("/main.lo")
 	public String moveLoginSuccesspage(Authentication authentication, ModelAndView mv) throws ServletException, IOException {
 		UserDetailsImpl userDetails =(UserDetailsImpl)authentication.getPrincipal();
-		mv.addObject("userCode", userDetails.getMember().getUserNo());
+		mv.addObject("userNo", userDetails.getMember().getUserNo());
 		
-//		request.setAttribute("userNo", userDetails.getMember().getUserNo());	
-//		request.getRequestDispatcher("/login-success.lo").forward(request, response);
 		
 	return "login/loginSuccess";
 	}
@@ -184,30 +182,6 @@ public class LoginController {
 		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
 		return deleteMemberService.deleteMember(userDetails.getMember().getUserNo());
 	}
-	
-//	@GetMapping("/test.lo")
-//	public ModelAndView test(Long userNo, Authentication authentication, ModelAndView mv) {
-//		
-//		UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
-//		System.out.println("123");
-//		//System.out.println("controller°ª"+userNo);
-//		
-//			Member member = userDetails.getMember();
-//			Mypage mypage = null;
-//			if(userNo != member.getUserNo()) {
-//				mypage = onloadEntityService.getOnloadEntity(userNo);
-//				mv.addObject("visit_rayout", mypage);
-//				mv.addObject("my_rayout", "null");
-//			}  else {
-//				mypage = onloadEntityService.getOnloadEntity(member.getUserNo());
-//				mv.addObject("my_rayout", mypage);
-//				mv.addObject("visit_rayout", "null");
-//			}
-//			mv.setViewName("login/loginSuccess");
-//			return mv;
-//	}
-	
-	
 	
 
 }

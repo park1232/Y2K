@@ -16,7 +16,7 @@ for(const img of images){
 		
 		//console.log(boardNo);
 		console.log(userNo);
-		window.open('show.ph?boardNo='+boardNo,'popup','width=600, height=650');
+		window.open('show.ph?boardNo='+boardNo,'popup','width=1200, height=850');
 		});
 	}
 
